@@ -75,6 +75,10 @@
 
 [Issues](https://github.com/eggu/resident-evil-2-annotated-map/issues)에 게임 판본, Classic REbirth 버전, 캐릭터·시나리오, 방·층, 언어·표시 범위와 스크린샷을 함께 남겨 주세요. 로딩 문제는 `scripts/RE2.AnnotatedMap.log`도 첨부하면 도움이 됩니다. 로그의 개인 경로는 지워 주세요.
 
+## 위키
+
+방 목록, 잠긴 문과 열쇠, 아이템·퍼즐·문서·세이브 지점, 몬스터, 랭크 계산은 [한국어 위키](docs/wiki/README.md)와 [English wiki](docs/wiki/README.en.md)를 참고하세요. 목록에는 스포일러가 포함됩니다.
+
 ## 빌드
 
 ```sh
