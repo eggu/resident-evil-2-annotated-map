@@ -1,0 +1,476 @@
+{
+  "style": "C: detailed retro survival-horror pixel art",
+  "source": "original generated sheet (not included)",
+  "source_sha256": "6c8fc0246faa1140ea80020a2ade3a53ec37da56f34d2312f59850de441be4ab",
+  "reference": "Resident Evil 2 item and key identities; retro pixel-art style",
+  "logical_max_dimension": 32,
+  "palette_colors": 16,
+  "alpha": "binary",
+  "sprites": [
+    {
+      "name": "key-31",
+      "file": "key-31.png",
+      "source_bounds": [
+        34,
+        69,
+        207,
+        221
+      ],
+      "size": [
+        32,
+        28
+      ],
+      "sha256": "96c7b322e615c5502fc9dbb19b43d1b45b819b67c0ce6901b0ee00c9e90f7d70"
+    },
+    {
+      "name": "key-48",
+      "file": "key-48.png",
+      "source_bounds": [
+        243,
+        84,
+        432,
+        195
+      ],
+      "size": [
+        32,
+        19
+      ],
+      "sha256": "6d37a62225273fc5d8fce892ffa5d7e89f2419fbeb1e713e50e81eb4caabc594"
+    },
+    {
+      "name": "key-63",
+      "file": "key-63.png",
+      "source_bounds": [
+        472,
+        73,
+        663,
+        218
+      ],
+      "size": [
+        32,
+        24
+      ],
+      "sha256": "ca649952ea263964df02b8c8c7ea81077b052d1cfa5b2e68378fe388224df009"
+    },
+    {
+      "name": "key-83",
+      "file": "key-83.png",
+      "source_bounds": [
+        688,
+        64,
+        868,
+        221
+      ],
+      "size": [
+        32,
+        28
+      ],
+      "sha256": "c7257a5126d3f6d2ee6ffe7520add639381f52af13202782863430e4c5202901"
+    },
+    {
+      "name": "key-88",
+      "file": "key-88.png",
+      "source_bounds": [
+        904,
+        54,
+        1090,
+        227
+      ],
+      "size": [
+        32,
+        30
+      ],
+      "sha256": "710ecf365e363788be3de34f071ba6035751ff3b7737267b11c0ddf066ccd5cf"
+    },
+    {
+      "name": "key-89",
+      "file": "key-89.png",
+      "source_bounds": [
+        1137,
+        64,
+        1298,
+        218
+      ],
+      "size": [
+        32,
+        31
+      ],
+      "sha256": "d735c38271506c220379324361e14bf6c354e2217a6986841b96b700230a666d"
+    },
+    {
+      "name": "key-90",
+      "file": "key-90.png",
+      "source_bounds": [
+        1356,
+        64,
+        1518,
+        227
+      ],
+      "size": [
+        32,
+        32
+      ],
+      "sha256": "ca67332cf340bab2aa9b00b965f20c185aba54910d7316c88a2bfab4656f32a6"
+    },
+    {
+      "name": "key-91",
+      "file": "key-91.png",
+      "source_bounds": [
+        1578,
+        64,
+        1736,
+        218
+      ],
+      "size": [
+        32,
+        31
+      ],
+      "sha256": "1513e148c81212e19682da8ea2218bc344ae2e4bc84a99ac69de8f7e4f295105"
+    },
+    {
+      "name": "key-92",
+      "file": "key-92.png",
+      "source_bounds": [
+        36,
+        274,
+        206,
+        440
+      ],
+      "size": [
+        32,
+        31
+      ],
+      "sha256": "a392719b5b6a64692c4e0c6a5b6a92f26319e514ebca76da0aff57d7b8d9cb17"
+    },
+    {
+      "name": "key-93",
+      "file": "key-93.png",
+      "source_bounds": [
+        246,
+        275,
+        440,
+        429
+      ],
+      "size": [
+        32,
+        25
+      ],
+      "sha256": "773dd22d8f27c3464adbeb150914842ac7f2faf3aa1d14d3c557163f173b9093"
+    },
+    {
+      "name": "key-94",
+      "file": "key-94.png",
+      "source_bounds": [
+        467,
+        275,
+        660,
+        431
+      ],
+      "size": [
+        32,
+        26
+      ],
+      "sha256": "4f4bda49d1df184708c2195fb1200146b0a1dbda1f0fd14a9b93a32849397e8e"
+    },
+    {
+      "name": "key-95",
+      "file": "key-95.png",
+      "source_bounds": [
+        688,
+        276,
+        864,
+        429
+      ],
+      "size": [
+        32,
+        28
+      ],
+      "sha256": "1e20f7c9a6208a28950357af7ce7b3df767d0a9e0e67fc9aadd85d17c7328546"
+    },
+    {
+      "name": "key-97",
+      "file": "key-97.png",
+      "source_bounds": [
+        900,
+        278,
+        1096,
+        445
+      ],
+      "size": [
+        32,
+        27
+      ],
+      "sha256": "f192bec5e9cc07376e4cdb35d658c36d6fcc1f0f9c9be2a5f3618728b647b2db"
+    },
+    {
+      "name": "key-98",
+      "file": "key-98.png",
+      "source_bounds": [
+        1130,
+        288,
+        1298,
+        427
+      ],
+      "size": [
+        32,
+        26
+      ],
+      "sha256": "fd4a3ab93e7b60a6e279965d225a1445b6836c7fb36f0beca4bfef1cbcfbb5ce"
+    },
+    {
+      "name": "key-99",
+      "file": "key-99.png",
+      "source_bounds": [
+        1340,
+        284,
+        1519,
+        440
+      ],
+      "size": [
+        32,
+        28
+      ],
+      "sha256": "8786335cad7fd9335dc5be6f788b9f73384e4906265eb696c1f5c8c49020ebc9"
+    },
+    {
+      "name": "typewriter",
+      "file": "typewriter.png",
+      "source_bounds": [
+        1549,
+        253,
+        1754,
+        448
+      ],
+      "size": [
+        32,
+        30
+      ],
+      "sha256": "aa3c27ebfa7ca0ff7ffaadd195ab88f9163be64ffe3764c3cc974756dc090703"
+    },
+    {
+      "name": "itembox",
+      "file": "itembox.png",
+      "source_bounds": [
+        32,
+        469,
+        221,
+        644
+      ],
+      "size": [
+        32,
+        30
+      ],
+      "sha256": "c949165168dce1fdd6bf72577fe0c744f4cc3af814a19b06368d2d5dfeb71ffa"
+    },
+    {
+      "name": "document",
+      "file": "document.png",
+      "source_bounds": [
+        257,
+        488,
+        429,
+        641
+      ],
+      "size": [
+        32,
+        28
+      ],
+      "sha256": "9f72cd5aed955d9e961e8a5c8f0626064c80dcecdbb355da47265bcc077d1819"
+    },
+    {
+      "name": "pickup-20",
+      "file": "pickup-20.png",
+      "source_bounds": [
+        702,
+        496,
+        869,
+        632
+      ],
+      "size": [
+        32,
+        26
+      ],
+      "sha256": "a0e7a5e2e65fadbe38833810688ce8fa341da455c5d4fd3b092e5de1fbe42da0"
+    },
+    {
+      "name": "pickup-21",
+      "file": "pickup-21.png",
+      "source_bounds": [
+        927,
+        492,
+        1073,
+        632
+      ],
+      "size": [
+        32,
+        31
+      ],
+      "sha256": "f13d39c3f44aa6315d95a4a1c1bc9dcef363b19cd030614d6fbbf292e4611290"
+    },
+    {
+      "name": "pickup-22",
+      "file": "pickup-22.png",
+      "source_bounds": [
+        1130,
+        492,
+        1302,
+        650
+      ],
+      "size": [
+        32,
+        29
+      ],
+      "sha256": "6e50b69ba7ee2f652b048746c643ce015a5213cce1ca7156dc5e3011bf91ab76"
+    },
+    {
+      "name": "pickup-24",
+      "file": "pickup-24.png",
+      "source_bounds": [
+        1356,
+        484,
+        1506,
+        648
+      ],
+      "size": [
+        29,
+        32
+      ],
+      "sha256": "b4f2d2098a4cf789630d601cc148ce18280eb2d164735d8c6c00602219afe1e9"
+    },
+    {
+      "name": "pickup-25",
+      "file": "pickup-25.png",
+      "source_bounds": [
+        1576,
+        484,
+        1723,
+        648
+      ],
+      "size": [
+        29,
+        32
+      ],
+      "sha256": "1b41335aed3d50d95b042860eb01a2fa9d17fe6dd8a90fb580de7e6a48a83244"
+    },
+    {
+      "name": "pickup-26",
+      "file": "pickup-26.png",
+      "source_bounds": [
+        51,
+        678,
+        197,
+        841
+      ],
+      "size": [
+        29,
+        32
+      ],
+      "sha256": "b597a9f78f4800fc83b9a6d437336f59e44e2f873b74bc961ba68b20b6ad8f6b"
+    },
+    {
+      "name": "pickup-27",
+      "file": "pickup-27.png",
+      "source_bounds": [
+        247,
+        672,
+        413,
+        849
+      ],
+      "size": [
+        30,
+        32
+      ],
+      "sha256": "428689a30d68ef5bc7fb79ef643fb04b3be7fa9240111a3ca29146674183feff"
+    },
+    {
+      "name": "pickup-29",
+      "file": "pickup-29.png",
+      "source_bounds": [
+        466,
+        707,
+        648,
+        808
+      ],
+      "size": [
+        32,
+        18
+      ],
+      "sha256": "e40eebbb65ca1d5f8b86a41331fc6151b73ce4f752d1d0bc5b26a05a87c05419"
+    },
+    {
+      "name": "pickup-30",
+      "file": "pickup-30.png",
+      "source_bounds": [
+        701,
+        682,
+        871,
+        845
+      ],
+      "size": [
+        32,
+        31
+      ],
+      "sha256": "266447ed27ede484f672dc2abc9eabb9befc1fe8d0930ed07ebb6bb86cba1769"
+    },
+    {
+      "name": "pickup-35",
+      "file": "pickup-35.png",
+      "source_bounds": [
+        964,
+        675,
+        1037,
+        849
+      ],
+      "size": [
+        13,
+        32
+      ],
+      "sha256": "7956e4a89190e77932e6ebe9343e92df1e746c7f70aacb937dd9ac461b73709a"
+    },
+    {
+      "name": "pickup-38",
+      "file": "pickup-38.png",
+      "source_bounds": [
+        1139,
+        675,
+        1310,
+        849
+      ],
+      "size": [
+        31,
+        32
+      ],
+      "sha256": "22bc90b7b9bb48c543ae4d6f263ab9222b2ef104038043f7537c372c842783d6"
+    },
+    {
+      "name": "pickup-39",
+      "file": "pickup-39.png",
+      "source_bounds": [
+        1362,
+        679,
+        1523,
+        849
+      ],
+      "size": [
+        30,
+        32
+      ],
+      "sha256": "0fd6bdc5952db0186bf22231ea72981c1eba2f0d77ec44d0058df9ae5d74ad87"
+    },
+    {
+      "name": "pickup-40",
+      "file": "pickup-40.png",
+      "source_bounds": [
+        1578,
+        682,
+        1738,
+        849
+      ],
+      "size": [
+        31,
+        32
+      ],
+      "sha256": "c587f4ef00fc594c1b556410b67d2a3ade74651b76c48370769044eb9ab421c9"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+__pycache__/
+*.pyc
+.DS_Store
+.venv/
+build/
+dist/
+local/
+*.exe
+*.asi
+*.pdb
+*.log
+*.ini
+!packaging/*.ini
+assets/atlas.h
+assets/overlay_icons.h
+assets/*-preview.png
+assets/atlas-provenance.json

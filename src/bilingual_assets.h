@@ -1,0 +1,6 @@
+#include "room_names-ko.h"
+#include "room_names-en.h"
+#include "room_labels-ko.h"
+#include "room_labels-en.h"
+#include "item_labels-ko.h"
+#include "item_labels-en.h"
