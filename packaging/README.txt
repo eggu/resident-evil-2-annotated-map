@@ -17,7 +17,7 @@ RE2 리메이크(2019)용이 아닙니다.
 
 사용 (지도 화면에서만 작동)
 - 숫자 키: 0 전체 표시, 1 방 이름·타자기·아이템 상자, 2 잠긴 문·열쇠, 3 핵심 아이템, 4 문서·지도,
-  5 퍼즐, 6 일반 아이템, 7 몬스터, 8 표시 범위(방문한 방 → 공개된 방 → 모든 방), 9 한국어 / English.
+  5 퍼즐, 6 일반 아이템, 7 적, 8 표시 범위(방문한 방 → 공개된 방 → 모든 방), 9 한국어 / English.
 - 이름 크기: - / = (+), 불투명도: Shift + 위 키. 숫자패드 -/+도 지원합니다.
 - 상태 화면 지도: 좌/우 장소 선택, 위/아래 층 선택. 이미 방문한 층만 보입니다.
   다른 장소가 있으면 좌우 가장자리에 초록 화살표가 깜빡입니다.
@@ -54,7 +54,7 @@ When upgrading, skip scripts/RE2.AnnotatedMap.ini or back it up and restore it.
 
 Controls (on the map screen only)
 - Number keys: 0 all annotations, 1 room names/typewriters/item boxes, 2 doors/keys,
-  3 key items, 4 documents/maps, 5 puzzles, 6 common items, 7 monsters,
+  3 key items, 4 documents/maps, 5 puzzles, 6 common items, 7 enemies,
   8 visibility (visited/revealed/all rooms), 9 Korean/English.
 - Name size: - / = (+); opacity: Shift + those keys. Numpad -/+ is supported.
 - Status-screen map: left/right selects an area, up/down selects a floor. Only visited floors are shown.

@@ -49,7 +49,7 @@ Keys work on the map screen only. The current state is shown in the legend at th
 | 4 | Documents and maps |
 | 5 | Puzzles |
 | 6 | Common items (ammo, recovery, Ink Ribbons) |
-| 7 | Monsters (visited rooms, off by default) |
+| 7 | Enemies (visited rooms, off by default) |
 | 8 | Visibility: visited rooms → revealed rooms (floor map picked up) → all rooms |
 | 9 | Korean / English |
 | - / = (+), numpad - / + | Name size in 10% steps (50–150%) |

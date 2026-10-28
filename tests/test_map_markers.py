@@ -32,6 +32,12 @@ class MapMarkers(unittest.TestCase):
             self.assertNotIn(spawn, spawns)
         self.assertTrue(any(r[5] == 0 for r in rows('monsters.h', 'map_monsters')))
 
+    def test_enemy_legend_uses_the_display_name(self):
+        for lang, folder, expected in [('ko', 'korean-assets', ['[7] 적 켜짐', '[7] 적 꺼짐']),
+                                      ('en', '', ['[7] ENEMIES: ON', '[7] ENEMIES: OFF'])]:
+            data = json.loads((ROOT / 'tests/fixtures' / folder / 'room_names-provenance.json').read_text())
+            self.assertEqual([r['text'] for r in data['labels'] if r['text'].startswith('[7] ')], expected)
+
     def test_zapping_tags_are_separate_from_item_names(self):
         for lang in ('ko', 'en'):
             text = (ROOT / f'src/item_labels-{lang}.h').read_text()

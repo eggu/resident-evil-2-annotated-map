@@ -8593,9 +8593,9 @@
       "page": 10,
       "u": 1,
       "v": 151,
-      "w": 184,
+      "w": 162,
       "h": 28,
-      "text": "[7] MONSTERS: ON",
+      "text": "[7] ENEMIES: ON",
       "font_px": 20,
       "icon_x": 0,
       "slots": 0
@@ -8604,9 +8604,9 @@
       "page": 10,
       "u": 1,
       "v": 181,
-      "w": 192,
+      "w": 170,
       "h": 28,
-      "text": "[7] MONSTERS: OFF",
+      "text": "[7] ENEMIES: OFF",
       "font_px": 20,
       "icon_x": 0,
       "slots": 0

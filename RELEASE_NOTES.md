@@ -4,6 +4,8 @@
 
 첫 공개 릴리스입니다.
 
+- 지도 범례의 적 표시를 `적` / `ENEMIES`로 표기합니다.
+
 - 재핑 항목은 아이템 이름과 구분되도록 `[Z]`로 표시합니다.
 
 - 생성 시점부터 죽은 시체, 연출·동결 개체와 방 밖의 몬스터 스폰은 표시하지 않습니다. 잠복 후 활동하는 적은 유지합니다.
@@ -19,6 +21,8 @@
 ## English
 
 First public release.
+
+- The enemy legend uses `적` / `ENEMIES`.
 
 - Zapping-related entries use a separate `[Z]` tag before the item name.
 
