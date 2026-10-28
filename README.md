@@ -104,6 +104,11 @@ python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
 
 `src/re2_keymap.c`가 런타임 소스이고, 나머지 헤더는 고정된 지도·이름·아이콘 데이터입니다. 자세한 내용은 [개발 문서](docs/DEVELOPMENT.md)를 참고하세요.
 
+## 다른 지도 모드
+
+- [RE1 Annotated Map - Survivor's Notes](https://github.com/eggu/resident-evil-annotated-map) — 바이오하자드 1 (1996)
+- [RE3 Annotated Map - Survivor's Notes](https://github.com/eggu/resident-evil-3-annotated-map) — 바이오하자드 3 (1999)
+
 ## 크레딧과 라이선스
 
 제작: **커트씨**. 소스는 [MIT License](LICENSE)입니다. 비공식 팬 모드이며 Capcom 및 Classic REbirth와 관련이 없습니다. 참고 자료, 이미지·글꼴 출처는 [NOTICE](NOTICE.md)에 있습니다.
