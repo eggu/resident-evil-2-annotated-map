@@ -2,7 +2,7 @@
 
 [한국어](05-key-items.md) | [English](05-key-items.en.md) · [Index](README.en.md)
 
-Key items use a cyan star and name and disappear when their collection flag is set. This category includes weapons, films and progression items outside the common-consumable group. At a shared puzzle location, a combined star/diamond marker is used.
+Key items use a cyan star and name and disappear when their collection flag is set. `[Z]` identifies zapping-related entries affected across scenarios; it is not part of the item name. This category includes weapons, films and progression items outside the common-consumable group. At a shared puzzle location, a combined star/diamond marker is used.
 
 
 ## Leon · Map ID 0
@@ -35,8 +35,8 @@ Key items use a cyan star and name and disappear when their collection flag is s
 | Leon | 2 | Interrogation Room (`20E`) | Cable (`86`) | 187,81 | `8:199` | `1:1=0` ∧ `4:69=0` |
 | Leon | 2 | Watchman's Room (`210`) | Magnum (`5`) | 238,112 | `8:85` | `1:1=0` |
 | Leon | 2 | Interrogation Room (`20E`) | Rook Plug (`60`) | 176,90 | `8:56` | — |
-| Leon | 2 | West Corridor (`204`) | Z Cord (`207`) | 42,153 | `29:9` | `29:10=0` |
-| Leon | 2 | East Stairway (`20F`) | Z Cord (`207`) | 261,84 | `29:10` | `29:9=0` |
+| Leon | 2 | West Corridor (`204`) | [Z] Cord (`207`) | 42,153 | `29:9` | `29:10=0` |
+| Leon | 2 | East Stairway (`20F`) | [Z] Cord (`207`) | 261,84 | `29:10` | `29:9=0` |
 
 ## Leon · Map ID 3
 
@@ -66,8 +66,8 @@ Key items use a cyan star and name and disappear when their collection flag is s
 | Leon | 5 | Autopsy Room (`215`) | Red Key Card (`52`) | 255,162 | `8:50` | — |
 | Leon | 5 | Cell Block Corridor (`219`) | Film C (`70`) | 32,135 | `8:117` | `1:1=1` ∧ `1:6=0` |
 | Leon | 5 | Holding Cell (`301`) | Manhole Opener (`75`) | 30,170 | `8:118` | — |
-| Leon | 5 | Armory (`214`) | Z SMG (`15`) | 188,99 | `29:0` | — |
-| Leon | 5 | Armory (`214`) | Z Side Pack (`206`) | 191,99 | `29:1` | — |
+| Leon | 5 | Armory (`214`) | [Z] SMG (`15`) | 188,99 | `29:0` | — |
+| Leon | 5 | Armory (`214`) | [Z] Side Pack (`206`) | 191,99 | `29:1` | — |
 
 ## Leon · Map ID 6
 
@@ -132,9 +132,9 @@ Key items use a cyan star and name and disappear when their collection flag is s
 | Leon | 16 | Lounge (`60A`) | Flamethrower (`16`) | 90,129 | `34:51` | `1:0=0` ∧ `1:1=1` ∧ `4:131=0` |
 | Leon | 16 | Cold Laboratory (`60D`) | Main Fuse (`76`) | 218,124 | `34:24` | — |
 | Leon | 16 | Cold Laboratory (`60D`) | Fuse Case (`77`) | 223,114 | `34:61` | — |
-| Leon | 16 | Capsule Room (`60F`) | Z SMG (`15`) | 185,196 | `34:30` | `8:62=0` |
+| Leon | 16 | Capsule Room (`60F`) | [Z] SMG (`15`) | 185,196 | `34:30` | `8:62=0` |
 | Leon | 16 | Vaccine Laboratory (`610`) | MO Disk (`96`) | 214,190 | `34:14` | `1:1=0` |
-| Leon | 16 | Plant Cultivation Room (`60E`) | Z Poison Ivy (`209`) | 142,179 | `255:0` | `1:1=1` ∧ `29:14=1` |
+| Leon | 16 | Plant Cultivation Room (`60E`) | [Z] Poison Ivy (`209`) | 142,179 | `255:0` | `1:1=1` ∧ `29:14=1` |
 
 ## Leon · Map ID 17
 
@@ -143,7 +143,7 @@ Key items use a cyan star and name and disappear when their collection flag is s
 | Leon | 17 | Birkin's Laboratory (`615`) | Magnum Parts (`33`) | 86,102 | `34:41` | — |
 | Leon | 17 | Birkin's Laboratory (`615`) | Power Room Key (`95`) | 125,120 | `34:43` | `1:1=1` |
 | Leon | 17 | Birkin's Laboratory (`615`) | Umbrella Key Card (`97`) | 125,120 | `34:43` | `1:1=0` |
-| Leon | 17 | Lab Control Room (`612`) | Z B.O.W. Gas (`208`) | 127,76 | `29:14` | `1:1=0` |
+| Leon | 17 | Lab Control Room (`612`) | [Z] B.O.W. Gas (`208`) | 127,76 | `29:14` | `1:1=0` |
 
 ## Leon · Map ID 18
 
@@ -190,8 +190,8 @@ Key items use a cyan star and name and disappear when their collection flag is s
 | Claire | 2 | Interrogation Room (`20E`) | Small Key (`31`) | 184,101 | `8:60` | `1:0=0` ∧ `1:1=0` ∧ `4:69=0` |
 | Claire | 2 | Interrogation Room (`20E`) | Cable (`86`) | 187,81 | `8:199` | `1:1=0` ∧ `4:69=0` |
 | Claire | 2 | Interrogation Room (`20E`) | Eagle Stone (`58`) | 176,90 | `8:56` | — |
-| Claire | 2 | West Corridor (`204`) | Z Cord (`207`) | 42,153 | `29:9` | `29:10=0` |
-| Claire | 2 | East Stairway (`20F`) | Z Cord (`207`) | 261,84 | `29:10` | `29:9=0` |
+| Claire | 2 | West Corridor (`204`) | [Z] Cord (`207`) | 42,153 | `29:9` | `29:10=0` |
+| Claire | 2 | East Stairway (`20F`) | [Z] Cord (`207`) | 261,84 | `29:10` | `29:9=0` |
 
 ## Claire · Map ID 3
 
@@ -222,8 +222,8 @@ Key items use a cyan star and name and disappear when their collection flag is s
 | Claire | 5 | Autopsy Room (`215`) | Red Key Card (`52`) | 255,162 | `8:50` | — |
 | Claire | 5 | Cell Block Corridor (`219`) | Film C (`70`) | 32,135 | `8:117` | `1:6=0` |
 | Claire | 5 | Kennel (`21A`) | Crank (`67`) | 90,115 | `8:29` | `1:6=0` |
-| Claire | 5 | Armory (`214`) | Z SMG (`15`) | 188,99 | `29:0` | — |
-| Claire | 5 | Armory (`214`) | Z Side Pack (`206`) | 191,99 | `29:1` | — |
+| Claire | 5 | Armory (`214`) | [Z] SMG (`15`) | 188,99 | `29:0` | — |
+| Claire | 5 | Armory (`214`) | [Z] Side Pack (`206`) | 191,99 | `29:1` | — |
 
 ## Claire · Map ID 6
 
@@ -297,10 +297,10 @@ Key items use a cyan star and name and disappear when their collection flag is s
 | Claire | 16 | Lounge (`60A`) | Flamethrower (`16`) | 90,129 | `34:51` | `1:0=0` ∧ `1:1=1` ∧ `4:131=0` |
 | Claire | 16 | Cold Laboratory (`60D`) | Main Fuse (`76`) | 218,124 | `34:24` | — |
 | Claire | 16 | Cold Laboratory (`60D`) | Fuse Case (`77`) | 223,114 | `34:61` | — |
-| Claire | 16 | Capsule Room (`60F`) | Z SMG (`15`) | 185,196 | `34:30` | `8:62=0` |
+| Claire | 16 | Capsule Room (`60F`) | [Z] SMG (`15`) | 185,196 | `34:30` | `8:62=0` |
 | Claire | 16 | Vaccine Laboratory (`610`) | MO Disk (`96`) | 214,190 | `34:14` | `1:1=0` |
 | Claire | 16 | Vaccine Laboratory (`610`) | Vaccine Cartridge (`79`) | 210,176 | `34:15` | `1:1=0` |
-| Claire | 16 | Plant Cultivation Room (`60E`) | Z Poison Ivy (`209`) | 142,179 | `255:0` | `1:1=1` ∧ `29:14=1` |
+| Claire | 16 | Plant Cultivation Room (`60E`) | [Z] Poison Ivy (`209`) | 142,179 | `255:0` | `1:1=1` ∧ `29:14=1` |
 
 ## Claire · Map ID 17
 
@@ -308,7 +308,7 @@ Key items use a cyan star and name and disappear when their collection flag is s
 | --- | --- | --- | --- | --- | --- | --- |
 | Claire | 17 | Birkin's Laboratory (`615`) | Power Room Key (`95`) | 125,120 | `34:43` | `1:1=1` |
 | Claire | 17 | Birkin's Laboratory (`615`) | Umbrella Key Card (`97`) | 125,120 | `34:43` | `1:1=0` |
-| Claire | 17 | Lab Control Room (`612`) | Z B.O.W. Gas (`208`) | 127,76 | `29:14` | `1:1=0` |
+| Claire | 17 | Lab Control Room (`612`) | [Z] B.O.W. Gas (`208`) | 127,76 | `29:14` | `1:1=0` |
 
 ## Claire · Map ID 18
 
@@ -378,10 +378,10 @@ Key items use a cyan star and name and disappear when their collection flag is s
 
 | Mode | Map ID | Room/slot | Item | x,y | Pickup bank:bit | Conditions |
 | --- | --- | --- | --- | --- | --- | --- |
-| Extreme Battle · Leon data | 13 | Upper Power Room (`604`) | Z SMG (`15`) | 201,151 | `34:7` | `130:0=1` |
-| Extreme Battle · Leon data | 13 | Upper Power Room (`604`) | Z SMG (`15`) | 201,151 | `34:7` | `130:1=1` |
-| Extreme Battle · Leon data | 13 | Upper Power Room (`604`) | Z SMG (`15`) | 201,151 | `34:7` | `130:2=1` |
-| Extreme Battle · Leon data | 13 | Upper Power Room (`604`) | Z SMG (`15`) | 201,151 | `34:7` | `130:3=1` |
+| Extreme Battle · Leon data | 13 | Upper Power Room (`604`) | [Z] SMG (`15`) | 201,151 | `34:7` | `130:0=1` |
+| Extreme Battle · Leon data | 13 | Upper Power Room (`604`) | [Z] SMG (`15`) | 201,151 | `34:7` | `130:1=1` |
+| Extreme Battle · Leon data | 13 | Upper Power Room (`604`) | [Z] SMG (`15`) | 201,151 | `34:7` | `130:2=1` |
+| Extreme Battle · Leon data | 13 | Upper Power Room (`604`) | [Z] SMG (`15`) | 201,151 | `34:7` | `130:3=1` |
 
 ## Extreme Battle · Leon data · Map ID 16
 
@@ -449,10 +449,10 @@ Key items use a cyan star and name and disappear when their collection flag is s
 
 | Mode | Map ID | Room/slot | Item | x,y | Pickup bank:bit | Conditions |
 | --- | --- | --- | --- | --- | --- | --- |
-| Extreme Battle · Claire data | 13 | Upper Power Room (`604`) | Z SMG (`15`) | 201,151 | `34:7` | `130:0=1` |
-| Extreme Battle · Claire data | 13 | Upper Power Room (`604`) | Z SMG (`15`) | 201,151 | `34:7` | `130:1=1` |
-| Extreme Battle · Claire data | 13 | Upper Power Room (`604`) | Z SMG (`15`) | 201,151 | `34:7` | `130:2=1` |
-| Extreme Battle · Claire data | 13 | Upper Power Room (`604`) | Z SMG (`15`) | 201,151 | `34:7` | `130:3=1` |
+| Extreme Battle · Claire data | 13 | Upper Power Room (`604`) | [Z] SMG (`15`) | 201,151 | `34:7` | `130:0=1` |
+| Extreme Battle · Claire data | 13 | Upper Power Room (`604`) | [Z] SMG (`15`) | 201,151 | `34:7` | `130:1=1` |
+| Extreme Battle · Claire data | 13 | Upper Power Room (`604`) | [Z] SMG (`15`) | 201,151 | `34:7` | `130:2=1` |
+| Extreme Battle · Claire data | 13 | Upper Power Room (`604`) | [Z] SMG (`15`) | 201,151 | `34:7` | `130:3=1` |
 
 ## Extreme Battle · Claire data · Map ID 16
 

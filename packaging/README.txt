@@ -23,6 +23,7 @@ RE2 리메이크(2019)용이 아닙니다.
   다른 장소가 있으면 좌우 가장자리에 초록 화살표가 깜빡입니다.
 - 기본값: 영어, 이름 100%, 불투명도 70%, 몬스터 끔, 나머지 켬, 방문한 방만 표시.
 - 설정은 scripts/RE2.AnnotatedMap.ini에 저장됩니다.
+- [Z]는 A/B 시나리오 사이의 선택·행동과 관련된 재핑 표식이며 아이템 이름의 일부가 아닙니다.
 - 랭크 예상치는 INI의 Rank=1로 켭니다(기본 끔, 변경 후 게임 재실행).
 
 제거
@@ -60,6 +61,7 @@ Controls (on the map screen only)
   Blinking green arrows at the left/right edges show that another area is available.
 - Defaults: English, size 100%, opacity 70%, monsters off, everything else on, visited rooms only.
 - Settings are saved in scripts/RE2.AnnotatedMap.ini.
+- [Z] marks zapping-related items/interactions affected by choices or actions across scenarios A/B; it is not part of the item name.
 - The live rank estimate is enabled with Rank=1 in the INI (off by default; restart after changing).
 
 Uninstall

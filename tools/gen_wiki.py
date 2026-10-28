@@ -180,8 +180,8 @@ def generate(lang):
         return table(['모드' if ko else 'Mode', '지도 ID' if ko else 'Map ID', '방/슬롯' if ko else 'Room/slot', '아이템' if ko else 'Item', 'x,y', '획득 bank:bit' if ko else 'Pickup bank:bit', '표시 조건' if ko else 'Conditions'],
                      [(mode(p), f, room(p, f, seen), item(i), f'{x},{y}', f'`{b}:{bit}`', conditions(item_guards, start, count))
                       for p, f, x, y, seen, i, b, bit, start, count in rows])
-    body = ('핵심 아이템은 청록색 별과 이름으로 표시하며 획득 플래그가 켜지면 숨깁니다. 무기·필름·진행 아이템 등 일반 소모품으로 분류하지 않는 표시 항목을 포함합니다. 퍼즐과 같은 위치에서는 별·마름모 결합 마커를 사용합니다.\n\n' if ko else
-            'Key items use a cyan star and name and disappear when their collection flag is set. This category includes weapons, films and progression items outside the common-consumable group. At a shared puzzle location, a combined star/diamond marker is used.\n\n')
+    body = ('핵심 아이템은 청록색 별과 이름으로 표시하며 획득 플래그가 켜지면 숨깁니다. `[Z]`는 시나리오 사이에 영향을 주고받는 재핑 항목의 표식으로, 아이템 이름의 일부가 아닙니다. 무기·필름·진행 아이템 등 일반 소모품으로 분류하지 않는 표시 항목을 포함합니다. 퍼즐과 같은 위치에서는 별·마름모 결합 마커를 사용합니다.\n\n' if ko else
+            'Key items use a cyan star and name and disappear when their collection flag is set. `[Z]` identifies zapping-related entries affected across scenarios; it is not part of the item name. This category includes weapons, films and progression items outside the common-consumable group. At a shared puzzle location, a combined star/diamond marker is used.\n\n')
     body += item_table([r for r in items if r[5] not in common | maps and r[5] in item_names[lang]])
     write(PAGES[4][0], name(PAGES[4]), body)
 

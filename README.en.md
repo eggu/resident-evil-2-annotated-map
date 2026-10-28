@@ -9,6 +9,13 @@ An ASI mod for the original Resident Evil 2 PC release (GOG `Resident Evil 2.exe
 - On the status-screen map, left/right selects an area and up/down selects a floor. Only visited floors are shown.
 - An optional live rank estimate uses the original results-screen formula (off by default).
 
+## Screenshots
+
+| | Visited rooms | All rooms |
+|---|---|---|
+| Monsters off | ![Police Station 1F — Visited rooms, monsters off](docs/screenshots/1.png) | ![Police Station 1F — All rooms, monsters off](docs/screenshots/3.png) |
+| Monsters on | ![Police Station 1F — Visited rooms, monsters on](docs/screenshots/2.png) | ![Police Station 1F — All rooms, monsters on](docs/screenshots/4.png) |
+
 ## Visibility and defaults
 
 A new configuration starts in **English, name size 100%, opacity 70%, visited rooms only**. Monsters and rank estimates start off; the other categories start on. Press `8` to change scope. **All rooms** reveals unexplored rooms and items. Area/floor selection still lists visited floors only.
@@ -44,6 +51,8 @@ Keys work on the map screen only. The current state is shown in the legend at th
 | - / = (+), numpad - / + | Name size in 10% steps (50–150%) |
 | Shift + those keys | Name opacity in 10% steps (10–100%) |
 | Left/right, up/down (status-screen map) | Select area and floor (visited floors only) |
+
+`[Z]` (`Z` in the screenshots) identifies a zapping-related item or interaction whose state is affected by choices or actions across scenarios A/B. It is not part of the item name.
 
 ## Settings (`scripts/RE2.AnnotatedMap.ini`)
 

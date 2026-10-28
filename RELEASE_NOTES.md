@@ -4,6 +4,8 @@
 
 첫 공개 릴리스입니다.
 
+- 재핑 항목은 아이템 이름과 구분되도록 `[Z]`로 표시합니다.
+
 - 생성 시점부터 죽은 시체, 연출·동결 개체와 방 밖의 몬스터 스폰은 표시하지 않습니다. 잠복 후 활동하는 적은 유지합니다.
 - 경찰서 1층 동쪽 사무실 금고 퍼즐을 미해결 상태에서 표시합니다.
 
@@ -17,6 +19,8 @@
 ## English
 
 First public release.
+
+- Zapping-related entries use a separate `[Z]` tag before the item name.
 
 - Excludes initial corpses, cinematic/frozen actors and monster spawns outside their rooms, while retaining dormant enemies that can wake.
 - Marks the Police Station 1F East Office safe until it is unlocked.

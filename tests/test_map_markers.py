@@ -32,6 +32,15 @@ class MapMarkers(unittest.TestCase):
             self.assertNotIn(spawn, spawns)
         self.assertTrue(any(r[5] == 0 for r in rows('monsters.h', 'map_monsters')))
 
+    def test_zapping_tags_are_separate_from_item_names(self):
+        for lang in ('ko', 'en'):
+            text = (ROOT / f'src/item_labels-{lang}.h').read_text()
+            labels = {int(i): name for i, name in re.findall(
+                r'\{(\d+),[^}]+\}, /\* \S+ (.*?) \*/', text)}
+            self.assertEqual({i for i, name in labels.items() if name.startswith('[Z] ')},
+                             {15, 206, 207, 208, 209})
+            self.assertFalse(any(name.startswith('Z ') for name in labels.values()))
+
     def test_safe_hides_after_unlock_for_both_characters(self):
         guards = rows('overlay_data.h', 'interaction_guards')
         safes = [r for r in rows('overlay_data.h', 'map_interactions')
