@@ -71,7 +71,7 @@ The release ZIP includes a default INI with comments. Close the game before edit
 | `Documents` | `1` | Documents and maps |
 | `Puzzles` | `1` | Puzzles and devices |
 | `CommonItems` | `1` | Ammo, recovery items, Ink Ribbons and other common pickups |
-| `Monsters` | `0` | Monsters |
+| `Enemies` | `0` | Enemies |
 | `English` | `1` | `1` English, `0` Korean |
 | `Scope` | `1` | `1` visited rooms, `2` rooms revealed by a floor map, `3` all rooms (spoilers) |
 | `NameSize` | `100` | Name size (50–150) |

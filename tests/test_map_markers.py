@@ -32,6 +32,17 @@ class MapMarkers(unittest.TestCase):
             self.assertNotIn(spawn, spawns)
         self.assertTrue(any(r[5] == 0 for r in rows('monsters.h', 'map_monsters')))
 
+    def test_enemy_setting_uses_only_the_new_key(self):
+        import configparser
+        config = configparser.ConfigParser()
+        config.read(ROOT / 'packaging/RE2.AnnotatedMap.ini')
+        self.assertEqual(config['MapOverlay']['Enemies'], '0')
+        self.assertNotIn('Monsters', config['MapOverlay'])
+        for name in ('README.md', 'README.en.md'):
+            text = (ROOT / name).read_text()
+            self.assertIn('`Enemies`', text)
+            self.assertNotIn('`Monsters`', text)
+
     def test_enemy_legend_uses_the_display_name(self):
         for lang, folder, expected in [('ko', 'korean-assets', ['[7] 적 켜짐', '[7] 적 꺼짐']),
                                       ('en', '', ['[7] ENEMIES: ON', '[7] ENEMIES: OFF'])]:

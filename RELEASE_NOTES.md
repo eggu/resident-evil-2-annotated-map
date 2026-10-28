@@ -4,7 +4,7 @@
 
 첫 공개 릴리스입니다.
 
-- 지도 범례의 적 표시를 `적` / `ENEMIES`로 표기합니다.
+- 지도 범례의 적 표시를 `적` / `ENEMIES`로 표기하며, INI 설정은 `Enemies`를 사용합니다.
 
 - 재핑 항목은 아이템 이름과 구분되도록 `[Z]`로 표시합니다.
 
@@ -22,7 +22,7 @@
 
 First public release.
 
-- The enemy legend uses `적` / `ENEMIES`.
+- The enemy legend uses `적` / `ENEMIES`, with `Enemies` as its INI setting.
 
 - Zapping-related entries use a separate `[Z]` tag before the item name.
 

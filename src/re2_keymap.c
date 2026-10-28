@@ -34,7 +34,7 @@ static char settings_path[MAX_PATH];
 static void save_settings(void){
  if(!settings_path[0])return;
  char value[4]={'0',0};
- const char *keys[]={"All","Rooms","Locks","Items","Documents","Puzzles","English","Monsters","CommonItems"};
+ const char *keys[]={"All","Rooms","Locks","Items","Documents","Puzzles","English","Enemies","CommonItems"};
  int values[]={overlay_enabled,room_names_enabled,locks_enabled,items_enabled,documents_enabled,puzzles_enabled,english_enabled,monsters_enabled,common_enabled};
  for(unsigned i=0;i<9;i++){value[0]=values[i]?'1':'0';WritePrivateProfileStringA("MapOverlay",keys[i],value,settings_path);}
  value[0]=(char)('0'+scope);WritePrivateProfileStringA("MapOverlay","Scope",value,settings_path);
@@ -50,7 +50,7 @@ static void load_settings(void){
  documents_enabled=GetPrivateProfileIntA("MapOverlay","Documents",1,settings_path)!=0;
  puzzles_enabled=GetPrivateProfileIntA("MapOverlay","Puzzles",1,settings_path)!=0;
  english_enabled=GetPrivateProfileIntA("MapOverlay","English",1,settings_path)!=0;
- monsters_enabled=GetPrivateProfileIntA("MapOverlay","Monsters",0,settings_path)!=0;
+ monsters_enabled=GetPrivateProfileIntA("MapOverlay","Enemies",0,settings_path)!=0;
  common_enabled=GetPrivateProfileIntA("MapOverlay","CommonItems",1,settings_path)!=0;
  name_size=size_value((int)GetPrivateProfileIntA("MapOverlay","NameSize",100,settings_path));
  rank_enabled=GetPrivateProfileIntA("MapOverlay","Rank",0,settings_path)!=0;
