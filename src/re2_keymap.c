@@ -20,8 +20,8 @@ static HANDLE logfile=INVALID_HANDLE_VALUE;
 static void log_line(const char *fmt,...){if(logfile==INVALID_HANDLE_VALUE)return;char out[512];va_list ap;va_start(ap,fmt);int n=wvsprintfA(out,fmt,ap);va_end(ap);DWORD wrote;if(n>0&&n<512)WriteFile(logfile,out,(DWORD)n,&wrote,NULL);}
 static int equal(const void *a,const void *b,unsigned n){const unsigned char*x=a,*y=b;for(unsigned i=0;i<n;i++)if(x[i]!=y[i])return 0;return 1;}
 static unsigned frames;
-static int overlay_enabled=1,room_names_enabled=1,locks_enabled=1,items_enabled=1,documents_enabled=1,puzzles_enabled=1;
-static int english_enabled=1,monsters_enabled=0,common_enabled=1;
+static int overlay_enabled=1,room_names_enabled=1,locks_enabled=0,items_enabled=0,documents_enabled=0,puzzles_enabled=0;
+static int english_enabled=1,monsters_enabled=0,common_enabled=0;
 static unsigned scope=1; /* [8] 1 visited rooms, 2 + rooms revealed by the floor map, 3 all rooms */
 static unsigned name_opacity=70,name_size=100;
 static int rank_enabled;
@@ -45,13 +45,13 @@ static void save_settings(void){
 static void load_settings(void){
  overlay_enabled=GetPrivateProfileIntA("MapOverlay","All",1,settings_path)!=0;
  room_names_enabled=GetPrivateProfileIntA("MapOverlay","Rooms",1,settings_path)!=0;
- locks_enabled=GetPrivateProfileIntA("MapOverlay","Locks",1,settings_path)!=0;
- items_enabled=GetPrivateProfileIntA("MapOverlay","Items",1,settings_path)!=0;
- documents_enabled=GetPrivateProfileIntA("MapOverlay","Documents",1,settings_path)!=0;
- puzzles_enabled=GetPrivateProfileIntA("MapOverlay","Puzzles",1,settings_path)!=0;
+ locks_enabled=GetPrivateProfileIntA("MapOverlay","Locks",0,settings_path)!=0;
+ items_enabled=GetPrivateProfileIntA("MapOverlay","Items",0,settings_path)!=0;
+ documents_enabled=GetPrivateProfileIntA("MapOverlay","Documents",0,settings_path)!=0;
+ puzzles_enabled=GetPrivateProfileIntA("MapOverlay","Puzzles",0,settings_path)!=0;
  english_enabled=GetPrivateProfileIntA("MapOverlay","English",1,settings_path)!=0;
  monsters_enabled=GetPrivateProfileIntA("MapOverlay","Enemies",0,settings_path)!=0;
- common_enabled=GetPrivateProfileIntA("MapOverlay","CommonItems",1,settings_path)!=0;
+ common_enabled=GetPrivateProfileIntA("MapOverlay","CommonItems",0,settings_path)!=0;
  name_size=size_value((int)GetPrivateProfileIntA("MapOverlay","NameSize",100,settings_path));
  rank_enabled=GetPrivateProfileIntA("MapOverlay","Rank",0,settings_path)!=0;
  name_opacity=opacity_value((int)GetPrivateProfileIntA("MapOverlay","NameOpacity",70,settings_path));
@@ -188,6 +188,17 @@ static unsigned high_count;
 static int under_high(int x,int y,int w,int h){
  for(unsigned j=0;j<high_count;j++){
   const Bounds *r=occupied+j;
+  if(x<r->x+r->w&&r->x<x+w&&y<r->y+r->h&&r->y<y+h)return 1;
+ }
+ return 0;
+}
+// Same, ignoring the marker an area-map badge is attached to: a star/diamond-sized high box (<= 8 px; names are
+// larger and still block) containing the point (cx,cy).
+#define MAP_BADGE 3
+static int under_high_except(int x,int y,int w,int h,int cx,int cy){
+ for(unsigned j=0;j<high_count;j++){
+  const Bounds *r=occupied+j;
+  if(r->w<=8&&r->h<=8&&r->x<=cx&&cx<r->x+r->w&&r->y<=cy&&cy<r->y+r->h)continue;
   if(x<r->x+r->w&&r->x<x+w&&y<r->y+r->h&&r->y<y+h)return 1;
  }
  return 0;
@@ -356,7 +367,7 @@ static unsigned marker_pl(unsigned pl){
  if(bank_bit(0,28)||bank_bit(0,31))return 4;
  return bank_bit(0,7)?pl|2:pl;
 }
-// [7] monsters (extract_monsters.py): icon kind MONSTER_KIND+category; hidden once the spawn's global id is dead in
+// [7] monsters (extract_monsters.py): icon kind MONSTER_KIND+category (12 species, kinds 50..61); hidden once the spawn's global id is dead in
 // bank 6 (stage < 3, not bonus) or bank 7 (0x4e77d0). 4th Survivor keeps its monsters (real player key, not tag 4).
 static unsigned monster_pl(unsigned pl){unsigned m=marker_pl(pl);return m==4?pl:m;}
 static int monster_dead(const MapMonster *m){
@@ -652,7 +663,13 @@ static void draw_names(unsigned mode){
    if(!t)break;
    for(unsigned q=0;q<sizeof(overlay_icons)/sizeof(overlay_icons[0]);q++)if(overlay_icons[q].kind==((i->item>=200&&i->item<=205)?13:100+i->item)){
     const OverlayIcon *icon=overlay_icons+q;int w=(OVERLAY_ICON_TEX/OVERLAY_ICON_SCALE*90+50)/100;
-    if(!under_high(i->x+PROJ_CENTRE+dx-w/2,i->y+PROJ_CENTRE+dy-w/2,w,w))quad_draw(i->x+PROJ_CENTRE+dx-w/2,i->y+PROJ_CENTRE+dy-w/2,w,w,icon->u,icon->v,OVERLAY_ICON_TEX,OVERLAY_ICON_TEX,t);pickups++;break;
+    int x=i->x+PROJ_CENTRE+dx-w/2,y=i->y+PROJ_CENTRE+dy-w/2;
+    // Area maps are progression pickups: when a diamond/star covers the spot (East Office safe holds the police map),
+    // show the map as a badge half under its lower-right corner instead of hiding it (user 2026-10-28). The marker it
+    // belongs to (the box holding the pickup point) stays on top; generate_room_names keeps the badge box clear.
+    int cx=x+w/2,cy=y+w/2,own=map_item(i->item)&&under_high(x,y,w,w);
+    if(own){x+=MAP_BADGE;y+=MAP_BADGE;}
+    if(own?!under_high_except(x,y,w,w,cx,cy):!under_high(x,y,w,w))quad_draw(x,y,w,w,icon->u,icon->v,OVERLAY_ICON_TEX,OVERLAY_ICON_TEX,t);pickups++;break;
    }
   }
  }

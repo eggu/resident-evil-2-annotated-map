@@ -22,13 +22,13 @@
 
 ## 표시 범위와 기본값
 
-새 설정은 **영어, 이름 크기 100%, 불투명도 70%, 방문한 방만 표시**로 시작합니다. 몬스터와 랭크 예상치는 꺼져 있고 다른 항목은 켜져 있습니다. `8`로 범위를 바꿉니다. **모든 방**은 미방문 구역과 아이템을 미리 보여줍니다. 방문한 층만 장소·층 선택에 나타납니다.
+새 설정은 **영어, 이름 크기 100%, 불투명도 70%, 방문한 방만 표시, 방 이름만 켬**으로 시작합니다. `9`로 한국어, `2`–`7`로 다른 항목을 켭니다. 랭크 예상치는 꺼져 있습니다. `8`로 범위를 바꿉니다. **모든 방**은 미방문 구역과 아이템을 미리 보여줍니다. 방문한 층만 장소·층 선택에 나타납니다.
 
 ## 설치
 
-1. [Releases](https://github.com/eggu/resident-evil-2-annotated-map/releases)에서 `RE2-Annotated-Map-<버전>.zip`을 받습니다. `Source code`는 설치 파일이 아닙니다.
-2. 게임을 종료하고 ZIP의 내용(`dsound.dll`, `scripts/`)을 `Resident Evil 2.exe`가 있는 게임 폴더에 폴더 구조 그대로 복사합니다.
-3. Classic REbirth는 별도로 설치해야 합니다(1.0.9에서 확인). ASI 로더인 [Ultimate ASI Loader](https://github.com/ThirteenAG/Ultimate-ASI-Loader) v9.7.4(MIT)가 `dsound.dll`로 포함되어 있습니다.
+1. Resident Evil 2용 **Classic REbirth**를 먼저 설치합니다(1.0.9에서 확인). [공식 다운로드](https://classicrebirth.com/index.php/downloads/resident-evil-2-classic-rebirth/)
+2. 게임을 종료합니다. [Releases](https://github.com/eggu/resident-evil-2-annotated-map/releases/latest)에서 `RE2-Annotated-Map-<버전>.zip`을 받아 압축을 풉니다. `Source code`는 설치 파일이 아닙니다.
+3. ZIP의 내용(`dsound.dll`, `scripts/`)을 `Resident Evil 2.exe`가 있는 게임 폴더에 폴더 구조 그대로 복사합니다. ASI 로더인 [Ultimate ASI Loader](https://github.com/ThirteenAG/Ultimate-ASI-Loader) v9.7.4(MIT)가 `dsound.dll`로 포함되어 있습니다.
    - 한글 패치 등으로 Ultimate ASI Loader가 이미 `dsound.dll`로 설치되어 있으면 `dsound.dll`은 건너뛰어도 됩니다.
    - ASI 로더가 아닌 다른 `dsound.dll`(예: DSOAL)이 있으면 덮어쓰지 말고, 포함된 `dsound.dll`을 `winmm.dll` 이름으로 복사하세요.
 
@@ -49,7 +49,7 @@
 | 4 | 문서·지도 |
 | 5 | 퍼즐 |
 | 6 | 일반 아이템(탄약·회복·잉크 리본) |
-| 7 | 적 (방문한 방, 기본 끔) |
+| 7 | 적 (방문한 방) |
 | 8 | 표시 범위: 방문한 방 → 공개된 방(층 지도 획득) → 모든 방 |
 | 9 | 한국어 / English |
 | - / = (+), 숫자패드 - / + | 이름 크기 10%씩 (50–150%) |
@@ -66,11 +66,11 @@
 |---|---|---|
 | `All` | `1` | 전체 표시 스위치 |
 | `Rooms` | `1` | 방 이름·타자기·아이템 상자 |
-| `Locks` | `1` | 잠긴 문·열쇠 |
-| `Items` | `1` | 핵심 아이템 |
-| `Documents` | `1` | 문서·지도 |
-| `Puzzles` | `1` | 퍼즐·장치 |
-| `CommonItems` | `1` | 탄약·회복·잉크 리본 등 일반 아이템 |
+| `Locks` | `0` | 잠긴 문·열쇠 |
+| `Items` | `0` | 핵심 아이템 |
+| `Documents` | `0` | 문서·지도 |
+| `Puzzles` | `0` | 퍼즐·장치 |
+| `CommonItems` | `0` | 탄약·회복·잉크 리본 등 일반 아이템 |
 | `Enemies` | `0` | 적 |
 | `English` | `1` | `1` 영어, `0` 한국어 |
 | `Scope` | `1` | `1` 방문한 방, `2` 층 지도로 공개된 방, `3` 모든 방(스포일러) |
@@ -80,9 +80,11 @@
 
 모든 항목은 `[MapOverlay]` 섹션에 있습니다.
 
-확대한 이름은 기존 위치를 유지하므로 겹칠 수 있습니다.
+## 알려진 한계
 
-릴리스 변경 사항: [한글·영문 릴리스 노트](RELEASE_NOTES.md).
+- GOG판 `Resident Evil 2.exe` + Classic REbirth만 지원합니다. 다른 실행 파일에서는 아무것도 적용하지 않고 로그만 남깁니다.
+- 확대한 이름은 기존 위치를 유지하므로 좁은 지도에서 겹칠 수 있습니다.
+- 적 표시는 출현 지점이며 실시간 위치가 아닙니다.
 
 ## 문제 신고
 
@@ -102,6 +104,6 @@ python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
 
 `src/re2_keymap.c`가 런타임 소스이고, 나머지 헤더는 고정된 지도·이름·아이콘 데이터입니다. 자세한 내용은 [개발 문서](docs/DEVELOPMENT.md)를 참고하세요.
 
-## 라이선스
+## 크레딧과 라이선스
 
-소스는 [MIT License](LICENSE)입니다. 비공식 팬 모드이며 Capcom 및 Classic REbirth와 관련이 없습니다. 참고 자료, 이미지·글꼴 출처는 [NOTICE](NOTICE.md)에 있습니다.
+제작: **커트씨**. 소스는 [MIT License](LICENSE)입니다. 비공식 팬 모드이며 Capcom 및 Classic REbirth와 관련이 없습니다. 참고 자료, 이미지·글꼴 출처는 [NOTICE](NOTICE.md)에 있습니다.

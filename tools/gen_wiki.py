@@ -227,9 +227,12 @@ def generate(lang):
 
     body = ('몬스터는 `7`로 켜며 기본값은 끔입니다. 처음부터 죽은 시체, 강제 연출·동결 개체, 방 모양 밖의 스폰은 제외합니다. 다시 일어날 수 있는 잠복 개체는 표시 대상입니다. 원래 출현 지점을 표시하므로 실시간 적 위치 추적 지도가 아닙니다. 출현 조건·방 표시 범위·사망 비트를 적용합니다. `gid=255`인 행은 개별 사망 비트로 숨기지 않습니다. 보너스 모드에서는 사망 bank 선택 규칙이 달라집니다.\n\n' if ko else
             'Monster markers are toggled with `7` and start off. Initial corpses, forced-animation/frozen actors and spawns outside their room shapes are excluded. Dormant enemies that can wake remain eligible. Markers show spawn positions, not real-time enemy tracking. Spawn conditions, room visibility and death flags apply. Rows with `gid=255` have no individual death-bit suppression. Bonus modes use different death-bank selection rules.\n\n')
-    cats = dict((int(i)-50, n) for i, n in re.findall(r'\{(5[0-6]),\d+,\d+\}, /\* monster-([^ ]+) \*/', (ROOT/'src/overlay_icons.h').read_text()))
-    assert set(cats) == set(range(7))
-    categories = ['좀비', '개', '리커', '비행형', '식물형', '곤충형', '보스'] if ko else [cats[i].capitalize() for i in range(7)]
+    cats = dict((int(i)-50, n) for i, n in re.findall(r'\{(5\d|6[01]),\d+,\d+\}, /\* monster-([^ ]+) \*/', (ROOT/'src/overlay_icons.h').read_text()))
+    assert set(cats) == set(range(12))
+    categories = (['좀비', '좀비견', '까마귀', '리커', '진화 리커', '거대 거미', '대형 바퀴', '거대 나방', '아이비', '포이즌 아이비',
+                   '타일런트', 'G'] if ko else
+                  ['Zombie', 'Zombie Dog', 'Crow', 'Licker', 'Evolved Licker', 'Giant Spider', 'Large Roach', 'Giant Moth', 'Ivy',
+                   'Poison Ivy', 'Tyrant', 'G'])
     body += table(['모드' if ko else 'Mode', '지도 ID' if ko else 'Map ID', '방/슬롯' if ko else 'Room/slot', '종류' if ko else 'Category', 'x,y', '사망 bank:gid' if ko else 'Death bank:gid', '표시 조건' if ko else 'Conditions'],
         [(mode(p), f, room(p, f, seen), categories[cat], f'{x},{y}', f'`{b}:{gid}`', conditions(monster_guards, start, count))
          for p, f, x, y, seen, cat, b, gid, start, count in monsters])

@@ -32,6 +32,13 @@ class MapMarkers(unittest.TestCase):
             self.assertNotIn(spawn, spawns)
         self.assertTrue(any(r[5] == 0 for r in rows('monsters.h', 'map_monsters')))
 
+    def test_each_enemy_species_has_its_own_icon(self):
+        species = {r[5] for r in rows('monsters.h', 'map_monsters')}
+        self.assertEqual(species, set(range(12)))
+        icons = {r[0]: r[1:] for r in rows('overlay_icons.h', 'overlay_icons')}
+        self.assertTrue(all(50 + c in icons for c in species))
+        self.assertEqual(len({icons[50 + c] for c in species}), 12)
+
     def test_enemy_setting_uses_only_the_new_key(self):
         import configparser
         config = configparser.ConfigParser()

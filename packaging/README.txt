@@ -2,7 +2,7 @@ RE2 Annotated Map - Survivor's Notes - Resident Evil 2 (1998)
 상세 지도: 생존자의 메모
 
 지원: GOG판 Resident Evil 2(Resident Evil 2.exe) + Classic REbirth + Ultimate ASI Loader.
-Classic REbirth는 별도로 설치해야 합니다(1.0.9에서 확인). Ultimate ASI Loader v9.7.4(MIT)는 dsound.dll로 포함되어 있습니다.
+Classic REbirth는 별도로 설치해야 합니다(1.0.9에서 확인): https://classicrebirth.com/index.php/downloads/resident-evil-2-classic-rebirth/ Ultimate ASI Loader v9.7.4(MIT)는 dsound.dll로 포함되어 있습니다.
 RE2 리메이크(2019)용이 아닙니다.
 게임 지도에 방 이름, 잠긴 문과 열쇠, 핵심 아이템, 문서·지도, 퍼즐, 일반 아이템, 타자기·아이템 상자, 몬스터를 표시합니다.
 
@@ -21,7 +21,7 @@ RE2 리메이크(2019)용이 아닙니다.
 - 이름 크기: - / = (+), 불투명도: Shift + 위 키. 숫자패드 -/+도 지원합니다.
 - 상태 화면 지도: 좌/우 장소 선택, 위/아래 층 선택. 이미 방문한 층만 보입니다.
   다른 장소가 있으면 좌우 가장자리에 초록 화살표가 깜빡입니다.
-- 기본값: 영어, 이름 100%, 불투명도 70%, 몬스터 끔, 나머지 켬, 방문한 방만 표시.
+- 기본값: 영어, 이름 100%, 불투명도 70%, 방문한 방만 표시, 방 이름만 켬(2–7로 다른 항목 켬).
 - 설정은 scripts/RE2.AnnotatedMap.ini에 저장됩니다.
 - [Z]는 A/B 시나리오 사이의 선택·행동과 관련된 재핑 표식이며 아이템 이름의 일부가 아닙니다.
 - 랭크 예상치는 INI의 Rank=1로 켭니다(기본 끔, 변경 후 게임 재실행).
@@ -30,7 +30,8 @@ RE2 리메이크(2019)용이 아닙니다.
 scripts/RE2.AnnotatedMap.asi와 .ini(.log)를 지웁니다. 다른 ASI 모드가 없으면 dsound.dll도 지웁니다.
 EXE와 세이브는 수정하지 않습니다. 지원하지 않는 실행 파일에서는 아무것도 패치하지 않습니다.
 
-비공식 팬 모드입니다. Capcom과 관련이 없으며 게임 파일을 포함하지 않습니다.
+제작: 커트씨. 비공식 팬 모드입니다. Capcom과 관련이 없으며 게임 파일을 포함하지 않습니다.
+소스 라이선스는 LICENSE.txt(MIT), 참고 자료와 글꼴 출처는 NOTICE.md에 있습니다.
 https://github.com/eggu/resident-evil-2-annotated-map
 
 ================================================================
@@ -38,7 +39,7 @@ English
 ================================================================
 
 Supported: GOG Resident Evil 2 (Resident Evil 2.exe) + Classic REbirth + Ultimate ASI Loader.
-Classic REbirth must be installed separately (tested with 1.0.9). Ultimate ASI Loader v9.7.4 (MIT) is included as dsound.dll.
+Classic REbirth must be installed separately (tested with 1.0.9): https://classicrebirth.com/index.php/downloads/resident-evil-2-classic-rebirth/ Ultimate ASI Loader v9.7.4 (MIT) is included as dsound.dll.
 This is not for the 2019 remake.
 Shows room names, locked doors and required keys, key items, documents and maps,
 puzzles, common items, typewriters and item boxes, and monsters on the game's map.
@@ -59,7 +60,7 @@ Controls (on the map screen only)
 - Name size: - / = (+); opacity: Shift + those keys. Numpad -/+ is supported.
 - Status-screen map: left/right selects an area, up/down selects a floor. Only visited floors are shown.
   Blinking green arrows at the left/right edges show that another area is available.
-- Defaults: English, size 100%, opacity 70%, monsters off, everything else on, visited rooms only.
+- Defaults: English, size 100%, opacity 70%, visited rooms only, only Rooms on (2-7 turn on other categories).
 - Settings are saved in scripts/RE2.AnnotatedMap.ini.
 - [Z] marks zapping-related items/interactions affected by choices or actions across scenarios A/B; it is not part of the item name.
 - The live rank estimate is enabled with Rank=1 in the INI (off by default; restart after changing).
@@ -68,5 +69,6 @@ Uninstall
 Delete scripts/RE2.AnnotatedMap.asi and its .ini/.log. Also delete dsound.dll if no other ASI mod uses it.
 The EXE and save files are not modified. Nothing is patched on an unsupported executable.
 
-Unofficial fan mod, unaffiliated with Capcom. No game files are included.
+Created by 커트씨. Unofficial fan mod, unaffiliated with Capcom. No game files are included.
+Source license: LICENSE.txt (MIT). References and font credits: NOTICE.md.
 https://github.com/eggu/resident-evil-2-annotated-map

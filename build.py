@@ -36,7 +36,8 @@ def main():
              'scripts/RE2.AnnotatedMap.ini': ROOT/'packaging/RE2.AnnotatedMap.ini',
              'scripts/UltimateASILoader-LICENSE.txt': loader/'UltimateASILoader-LICENSE.txt',
              'dsound.dll': loader/'dsound.dll',
-             'RE2-Annotated-Map-README.txt': ROOT/'packaging/README.txt'}
+             'RE2-Annotated-Map-README.txt': ROOT/'packaging/README.txt',
+             'LICENSE.txt': ROOT/'LICENSE', 'NOTICE.md': ROOT/'NOTICE.md'}
     with zipfile.ZipFile(package,'w',zipfile.ZIP_DEFLATED) as z:
         for name,source in files.items(): z.write(source,name)
     with zipfile.ZipFile(package) as z:

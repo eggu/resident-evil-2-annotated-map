@@ -111,7 +111,7 @@ static const RoomName_EN room_names_EN[]={
 {0,16,114,176,210,10,0,0,0,0}, /* 60F Capsule Room */
 {0,16,115,221,184,80,0,0,0,0}, /* 610 Vaccine Laboratory */
 {0,16,137,116,200,52,137,200,135,200}, /* 60E Plant Cultivation Room */
-{0,17,117,159,84,42,0,0,0,0}, /* 612 Lab Control Room */
+{0,17,117,162,85,42,0,0,0,0}, /* 612 Lab Control Room */
 {0,17,118,91,71,20,0,0,0,0}, /* 613 Computer Room */
 {0,17,119,104,96,43,0,0,0,0}, /* 614 Laboratory Corridor */
 {0,17,120,104,126,6,0,0,0,0}, /* 615 Birkin's Laboratory */
@@ -235,7 +235,7 @@ static const RoomName_EN room_names_EN[]={
 {1,16,114,176,210,10,0,0,0,0}, /* 60F Capsule Room */
 {1,16,115,241,163,80,241,171,241,169}, /* 610 Vaccine Laboratory */
 {1,16,137,116,200,52,137,200,135,200}, /* 60E Plant Cultivation Room */
-{1,17,117,159,84,42,0,0,0,0}, /* 612 Lab Control Room */
+{1,17,117,162,85,42,0,0,0,0}, /* 612 Lab Control Room */
 {1,17,118,91,71,20,0,0,0,0}, /* 613 Computer Room */
 {1,17,119,104,96,43,0,0,0,0}, /* 614 Laboratory Corridor */
 {1,17,120,104,126,6,0,0,0,0}, /* 615 Birkin's Laboratory */

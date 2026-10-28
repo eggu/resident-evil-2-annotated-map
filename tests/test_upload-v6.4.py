@@ -1,6 +1,6 @@
 import os
 from pathlib import Path
-exec((Path(__file__).resolve().parent/'test_native-v6.2.py').read_text().replace('count=1000000','count=30000000').split('# ---- harness end')[0])
+exec((Path(__file__).resolve().parent/'test_native-v6.4.py').read_text().replace('count=1000000','count=30000000').split('# ---- harness end')[0])
 from unicorn import UC_HOOK_CODE,UC_HOOK_MEM_INVALID
 from unicorn.x86_const import UC_X86_REG_EIP
 u.mem_map(0x22000000,0x900000);u.mem_map(0x23000000,0x1000000)

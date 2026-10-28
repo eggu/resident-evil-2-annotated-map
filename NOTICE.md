@@ -13,8 +13,8 @@ data and documentation.
   project.
 - **Leon B transport sequence**: checked against Brandon W. Dennis's Resident Evil 2 FAQ (1998),
   https://gamefaqs.gamespot.com/ps/198458-resident-evil-2/faqs/4110 . No FAQ text is included.
-- **Monster icons**: pixel art drawn for this mod; Evil Resource (https://www.evilresource.com) Resident Evil 2 images
-  were used as visual reference only. The site's images are not included.
+- **Enemy icons**: AI-assisted pixel art prepared for this mod (ChatGPT image generation, then reduced to 16-colour
+  sprites); Evil Resource (https://www.evilresource.com) Resident Evil 2 images were used as visual reference only. The site's images are not included.
 - **Item, ammunition, recovery, Ink Ribbon, furniture and document sprites**: AI-assisted artwork prepared for this mod
   from game object identities and a retro pixel-art style. Provenance and extraction hashes are in
   `assets/artwork-provenance.json`. The folded map icon and amber puzzle diamond are code-drawn in
