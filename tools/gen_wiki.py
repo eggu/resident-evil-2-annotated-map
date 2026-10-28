@@ -185,8 +185,8 @@ def generate(lang):
     body += item_table([r for r in items if r[5] not in common | maps and r[5] in item_names[lang]])
     write(PAGES[4][0], name(PAGES[4]), body)
 
-    body = ('주황색 마름모는 `kind=6`인 퍼즐·장치 상호작용입니다. 조건이 더 이상 맞지 않으면 사라집니다. 퍼즐 이름을 임의로 붙이지 않고 방/슬롯·위치·조건을 나열합니다.\n\n' if ko else
-            'Amber diamonds represent puzzle/device interactions with `kind=6`. They disappear when their conditions no longer pass. The table identifies room/slot, position and conditions without inventing puzzle names.\n\n')
+    body = ('주황색 마름모는 `kind=6`인 퍼즐·장치 상호작용입니다. 경찰서 1층 동쪽 사무실 금고는 열기 전까지 표시합니다. 조건이 더 이상 맞지 않으면 사라집니다. 퍼즐 이름을 임의로 붙이지 않고 방/슬롯·위치·조건을 나열합니다.\n\n' if ko else
+            'Amber diamonds represent puzzle/device interactions with `kind=6`. The East Office safe on Police Station 1F remains marked until unlocked. They disappear when their conditions no longer pass. The table identifies room/slot, position and conditions without inventing puzzle names.\n\n')
     body += table(['모드' if ko else 'Mode', '지도 ID' if ko else 'Map ID', '방/슬롯' if ko else 'Room/slot', 'x,y', '표시 조건' if ko else 'Conditions'],
         [(mode(p), f, room(p, f, seen), f'{x},{y}', conditions(interaction_guards, start, count))
          for p, f, seen, kind, x, y, start, count in interactions if kind == 6])
@@ -225,8 +225,8 @@ def generate(lang):
              '\nSource code: [MIT](../../LICENSE). Game and third-party material retain their respective rights. Full credits: [NOTICE](../../NOTICE.md).\n')
     write(PAGES[9][0], name(PAGES[9]), body)
 
-    body = ('몬스터는 `7`로 켜며 기본값은 끔입니다. 원래 출현 지점을 표시하므로 실시간 적 위치 추적 지도가 아닙니다. 출현 조건·방 표시 범위·사망 비트를 적용합니다. `gid=255`인 행은 개별 사망 비트로 숨기지 않습니다. 보너스 모드에서는 사망 bank 선택 규칙이 달라집니다.\n\n' if ko else
-            'Monster markers are toggled with `7` and start off. They show spawn positions, not real-time enemy tracking. Spawn conditions, room visibility and death flags apply. Rows with `gid=255` have no individual death-bit suppression. Bonus modes use different death-bank selection rules.\n\n')
+    body = ('몬스터는 `7`로 켜며 기본값은 끔입니다. 처음부터 죽은 시체, 강제 연출·동결 개체, 방 모양 밖의 스폰은 제외합니다. 다시 일어날 수 있는 잠복 개체는 표시 대상입니다. 원래 출현 지점을 표시하므로 실시간 적 위치 추적 지도가 아닙니다. 출현 조건·방 표시 범위·사망 비트를 적용합니다. `gid=255`인 행은 개별 사망 비트로 숨기지 않습니다. 보너스 모드에서는 사망 bank 선택 규칙이 달라집니다.\n\n' if ko else
+            'Monster markers are toggled with `7` and start off. Initial corpses, forced-animation/frozen actors and spawns outside their room shapes are excluded. Dormant enemies that can wake remain eligible. Markers show spawn positions, not real-time enemy tracking. Spawn conditions, room visibility and death flags apply. Rows with `gid=255` have no individual death-bit suppression. Bonus modes use different death-bank selection rules.\n\n')
     cats = dict((int(i)-50, n) for i, n in re.findall(r'\{(5[0-6]),\d+,\d+\}, /\* monster-([^ ]+) \*/', (ROOT/'src/overlay_icons.h').read_text()))
     assert set(cats) == set(range(7))
     categories = ['좀비', '개', '리커', '비행형', '식물형', '곤충형', '보스'] if ko else [cats[i].capitalize() for i in range(7)]

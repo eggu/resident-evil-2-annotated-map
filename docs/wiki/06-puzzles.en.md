@@ -2,7 +2,7 @@
 
 [한국어](06-puzzles.md) | [English](06-puzzles.en.md) · [Index](README.en.md)
 
-Amber diamonds represent puzzle/device interactions with `kind=6`. They disappear when their conditions no longer pass. The table identifies room/slot, position and conditions without inventing puzzle names.
+Amber diamonds represent puzzle/device interactions with `kind=6`. The East Office safe on Police Station 1F remains marked until unlocked. They disappear when their conditions no longer pass. The table identifies room/slot, position and conditions without inventing puzzle names.
 
 
 ## Leon · Map ID 2
@@ -13,6 +13,7 @@ Amber diamonds represent puzzle/device interactions with `kind=6`. They disappea
 | Leon | 2 | West Corridor (`204`) | 42,153 | `1:6=0` |
 | Leon | 2 | Operations Room (`206`) | 63,116 | — |
 | Leon | 2 | Darkroom (`208`) | 124,102 | — |
+| Leon | 2 | East Office (`20B`) | 220,134 | `1:6=0` ∧ `4:37=0` |
 | Leon | 2 | Press Room (`20D`) | 208,89 | — |
 | Leon | 2 | East Stairway (`20F`) | 261,84 | `1:6=0` |
 
@@ -133,6 +134,7 @@ Amber diamonds represent puzzle/device interactions with `kind=6`. They disappea
 | Claire | 2 | West Corridor (`204`) | 42,153 | `1:6=0` |
 | Claire | 2 | Operations Room (`206`) | 63,116 | — |
 | Claire | 2 | Darkroom (`208`) | 124,102 | — |
+| Claire | 2 | East Office (`20B`) | 220,134 | `1:6=0` ∧ `4:37=0` |
 | Claire | 2 | Press Room (`20D`) | 208,89 | — |
 | Claire | 2 | East Stairway (`20F`) | 261,84 | `1:6=0` |
 

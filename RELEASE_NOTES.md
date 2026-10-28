@@ -4,6 +4,9 @@
 
 첫 공개 릴리스입니다.
 
+- 생성 시점부터 죽은 시체, 연출·동결 개체와 방 밖의 몬스터 스폰은 표시하지 않습니다. 잠복 후 활동하는 적은 유지합니다.
+- 경찰서 1층 동쪽 사무실 금고 퍼즐을 미해결 상태에서 표시합니다.
+
 - 원작 Resident Evil 2 PC판(GOG + Classic REbirth) 지도에 방 이름, 잠긴 문·열쇠, 핵심 아이템, 문서·지도, 퍼즐, 일반 아이템, 타자기·아이템 상자, 몬스터를 표시합니다.
 - 레온/클레어, A/B 시나리오, 재핑 아이템을 반영합니다. 주운 아이템과 쓰러뜨린 몬스터는 사라지고, 아이템이 남은 방은 주황색으로 칠합니다.
 - 숫자 키 0–9로 항목별 표시, 표시 범위, 언어를 바꿉니다. `-`/`+`로 이름 크기, Shift + `-`/`+`로 불투명도를 조절합니다.
@@ -14,6 +17,9 @@
 ## English
 
 First public release.
+
+- Excludes initial corpses, cinematic/frozen actors and monster spawns outside their rooms, while retaining dormant enemies that can wake.
+- Marks the Police Station 1F East Office safe until it is unlocked.
 
 - Adds room names, locked doors and keys, key items, documents and maps, puzzles, common items, typewriters and item boxes, and monsters to the map of the original Resident Evil 2 PC release (GOG + Classic REbirth).
 - Reflects Leon/Claire, scenarios A/B and zapping items. Picked-up items and killed monsters disappear; rooms with items left are tinted orange.

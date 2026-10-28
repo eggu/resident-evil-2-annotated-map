@@ -2,7 +2,7 @@
 
 [한국어](11-monsters.md) | [English](11-monsters.en.md) · [Index](README.en.md)
 
-Monster markers are toggled with `7` and start off. They show spawn positions, not real-time enemy tracking. Spawn conditions, room visibility and death flags apply. Rows with `gid=255` have no individual death-bit suppression. Bonus modes use different death-bank selection rules.
+Monster markers are toggled with `7` and start off. Initial corpses, forced-animation/frozen actors and spawns outside their room shapes are excluded. Dormant enemies that can wake remain eligible. Markers show spawn positions, not real-time enemy tracking. Spawn conditions, room visibility and death flags apply. Rows with `gid=255` have no individual death-bit suppression. Bonus modes use different death-bank selection rules.
 
 
 ## Leon · Map ID 0
@@ -35,7 +35,6 @@ Monster markers are toggled with `7` and start off. They show spawn positions, n
 | Leon | 0 | `seen=25` | Zombie | 66,206 | `6:167` | `4:152=1` |
 | Leon | 0 | `seen=25` | Zombie | 75,200 | `6:165` | `4:152=1` |
 | Leon | 0 | `seen=25` | Zombie | 75,204 | `6:166` | `4:152=0` |
-| Leon | 0 | `seen=25` | Zombie | 79,206 | `6:255` | — |
 | Leon | 0 | `seen=25` | Zombie | 79,208 | `6:167` | `4:152=0` |
 | Leon | 0 | `seen=25` | Zombie | 80,202 | `6:165` | `4:152=0` |
 | Leon | 0 | `seen=25` | Zombie | 83,205 | `6:164` | `4:152=0` |
@@ -76,15 +75,12 @@ Monster markers are toggled with `7` and start off. They show spawn positions, n
 | Leon | 2 | Reception Room (`201`) | Zombie | 100,149 | `6:117` | `0:25=0` ∧ `1:1=1` ∧ `1:6=0` |
 | Leon | 2 | Reception Room (`201`) | Zombie | 100,150 | `6:118` | `0:25=1` ∧ `1:1=1` ∧ `1:6=0` |
 | Leon | 2 | Reception Room (`201`) | Insect | 101,142 | `6:116` | `1:6=1` |
-| Leon | 2 | Reception Room (`201`) | Licker | 104,157 | `6:24` | `1:1=0` ∧ `1:6=0` ∧ `4:5=0` |
 | Leon | 2 | Reception Room (`201`) | Zombie | 110,154 | `6:212` | `0:25=1` ∧ `1:1=1` ∧ `1:6=0` |
 | Leon | 2 | Reception Room (`201`) | Zombie | 111,153 | `6:118` | `0:25=0` ∧ `1:1=1` ∧ `1:6=0` |
 | Leon | 2 | Reception Room (`201`) | Insect | 119,156 | `6:255` | `1:6=1` |
-| Leon | 2 | West Office (`202`) | Zombie | 88,132 | `6:255` | `1:1=0` ∧ `4:7=1` |
 | Leon | 2 | West Corridor (`204`) | Licker | 47,125 | `6:131` | `1:6=1` |
 | Leon | 2 | West Corridor (`204`) | Licker | 47,133 | `6:61` | `1:1=0` ∧ `1:6=0` ∧ `4:86=1` ∧ `4:153=0` |
 | Leon | 2 | West Corridor (`204`) | Licker | 48,140 | `6:130` | `1:6=1` |
-| Leon | 2 | West Corridor (`204`) | Zombie | 49,145 | `6:255` | `1:6=0` |
 | Leon | 2 | West Corridor (`204`) | Licker | 80,153 | `6:155` | `1:6=1` |
 | Leon | 2 | West Passage (`205`) | Zombie | 41,76 | `6:255` | `1:1=0` ∧ `1:6=0` |
 | Leon | 2 | West Passage (`205`) | Plant | 41,76 | `6:255` | `1:6=1` |
@@ -122,7 +118,6 @@ Monster markers are toggled with `7` and start off. They show spawn positions, n
 | Leon | 2 | Break Room Corridor (`20A`) | Zombie | 183,134 | `6:34` | `1:1=1` ∧ `1:6=0` |
 | Leon | 2 | Break Room Corridor (`20A`) | Zombie | 183,141 | `6:206` | `1:1=1` ∧ `1:6=0` |
 | Leon | 2 | Break Room Corridor (`20A`) | Zombie | 183,165 | `6:205` | `1:1=1` ∧ `1:6=0` |
-| Leon | 2 | Break Room Corridor (`20A`) | Zombie | 184,161 | `6:102` | `1:6=1` |
 | Leon | 2 | Break Room Corridor (`20A`) | Zombie | 188,121 | `6:206` | `1:1=0` ∧ `1:6=0` |
 | Leon | 2 | Break Room Corridor (`20A`) | Zombie | 190,127 | `6:34` | `1:1=0` ∧ `1:6=0` |
 | Leon | 2 | Break Room Corridor (`20A`) | Zombie | 190,129 | `6:32` | `1:1=1` ∧ `1:6=0` |
@@ -147,7 +142,6 @@ Monster markers are toggled with `7` and start off. They show spawn positions, n
 | Leon | 2 | East Corridor (`20C`) | Zombie | 203,101 | `6:93` | `1:1=0` |
 | Leon | 2 | East Corridor (`20C`) | Zombie | 219,80 | `6:148` | `1:1=0` |
 | Leon | 2 | East Corridor (`20C`) | Zombie | 228,83 | `6:92` | `1:1=0` |
-| Leon | 2 | East Corridor (`20C`) | Boss | 231,99 | `6:197` | `1:1=1` ∧ `4:128=0` |
 | Leon | 2 | East Corridor (`20C`) | Zombie | 233,98 | `6:91` | `1:1=0` |
 | Leon | 2 | Press Room (`20D`) | Licker | 218,110 | `6:144` | `1:0=1` ∧ `1:1=0` |
 | Leon | 2 | Press Room (`20D`) | Boss | 218,117 | `6:198` | `1:1=1` ∧ `4:78=1` ∧ `4:79=0` |
@@ -172,17 +166,9 @@ Monster markers are toggled with `7` and start off. They show spawn positions, n
 | Leon | 3 | Rooftop Entrance (`109`) | Flyer | 238,143 | `6:4` | `1:1=0` ∧ `1:6=0` ∧ `4:49=1` |
 | Leon | 3 | Rooftop Entrance (`109`) | Flyer | 240,141 | `6:5` | `1:1=1` ∧ `1:6=0` ∧ `4:0=0` |
 | Leon | 3 | Rooftop Entrance (`109`) | Flyer | 240,143 | `6:2` | `1:1=1` ∧ `1:6=0` ∧ `4:0=0` |
-| Leon | 3 | Rooftop Entrance (`109`) | Flyer | 241,150 | `6:4` | `1:1=0` ∧ `1:6=0` ∧ `4:49=0` |
-| Leon | 3 | Rooftop Entrance (`109`) | Flyer | 242,139 | `6:1` | `1:1=1` ∧ `1:6=0` ∧ `4:0=0` |
 | Leon | 3 | Rooftop Entrance (`109`) | Flyer | 242,141 | `6:3` | `1:1=0` ∧ `1:6=0` ∧ `4:49=1` |
 | Leon | 3 | Rooftop Entrance (`109`) | Flyer | 242,142 | `6:5` | `1:1=0` ∧ `1:6=0` ∧ `4:49=0` |
-| Leon | 3 | Rooftop Entrance (`109`) | Flyer | 242,142 | `6:8` | `1:1=1` ∧ `1:6=0` ∧ `4:0=0` |
 | Leon | 3 | Rooftop Entrance (`109`) | Flyer | 242,143 | `6:7` | `1:1=1` ∧ `1:6=0` ∧ `4:0=0` |
-| Leon | 3 | Rooftop Entrance (`109`) | Flyer | 248,134 | `6:3` | `1:1=0` ∧ `1:6=0` ∧ `4:49=0` |
-| Leon | 3 | Rooftop Entrance (`109`) | Flyer | 249,134 | `6:2` | `1:1=0` ∧ `1:6=0` |
-| Leon | 3 | Rooftop Entrance (`109`) | Flyer | 255,134 | `6:1` | `1:1=0` ∧ `1:6=0` ∧ `4:49=0` |
-| Leon | 3 | Rooftop Entrance (`109`) | Flyer | 257,134 | `6:1` | `1:1=0` ∧ `1:6=0` ∧ `4:49=1` |
-| Leon | 3 | Rooftop Entrance (`109`) | Flyer | 264,134 | `6:0` | `1:1=0` ∧ `1:6=0` |
 | Leon | 3 | Rooftop Entrance (`109`) | Boss | 266,109 | `6:132` | `1:6=1` |
 | Leon | 3 | Helicopter Corridor (`10A`) | Licker | 203,129 | `6:76` | `1:0=0` ∧ `1:1=1` ∧ `1:6=0` ∧ `4:0=1` |
 | Leon | 3 | Helicopter Corridor (`10A`) | Licker | 203,129 | `6:76` | `1:1=1` ∧ `1:6=0` ∧ `4:0=0` |
@@ -191,8 +177,6 @@ Monster markers are toggled with `7` and start off. They show spawn positions, n
 | Leon | 3 | Helicopter Corridor (`10A`) | Zombie | 209,127 | `6:127` | `1:6=1` |
 | Leon | 3 | Helicopter Corridor (`10A`) | Zombie | 209,129 | `6:76` | `1:0=0` ∧ `1:1=0` ∧ `1:6=0` ∧ `4:0=1` |
 | Leon | 3 | Helicopter Corridor (`10A`) | Zombie | 209,129 | `6:76` | `1:1=0` ∧ `1:6=0` ∧ `4:0=0` |
-| Leon | 3 | Helicopter Corridor (`10A`) | Zombie | 209,142 | `6:126` | `1:6=1` |
-| Leon | 3 | Helicopter Corridor (`10A`) | Zombie | 209,152 | `6:123` | `1:6=1` |
 | Leon | 3 | Helicopter Corridor (`10A`) | Zombie | 209,159 | `6:74` | `1:6=1` |
 | Leon | 3 | Helicopter Corridor (`10A`) | Licker | 212,115 | `6:77` | `1:0=0` ∧ `1:1=1` ∧ `1:6=0` ∧ `4:0=1` |
 | Leon | 3 | Helicopter Corridor (`10A`) | Licker | 212,115 | `6:77` | `1:1=1` ∧ `1:6=0` ∧ `4:0=0` |
@@ -234,7 +218,6 @@ Monster markers are toggled with `7` and start off. They show spawn positions, n
 | Leon | 3 | West Corridor (`113`) | Zombie | 66,140 | `6:114` | `0:25=0` ∧ `1:1=0` ∧ `1:6=0` ∧ `4:129=0` |
 | Leon | 3 | West Corridor (`113`) | Zombie | 66,140 | `6:114` | `0:25=1` ∧ `1:1=0` ∧ `1:6=0` |
 | Leon | 3 | West Corridor (`113`) | Zombie | 66,146 | `6:82` | `0:25=1` ∧ `1:1=0` ∧ `1:6=0` |
-| Leon | 3 | West Corridor (`113`) | Zombie | 67,142 | `6:255` | `1:1=0` ∧ `1:6=0` ∧ `4:129=0` |
 | Leon | 3 | West Corridor (`113`) | Zombie | 67,146 | `6:82` | `0:25=0` ∧ `1:1=0` ∧ `1:6=0` ∧ `4:129=0` |
 | Leon | 3 | West Corridor (`113`) | Zombie | 69,146 | `6:113` | `0:25=0` ∧ `1:1=0` ∧ `1:6=0` ∧ `4:129=1` |
 | Leon | 3 | West Corridor (`113`) | Licker | 69,146 | `6:156` | `1:6=1` |
@@ -284,7 +267,6 @@ Monster markers are toggled with `7` and start off. They show spawn positions, n
 | Leon | 5 | Basement Corridor (`211`) | Dog | 263,125 | `6:100` | `0:25=1` ∧ `1:1=0` ∧ `1:6=0` ∧ `8:119=0` |
 | Leon | 5 | Underground Waterway (`212`) | Dog | 254,77 | `6:142` | `4:83=1` |
 | Leon | 5 | Underground Waterway (`212`) | Dog | 263,92 | `6:141` | `4:83=1` |
-| Leon | 5 | Underground Waterway (`212`) | Dog | 267,75 | `6:141` | `4:83=0` |
 | Leon | 5 | Autopsy Room (`215`) | Zombie | 238,157 | `6:90` | `0:25=0` ∧ `1:1=0` ∧ `4:54=0` |
 | Leon | 5 | Autopsy Room (`215`) | Zombie | 238,157 | `6:90` | `0:25=1` ∧ `1:1=0` |
 | Leon | 5 | Autopsy Room (`215`) | Licker | 239,159 | `6:88` | `1:1=1` |
@@ -302,11 +284,9 @@ Monster markers are toggled with `7` and start off. They show spawn positions, n
 | Leon | 5 | Parking Garage (`216`) | Dog | 111,135 | `6:81` | `1:6=1` |
 | Leon | 5 | Parking Garage (`216`) | Dog | 136,156 | `6:82` | `1:6=1` |
 | Leon | 5 | Parking Garage (`216`) | Dog | 145,151 | `6:83` | `1:6=1` |
-| Leon | 5 | Cell Block Corridor (`219`) | Boss | 45,140 | `6:255` | `1:6=0` ∧ `3:67=1` ∧ `3:98=0` ∧ `4:55=1` |
 | Leon | 5 | Cell Block Corridor (`219`) | Zombie | 62,140 | `6:162` | `1:6=1` |
 | Leon | 5 | Cell Block Corridor (`219`) | Zombie | 64,138 | `6:95` | `1:6=1` |
 | Leon | 5 | Cell Block Corridor (`219`) | Zombie | 77,150 | `6:140` | `1:6=1` |
-| Leon | 5 | Cell Block Corridor (`219`) | Zombie | 79,148 | `6:148` | `1:6=1` |
 | Leon | 5 | Cell Block Corridor (`219`) | Zombie | 89,156 | `6:96` | `1:6=1` |
 | Leon | 5 | Cell Block Corridor (`219`) | Zombie | 95,157 | `6:161` | `1:6=1` |
 | Leon | 5 | Kennel (`21A`) | Dog | 77,122 | `6:106` | `1:6=1` |
@@ -316,14 +296,12 @@ Monster markers are toggled with `7` and start off. They show spawn positions, n
 | Leon | 5 | Kennel (`21A`) | Dog | 85,142 | `6:107` | `1:6=1` |
 | Leon | 5 | Kennel (`21A`) | Dog | 96,136 | `6:79` | `1:6=0` ∧ `4:114=0` |
 | Leon | 5 | Kennel (`21A`) | Dog | 99,125 | `6:80` | `1:6=0` ∧ `4:61=0` ∧ `4:114=0` |
-| Leon | 5 | Kennel (`21A`) | Dog | 99,126 | `6:80` | `1:6=0` ∧ `4:61=1` ∧ `4:114=0` |
 
 ## Leon · Map ID 6
 
 | Mode | Map ID | Room/slot | Category | x,y | Death bank:gid | Conditions |
 | --- | --- | --- | --- | --- | --- | --- |
 | Leon | 6 | Treatment Corridor (`302`) | Insect | 84,172 | `6:89` | `1:6=1` |
-| Leon | 6 | Treatment Corridor (`302`) | Insect | 86,183 | `6:106` | `1:6=0` |
 | Leon | 6 | Treatment Corridor (`302`) | Insect | 93,145 | `6:145` | `1:6=0` |
 | Leon | 6 | Treatment Corridor (`302`) | Insect | 98,192 | `6:88` | `1:6=1` |
 | Leon | 6 | Plug Passage (`303`) | Zombie | 104,91 | `6:160` | `1:6=1` |
@@ -461,31 +439,6 @@ Monster markers are toggled with `7` and start off. They show spawn positions, n
 | Leon | 9 | Underground Passage (`508`) | Zombie | 210,114 | `7:55` | `1:1=0` |
 | Leon | 9 | Underground Passage (`508`) | Zombie | 218,97 | `7:12` | `1:1=0` |
 
-## Leon · Map ID 10
-
-| Mode | Map ID | Room/slot | Category | x,y | Death bank:gid | Conditions |
-| --- | --- | --- | --- | --- | --- | --- |
-| Leon | 10 | Freight Train (`505`) | Boss | 196,112 | `7:255` | `4:97=0` ∧ `4:99=1` |
-
-## Leon · Map ID 12
-
-| Mode | Map ID | Room/slot | Category | x,y | Death bank:gid | Conditions |
-| --- | --- | --- | --- | --- | --- | --- |
-| Leon | 12 | Freight Train (`505`) | Boss | 149,112 | `7:255` | `4:97=0` ∧ `4:99=1` |
-
-## Leon · Map ID 13
-
-| Mode | Map ID | Room/slot | Category | x,y | Death bank:gid | Conditions |
-| --- | --- | --- | --- | --- | --- | --- |
-| Leon | 13 | Freight Train (`505`) | Boss | 173,71 | `7:255` | `4:97=0` ∧ `4:99=1` |
-| Leon | 13 | Upper Power Room (`604`) | Boss | 248,128 | `7:18` | `1:1=1` ∧ `4:92=0` |
-
-## Leon · Map ID 14
-
-| Mode | Map ID | Room/slot | Category | x,y | Death bank:gid | Conditions |
-| --- | --- | --- | --- | --- | --- | --- |
-| Leon | 14 | Pump Room (`603`) | Zombie | 124,155 | `7:255` | — |
-
 ## Leon · Map ID 15
 
 | Mode | Map ID | Room/slot | Category | x,y | Death bank:gid | Conditions |
@@ -497,7 +450,6 @@ Monster markers are toggled with `7` and start off. They show spawn positions, n
 
 | Mode | Map ID | Room/slot | Category | x,y | Death bank:gid | Conditions |
 | --- | --- | --- | --- | --- | --- | --- |
-| Leon | 16 | Freight Train (`505`) | Boss | 193,61 | `7:255` | `4:97=0` ∧ `4:99=1` |
 | Leon | 16 | Cargo Platform (`606`) | Zombie | 142,63 | `7:63` | `1:1=0` ∧ `4:188=1` |
 | Leon | 16 | Cargo Platform (`606`) | Zombie | 142,63 | `7:63` | `1:1=1` ∧ `4:92=0` |
 | Leon | 16 | Cargo Platform (`606`) | Zombie | 143,58 | `7:62` | `1:1=0` ∧ `4:188=1` |
@@ -510,9 +462,6 @@ Monster markers are toggled with `7` and start off. They show spawn positions, n
 | Leon | 16 | Cargo Platform (`606`) | Zombie | 165,61 | `7:65` | `1:1=1` ∧ `4:92=0` |
 | Leon | 16 | Lounge (`609`) | Licker | 70,148 | `7:38` | — |
 | Leon | 16 | Lounge (`609`) | Licker | 77,150 | `7:39` | — |
-| Leon | 16 | Lounge (`60A`) | Plant | 66,129 | `7:19` | `1:1=0` ∧ `4:131=0` |
-| Leon | 16 | Lounge (`60A`) | Plant | 67,129 | `7:19` | `1:1=0` ∧ `4:131=0` |
-| Leon | 16 | Lounge (`60A`) | Plant | 68,129 | `7:19` | `1:1=0` ∧ `4:131=0` |
 | Leon | 16 | West Corridor (`60B`) | Plant | 117,181 | `7:21` | `1:1=0` ∧ `4:95=0` |
 | Leon | 16 | West Corridor (`60B`) | Plant | 120,177 | `7:22` | `1:1=0` ∧ `4:95=0` |
 | Leon | 16 | Capsule Room (`60F`) | Licker | 160,178 | `7:59` | — |
@@ -569,7 +518,6 @@ Monster markers are toggled with `7` and start off. They show spawn positions, n
 | Leon | 18 | Platform Entrance (`700`) | Zombie | 226,104 | `7:169` | `1:1=1` ∧ `4:136=1` |
 | Leon | 18 | Platform Entrance (`700`) | Zombie | 229,95 | `7:168` | `1:1=1` ∧ `4:136=1` |
 | Leon | 18 | Platform Entrance (`700`) | Zombie | 237,113 | `7:170` | `1:1=1` ∧ `4:136=1` |
-| Leon | 18 | Escape Platform (`702`) | Boss | 134,167 | `7:40` | `4:151=0` |
 
 ## Leon · Map ID 19
 
@@ -607,7 +555,6 @@ Monster markers are toggled with `7` and start off. They show spawn positions, n
 | Claire | 0 | `seen=25` | Zombie | 66,206 | `6:167` | `4:152=1` |
 | Claire | 0 | `seen=25` | Zombie | 75,200 | `6:165` | `4:152=1` |
 | Claire | 0 | `seen=25` | Zombie | 75,204 | `6:166` | `4:152=0` |
-| Claire | 0 | `seen=25` | Zombie | 79,206 | `6:255` | — |
 | Claire | 0 | `seen=25` | Zombie | 79,208 | `6:167` | `4:152=0` |
 | Claire | 0 | `seen=25` | Zombie | 80,202 | `6:165` | `4:152=0` |
 | Claire | 0 | `seen=25` | Zombie | 83,205 | `6:164` | `4:152=0` |
@@ -648,15 +595,12 @@ Monster markers are toggled with `7` and start off. They show spawn positions, n
 | Claire | 2 | Reception Room (`201`) | Zombie | 100,149 | `6:117` | `0:25=0` ∧ `1:1=1` ∧ `1:6=0` |
 | Claire | 2 | Reception Room (`201`) | Zombie | 100,150 | `6:118` | `0:25=1` ∧ `1:1=1` ∧ `1:6=0` |
 | Claire | 2 | Reception Room (`201`) | Insect | 101,142 | `6:116` | `1:6=1` |
-| Claire | 2 | Reception Room (`201`) | Licker | 104,157 | `6:24` | `1:1=0` ∧ `1:6=0` ∧ `4:5=0` |
 | Claire | 2 | Reception Room (`201`) | Zombie | 110,154 | `6:212` | `0:25=1` ∧ `1:1=1` ∧ `1:6=0` |
 | Claire | 2 | Reception Room (`201`) | Zombie | 111,153 | `6:118` | `0:25=0` ∧ `1:1=1` ∧ `1:6=0` |
 | Claire | 2 | Reception Room (`201`) | Insect | 119,156 | `6:255` | `1:6=1` |
-| Claire | 2 | West Office (`202`) | Zombie | 88,132 | `6:255` | `1:1=0` ∧ `4:7=1` |
 | Claire | 2 | West Corridor (`204`) | Licker | 47,125 | `6:131` | `1:6=1` |
 | Claire | 2 | West Corridor (`204`) | Licker | 47,133 | `6:61` | `1:1=0` ∧ `1:6=0` ∧ `4:86=1` ∧ `4:153=0` |
 | Claire | 2 | West Corridor (`204`) | Licker | 48,140 | `6:130` | `1:6=1` |
-| Claire | 2 | West Corridor (`204`) | Zombie | 49,145 | `6:255` | `1:6=0` |
 | Claire | 2 | West Corridor (`204`) | Licker | 80,153 | `6:155` | `1:6=1` |
 | Claire | 2 | West Passage (`205`) | Zombie | 41,76 | `6:255` | `1:1=0` ∧ `1:6=0` |
 | Claire | 2 | West Passage (`205`) | Plant | 41,76 | `6:255` | `1:6=1` |
@@ -694,7 +638,6 @@ Monster markers are toggled with `7` and start off. They show spawn positions, n
 | Claire | 2 | Break Room Corridor (`20A`) | Zombie | 183,134 | `6:34` | `1:1=1` ∧ `1:6=0` |
 | Claire | 2 | Break Room Corridor (`20A`) | Zombie | 183,141 | `6:206` | `1:1=1` ∧ `1:6=0` |
 | Claire | 2 | Break Room Corridor (`20A`) | Zombie | 183,165 | `6:205` | `1:1=1` ∧ `1:6=0` |
-| Claire | 2 | Break Room Corridor (`20A`) | Zombie | 184,161 | `6:102` | `1:6=1` |
 | Claire | 2 | Break Room Corridor (`20A`) | Zombie | 188,121 | `6:206` | `1:1=0` ∧ `1:6=0` |
 | Claire | 2 | Break Room Corridor (`20A`) | Zombie | 190,127 | `6:34` | `1:1=0` ∧ `1:6=0` |
 | Claire | 2 | Break Room Corridor (`20A`) | Zombie | 190,129 | `6:32` | `1:1=1` ∧ `1:6=0` |
@@ -719,7 +662,6 @@ Monster markers are toggled with `7` and start off. They show spawn positions, n
 | Claire | 2 | East Corridor (`20C`) | Zombie | 203,101 | `6:93` | `1:1=0` |
 | Claire | 2 | East Corridor (`20C`) | Zombie | 219,80 | `6:148` | `1:1=0` |
 | Claire | 2 | East Corridor (`20C`) | Zombie | 228,83 | `6:92` | `1:1=0` |
-| Claire | 2 | East Corridor (`20C`) | Boss | 231,99 | `6:197` | `1:1=1` ∧ `4:128=0` |
 | Claire | 2 | East Corridor (`20C`) | Zombie | 233,98 | `6:91` | `1:1=0` |
 | Claire | 2 | Press Room (`20D`) | Licker | 218,110 | `6:144` | `1:0=1` ∧ `1:1=0` |
 | Claire | 2 | Press Room (`20D`) | Boss | 218,117 | `6:198` | `1:1=1` ∧ `4:78=1` ∧ `4:79=0` |
@@ -744,17 +686,9 @@ Monster markers are toggled with `7` and start off. They show spawn positions, n
 | Claire | 3 | Rooftop Entrance (`109`) | Flyer | 238,143 | `6:4` | `1:1=0` ∧ `1:6=0` ∧ `4:49=1` |
 | Claire | 3 | Rooftop Entrance (`109`) | Flyer | 240,141 | `6:5` | `1:1=1` ∧ `1:6=0` ∧ `4:0=0` |
 | Claire | 3 | Rooftop Entrance (`109`) | Flyer | 240,143 | `6:2` | `1:1=1` ∧ `1:6=0` ∧ `4:0=0` |
-| Claire | 3 | Rooftop Entrance (`109`) | Flyer | 241,150 | `6:4` | `1:1=0` ∧ `1:6=0` ∧ `4:49=0` |
-| Claire | 3 | Rooftop Entrance (`109`) | Flyer | 242,139 | `6:1` | `1:1=1` ∧ `1:6=0` ∧ `4:0=0` |
 | Claire | 3 | Rooftop Entrance (`109`) | Flyer | 242,141 | `6:3` | `1:1=0` ∧ `1:6=0` ∧ `4:49=1` |
 | Claire | 3 | Rooftop Entrance (`109`) | Flyer | 242,142 | `6:5` | `1:1=0` ∧ `1:6=0` ∧ `4:49=0` |
-| Claire | 3 | Rooftop Entrance (`109`) | Flyer | 242,142 | `6:8` | `1:1=1` ∧ `1:6=0` ∧ `4:0=0` |
 | Claire | 3 | Rooftop Entrance (`109`) | Flyer | 242,143 | `6:7` | `1:1=1` ∧ `1:6=0` ∧ `4:0=0` |
-| Claire | 3 | Rooftop Entrance (`109`) | Flyer | 248,134 | `6:3` | `1:1=0` ∧ `1:6=0` ∧ `4:49=0` |
-| Claire | 3 | Rooftop Entrance (`109`) | Flyer | 249,134 | `6:2` | `1:1=0` ∧ `1:6=0` |
-| Claire | 3 | Rooftop Entrance (`109`) | Flyer | 255,134 | `6:1` | `1:1=0` ∧ `1:6=0` ∧ `4:49=0` |
-| Claire | 3 | Rooftop Entrance (`109`) | Flyer | 257,134 | `6:1` | `1:1=0` ∧ `1:6=0` ∧ `4:49=1` |
-| Claire | 3 | Rooftop Entrance (`109`) | Flyer | 264,134 | `6:0` | `1:1=0` ∧ `1:6=0` |
 | Claire | 3 | Rooftop Entrance (`109`) | Boss | 266,109 | `6:132` | `1:6=1` |
 | Claire | 3 | Helicopter Corridor (`10A`) | Licker | 203,129 | `6:76` | `1:0=0` ∧ `1:1=1` ∧ `1:6=0` ∧ `4:0=1` |
 | Claire | 3 | Helicopter Corridor (`10A`) | Licker | 203,129 | `6:76` | `1:1=1` ∧ `1:6=0` ∧ `4:0=0` |
@@ -763,8 +697,6 @@ Monster markers are toggled with `7` and start off. They show spawn positions, n
 | Claire | 3 | Helicopter Corridor (`10A`) | Zombie | 209,127 | `6:127` | `1:6=1` |
 | Claire | 3 | Helicopter Corridor (`10A`) | Zombie | 209,129 | `6:76` | `1:0=0` ∧ `1:1=0` ∧ `1:6=0` ∧ `4:0=1` |
 | Claire | 3 | Helicopter Corridor (`10A`) | Zombie | 209,129 | `6:76` | `1:1=0` ∧ `1:6=0` ∧ `4:0=0` |
-| Claire | 3 | Helicopter Corridor (`10A`) | Zombie | 209,142 | `6:126` | `1:6=1` |
-| Claire | 3 | Helicopter Corridor (`10A`) | Zombie | 209,152 | `6:123` | `1:6=1` |
 | Claire | 3 | Helicopter Corridor (`10A`) | Zombie | 209,159 | `6:74` | `1:6=1` |
 | Claire | 3 | Helicopter Corridor (`10A`) | Licker | 212,115 | `6:77` | `1:0=0` ∧ `1:1=1` ∧ `1:6=0` ∧ `4:0=1` |
 | Claire | 3 | Helicopter Corridor (`10A`) | Licker | 212,115 | `6:77` | `1:1=1` ∧ `1:6=0` ∧ `4:0=0` |
@@ -810,7 +742,6 @@ Monster markers are toggled with `7` and start off. They show spawn positions, n
 | Claire | 3 | West Corridor (`113`) | Zombie | 66,140 | `6:114` | `0:25=1` ∧ `1:1=1` ∧ `1:6=0` ∧ `4:15=1` |
 | Claire | 3 | West Corridor (`113`) | Zombie | 66,140 | `6:114` | `1:1=1` ∧ `1:6=0` ∧ `4:15=0` ∧ `4:129=0` |
 | Claire | 3 | West Corridor (`113`) | Zombie | 66,146 | `6:82` | `0:25=1` ∧ `1:1=1` ∧ `1:6=0` |
-| Claire | 3 | West Corridor (`113`) | Zombie | 67,142 | `6:255` | `1:1=1` ∧ `1:6=0` ∧ `4:129=0` |
 | Claire | 3 | West Corridor (`113`) | Zombie | 67,146 | `6:82` | `0:25=0` ∧ `1:1=1` ∧ `1:6=0` ∧ `4:129=0` |
 | Claire | 3 | West Corridor (`113`) | Zombie | 69,146 | `6:113` | `0:25=0` ∧ `1:1=1` ∧ `1:6=0` ∧ `4:129=1` |
 | Claire | 3 | West Corridor (`113`) | Licker | 69,146 | `6:156` | `1:6=1` |
@@ -868,7 +799,6 @@ Monster markers are toggled with `7` and start off. They show spawn positions, n
 | Claire | 5 | Basement Corridor (`211`) | Dog | 263,125 | `6:100` | `0:25=1` ∧ `1:1=0` ∧ `1:6=0` ∧ `8:119=0` |
 | Claire | 5 | Underground Waterway (`212`) | Dog | 254,77 | `6:142` | `4:83=1` |
 | Claire | 5 | Underground Waterway (`212`) | Dog | 263,92 | `6:141` | `4:83=1` |
-| Claire | 5 | Underground Waterway (`212`) | Dog | 267,75 | `6:141` | `4:83=0` |
 | Claire | 5 | Autopsy Room (`215`) | Zombie | 238,157 | `6:90` | `0:25=0` ∧ `1:1=0` ∧ `4:54=0` |
 | Claire | 5 | Autopsy Room (`215`) | Zombie | 238,157 | `6:90` | `0:25=1` ∧ `1:1=0` |
 | Claire | 5 | Autopsy Room (`215`) | Licker | 239,159 | `6:88` | `1:1=1` |
@@ -889,14 +819,11 @@ Monster markers are toggled with `7` and start off. They show spawn positions, n
 | Claire | 5 | Cell Block Corridor (`219`) | Zombie | 41,135 | `6:123` | `1:6=0` ∧ `8:119=0` |
 | Claire | 5 | Cell Block Corridor (`219`) | Dog | 59,140 | `6:120` | `1:6=0` ∧ `8:119=1` |
 | Claire | 5 | Cell Block Corridor (`219`) | Zombie | 60,139 | `6:122` | `1:6=0` ∧ `8:119=0` |
-| Claire | 5 | Cell Block Corridor (`219`) | Zombie | 61,138 | `6:255` | `1:6=0` ∧ `8:119=1` |
 | Claire | 5 | Cell Block Corridor (`219`) | Zombie | 62,140 | `6:162` | `1:6=1` |
 | Claire | 5 | Cell Block Corridor (`219`) | Zombie | 64,138 | `6:95` | `1:6=1` |
 | Claire | 5 | Cell Block Corridor (`219`) | Zombie | 76,148 | `6:121` | `1:6=0` ∧ `8:119=0` |
 | Claire | 5 | Cell Block Corridor (`219`) | Zombie | 77,150 | `6:140` | `1:6=1` |
-| Claire | 5 | Cell Block Corridor (`219`) | Zombie | 79,148 | `6:148` | `1:6=1` |
 | Claire | 5 | Cell Block Corridor (`219`) | Dog | 83,157 | `6:146` | `1:6=0` ∧ `8:119=1` |
-| Claire | 5 | Cell Block Corridor (`219`) | Zombie | 86,155 | `6:255` | `1:6=0` ∧ `8:119=1` |
 | Claire | 5 | Cell Block Corridor (`219`) | Zombie | 89,156 | `6:96` | `1:6=1` |
 | Claire | 5 | Cell Block Corridor (`219`) | Zombie | 95,157 | `6:161` | `1:6=1` |
 | Claire | 5 | Kennel (`21A`) | Dog | 77,122 | `6:106` | `1:6=1` |
@@ -906,15 +833,12 @@ Monster markers are toggled with `7` and start off. They show spawn positions, n
 | Claire | 5 | Kennel (`21A`) | Dog | 85,142 | `6:107` | `1:6=1` |
 | Claire | 5 | Kennel (`21A`) | Dog | 96,136 | `6:79` | `1:6=0` ∧ `4:114=0` |
 | Claire | 5 | Kennel (`21A`) | Dog | 99,125 | `6:80` | `1:6=0` ∧ `4:61=0` ∧ `4:114=0` |
-| Claire | 5 | Kennel (`21A`) | Dog | 99,126 | `6:80` | `1:6=0` ∧ `4:61=1` ∧ `4:114=0` |
-| Claire | 5 | Secret Passage (`308`) | Boss | 170,94 | `6:255` | `1:1=0` ∧ `3:9=0` |
 
 ## Claire · Map ID 6
 
 | Mode | Map ID | Room/slot | Category | x,y | Death bank:gid | Conditions |
 | --- | --- | --- | --- | --- | --- | --- |
 | Claire | 6 | Treatment Corridor (`302`) | Insect | 84,172 | `6:89` | `1:6=1` |
-| Claire | 6 | Treatment Corridor (`302`) | Insect | 86,183 | `6:106` | `1:6=0` |
 | Claire | 6 | Treatment Corridor (`302`) | Insect | 93,145 | `6:145` | `1:6=0` |
 | Claire | 6 | Treatment Corridor (`302`) | Insect | 98,192 | `6:88` | `1:6=1` |
 | Claire | 6 | Plug Passage (`303`) | Zombie | 104,91 | `6:160` | `1:6=1` |
@@ -931,7 +855,6 @@ Monster markers are toggled with `7` and start off. They show spawn positions, n
 | Claire | 6 | Chess Plug Passage (`309`) | Boss | 151,145 | `6:98` | `1:1=0` ∧ `4:57=0` |
 | Claire | 6 | Chess Plug Passage (`309`) | Boss | 151,145 | `6:255` | `1:1=0` ∧ `4:57=0` |
 | Claire | 6 | Chess Plug Passage (`309`) | Boss | 151,162 | `6:98` | `1:1=1` ∧ `4:57=1` |
-| Claire | 6 | Treatment Corridor (`30B`) | Zombie | 117,100 | `6:41` | `1:6=1` |
 
 ## Claire · Map ID 7
 
@@ -986,18 +909,6 @@ Monster markers are toggled with `7` and start off. They show spawn positions, n
 | Claire | 9 | Underground Passage (`508`) | Zombie | 210,114 | `7:55` | `1:1=0` |
 | Claire | 9 | Underground Passage (`508`) | Zombie | 218,97 | `7:12` | `1:1=0` |
 
-## Claire · Map ID 13
-
-| Mode | Map ID | Room/slot | Category | x,y | Death bank:gid | Conditions |
-| --- | --- | --- | --- | --- | --- | --- |
-| Claire | 13 | Upper Power Room (`604`) | Boss | 248,128 | `7:18` | `1:1=1` ∧ `4:92=0` |
-
-## Claire · Map ID 14
-
-| Mode | Map ID | Room/slot | Category | x,y | Death bank:gid | Conditions |
-| --- | --- | --- | --- | --- | --- | --- |
-| Claire | 14 | Pump Room (`603`) | Zombie | 124,155 | `7:255` | — |
-
 ## Claire · Map ID 15
 
 | Mode | Map ID | Room/slot | Category | x,y | Death bank:gid | Conditions |
@@ -1021,9 +932,6 @@ Monster markers are toggled with `7` and start off. They show spawn positions, n
 | Claire | 16 | Cargo Platform (`606`) | Zombie | 165,61 | `7:65` | `1:1=1` ∧ `4:92=0` |
 | Claire | 16 | Lounge (`609`) | Licker | 70,148 | `7:38` | — |
 | Claire | 16 | Lounge (`609`) | Licker | 77,150 | `7:39` | — |
-| Claire | 16 | Lounge (`60A`) | Plant | 66,129 | `7:19` | `1:1=0` ∧ `4:131=0` |
-| Claire | 16 | Lounge (`60A`) | Plant | 67,129 | `7:19` | `1:1=0` ∧ `4:131=0` |
-| Claire | 16 | Lounge (`60A`) | Plant | 68,129 | `7:19` | `1:1=0` ∧ `4:131=0` |
 | Claire | 16 | West Corridor (`60B`) | Plant | 117,181 | `7:21` | `1:1=0` ∧ `4:95=0` |
 | Claire | 16 | West Corridor (`60B`) | Plant | 120,177 | `7:22` | `1:1=0` ∧ `4:95=0` |
 | Claire | 16 | Capsule Room (`60F`) | Licker | 160,178 | `7:59` | — |
@@ -1041,7 +949,6 @@ Monster markers are toggled with `7` and start off. They show spawn positions, n
 
 | Mode | Map ID | Room/slot | Category | x,y | Death bank:gid | Conditions |
 | --- | --- | --- | --- | --- | --- | --- |
-| Claire | 17 | Lab Control Room (`612`) | Boss | 157,93 | `7:255` | `1:1=1` ∧ `3:133=0` ∧ `34:43=1` |
 | Claire | 17 | Computer Room (`613`) | Flyer | 98,68 | `7:16` | — |
 | Claire | 17 | Computer Room (`613`) | Insect | 100,57 | `7:46` | — |
 | Claire | 17 | Computer Room (`613`) | Insect | 101,57 | `7:34` | — |
@@ -1082,7 +989,6 @@ Monster markers are toggled with `7` and start off. They show spawn positions, n
 | Claire | 18 | Platform Entrance (`700`) | Zombie | 226,104 | `7:169` | `1:1=1` ∧ `4:136=1` |
 | Claire | 18 | Platform Entrance (`700`) | Zombie | 229,95 | `7:168` | `1:1=1` ∧ `4:136=1` |
 | Claire | 18 | Platform Entrance (`700`) | Zombie | 237,113 | `7:170` | `1:1=1` ∧ `4:136=1` |
-| Claire | 18 | Escape Platform (`702`) | Boss | 134,167 | `7:40` | `4:151=0` |
 
 ## Claire · Map ID 19
 
@@ -1225,14 +1131,6 @@ Monster markers are toggled with `7` and start off. They show spawn positions, n
 | Extreme Battle · Leon data | 2 | West Corridor (`204`) | Boss | 45,155 | `6:2` | `4:15=1` ∧ `131:1=1` |
 | Extreme Battle · Leon data | 2 | West Corridor (`204`) | Boss | 45,155 | `6:2` | `4:15=1` ∧ `131:2=1` |
 | Extreme Battle · Leon data | 2 | West Corridor (`204`) | Boss | 45,155 | `6:2` | `4:15=1` ∧ `131:3=1` |
-| Extreme Battle · Leon data | 2 | West Corridor (`204`) | Zombie | 50,127 | `6:7` | `4:15=0` ∧ `131:1=0` ∧ `131:2=0` ∧ `131:3=0` |
-| Extreme Battle · Leon data | 2 | West Corridor (`204`) | Zombie | 50,127 | `6:7` | `4:15=0` ∧ `131:1=1` |
-| Extreme Battle · Leon data | 2 | West Corridor (`204`) | Zombie | 50,127 | `6:7` | `4:15=0` ∧ `131:2=1` |
-| Extreme Battle · Leon data | 2 | West Corridor (`204`) | Zombie | 50,127 | `6:7` | `4:15=0` ∧ `131:3=1` |
-| Extreme Battle · Leon data | 2 | West Corridor (`204`) | Zombie | 50,143 | `6:5` | `4:15=0` ∧ `131:1=0` ∧ `131:2=0` ∧ `131:3=0` |
-| Extreme Battle · Leon data | 2 | West Corridor (`204`) | Zombie | 50,143 | `6:5` | `4:15=0` ∧ `131:1=1` |
-| Extreme Battle · Leon data | 2 | West Corridor (`204`) | Zombie | 50,143 | `6:5` | `4:15=0` ∧ `131:2=1` |
-| Extreme Battle · Leon data | 2 | West Corridor (`204`) | Zombie | 50,143 | `6:5` | `4:15=0` ∧ `131:3=1` |
 | Extreme Battle · Leon data | 2 | West Corridor (`204`) | Zombie | 63,157 | `6:3` | `4:15=0` ∧ `131:1=0` ∧ `131:2=0` ∧ `131:3=0` |
 | Extreme Battle · Leon data | 2 | West Corridor (`204`) | Zombie | 63,157 | `6:3` | `4:15=0` ∧ `131:1=1` |
 | Extreme Battle · Leon data | 2 | West Corridor (`204`) | Zombie | 63,157 | `6:3` | `4:15=0` ∧ `131:2=1` |
@@ -1242,7 +1140,6 @@ Monster markers are toggled with `7` and start off. They show spawn positions, n
 | Extreme Battle · Leon data | 2 | West Corridor (`204`) | Zombie | 83,150 | `6:2` | `4:15=0` ∧ `131:2=1` |
 | Extreme Battle · Leon data | 2 | West Corridor (`204`) | Zombie | 83,150 | `6:2` | `4:15=0` ∧ `131:3=1` |
 | Extreme Battle · Leon data | 2 | West Passage (`205`) | Plant | 44,70 | `6:90` | `4:11=0` |
-| Extreme Battle · Leon data | 2 | West Passage (`205`) | Plant | 69,64 | `6:255` | `4:11=0` |
 | Extreme Battle · Leon data | 2 | West Passage (`205`) | Dog | 82,68 | `6:90` | `4:11=1` |
 | Extreme Battle · Leon data | 2 | West Passage (`205`) | Dog | 83,84 | `6:92` | `4:11=1` |
 | Extreme Battle · Leon data | 2 | West Passage (`205`) | Plant | 83,89 | `6:91` | `4:11=0` |
@@ -1379,7 +1276,6 @@ Monster markers are toggled with `7` and start off. They show spawn positions, n
 | Extreme Battle · Leon data | 2 | East Stairway (`20F`) | Flyer | 261,114 | `6:50` | `4:255=1` ∧ `131:3=1` |
 | Extreme Battle · Leon data | 2 | Watchman's Room (`210`) | Plant | 243,102 | `6:55` | — |
 | Extreme Battle · Leon data | 2 | Watchman's Room (`210`) | Plant | 252,114 | `6:56` | — |
-| Extreme Battle · Leon data | 2 | Watchman's Room (`210`) | Plant | 254,96 | `6:255` | — |
 
 ## Extreme Battle · Leon data · Map ID 3
 
@@ -1393,7 +1289,6 @@ Monster markers are toggled with `7` and start off. They show spawn positions, n
 | Extreme Battle · Leon data | 3 | Rooftop (`108`) | Zombie | 255,98 | `6:32` | — |
 | Extreme Battle · Leon data | 3 | Rooftop Entrance (`109`) | Plant | 239,143 | `6:0` | — |
 | Extreme Battle · Leon data | 3 | Rooftop Entrance (`109`) | Plant | 261,133 | `6:1` | — |
-| Extreme Battle · Leon data | 3 | Rooftop Entrance (`109`) | Plant | 270,128 | `6:255` | — |
 | Extreme Battle · Leon data | 3 | Helicopter Corridor (`10A`) | Plant | 205,112 | `6:38` | `4:6=1` ∧ `4:255=0` ∧ `131:1=0` ∧ `131:2=0` ∧ `131:3=0` |
 | Extreme Battle · Leon data | 3 | Helicopter Corridor (`10A`) | Plant | 205,112 | `6:38` | `4:6=1` ∧ `4:255=0` ∧ `131:2=1` |
 | Extreme Battle · Leon data | 3 | Helicopter Corridor (`10A`) | Plant | 205,112 | `6:38` | `4:6=1` ∧ `4:255=0` ∧ `131:3=1` |
@@ -1442,12 +1337,6 @@ Monster markers are toggled with `7` and start off. They show spawn positions, n
 | Extreme Battle · Leon data | 3 | Helicopter Corridor (`10A`) | Zombie | 219,105 | `6:40` | `4:255=1` ∧ `131:1=0` ∧ `131:2=0` ∧ `131:3=0` |
 | Extreme Battle · Leon data | 3 | Helicopter Corridor (`10A`) | Zombie | 219,105 | `6:40` | `4:255=1` ∧ `131:2=1` |
 | Extreme Battle · Leon data | 3 | Helicopter Corridor (`10A`) | Zombie | 219,105 | `6:40` | `4:255=1` ∧ `131:3=1` |
-| Extreme Battle · Leon data | 3 | Helicopter Corridor (`10A`) | Plant | 221,94 | `6:255` | `4:6=1` ∧ `4:255=0` ∧ `131:1=0` ∧ `131:2=0` ∧ `131:3=0` |
-| Extreme Battle · Leon data | 3 | Helicopter Corridor (`10A`) | Plant | 221,94 | `6:255` | `4:6=1` ∧ `4:255=0` ∧ `131:2=1` |
-| Extreme Battle · Leon data | 3 | Helicopter Corridor (`10A`) | Plant | 221,94 | `6:255` | `4:6=1` ∧ `4:255=0` ∧ `131:3=1` |
-| Extreme Battle · Leon data | 3 | Helicopter Corridor (`10A`) | Plant | 221,94 | `6:255` | `4:255=1` ∧ `131:1=0` ∧ `131:2=0` ∧ `131:3=0` |
-| Extreme Battle · Leon data | 3 | Helicopter Corridor (`10A`) | Plant | 221,94 | `6:255` | `4:255=1` ∧ `131:2=1` |
-| Extreme Battle · Leon data | 3 | Helicopter Corridor (`10A`) | Plant | 221,94 | `6:255` | `4:255=1` ∧ `131:3=1` |
 | Extreme Battle · Leon data | 3 | Helicopter Corridor (`10A`) | Zombie | 221,115 | `6:225` | `4:6=0` ∧ `4:255=0` ∧ `131:1=0` ∧ `131:2=0` ∧ `131:3=0` |
 | Extreme Battle · Leon data | 3 | Helicopter Corridor (`10A`) | Zombie | 221,115 | `6:225` | `4:6=0` ∧ `4:255=0` ∧ `131:2=1` |
 | Extreme Battle · Leon data | 3 | Helicopter Corridor (`10A`) | Zombie | 221,115 | `6:225` | `4:6=0` ∧ `4:255=0` ∧ `131:3=1` |
@@ -1493,7 +1382,6 @@ Monster markers are toggled with `7` and start off. They show spawn positions, n
 | --- | --- | --- | --- | --- | --- | --- |
 | Extreme Battle · Leon data | 4 | Main Hall (`117`) | Plant | 166,76 | `6:116` | — |
 | Extreme Battle · Leon data | 4 | Main Hall (`117`) | Plant | 166,133 | `6:115` | — |
-| Extreme Battle · Leon data | 4 | Main Hall (`117`) | Plant | 168,93 | `6:255` | — |
 
 ## Extreme Battle · Leon data · Map ID 5
 
@@ -1526,7 +1414,6 @@ Monster markers are toggled with `7` and start off. They show spawn positions, n
 | Extreme Battle · Leon data | 5 | Secret Room (`300`) | Zombie | 139,80 | `6:18` | — |
 | Extreme Battle · Leon data | 5 | Secret Room (`300`) | Zombie | 144,72 | `6:16` | — |
 | Extreme Battle · Leon data | 5 | Secret Room (`300`) | Zombie | 148,89 | `6:14` | — |
-| Extreme Battle · Leon data | 5 | Secret Room (`300`) | Zombie | 149,97 | `6:17` | — |
 | Extreme Battle · Leon data | 5 | Secret Room (`300`) | Zombie | 153,80 | `6:15` | — |
 | Extreme Battle · Leon data | 5 | Holding Cell (`301`) | Zombie | 32,165 | `6:223` | — |
 | Extreme Battle · Leon data | 5 | Holding Cell (`301`) | Zombie | 34,156 | `6:222` | — |
@@ -1945,7 +1832,6 @@ Monster markers are toggled with `7` and start off. They show spawn positions, n
 | Extreme Battle · Leon data | 16 | 608,611 (`608,611`) | Zombie | 173,146 | `7:180` | `4:255=1` ∧ `131:1=0` |
 | Extreme Battle · Leon data | 16 | Lounge (`609`) | Plant | 68,153 | `7:106` | — |
 | Extreme Battle · Leon data | 16 | Lounge (`609`) | Plant | 77,150 | `7:107` | — |
-| Extreme Battle · Leon data | 16 | Lounge (`609`) | Plant | 79,130 | `7:255` | — |
 | Extreme Battle · Leon data | 16 | Lounge (`60A`) | Insect | 72,121 | `7:57` | — |
 | Extreme Battle · Leon data | 16 | Lounge (`60A`) | Insect | 77,112 | `7:255` | — |
 | Extreme Battle · Leon data | 16 | Lounge (`60A`) | Insect | 83,120 | `7:58` | — |
@@ -2047,7 +1933,6 @@ Monster markers are toggled with `7` and start off. They show spawn positions, n
 | Extreme Battle · Leon data | 17 | Laboratory Corridor (`614`) | Zombie | 65,77 | `7:65` | `4:13=0` |
 | Extreme Battle · Leon data | 17 | Laboratory Corridor (`614`) | Zombie | 66,66 | `7:66` | `4:13=0` |
 | Extreme Battle · Leon data | 17 | Laboratory Corridor (`614`) | Zombie | 66,115 | `7:68` | `4:13=0` |
-| Extreme Battle · Leon data | 17 | Laboratory Corridor (`614`) | Zombie | 72,98 | `7:70` | `4:13=0` |
 | Extreme Battle · Leon data | 17 | Birkin's Laboratory (`615`) | Insect | 78,129 | `7:255` | — |
 | Extreme Battle · Leon data | 17 | Birkin's Laboratory (`615`) | Insect | 78,136 | `7:255` | — |
 | Extreme Battle · Leon data | 17 | Birkin's Laboratory (`615`) | Insect | 80,133 | `7:255` | — |
@@ -2229,14 +2114,6 @@ Monster markers are toggled with `7` and start off. They show spawn positions, n
 | Extreme Battle · Claire data | 2 | West Corridor (`204`) | Boss | 45,155 | `6:2` | `4:15=1` ∧ `131:1=1` |
 | Extreme Battle · Claire data | 2 | West Corridor (`204`) | Boss | 45,155 | `6:2` | `4:15=1` ∧ `131:2=1` |
 | Extreme Battle · Claire data | 2 | West Corridor (`204`) | Boss | 45,155 | `6:2` | `4:15=1` ∧ `131:3=1` |
-| Extreme Battle · Claire data | 2 | West Corridor (`204`) | Zombie | 50,127 | `6:7` | `4:15=0` ∧ `131:1=0` ∧ `131:2=0` ∧ `131:3=0` |
-| Extreme Battle · Claire data | 2 | West Corridor (`204`) | Zombie | 50,127 | `6:7` | `4:15=0` ∧ `131:1=1` |
-| Extreme Battle · Claire data | 2 | West Corridor (`204`) | Zombie | 50,127 | `6:7` | `4:15=0` ∧ `131:2=1` |
-| Extreme Battle · Claire data | 2 | West Corridor (`204`) | Zombie | 50,127 | `6:7` | `4:15=0` ∧ `131:3=1` |
-| Extreme Battle · Claire data | 2 | West Corridor (`204`) | Zombie | 50,143 | `6:5` | `4:15=0` ∧ `131:1=0` ∧ `131:2=0` ∧ `131:3=0` |
-| Extreme Battle · Claire data | 2 | West Corridor (`204`) | Zombie | 50,143 | `6:5` | `4:15=0` ∧ `131:1=1` |
-| Extreme Battle · Claire data | 2 | West Corridor (`204`) | Zombie | 50,143 | `6:5` | `4:15=0` ∧ `131:2=1` |
-| Extreme Battle · Claire data | 2 | West Corridor (`204`) | Zombie | 50,143 | `6:5` | `4:15=0` ∧ `131:3=1` |
 | Extreme Battle · Claire data | 2 | West Corridor (`204`) | Zombie | 63,157 | `6:3` | `4:15=0` ∧ `131:1=0` ∧ `131:2=0` ∧ `131:3=0` |
 | Extreme Battle · Claire data | 2 | West Corridor (`204`) | Zombie | 63,157 | `6:3` | `4:15=0` ∧ `131:1=1` |
 | Extreme Battle · Claire data | 2 | West Corridor (`204`) | Zombie | 63,157 | `6:3` | `4:15=0` ∧ `131:2=1` |
@@ -2246,7 +2123,6 @@ Monster markers are toggled with `7` and start off. They show spawn positions, n
 | Extreme Battle · Claire data | 2 | West Corridor (`204`) | Zombie | 83,150 | `6:2` | `4:15=0` ∧ `131:2=1` |
 | Extreme Battle · Claire data | 2 | West Corridor (`204`) | Zombie | 83,150 | `6:2` | `4:15=0` ∧ `131:3=1` |
 | Extreme Battle · Claire data | 2 | West Passage (`205`) | Plant | 44,70 | `6:90` | `4:11=0` |
-| Extreme Battle · Claire data | 2 | West Passage (`205`) | Plant | 69,64 | `6:255` | `4:11=0` |
 | Extreme Battle · Claire data | 2 | West Passage (`205`) | Dog | 82,68 | `6:90` | `4:11=1` |
 | Extreme Battle · Claire data | 2 | West Passage (`205`) | Dog | 83,84 | `6:92` | `4:11=1` |
 | Extreme Battle · Claire data | 2 | West Passage (`205`) | Plant | 83,89 | `6:91` | `4:11=0` |
@@ -2383,7 +2259,6 @@ Monster markers are toggled with `7` and start off. They show spawn positions, n
 | Extreme Battle · Claire data | 2 | East Stairway (`20F`) | Flyer | 261,114 | `6:50` | `4:255=1` ∧ `131:3=1` |
 | Extreme Battle · Claire data | 2 | Watchman's Room (`210`) | Plant | 243,102 | `6:55` | — |
 | Extreme Battle · Claire data | 2 | Watchman's Room (`210`) | Plant | 252,114 | `6:56` | — |
-| Extreme Battle · Claire data | 2 | Watchman's Room (`210`) | Plant | 254,96 | `6:255` | — |
 
 ## Extreme Battle · Claire data · Map ID 3
 
@@ -2397,7 +2272,6 @@ Monster markers are toggled with `7` and start off. They show spawn positions, n
 | Extreme Battle · Claire data | 3 | Rooftop (`108`) | Zombie | 255,98 | `6:32` | — |
 | Extreme Battle · Claire data | 3 | Rooftop Entrance (`109`) | Plant | 239,143 | `6:0` | — |
 | Extreme Battle · Claire data | 3 | Rooftop Entrance (`109`) | Plant | 261,133 | `6:1` | — |
-| Extreme Battle · Claire data | 3 | Rooftop Entrance (`109`) | Plant | 270,128 | `6:255` | — |
 | Extreme Battle · Claire data | 3 | Helicopter Corridor (`10A`) | Plant | 205,112 | `6:38` | `4:6=1` ∧ `4:255=0` ∧ `131:1=0` ∧ `131:2=0` ∧ `131:3=0` |
 | Extreme Battle · Claire data | 3 | Helicopter Corridor (`10A`) | Plant | 205,112 | `6:38` | `4:6=1` ∧ `4:255=0` ∧ `131:2=1` |
 | Extreme Battle · Claire data | 3 | Helicopter Corridor (`10A`) | Plant | 205,112 | `6:38` | `4:6=1` ∧ `4:255=0` ∧ `131:3=1` |
@@ -2446,12 +2320,6 @@ Monster markers are toggled with `7` and start off. They show spawn positions, n
 | Extreme Battle · Claire data | 3 | Helicopter Corridor (`10A`) | Zombie | 219,105 | `6:40` | `4:255=1` ∧ `131:1=0` ∧ `131:2=0` ∧ `131:3=0` |
 | Extreme Battle · Claire data | 3 | Helicopter Corridor (`10A`) | Zombie | 219,105 | `6:40` | `4:255=1` ∧ `131:2=1` |
 | Extreme Battle · Claire data | 3 | Helicopter Corridor (`10A`) | Zombie | 219,105 | `6:40` | `4:255=1` ∧ `131:3=1` |
-| Extreme Battle · Claire data | 3 | Helicopter Corridor (`10A`) | Plant | 221,94 | `6:255` | `4:6=1` ∧ `4:255=0` ∧ `131:1=0` ∧ `131:2=0` ∧ `131:3=0` |
-| Extreme Battle · Claire data | 3 | Helicopter Corridor (`10A`) | Plant | 221,94 | `6:255` | `4:6=1` ∧ `4:255=0` ∧ `131:2=1` |
-| Extreme Battle · Claire data | 3 | Helicopter Corridor (`10A`) | Plant | 221,94 | `6:255` | `4:6=1` ∧ `4:255=0` ∧ `131:3=1` |
-| Extreme Battle · Claire data | 3 | Helicopter Corridor (`10A`) | Plant | 221,94 | `6:255` | `4:255=1` ∧ `131:1=0` ∧ `131:2=0` ∧ `131:3=0` |
-| Extreme Battle · Claire data | 3 | Helicopter Corridor (`10A`) | Plant | 221,94 | `6:255` | `4:255=1` ∧ `131:2=1` |
-| Extreme Battle · Claire data | 3 | Helicopter Corridor (`10A`) | Plant | 221,94 | `6:255` | `4:255=1` ∧ `131:3=1` |
 | Extreme Battle · Claire data | 3 | Helicopter Corridor (`10A`) | Zombie | 221,115 | `6:225` | `4:6=0` ∧ `4:255=0` ∧ `131:1=0` ∧ `131:2=0` ∧ `131:3=0` |
 | Extreme Battle · Claire data | 3 | Helicopter Corridor (`10A`) | Zombie | 221,115 | `6:225` | `4:6=0` ∧ `4:255=0` ∧ `131:2=1` |
 | Extreme Battle · Claire data | 3 | Helicopter Corridor (`10A`) | Zombie | 221,115 | `6:225` | `4:6=0` ∧ `4:255=0` ∧ `131:3=1` |
@@ -2497,7 +2365,6 @@ Monster markers are toggled with `7` and start off. They show spawn positions, n
 | --- | --- | --- | --- | --- | --- | --- |
 | Extreme Battle · Claire data | 4 | Main Hall (`117`) | Plant | 166,76 | `6:116` | — |
 | Extreme Battle · Claire data | 4 | Main Hall (`117`) | Plant | 166,133 | `6:115` | — |
-| Extreme Battle · Claire data | 4 | Main Hall (`117`) | Plant | 168,93 | `6:255` | — |
 
 ## Extreme Battle · Claire data · Map ID 5
 
@@ -2530,7 +2397,6 @@ Monster markers are toggled with `7` and start off. They show spawn positions, n
 | Extreme Battle · Claire data | 5 | Secret Room (`300`) | Zombie | 139,80 | `6:18` | — |
 | Extreme Battle · Claire data | 5 | Secret Room (`300`) | Zombie | 144,72 | `6:16` | — |
 | Extreme Battle · Claire data | 5 | Secret Room (`300`) | Zombie | 148,89 | `6:14` | — |
-| Extreme Battle · Claire data | 5 | Secret Room (`300`) | Zombie | 149,97 | `6:17` | — |
 | Extreme Battle · Claire data | 5 | Secret Room (`300`) | Zombie | 153,80 | `6:15` | — |
 | Extreme Battle · Claire data | 5 | Holding Cell (`301`) | Zombie | 32,165 | `6:223` | — |
 | Extreme Battle · Claire data | 5 | Holding Cell (`301`) | Zombie | 34,156 | `6:222` | — |
@@ -2945,7 +2811,6 @@ Monster markers are toggled with `7` and start off. They show spawn positions, n
 | Extreme Battle · Claire data | 16 | 608,611 (`608,611`) | Zombie | 173,146 | `7:180` | `4:255=1` ∧ `131:1=0` |
 | Extreme Battle · Claire data | 16 | Lounge (`609`) | Plant | 68,153 | `7:106` | — |
 | Extreme Battle · Claire data | 16 | Lounge (`609`) | Plant | 77,150 | `7:107` | — |
-| Extreme Battle · Claire data | 16 | Lounge (`609`) | Plant | 79,130 | `7:255` | — |
 | Extreme Battle · Claire data | 16 | Lounge (`60A`) | Insect | 72,121 | `7:57` | — |
 | Extreme Battle · Claire data | 16 | Lounge (`60A`) | Insect | 77,112 | `7:255` | — |
 | Extreme Battle · Claire data | 16 | Lounge (`60A`) | Insect | 83,120 | `7:58` | — |
@@ -3047,7 +2912,6 @@ Monster markers are toggled with `7` and start off. They show spawn positions, n
 | Extreme Battle · Claire data | 17 | Laboratory Corridor (`614`) | Zombie | 65,77 | `7:65` | `4:13=0` |
 | Extreme Battle · Claire data | 17 | Laboratory Corridor (`614`) | Zombie | 66,66 | `7:66` | `4:13=0` |
 | Extreme Battle · Claire data | 17 | Laboratory Corridor (`614`) | Zombie | 66,115 | `7:68` | `4:13=0` |
-| Extreme Battle · Claire data | 17 | Laboratory Corridor (`614`) | Zombie | 72,98 | `7:70` | `4:13=0` |
 | Extreme Battle · Claire data | 17 | Birkin's Laboratory (`615`) | Insect | 78,129 | `7:255` | — |
 | Extreme Battle · Claire data | 17 | Birkin's Laboratory (`615`) | Insect | 78,136 | `7:255` | — |
 | Extreme Battle · Claire data | 17 | Birkin's Laboratory (`615`) | Insect | 80,133 | `7:255` | — |
