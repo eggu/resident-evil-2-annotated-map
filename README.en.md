@@ -2,6 +2,8 @@
 
 English | [한국어](README.md)
 
+<p align="center"><img src="docs/logo.png" alt="RE2 Annotated Map — Survivor’s Notes" width="320"></p>
+
 An ASI mod for the original Resident Evil 2 PC release (GOG `Resident Evil 2.exe` + [Classic REbirth](https://classicrebirth.com/)) that adds room names, locked doors and their keys, key items, documents and maps, puzzles, common items, typewriters and item boxes, and monsters to the map. Korean and English are supported. This is not for the 2019 remake.
 
 - Annotations are drawn on the game's own map screen. Picked-up items, opened doors, solved puzzles and killed monsters disappear from the map. Rooms with items left are tinted orange.
@@ -11,10 +13,12 @@ An ASI mod for the original Resident Evil 2 PC release (GOG `Resident Evil 2.exe
 
 ## Screenshots
 
+Red outlines highlight the monster toggle and room visibility scope being compared.
+
 | | Visited rooms | All rooms |
 |---|---|---|
-| Monsters off | ![Police Station 1F — Visited rooms, monsters off](docs/screenshots/1.png) | ![Police Station 1F — All rooms, monsters off](docs/screenshots/3.png) |
-| Monsters on | ![Police Station 1F — Visited rooms, monsters on](docs/screenshots/2.png) | ![Police Station 1F — All rooms, monsters on](docs/screenshots/4.png) |
+| Monsters off | ![Police Station 1F — Visited rooms, monsters off](docs/screenshots/1-highlighted.png) | ![Police Station 1F — All rooms, monsters off](docs/screenshots/3-highlighted.png) |
+| Monsters on | ![Police Station 1F — Visited rooms, monsters on](docs/screenshots/2-highlighted.png) | ![Police Station 1F — All rooms, monsters on](docs/screenshots/4-highlighted.png) |
 
 ## Visibility and defaults
 

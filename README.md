@@ -2,6 +2,8 @@
 
 [English](README.en.md) | 한국어
 
+<p align="center"><img src="docs/logo.png" alt="RE2 Annotated Map — Survivor’s Notes" width="320"></p>
+
 **상세 지도: 생존자의 메모** — 원작 Resident Evil 2 PC판(GOG판 `Resident Evil 2.exe` + [Classic REbirth](https://classicrebirth.com/))의 지도에 방 이름, 잠긴 문과 필요한 열쇠, 핵심 아이템, 문서·지도, 퍼즐, 일반 아이템, 타자기·아이템 상자, 몬스터를 표시하는 ASI 모드입니다. 한국어/영어를 지원합니다. RE2 리메이크(2019)용이 아닙니다.
 
 - 게임 자체의 지도 화면에 표시합니다. 주운 아이템, 연 문, 푼 퍼즐, 쓰러뜨린 몬스터는 지도에서 사라집니다. 아이템이 남은 방은 주황색으로 칠합니다.
@@ -11,10 +13,12 @@
 
 ## 스크린샷
 
+빨간 테두리는 비교할 몬스터 표시와 방 표시 범위의 범례를 강조합니다.
+
 | | 방문한 방 | 모든 방 |
 |---|---|---|
-| 몬스터 끔 | ![경찰서 1층 — 방문한 방, 몬스터 끔](docs/screenshots/1.png) | ![경찰서 1층 — 모든 방, 몬스터 끔](docs/screenshots/3.png) |
-| 몬스터 켬 | ![경찰서 1층 — 방문한 방, 몬스터 켬](docs/screenshots/2.png) | ![경찰서 1층 — 모든 방, 몬스터 켬](docs/screenshots/4.png) |
+| 몬스터 끔 | ![경찰서 1층 — 방문한 방, 몬스터 끔](docs/screenshots/1-highlighted.png) | ![경찰서 1층 — 모든 방, 몬스터 끔](docs/screenshots/3-highlighted.png) |
+| 몬스터 켬 | ![경찰서 1층 — 방문한 방, 몬스터 켬](docs/screenshots/2-highlighted.png) | ![경찰서 1층 — 모든 방, 몬스터 켬](docs/screenshots/4-highlighted.png) |
 
 ## 표시 범위와 기본값
 
