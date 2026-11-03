@@ -77,7 +77,7 @@ ROOM_HELP_LABEL=int(re.search(r'ROOM_HELP_LABEL (\d+)',(R/'room_labels.h').read_
 ROOM_HELP_LABEL_COUNT=int(re.search(r'ROOM_HELP_LABEL_COUNT (\d+)',(R/'room_labels.h').read_text())[1])
 help_icon_x=(lambda text:[int(v) for v in re.search(r'room_help_icon_x\[\]=\{([^}]*)\}',text)[1].split(',')])((R/'room_labels.h').read_text())
 ITEM_PAGES=int(re.search(r'ITEM_LABEL_PAGE_COUNT (\d+)',(R/'item_labels.h').read_text())[1])
-assert len(room_labels)>96 and ROOM_HELP_LABEL+ROOM_HELP_LABEL_COUNT==len(room_labels) and ROOM_HELP_LABEL_COUNT==46 and len(item_labels)==76 and len(items)==1178 # +event rewards (Main Fuse, plugs...) and 4-point pickups (Fuse Case), 2026-10-23
+assert len(room_labels)>96 and ROOM_HELP_LABEL+ROOM_HELP_LABEL_COUNT==len(room_labels) and ROOM_HELP_LABEL_COUNT==47 and len(item_labels)==76 and len(items)==1178 # +event rewards (Main Fuse, plugs...) and 4-point pickups (Fuse Case), 2026-10-23
 # Leon B Vacant Factory B1 Shotgun Parts (ROOM5020, AOT attribute 0x71 incl. UNDER) is a [3] key item; no Rocket Launcher event row.
 assert any(i[:2]==(0,9) and i[5]==34 and i[6:8]==(34,21) for i in items) and not any(i[5]==17 and i[0]<2 for i in items) # Rocket Launcher: Extreme Battle rows only
 assert {20,21,22,24,25,26,27,29,30,35,38,39,40} <= {i[0] for i in item_labels}
@@ -124,7 +124,7 @@ ko_item_pages=int(re.search(r'ITEM_LABEL_PAGE_COUNT (\d+)',(KO/'item_labels.h').
 ko_help_start=int(re.search(r'ROOM_HELP_LABEL (\d+)',ko_header)[1])
 ko_help_count=int(re.search(r'ROOM_HELP_LABEL_COUNT (\d+)',ko_header)[1])
 ko_help_text=[label['text'] for label in json.loads((KO/'room_names-provenance.json').read_text())['labels'][-ko_help_count:]]
-assert ko_help_count==46 and ko_help_text[:22]==['표시 상태', '[0] 전체 켜짐', '[0] 전체 꺼짐', '[1] 방 이름 켜짐', '[1] 방 이름 꺼짐', '[2] 잠긴 문 켜짐', '[2] 잠긴 문 꺼짐', '[3] 핵심 아이템 켜짐', '[3] 핵심 아이템 꺼짐', '[4] 문서·지도 켜짐', '[4] 문서·지도 꺼짐', '[5] 퍼즐 켜짐', '[5] 퍼즐 꺼짐', '[9] 언어: 한국어', '[9] 언어: 영어', '[7] 적 켜짐', '[7] 적 꺼짐', '[6] 일반 아이템 켜짐', '[6] 일반 아이템 꺼짐', '[8] 방문 방', '[8] 공개 방', '[8] 전체 방']
+assert ko_help_count==47 and ko_help_text[:22]==['표시 상태', '[0] 전체 켜짐', '[0] 전체 꺼짐', '[1] 방 이름 켜짐', '[1] 방 이름 꺼짐', '[2] 잠긴 문 켜짐', '[2] 잠긴 문 꺼짐', '[3] 핵심 아이템 켜짐', '[3] 핵심 아이템 꺼짐', '[4] 문서·지도 켜짐', '[4] 문서·지도 꺼짐', '[5] 퍼즐 켜짐', '[5] 퍼즐 꺼짐', '[9] 언어: 한국어', '[9] 언어: 영어', '[7] 적 켜짐', '[7] 적 꺼짐', '[6] 일반 아이템 켜짐', '[6] 일반 아이템 꺼짐', '[8] 방문 방', '[8] 공개 방', '[8] 전체 방']
 ko_room_px=pixels(KO/'room_labels.h','room_label_pixels');ko_item_px=pixels(KO/'item_labels.h','item_label_pixels')
 for k in range(ko_room_pages):pages.setdefault(bytes(struct.pack('<65536H',*ko_room_px[k*65536:(k+1)*65536])),('room',k))
 for k in range(ko_item_pages):pages.setdefault(bytes(struct.pack('<65536H',*ko_item_px[k*65536:(k+1)*65536])),('item',k))
@@ -156,7 +156,7 @@ def item_on(item,state):
 BANKS={33:0x98ec1c,6:0x98eb74,7:0x98eb94,0:0x989e6c,1:0x989ed0,3:0x98eb2c,4:0x98eb4c,8:0x98ebb4,29:0x98ed24,34:0x98ebd4,255:0x98ed2c} # 29 = FG_ZAPPING ([0x53b218+29*4])
 def visible_help(state):
  stage=call('KeyMapTestInteractionStage')
- indices=[0,43,1 if state&1 else 2,3 if state&2 else 4,5 if state&4 else 6,7 if state&8 else 8,9 if state&16 else 10,11 if stage else 12,17 if call('KeyMapTestCommon') else 18,15 if call('KeyMapTestMonsters') else 16,18+call('KeyMapTestScope'),14 if call('KeyMapTestLanguage') else 13,22+(call('KeyMapTestOpacity')-10)//10,32+(call('KeyMapTestSize')-50)//10]
+ indices=[0,43,46,1 if state&1 else 2,3 if state&2 else 4,5 if state&4 else 6,7 if state&8 else 8,9 if state&16 else 10,11 if stage else 12,17 if call('KeyMapTestCommon') else 18,15 if call('KeyMapTestMonsters') else 16,18+call('KeyMapTestScope'),14 if call('KeyMapTestLanguage') else 13,22+(call('KeyMapTestOpacity')-10)//10,32+(call('KeyMapTestSize')-50)//10]
  return Counter({('help',)+room_labels[ROOM_HELP_LABEL+n]:1 for n in indices})
 def model(pl,floor,flags,bits,seen,state=31,mode=0):
  def bb(bank,bit):return bit in bits.get(bank,()) or (bank==1 and bit<32 and flags&(0x80000000>>bit)!=0)
@@ -347,7 +347,7 @@ def run(pl,floor,flags=None,bits={},seen=range(256),free=0x20000,mode=0,mpl=None
    if (page,uu,vv,sw,sh) in help_rows:
     n=help_rows.index((page,uu,vv,sw,sh))
     state=call('KeyMapTestState');stage=call('KeyMapTestInteractionStage');language=call('KeyMapTestLanguage')
-    selected=[0,43,1 if state&1 else 2,3 if state&2 else 4,5 if state&4 else 6,7 if state&8 else 8,9 if state&16 else 10,11 if stage else 12,17 if call('KeyMapTestCommon') else 18,15 if call('KeyMapTestMonsters') else 16,18+call('KeyMapTestScope'),14 if language else 13,22+(call('KeyMapTestOpacity')-10)//10,32+(call('KeyMapTestSize')-50)//10]
+    selected=[0,43,46,1 if state&1 else 2,3 if state&2 else 4,5 if state&4 else 6,7 if state&8 else 8,9 if state&16 else 10,11 if stage else 12,17 if call('KeyMapTestCommon') else 18,15 if call('KeyMapTestMonsters') else 16,18+call('KeyMapTestScope'),14 if language else 13,22+(call('KeyMapTestOpacity')-10)//10,32+(call('KeyMapTestSize')-50)//10]
     assert n in selected,(n,selected)
     # Row-by-row 6/5-column legend (2026-10-26); exact layout is covered by the pre-release legend tests.
     assert 0<x and x+w<=320 and 200<=y and y+h<=240,(x,y,w,h)

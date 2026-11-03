@@ -372,8 +372,8 @@ static void help_draw(void){
  unsigned legend_y=LEGEND_Y;
  if(t)room_label_draw(x[0]+title_w/2,legend_y+title_h/2,title->u,title->v,title->w,title->h,t);
  unsigned cursor=x[0]+title_w+6;
- for(unsigned n=0;n<3;n++){
-  unsigned id=n==2?43+(unsigned)zoom_on:n?32+(name_size-50)/10:22+(name_opacity-10)/10;
+ for(unsigned n=0;n<4;n++){
+  unsigned id=n==3?46:n==2?43+(unsigned)zoom_on:n?32+(name_size-50)/10:22+(name_opacity-10)/10;
   const RoomLabel*l=base+id;unsigned w=(l->w+scale/2)/scale;
   unsigned tex=cached_texture(active_room_cache(l->page),active_room_pixels(l->page));
   if(tex)room_label_draw(cursor+w/2,legend_y+title_h/2,l->u,l->v,l->w,l->h,tex);

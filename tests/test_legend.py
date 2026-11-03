@@ -18,9 +18,9 @@ shown=draw();assert call('KeyMapTestLegend')==1
 toggle(8192);assert call('KeyMapTestLegend')==0
 hidden=draw()
 gone=[q for q in shown if q not in hidden];new=[q for q in hidden if q not in shown]
-assert len(gone)==14,len(gone)                      # title, opacity, size, zoom and ten state rows
+assert len(gone)==15,len(gone)                      # title, opacity, size, zoom, hide and ten state rows
 assert all(struct.unpack_from('<h',q,18)[0]>=210 for q in gone),'only legend rows disappear'
-assert len(new)==1 and len(hidden)==len(shown)-13,(len(new),len(hidden)) # the hint, nothing else moves
+assert len(new)==1 and len(hidden)==len(shown)-14,(len(new),len(hidden)) # the hint, nothing else moves
 x0,y0,x1,y1=struct.unpack_from('<4h',new[0],16)
 assert x0==8 and y0==228 and y1<=238 and x1<=318,(x0,y0,x1,y1)
 toggle(1);toggle(1);assert call('KeyMapTestLegend')==0 # other keys leave it alone

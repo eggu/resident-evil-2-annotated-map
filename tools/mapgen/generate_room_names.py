@@ -36,14 +36,14 @@ for language, title in (('Korean', '[Shift -/+] 불투명도'), ('English', '[Sh
     HELP_TEXT[language] += tuple(f'{title}: {percent}%' for percent in range(10, 101, 10))
 for language, title in (('Korean', '[-/+] 이름'), ('English', '[-/+] Size')):
     HELP_TEXT[language] += tuple(f'{title}: {percent}%' for percent in range(50, 151, 10))
-HELP_TEXT['Korean'] += ('[결정] 확대: 1배', '[결정] 확대: 2배', '~키 눌러서 범례 보기')  # ids 43,44 decide as in RE3; 45 folded legend
-HELP_TEXT['English'] += ('[Action] Zoom: 1x', '[Action] Zoom: 2x', 'Press ~ to show the legend')
+HELP_TEXT['Korean'] += ('[결정] 확대: 1배', '[결정] 확대: 2배', '[~] 범례', '[~] 숨김')  # ids 43,44 decide as in RE3; 45 folded legend; 46 hide
+HELP_TEXT['English'] += ('[Action] Zoom: 1x', '[Action] Zoom: 2x', '[~] Legend', '[~] Hide')
 HELP_SLOT = 6  # map pixels per marker slot (5 px marker + 1 px gap)
 _WHITE, _OFF = (255, 255, 255), (140, 140, 140)
 # RE3 build_assets.py CATEGORY_COLOR/PALETTE, in HELP_TEXT order; marker sprites stay unchanged.
 HELP_RGB = (_WHITE, _WHITE, _OFF, (240, 226, 190), _OFF, (255, 205, 70), _OFF, (90, 220, 255), _OFF,
             (255, 140, 210), _OFF, (255, 150, 40), _OFF, _WHITE, _WHITE, (235, 60, 60), _OFF, (255, 120, 60), _OFF,
-            _WHITE, _WHITE, _WHITE) + (_WHITE,) * 24
+            _WHITE, _WHITE, _WHITE) + (_WHITE,) * 25
 # Native rects reachable from several RDTs: (floor, index) -> room code whose name labels it.
 # Floor 19 train map index 1 is the same rect as room 704's floor-18 train car, reached from 700/701/702/704.
 SHARED_RECT = {(19, 1): '704'}
