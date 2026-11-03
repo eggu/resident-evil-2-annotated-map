@@ -1,4 +1,26 @@
-# RE2 Annotated Map - Survivor's Notes — 1.0.0
+# RE2 Annotated Map - Survivor's Notes — 1.1.0
+
+## 한국어
+
+- 지도 2배 확대를 추가했습니다. 결정 버튼으로 켜고 끄며, 확대 중에는 방향 입력으로 지도를 옮깁니다. 지도를 다시 열면 1배로 돌아옵니다.
+- `~` 키로 범례를 접고 펼칠 수 있습니다. 설정은 저장됩니다.
+- 잠긴 서랍과 일부 이벤트 잠금 아이콘이 옆 방에 표시되던 문제를 고쳤습니다. 예를 들어 1층 Reception Room의 서랍이 West Office에 표시되었습니다.
+- 방 이름 연결선이 방 외곽선과 겹치지 않게 했습니다. 일부 방 이름의 위치가 달라졌습니다.
+- 핵심 아이템과 같은 자리에 있는 잠금은 별 옆에 작게 표시합니다.
+- 지도 데이터 생성 도구와 이름 배치 규칙을 저장소에 추가했습니다.
+- 업그레이드: 기존 `scripts/RE2.AnnotatedMap.ini`는 그대로 두고 `scripts/RE2.AnnotatedMap.asi`만 바꾸면 됩니다.
+
+## English
+
+- Added 2x map zoom. The Action button toggles it, and directions move the map while zoomed. Reopening the map returns to 1x.
+- The `~` key shows or hides the legend. The setting is saved.
+- Fixed locked drawers and some event locks appearing in the neighbouring room, such as the 1F Reception Room drawer shown in the West Office.
+- Room-name leader lines no longer overlap room outlines. Some room names have moved.
+- A lock on the same spot as a key item now appears as a small badge beside its star.
+- Added the map data generators and the name placement rules to the repository.
+- Upgrading: keep your `scripts/RE2.AnnotatedMap.ini` and replace only `scripts/RE2.AnnotatedMap.asi`.
+
+# 1.0.0
 
 ## 한국어
 

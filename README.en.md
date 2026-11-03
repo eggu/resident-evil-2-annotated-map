@@ -9,6 +9,7 @@ An ASI mod for the original Resident Evil 2 PC release (GOG `Resident Evil 2.exe
 - Annotations are drawn on the game's own map screen. Picked-up items, opened doors, solved puzzles and killed monsters disappear from the map. Rooms with items left are tinted orange.
 - Item and lock differences between Leon/Claire and scenarios A/B are reflected. Zapping items are shown too.
 - On the status-screen map, left/right selects an area and up/down selects a floor. Only visited floors are shown.
+- The Action button zooms the map to 2x, and directions move it while zoomed.
 - An optional live rank estimate uses the original results-screen formula (off by default).
 
 ## Screenshots
