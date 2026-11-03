@@ -18,9 +18,11 @@ RE2 리메이크(2019)용이 아닙니다.
 사용 (지도 화면에서만 작동)
 - 숫자 키: 0 전체 표시, 1 방 이름·타자기·아이템 상자, 2 잠긴 문·열쇠, 3 핵심 아이템, 4 문서·지도,
   5 퍼즐, 6 일반 아이템, 7 적, 8 표시 범위(방문한 방 → 공개된 방 → 모든 방), 9 한국어 / English.
+- 범례 표시: ~ (숫자 1 왼쪽) 키로 켜고 끕니다.
 - 이름 크기: - / = (+), 불투명도: Shift + 위 키. 숫자패드 -/+도 지원합니다.
 - 상태 화면 지도: 좌/우 장소 선택, 위/아래 층 선택. 이미 방문한 층만 보입니다.
   다른 장소가 있으면 좌우 가장자리에 초록 화살표가 깜빡입니다.
+- 지도 2배 확대: 결정 버튼으로 켜고 끕니다. 확대 중에는 방향 입력으로 지도를 옮기며, 지도를 다시 열면 1배로 돌아옵니다.
 - 기본값: 영어, 이름 100%, 불투명도 70%, 방문한 방만 표시, 방 이름만 켬(2–7로 다른 항목 켬).
 - 설정은 scripts/RE2.AnnotatedMap.ini에 저장됩니다.
 - [Z]는 A/B 시나리오 사이의 선택·행동과 관련된 재핑 표식이며 아이템 이름의 일부가 아닙니다.
@@ -57,9 +59,11 @@ Controls (on the map screen only)
 - Number keys: 0 all annotations, 1 room names/typewriters/item boxes, 2 doors/keys,
   3 key items, 4 documents/maps, 5 puzzles, 6 common items, 7 enemies,
   8 visibility (visited/revealed/all rooms), 9 Korean/English.
+- Legend: ~ (left of 1) shows or hides it.
 - Name size: - / = (+); opacity: Shift + those keys. Numpad -/+ is supported.
 - Status-screen map: left/right selects an area, up/down selects a floor. Only visited floors are shown.
   Blinking green arrows at the left/right edges show that another area is available.
+- 2x map zoom: the Action button toggles it. While zoomed, directions move the map; reopening the map returns to 1x.
 - Defaults: English, size 100%, opacity 70%, visited rooms only, only Rooms on (2-7 turn on other categories).
 - Settings are saved in scripts/RE2.AnnotatedMap.ini.
 - [Z] marks zapping-related items/interactions affected by choices or actions across scenarios A/B; it is not part of the item name.

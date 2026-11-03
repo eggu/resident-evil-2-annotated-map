@@ -45,8 +45,8 @@
       "pl": 0,
       "floor": 2,
       "seen": 31,
-      "x": 113,
-      "y": 150,
+      "x": 99,
+      "y": 171,
       "ko": "Reception Room",
       "rooms": [
         "201"
@@ -63,13 +63,12 @@
       "lw": 25,
       "lh": 12,
       "line": [
-        0,
-        0,
-        0,
-        0
+        102,
+        163,
+        102,
+        165
       ],
-      "outside_reason": null,
-      "cover": 0.96
+      "outside_reason": "near"
     },
     {
       "pl": 0,
@@ -165,8 +164,8 @@
       "pl": 0,
       "floor": 2,
       "seen": 35,
-      "x": 46,
-      "y": 62,
+      "x": 94,
+      "y": 91,
       "ko": "West Passage",
       "rooms": [
         "205"
@@ -183,12 +182,13 @@
       "lw": 21,
       "lh": 13,
       "line": [
-        46,
-        70,
-        46,
-        68
+        0,
+        0,
+        0,
+        0
       ],
-      "outside_reason": "near"
+      "outside_reason": null,
+      "cover": 0.791
     },
     {
       "pl": 0,
@@ -224,8 +224,8 @@
       "pl": 0,
       "floor": 2,
       "seen": 37,
-      "x": 102,
-      "y": 62,
+      "x": 115,
+      "y": 77,
       "ko": "West Stairway",
       "rooms": [
         "207"
@@ -242,20 +242,20 @@
       "lw": 22,
       "lh": 13,
       "line": [
-        102,
-        70,
-        102,
-        68
+        0,
+        0,
+        0,
+        0
       ],
-      "outside_reason": "near",
-      "cover": 0.8
+      "outside_reason": null,
+      "cover": 0.92
     },
     {
       "pl": 0,
       "floor": 2,
       "seen": 38,
-      "x": 121,
-      "y": 91,
+      "x": 126,
+      "y": 64,
       "ko": "Darkroom",
       "rooms": [
         "208"
@@ -272,20 +272,19 @@
       "lw": 24,
       "lh": 6,
       "line": [
-        0,
-        0,
-        0,
-        0
+        126,
+        87,
+        126,
+        67
       ],
-      "outside_reason": null,
-      "cover": 0.861
+      "outside_reason": "fit"
     },
     {
       "pl": 0,
       "floor": 2,
       "seen": 39,
-      "x": 78,
-      "y": 61,
+      "x": 32,
+      "y": 110,
       "ko": "Evidence Room",
       "rooms": [
         "209"
@@ -302,10 +301,10 @@
       "lw": 23,
       "lh": 12,
       "line": [
-        85,
-        97,
-        85,
-        67
+        79,
+        110,
+        43,
+        110
       ],
       "outside_reason": "fit"
     },
@@ -452,9 +451,9 @@
       "lh": 12,
       "line": [
         186,
-        80,
+        83,
         184,
-        80
+        83
       ],
       "outside_reason": "near"
     },
@@ -462,7 +461,7 @@
       "pl": 0,
       "floor": 2,
       "seen": 45,
-      "x": 243,
+      "x": 246,
       "y": 72,
       "ko": "East Stairway",
       "rooms": [
@@ -480,9 +479,9 @@
       "lw": 22,
       "lh": 13,
       "line": [
-        243,
+        246,
         80,
-        243,
+        246,
         78
       ],
       "outside_reason": "near"
@@ -520,8 +519,8 @@
       "pl": 0,
       "floor": 2,
       "seen": 130,
-      "x": 267,
-      "y": 148,
+      "x": 285,
+      "y": 159,
       "ko": "Emergency Stairway",
       "rooms": [
         "116"
@@ -538,10 +537,10 @@
       "lw": 28,
       "lh": 13,
       "line": [
-        267,
-        156,
-        267,
-        154
+        269,
+        159,
+        271,
+        159
       ],
       "outside_reason": "near"
     },
@@ -699,7 +698,7 @@
       "pl": 0,
       "floor": 3,
       "seen": 13,
-      "x": 182,
+      "x": 184,
       "y": 61,
       "ko": "Chief's Office Corridor",
       "rooms": [
@@ -717,9 +716,9 @@
       "lw": 33,
       "lh": 12,
       "line": [
-        182,
+        184,
         104,
-        182,
+        184,
         67
       ],
       "outside_reason": "fit"
@@ -729,7 +728,7 @@
       "floor": 3,
       "seen": 14,
       "x": 197,
-      "y": 127,
+      "y": 129,
       "ko": "Taxidermy Room",
       "rooms": [
         "10E"
@@ -758,7 +757,7 @@
       "pl": 0,
       "floor": 3,
       "seen": 15,
-      "x": 179,
+      "x": 182,
       "y": 176,
       "ko": "Waiting Room",
       "rooms": [
@@ -776,9 +775,9 @@
       "lw": 19,
       "lh": 12,
       "line": [
-        179,
+        182,
         168,
-        179,
+        182,
         170
       ],
       "outside_reason": "near"
@@ -847,8 +846,8 @@
       "pl": 0,
       "floor": 3,
       "seen": 19,
-      "x": 92,
-      "y": 158,
+      "x": 76,
+      "y": 148,
       "ko": "West Corridor",
       "rooms": [
         "113"
@@ -865,19 +864,20 @@
       "lw": 20,
       "lh": 12,
       "line": [
-        92,
-        150,
-        92,
-        152
+        0,
+        0,
+        0,
+        0
       ],
-      "outside_reason": "near"
+      "outside_reason": null,
+      "cover": 0.938
     },
     {
       "pl": 0,
       "floor": 3,
       "seen": 20,
       "x": 18,
-      "y": 109,
+      "y": 112,
       "ko": "S.T.A.R.S. Corridor",
       "rooms": [
         "114"
@@ -895,9 +895,9 @@
       "lh": 12,
       "line": [
         31,
-        109,
+        112,
         29,
-        109
+        112
       ],
       "outside_reason": "near"
     },
@@ -905,8 +905,8 @@
       "pl": 0,
       "floor": 3,
       "seen": 21,
-      "x": 53,
-      "y": 147,
+      "x": 17,
+      "y": 138,
       "ko": "S.T.A.R.S. Office",
       "rooms": [
         "115"
@@ -923,13 +923,12 @@
       "lw": 23,
       "lh": 12,
       "line": [
-        0,
-        0,
-        0,
-        0
+        42,
+        138,
+        28,
+        138
       ],
-      "outside_reason": null,
-      "cover": 0.87
+      "outside_reason": "fit"
     },
     {
       "pl": 0,
@@ -1024,7 +1023,7 @@
       "pl": 0,
       "floor": 4,
       "seen": 23,
-      "x": 168,
+      "x": 171,
       "y": 68,
       "ko": "Main Hall",
       "rooms": [
@@ -1042,9 +1041,9 @@
       "lw": 13,
       "lh": 12,
       "line": [
-        168,
+        171,
         75,
-        168,
+        171,
         73
       ],
       "outside_reason": "near"
@@ -1084,7 +1083,7 @@
       "floor": 5,
       "seen": 47,
       "x": 220,
-      "y": 135,
+      "y": 137,
       "ko": "Basement Corridor",
       "rooms": [
         "211"
@@ -1107,13 +1106,13 @@
         0
       ],
       "outside_reason": null,
-      "cover": 0.845
+      "cover": 0.992
     },
     {
       "pl": 0,
       "floor": 5,
       "seen": 48,
-      "x": 232,
+      "x": 235,
       "y": 70,
       "ko": "Underground Waterway",
       "rooms": [
@@ -1131,9 +1130,9 @@
       "lw": 32,
       "lh": 13,
       "line": [
-        232,
+        235,
         78,
-        232,
+        235,
         76
       ],
       "outside_reason": "near"
@@ -1413,7 +1412,7 @@
       "floor": 6,
       "seen": 60,
       "x": 89,
-      "y": 136,
+      "y": 138,
       "ko": "Treatment Corridor",
       "rooms": [
         "302"
@@ -1431,9 +1430,9 @@
       "lh": 12,
       "line": [
         103,
-        136,
+        138,
         101,
-        136
+        138
       ],
       "outside_reason": "near"
     },
@@ -1441,7 +1440,7 @@
       "pl": 0,
       "floor": 6,
       "seen": 61,
-      "x": 122,
+      "x": 126,
       "y": 75,
       "ko": "Plug Passage",
       "rooms": [
@@ -1465,7 +1464,7 @@
         0
       ],
       "outside_reason": null,
-      "cover": 0.884
+      "cover": 0.857
     },
     {
       "pl": 0,
@@ -1560,7 +1559,7 @@
       "pl": 0,
       "floor": 6,
       "seen": 65,
-      "x": 217,
+      "x": 220,
       "y": 94,
       "ko": "Construction Passage",
       "rooms": [
@@ -1578,9 +1577,9 @@
       "lw": 31,
       "lh": 13,
       "line": [
-        217,
+        220,
         102,
-        217,
+        220,
         100
       ],
       "outside_reason": "near"
@@ -1589,7 +1588,7 @@
       "pl": 0,
       "floor": 6,
       "seen": 67,
-      "x": 134,
+      "x": 137,
       "y": 155,
       "ko": "Chess Plug Passage",
       "rooms": [
@@ -1607,9 +1606,9 @@
       "lw": 27,
       "lh": 13,
       "line": [
-        134,
+        137,
         147,
-        134,
+        137,
         149
       ],
       "outside_reason": "near"
@@ -1649,7 +1648,7 @@
       "floor": 6,
       "seen": 69,
       "x": 89,
-      "y": 103,
+      "y": 106,
       "ko": "Treatment Corridor",
       "rooms": [
         "30B"
@@ -1667,9 +1666,9 @@
       "lh": 12,
       "line": [
         103,
-        103,
+        106,
         101,
-        103
+        106
       ],
       "outside_reason": "near"
     },
@@ -1678,7 +1677,7 @@
       "floor": 6,
       "seen": 70,
       "x": 74,
-      "y": 116,
+      "y": 119,
       "ko": "West Control Room",
       "rooms": [
         "30C"
@@ -1696,9 +1695,9 @@
       "lh": 12,
       "line": [
         91,
-        116,
+        119,
         89,
-        116
+        119
       ],
       "outside_reason": "near"
     },
@@ -1885,7 +1884,7 @@
       "pl": 0,
       "floor": 7,
       "seen": 133,
-      "x": 246,
+      "x": 249,
       "y": 71,
       "ko": "North Control Room",
       "rooms": [
@@ -1903,9 +1902,9 @@
       "lw": 32,
       "lh": 12,
       "line": [
-        246,
+        249,
         78,
-        246,
+        249,
         76
       ],
       "outside_reason": "near"
@@ -2363,7 +2362,7 @@
       "pl": 0,
       "floor": 9,
       "seen": 91,
-      "x": 126,
+      "x": 129,
       "y": 133,
       "ko": "Underground Passage",
       "rooms": [
@@ -2381,9 +2380,9 @@
       "lw": 32,
       "lh": 13,
       "line": [
-        126,
+        129,
         125,
-        126,
+        129,
         127
       ],
       "outside_reason": "near"
@@ -2392,7 +2391,7 @@
       "pl": 0,
       "floor": 9,
       "seen": 97,
-      "x": 181,
+      "x": 184,
       "y": 79,
       "ko": "Underground Passage",
       "rooms": [
@@ -2410,9 +2409,9 @@
       "lw": 32,
       "lh": 13,
       "line": [
-        181,
+        184,
         87,
-        181,
+        184,
         85
       ],
       "outside_reason": "near",
@@ -2719,7 +2718,7 @@
       "pl": 0,
       "floor": 13,
       "seen": 100,
-      "x": 91,
+      "x": 94,
       "y": 63,
       "ko": "Elevator",
       "rooms": [
@@ -2737,9 +2736,9 @@
       "lw": 21,
       "lh": 6,
       "line": [
-        91,
+        94,
         67,
-        91,
+        94,
         65
       ],
       "outside_reason": "near"
@@ -2928,7 +2927,7 @@
       "pl": 0,
       "floor": 16,
       "seen": 100,
-      "x": 111,
+      "x": 114,
       "y": 55,
       "ko": "Elevator",
       "rooms": [
@@ -2946,9 +2945,9 @@
       "lw": 21,
       "lh": 6,
       "line": [
-        111,
+        114,
         59,
-        111,
+        114,
         57
       ],
       "outside_reason": "near"
@@ -3345,8 +3344,8 @@
       "pl": 0,
       "floor": 17,
       "seen": 119,
-      "x": 104,
-      "y": 96,
+      "x": 81,
+      "y": 97,
       "ko": "Laboratory Corridor",
       "rooms": [
         "614"
@@ -3369,7 +3368,7 @@
         0
       ],
       "outside_reason": null,
-      "cover": 0.833
+      "cover": 0.901
     },
     {
       "pl": 0,
@@ -3737,8 +3736,8 @@
       "pl": 1,
       "floor": 2,
       "seen": 31,
-      "x": 113,
-      "y": 150,
+      "x": 99,
+      "y": 171,
       "ko": "Reception Room",
       "rooms": [
         "201"
@@ -3755,13 +3754,12 @@
       "lw": 25,
       "lh": 12,
       "line": [
-        0,
-        0,
-        0,
-        0
+        102,
+        163,
+        102,
+        165
       ],
-      "outside_reason": null,
-      "cover": 0.96
+      "outside_reason": "near"
     },
     {
       "pl": 1,
@@ -3857,8 +3855,8 @@
       "pl": 1,
       "floor": 2,
       "seen": 35,
-      "x": 46,
-      "y": 62,
+      "x": 94,
+      "y": 91,
       "ko": "West Passage",
       "rooms": [
         "205"
@@ -3875,12 +3873,13 @@
       "lw": 21,
       "lh": 13,
       "line": [
-        46,
-        70,
-        46,
-        68
+        0,
+        0,
+        0,
+        0
       ],
-      "outside_reason": "near"
+      "outside_reason": null,
+      "cover": 0.791
     },
     {
       "pl": 1,
@@ -3916,8 +3915,8 @@
       "pl": 1,
       "floor": 2,
       "seen": 37,
-      "x": 102,
-      "y": 62,
+      "x": 115,
+      "y": 77,
       "ko": "West Stairway",
       "rooms": [
         "207"
@@ -3934,20 +3933,20 @@
       "lw": 22,
       "lh": 13,
       "line": [
-        102,
-        70,
-        102,
-        68
+        0,
+        0,
+        0,
+        0
       ],
-      "outside_reason": "near",
-      "cover": 0.8
+      "outside_reason": null,
+      "cover": 0.92
     },
     {
       "pl": 1,
       "floor": 2,
       "seen": 38,
-      "x": 121,
-      "y": 91,
+      "x": 126,
+      "y": 64,
       "ko": "Darkroom",
       "rooms": [
         "208"
@@ -3964,20 +3963,19 @@
       "lw": 24,
       "lh": 6,
       "line": [
-        0,
-        0,
-        0,
-        0
+        126,
+        87,
+        126,
+        67
       ],
-      "outside_reason": null,
-      "cover": 0.861
+      "outside_reason": "fit"
     },
     {
       "pl": 1,
       "floor": 2,
       "seen": 39,
-      "x": 78,
-      "y": 61,
+      "x": 32,
+      "y": 110,
       "ko": "Evidence Room",
       "rooms": [
         "209"
@@ -3994,10 +3992,10 @@
       "lw": 23,
       "lh": 12,
       "line": [
-        85,
-        97,
-        85,
-        67
+        79,
+        110,
+        43,
+        110
       ],
       "outside_reason": "fit"
     },
@@ -4144,9 +4142,9 @@
       "lh": 12,
       "line": [
         186,
-        80,
+        83,
         184,
-        80
+        83
       ],
       "outside_reason": "near"
     },
@@ -4154,7 +4152,7 @@
       "pl": 1,
       "floor": 2,
       "seen": 45,
-      "x": 243,
+      "x": 246,
       "y": 72,
       "ko": "East Stairway",
       "rooms": [
@@ -4172,9 +4170,9 @@
       "lw": 22,
       "lh": 13,
       "line": [
-        243,
+        246,
         80,
-        243,
+        246,
         78
       ],
       "outside_reason": "near"
@@ -4212,8 +4210,8 @@
       "pl": 1,
       "floor": 2,
       "seen": 130,
-      "x": 267,
-      "y": 148,
+      "x": 285,
+      "y": 159,
       "ko": "Emergency Stairway",
       "rooms": [
         "116"
@@ -4230,10 +4228,10 @@
       "lw": 28,
       "lh": 13,
       "line": [
-        267,
-        156,
-        267,
-        154
+        269,
+        159,
+        271,
+        159
       ],
       "outside_reason": "near"
     },
@@ -4301,7 +4299,7 @@
       "pl": 1,
       "floor": 3,
       "seen": 10,
-      "x": 208,
+      "x": 211,
       "y": 176,
       "ko": "Helicopter Corridor",
       "rooms": [
@@ -4319,9 +4317,9 @@
       "lw": 25,
       "lh": 12,
       "line": [
-        208,
+        211,
         168,
-        208,
+        211,
         170
       ],
       "outside_reason": "near"
@@ -4390,8 +4388,8 @@
       "pl": 1,
       "floor": 3,
       "seen": 13,
-      "x": 190,
-      "y": 191,
+      "x": 185,
+      "y": 61,
       "ko": "Chief's Office Corridor",
       "rooms": [
         "10D"
@@ -4408,10 +4406,10 @@
       "lw": 33,
       "lh": 12,
       "line": [
-        190,
-        111,
-        190,
-        185
+        185,
+        104,
+        185,
+        67
       ],
       "outside_reason": "fit"
     },
@@ -4419,8 +4417,8 @@
       "pl": 1,
       "floor": 3,
       "seen": 14,
-      "x": 297,
-      "y": 128,
+      "x": 183,
+      "y": 178,
       "ko": "Taxidermy Room",
       "rooms": [
         "10E"
@@ -4437,10 +4435,10 @@
       "lw": 26,
       "lh": 12,
       "line": [
-        207,
-        128,
-        284,
-        128
+        191,
+        143,
+        191,
+        172
       ],
       "outside_reason": "fit"
     },
@@ -4448,8 +4446,8 @@
       "pl": 1,
       "floor": 3,
       "seen": 15,
-      "x": 179,
-      "y": 176,
+      "x": 196,
+      "y": 191,
       "ko": "Waiting Room",
       "rooms": [
         "10F"
@@ -4466,10 +4464,10 @@
       "lw": 19,
       "lh": 12,
       "line": [
-        179,
+        196,
         168,
-        179,
-        170
+        196,
+        185
       ],
       "outside_reason": "near"
     },
@@ -4537,8 +4535,8 @@
       "pl": 1,
       "floor": 3,
       "seen": 19,
-      "x": 92,
-      "y": 158,
+      "x": 76,
+      "y": 148,
       "ko": "West Corridor",
       "rooms": [
         "113"
@@ -4555,19 +4553,20 @@
       "lw": 20,
       "lh": 12,
       "line": [
-        92,
-        150,
-        92,
-        152
+        0,
+        0,
+        0,
+        0
       ],
-      "outside_reason": "near"
+      "outside_reason": null,
+      "cover": 0.938
     },
     {
       "pl": 1,
       "floor": 3,
       "seen": 20,
       "x": 18,
-      "y": 109,
+      "y": 112,
       "ko": "S.T.A.R.S. Corridor",
       "rooms": [
         "114"
@@ -4585,9 +4584,9 @@
       "lh": 12,
       "line": [
         31,
-        109,
+        112,
         29,
-        109
+        112
       ],
       "outside_reason": "near"
     },
@@ -4595,8 +4594,8 @@
       "pl": 1,
       "floor": 3,
       "seen": 21,
-      "x": 53,
-      "y": 147,
+      "x": 17,
+      "y": 138,
       "ko": "S.T.A.R.S. Office",
       "rooms": [
         "115"
@@ -4613,13 +4612,12 @@
       "lw": 23,
       "lh": 12,
       "line": [
-        0,
-        0,
-        0,
-        0
+        42,
+        138,
+        28,
+        138
       ],
-      "outside_reason": null,
-      "cover": 0.87
+      "outside_reason": "fit"
     },
     {
       "pl": 1,
@@ -4714,7 +4712,7 @@
       "pl": 1,
       "floor": 4,
       "seen": 23,
-      "x": 168,
+      "x": 171,
       "y": 68,
       "ko": "Main Hall",
       "rooms": [
@@ -4732,9 +4730,9 @@
       "lw": 13,
       "lh": 12,
       "line": [
-        168,
+        171,
         75,
-        168,
+        171,
         73
       ],
       "outside_reason": "near"
@@ -4774,7 +4772,7 @@
       "floor": 5,
       "seen": 47,
       "x": 220,
-      "y": 135,
+      "y": 137,
       "ko": "Basement Corridor",
       "rooms": [
         "211"
@@ -4797,13 +4795,13 @@
         0
       ],
       "outside_reason": null,
-      "cover": 0.845
+      "cover": 0.992
     },
     {
       "pl": 1,
       "floor": 5,
       "seen": 48,
-      "x": 232,
+      "x": 235,
       "y": 70,
       "ko": "Underground Waterway",
       "rooms": [
@@ -4821,9 +4819,9 @@
       "lw": 32,
       "lh": 13,
       "line": [
-        232,
+        235,
         78,
-        232,
+        235,
         76
       ],
       "outside_reason": "near"
@@ -5103,7 +5101,7 @@
       "floor": 6,
       "seen": 60,
       "x": 89,
-      "y": 136,
+      "y": 138,
       "ko": "Treatment Corridor",
       "rooms": [
         "302"
@@ -5121,9 +5119,9 @@
       "lh": 12,
       "line": [
         103,
-        136,
+        138,
         101,
-        136
+        138
       ],
       "outside_reason": "near"
     },
@@ -5250,7 +5248,7 @@
       "pl": 1,
       "floor": 6,
       "seen": 65,
-      "x": 217,
+      "x": 220,
       "y": 94,
       "ko": "Construction Passage",
       "rooms": [
@@ -5268,9 +5266,9 @@
       "lw": 31,
       "lh": 13,
       "line": [
-        217,
+        220,
         102,
-        217,
+        220,
         100
       ],
       "outside_reason": "near"
@@ -5279,7 +5277,7 @@
       "pl": 1,
       "floor": 6,
       "seen": 67,
-      "x": 134,
+      "x": 137,
       "y": 155,
       "ko": "Chess Plug Passage",
       "rooms": [
@@ -5297,9 +5295,9 @@
       "lw": 27,
       "lh": 13,
       "line": [
-        134,
+        137,
         147,
-        134,
+        137,
         149
       ],
       "outside_reason": "near"
@@ -5369,7 +5367,7 @@
       "floor": 6,
       "seen": 70,
       "x": 74,
-      "y": 114,
+      "y": 117,
       "ko": "West Control Room",
       "rooms": [
         "30C"
@@ -5387,9 +5385,9 @@
       "lh": 12,
       "line": [
         91,
-        114,
+        117,
         89,
-        114
+        117
       ],
       "outside_reason": "near"
     },
@@ -5546,8 +5544,8 @@
       "pl": 1,
       "floor": 7,
       "seen": 131,
-      "x": 203,
-      "y": 166,
+      "x": 223,
+      "y": 159,
       "ko": "South Control Room",
       "rooms": [
         "401"
@@ -5564,10 +5562,10 @@
       "lw": 32,
       "lh": 12,
       "line": [
-        220,
+        223,
         166,
-        218,
-        166
+        223,
+        164
       ],
       "outside_reason": "near"
     },
@@ -6054,7 +6052,7 @@
       "pl": 1,
       "floor": 9,
       "seen": 91,
-      "x": 126,
+      "x": 129,
       "y": 133,
       "ko": "Underground Passage",
       "rooms": [
@@ -6072,9 +6070,9 @@
       "lw": 32,
       "lh": 13,
       "line": [
-        126,
+        129,
         125,
-        126,
+        129,
         127
       ],
       "outside_reason": "near"
@@ -6083,7 +6081,7 @@
       "pl": 1,
       "floor": 9,
       "seen": 97,
-      "x": 181,
+      "x": 184,
       "y": 79,
       "ko": "Underground Passage",
       "rooms": [
@@ -6101,9 +6099,9 @@
       "lw": 32,
       "lh": 13,
       "line": [
-        181,
+        184,
         87,
-        181,
+        184,
         85
       ],
       "outside_reason": "near",
@@ -6410,7 +6408,7 @@
       "pl": 1,
       "floor": 13,
       "seen": 100,
-      "x": 91,
+      "x": 94,
       "y": 63,
       "ko": "Elevator",
       "rooms": [
@@ -6428,9 +6426,9 @@
       "lw": 21,
       "lh": 6,
       "line": [
-        91,
+        94,
         67,
-        91,
+        94,
         65
       ],
       "outside_reason": "near"
@@ -6619,7 +6617,7 @@
       "pl": 1,
       "floor": 16,
       "seen": 100,
-      "x": 111,
+      "x": 114,
       "y": 55,
       "ko": "Elevator",
       "rooms": [
@@ -6637,9 +6635,9 @@
       "lw": 21,
       "lh": 6,
       "line": [
-        111,
+        114,
         59,
-        111,
+        114,
         57
       ],
       "outside_reason": "near"
@@ -6917,8 +6915,8 @@
       "pl": 1,
       "floor": 16,
       "seen": 115,
-      "x": 241,
-      "y": 163,
+      "x": 257,
+      "y": 174,
       "ko": "Vaccine Laboratory",
       "rooms": [
         "610"
@@ -6935,10 +6933,10 @@
       "lw": 27,
       "lh": 13,
       "line": [
-        241,
-        171,
-        241,
-        169
+        242,
+        174,
+        244,
+        174
       ],
       "outside_reason": "near"
     },
@@ -7035,8 +7033,8 @@
       "pl": 1,
       "floor": 17,
       "seen": 119,
-      "x": 104,
-      "y": 96,
+      "x": 81,
+      "y": 97,
       "ko": "Laboratory Corridor",
       "rooms": [
         "614"
@@ -7059,7 +7057,7 @@
         0
       ],
       "outside_reason": null,
-      "cover": 0.833
+      "cover": 0.901
     },
     {
       "pl": 1,
@@ -8865,6 +8863,39 @@
       "w": 156,
       "h": 28,
       "text": "[-/+] Size: 150%",
+      "font_px": 20,
+      "icon_x": 0,
+      "slots": 0
+    },
+    {
+      "page": 14,
+      "u": 1,
+      "v": 91,
+      "w": 166,
+      "h": 28,
+      "text": "[Action] Zoom: 1x",
+      "font_px": 20,
+      "icon_x": 0,
+      "slots": 0
+    },
+    {
+      "page": 14,
+      "u": 1,
+      "v": 121,
+      "w": 170,
+      "h": 28,
+      "text": "[Action] Zoom: 2x",
+      "font_px": 20,
+      "icon_x": 0,
+      "slots": 0
+    },
+    {
+      "page": 14,
+      "u": 1,
+      "v": 151,
+      "w": 254,
+      "h": 28,
+      "text": "Press ~ to show the legend",
       "font_px": 20,
       "icon_x": 0,
       "slots": 0

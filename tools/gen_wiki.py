@@ -124,9 +124,9 @@ def generate(lang):
              ('하수도', 'Sewers', [7, 8]), ('공장', 'Factory', [9, 10, 11, 12]),
              ('연구소', 'Laboratory', [13, 14, 15, 16, 17]), ('열차', 'Train', [18, 19])]
     body = ('표시 범위는 `8`로 방문한 방 → 공개된 방 → 모든 방 순서로 바꿉니다. 공개된 방은 층 지도 획득 여부와 방의 시나리오 마스크를 함께 적용합니다. 모든 방은 방 방문 제한을 해제하지만, 이미 주운 아이템이나 완료된 이벤트를 되돌려 표시하지 않습니다.\n\n'
-            '상태 화면 지도에서 좌/우는 장소, 위/아래는 층을 바꿉니다. 방문한 층만 선택할 수 있고 끝에서 처음으로 순환하지 않습니다. 범위가 모든 방이어도 방문하지 않은 층이 선택 목록에 추가되지는 않습니다.\n\n' if ko else
+            '상태 화면 지도에서 좌/우는 장소, 위/아래는 층을 바꿉니다. 방문한 층만 선택할 수 있고 끝에서 처음으로 순환하지 않습니다. 범위가 모든 방이어도 방문하지 않은 층이 선택 목록에 추가되지는 않습니다. 결정 버튼은 2배 확대를 켜고 끄며, 확대 중에는 방향 입력이 지도를 옮깁니다. 지도를 다시 열면 1배로 돌아옵니다.\n\n' if ko else
             'Press `8` to cycle Visited → Revealed → All. Revealed requires the acquired floor-map flag and the room\'s scenario visibility mask. All removes the room-visit gate; it does not restore collected items or completed events.\n\n'
-            'On the status-screen map, left/right selects an area and up/down selects a floor. Only visited floors are selectable, without wraparound. All scope does not add unvisited floors to the selection list.\n\n')
+            'On the status-screen map, left/right selects an area and up/down selects a floor. Only visited floors are selectable, without wraparound. All scope does not add unvisited floors to the selection list. The Action button toggles 2x zoom, where directions move the map instead; reopening the map returns to 1x.\n\n')
     body += table(['구역' if ko else 'Area', '위→아래 지도 ID' if ko else 'Map IDs, top to bottom'],
                   [(a[0] if ko else a[1], ', '.join(map(str, a[2]))) for a in areas])
     body += '\n' + table(['캐릭터' if ko else 'Character', '지도 ID' if ko else 'Map ID', '리소스' if ko else 'Resource', '방 슬롯' if ko else 'Room slots'],
@@ -251,8 +251,8 @@ def generate(lang):
             '- Sprays: `100−15×count` for 0–5; zero from 6.\n'
             '- Subtract 50 when the infinite-weapon flag is set.\n\n')
     body += table(['랭크' if ko else 'Rank', '점수' if ko else 'Score'], [('A', '269–300'), ('B', '199–268'), ('C', '144–198'), ('D', '99–143'), ('E', '0–98')])
-    body += ('\n## 설정\n\n설정 파일은 `scripts/RE2.AnnotatedMap.ini`입니다. 게임 안에서 바꾼 값은 자동 저장됩니다. 이름 크기는 50–150%, 불투명도는 10–100%이며 10%씩 조절합니다. 확대하면 좁은 지도에서 이름이 겹칠 수 있습니다.\n\n[전체 기본값과 단축키](../../README.md)\n' if ko else
-             '\n## Settings\n\nSettings are stored in `scripts/RE2.AnnotatedMap.ini`. In-game changes are saved automatically. Name size ranges from 50–150% and opacity from 10–100%, in 10% steps. Enlarged names may overlap on crowded maps.\n\n[All defaults and controls](../../README.en.md)\n')
+    body += ('\n## 설정\n\n설정 파일은 `scripts/RE2.AnnotatedMap.ini`입니다. 게임 안에서 바꾼 값은 자동 저장됩니다. 범례는 `~` 키로 켜고 끕니다. 이름 크기는 50–150%, 불투명도는 10–100%이며 10%씩 조절합니다. 확대하면 좁은 지도에서 이름이 겹칠 수 있습니다.\n\n[전체 기본값과 단축키](../../README.md)\n' if ko else
+             '\n## Settings\n\nSettings are stored in `scripts/RE2.AnnotatedMap.ini`. In-game changes are saved automatically. The `~` key shows or hides the legend. Name size ranges from 50–150% and opacity from 10–100%, in 10% steps. Enlarged names may overlap on crowded maps.\n\n[All defaults and controls](../../README.en.md)\n')
     write(PAGES[11][0], name(PAGES[11]), body)
 
 

@@ -24,12 +24,16 @@ static int overlay_enabled=1,room_names_enabled=1,locks_enabled=0,items_enabled=
 static int english_enabled=1,monsters_enabled=0,common_enabled=0;
 static unsigned scope=1; /* [8] 1 visited rooms, 2 + rooms revealed by the floor map, 3 all rooms */
 static unsigned name_opacity=70,name_size=100;
-static int rank_enabled;
+static int rank_enabled,legend_enabled=1;
 static unsigned size_value(int value){if(value<50)value=50;if(value>150)value=150;return (unsigned)(value+5)/10*10;}
 static int name_dimension(unsigned pixels){return (pixels*name_size+200)/400;}
 static int drawing_names;
 static unsigned opacity_value(int value){if(value<10)value=10;if(value>100)value=100;return (unsigned)(value+5)/10*10;}
 static unsigned toggle_was_down;
+// 2x map zoom, session only. Native map has no scale: after map_draw the queued packets are rewritten (zoom_packets).
+static int zoom_on,view_x,view_y,zoom_center; // view = top-left of the 320x240 window on the doubled 640x480 map
+#define MX(v) (zoom_on?2*((v)+dx)-view_x:(v)+dx)
+#define MY(v) (zoom_on?2*((v)+dy)-view_y:(v)+dy)
 static char settings_path[MAX_PATH];
 static void save_settings(void){
  if(!settings_path[0])return;
@@ -41,6 +45,7 @@ static void save_settings(void){
  wsprintfA(value,"%u",name_size);WritePrivateProfileStringA("MapOverlay","NameSize",value,settings_path);
  wsprintfA(value,"%u",name_opacity);WritePrivateProfileStringA("MapOverlay","NameOpacity",value,settings_path);
  value[0]=rank_enabled?'1':'0';WritePrivateProfileStringA("MapOverlay","Rank",value,settings_path);
+ value[0]=legend_enabled?'1':'0';WritePrivateProfileStringA("MapOverlay","Legend",value,settings_path);
 }
 static void load_settings(void){
  overlay_enabled=GetPrivateProfileIntA("MapOverlay","All",1,settings_path)!=0;
@@ -54,6 +59,7 @@ static void load_settings(void){
  common_enabled=GetPrivateProfileIntA("MapOverlay","CommonItems",0,settings_path)!=0;
  name_size=size_value((int)GetPrivateProfileIntA("MapOverlay","NameSize",100,settings_path));
  rank_enabled=GetPrivateProfileIntA("MapOverlay","Rank",0,settings_path)!=0;
+ legend_enabled=GetPrivateProfileIntA("MapOverlay","Legend",1,settings_path)!=0;
  name_opacity=opacity_value((int)GetPrivateProfileIntA("MapOverlay","NameOpacity",70,settings_path));
  scope=GetPrivateProfileIntA("MapOverlay","Scope",1,settings_path);if(scope<1||scope>3)scope=1;
 }
@@ -71,6 +77,7 @@ static void update_toggle(unsigned mode,int down){
   if(pressed&128)common_enabled=!common_enabled;
   if(pressed&256)monsters_enabled=!monsters_enabled;
   if(pressed&4096)scope=scope%3+1;
+  if(pressed&8192)legend_enabled=!legend_enabled;
   if(down&2048){
    if(pressed&512&&name_opacity<100)name_opacity+=10;
    if(pressed&1024&&name_opacity>10)name_opacity-=10;
@@ -78,7 +85,7 @@ static void update_toggle(unsigned mode,int down){
    if(pressed&512&&name_size<150)name_size+=10;
    if(pressed&1024&&name_size>50)name_size-=10;
   }
-  if(pressed&6143)save_settings();
+  if(pressed&14335)save_settings();
  }
  toggle_was_down=(unsigned)down;
 }
@@ -150,7 +157,14 @@ static unsigned occupied_count;
 static void reserve(int x,int y,int w,int h){if(occupied_count<sizeof(occupied)/sizeof(occupied[0]))occupied[occupied_count++]=(Bounds){x,y,w,h};}
 static void quad_draw(int x,int y,int w,int h,unsigned u,unsigned v,unsigned sw,unsigned sh,unsigned tex){
  uintptr_t next=*(uintptr_t*)addr(0x524e1c),end=*(uintptr_t*)addr(0x524e20);
- if(!tex||w<1||h<1||w>317||h>237||next>end||end-next<32+8192)return;
+ if(!tex||w<1||h<1||next>end||end-next<32+8192)return;
+ if(zoom_on){ // the map runs past the screen: crop instead of pushing markers onto the edge
+  int l=x<1?1-x:0,r=x+w>318?x+w-318:0,t=y<1?1-y:0,b=y+h>238?y+h-238:0;
+  if(l+r>=w||t+b>=h)return;
+  u+=sw*l/w;v+=sh*t/h;sw-=sw*(l+r)/w;sh-=sh*(t+b)/h;if(!sw)sw=1;if(!sh)sh=1;
+  x+=l;y+=t;w-=l+r;h-=t+b;
+ }
+ if(w>317||h>237)return;
  if(x<1)x=1;if(x+w>318)x=318-w;
  if(y<1)y=1;if(y+h>238)y=238-h;
  unsigned char *p=(unsigned char*)next;
@@ -178,6 +192,7 @@ static void icon_box(int px,int py,const Icon *i,int *x,int *y,int *w,int *h){
  *w=(i->w*LOCK_ICON_TENTHS+m*5)/(m*10);*h=(i->h*LOCK_ICON_TENTHS+m*5)/(m*10);
  if(*w<1)*w=1;if(*h<1)*h=1;
  *x=px-*w/2;*y=py-*h/2;
+ if(zoom_on)return;
  if(*x<1)*x=1;if(*x+*w>318)*x=318-*w;
  if(*y<1)*y=1;if(*y+*h>238)*y=238-*h;
 }
@@ -200,6 +215,14 @@ static int under_high_except(int x,int y,int w,int h,int cx,int cy){
   const Bounds *r=occupied+j;
   if(r->w<=8&&r->h<=8&&r->x<=cx&&cx<r->x+r->w&&r->y<=cy&&cy<r->y+r->h)continue;
   if(x<r->x+r->w&&r->x<x+w&&y<r->y+r->h&&r->y<y+h)return 1;
+ }
+ return 0;
+}
+// A star/diamond-sized box among occupied[0..n) containing (cx,cy).
+static int on_marker(unsigned n,int cx,int cy){
+ for(unsigned j=0;j<n;j++){
+  const Bounds *r=occupied+j;
+  if(r->w<=8&&r->h<=8&&r->x<=cx&&cx<r->x+r->w&&r->y<=cy&&cy<r->y+r->h)return 1;
  }
  return 0;
 }
@@ -311,7 +334,20 @@ static int map_item(unsigned item){return item>=200&&item<=205;}
 // [3] key items, [6] common pickups, [4] area maps (with documents), as in the RE1 HD Remaster map mod.
 static int item_enabled(unsigned item){return map_item(item)?documents_enabled:common_item(item)?common_enabled:items_enabled;}
 #define LEGEND_Y 210
+// Folded legend: one hint line on its bottom row (label 45). The rank line is its own setting.
+#define LEGEND_HINT_Y (LEGEND_Y+18)
+static const RoomLabel *legend_hint(unsigned *w,unsigned *h){
+ const RoomLabel *l=active_room_labels()+active_help_start()+45;
+ unsigned scale=english_enabled?ROOM_LABEL_SCALE_EN:ROOM_LABEL_SCALE_KO;
+ *w=(l->w+scale/2)/scale;*h=(l->h+scale/2)/scale;return l;
+}
 static void help_draw(void){
+ if(!legend_enabled){
+  unsigned w,h;const RoomLabel *l=legend_hint(&w,&h);
+  unsigned tex=cached_texture(active_room_cache(l->page),active_room_pixels(l->page));
+  if(tex)room_label_draw(8+w/2,LEGEND_HINT_Y+h/2,l->u,l->v,l->w,l->h,tex);
+  rank_draw();return;
+ }
  const unsigned state[10]={overlay_enabled?1:2,room_names_enabled?3:4,locks_enabled?5:6,
                           items_enabled?7:8,documents_enabled?9:10,puzzles_enabled?11:12,
                           common_enabled?17:18,monsters_enabled?15:16,18+scope,english_enabled?14:13};
@@ -336,8 +372,8 @@ static void help_draw(void){
  unsigned legend_y=LEGEND_Y;
  if(t)room_label_draw(x[0]+title_w/2,legend_y+title_h/2,title->u,title->v,title->w,title->h,t);
  unsigned cursor=x[0]+title_w+6;
- for(unsigned n=0;n<2;n++){
-  unsigned id=n?32+(name_size-50)/10:22+(name_opacity-10)/10;
+ for(unsigned n=0;n<3;n++){
+  unsigned id=n==2?43+(unsigned)zoom_on:n?32+(name_size-50)/10:22+(name_opacity-10)/10;
   const RoomLabel*l=base+id;unsigned w=(l->w+scale/2)/scale;
   unsigned tex=cached_texture(active_room_cache(l->page),active_room_pixels(l->page));
   if(tex)room_label_draw(cursor+w/2,legend_y+title_h/2,l->u,l->v,l->w,l->h,tex);
@@ -468,9 +504,9 @@ int __cdecl fill_draw(unsigned char *s,unsigned slot,unsigned prio,unsigned mode
 // Room names never dodge: the generator placed them inside their room or at the end of a leader line, and runtime
 // displacement left names outside rooms with no line (user 2026-10-26). A resized name grows away from its leader end.
 static void room_box(const RoomName *r,const RoomLabel *l,int dx,int dy,int *x,int *y,int *w,int *h){
- int cx=r->x,cy=r->y;
- if(r->lx0|r->ly0|r->lx1|r->ly1){cx=r->lx1+(cx-r->lx1)*(int)name_size/100;cy=r->ly1+(cy-r->ly1)*(int)name_size/100;}
- *w=name_dimension(l->w);*h=name_dimension(l->h);*x=cx+dx-*w/2;*y=cy+dy-*h/2;
+ int cx=MX(r->x),cy=MY(r->y);
+ if(r->lx0|r->ly0|r->lx1|r->ly1){cx=MX(r->lx1)+(r->x-r->lx1)*(int)name_size/100;cy=MY(r->ly1)+(r->y-r->ly1)*(int)name_size/100;}
+ *w=name_dimension(l->w);*h=name_dimension(l->h);*x=cx-*w/2;*y=cy-*h/2;
 }
 static const Icon *door_icon(const Door *d,unsigned pl,unsigned mpl,unsigned floor,unsigned flags){
  if(d->pl!=mpl||d->floor!=floor)return 0;
@@ -496,14 +532,15 @@ static int key_item_shown(const MapItem *i,unsigned pl,unsigned mpl,unsigned flo
 // Marker centre and width; a combined puzzle/key marker sits on its puzzle and the name follows it.
 static int key_marker(const MapItem *i,int dx,int dy,int *px,int *py){
  const MapInteraction *pz=combo_of(i);
- if(pz){*px=pz->x+PROJ_CENTRE+dx;*py=pz->y+PROJ_CENTRE+dy;return PUZZLE_KEY_W;}
- *px=i->x+PROJ_CENTRE+dx;*py=i->y+PROJ_CENTRE+dy;
+ if(pz){*px=MX(pz->x+PROJ_CENTRE);*py=MY(pz->y+PROJ_CENTRE);return PUZZLE_KEY_W;}
+ *px=MX(i->x+PROJ_CENTRE);*py=MY(i->y+PROJ_CENTRE);
  return (OVERLAY_ICON_TEX/OVERLAY_ICON_SCALE*90+50)/100; // standalone key-item star stays at 90% icon size
 }
 // Drawn marker box, clamped to the map like the star itself.
 static int key_box(const MapItem *i,int dx,int dy,int *x,int *y){
  int px,py,sw=key_marker(i,dx,dy,&px,&py);
  *x=px-sw/2;*y=py-sw/2;
+ if(zoom_on)return sw;
  if(*x<1)*x=1;if(*x>318-sw)*x=318-sw;
  if(*y<1)*y=1;if(*y>238-sw)*y=238-sw;
  return sw;
@@ -532,22 +569,25 @@ static unsigned draw_key_items(unsigned pl,unsigned mpl,unsigned floor,int dx,in
  }
  for(unsigned j=0;j<sizeof(map_interactions)/sizeof(map_interactions[0]);j++){
   const MapInteraction *m=map_interactions+j;
-  if(puzzle_drawn(m,pl,mpl,floor))reserve(m->x+PROJ_CENTRE+dx-3,m->y+PROJ_CENTRE+dy-3,6,6);
+  if(puzzle_drawn(m,pl,mpl,floor))reserve(MX(m->x+PROJ_CENTRE)-3,MY(m->y+PROJ_CENTRE)-3,6,6);
  }
  // Stand-ins the names steer around and then drop: legend, locks, files/area maps, save/item-box markers, room names.
  unsigned rooms=occupied_count,flags=*(uint32_t*)addr(0x989ed0);
- reserve(1,LEGEND_Y,317,238-LEGEND_Y); // opaque legend rows would cover a translucent name
+ if(legend_enabled)reserve(1,LEGEND_Y,317,238-LEGEND_Y); // opaque legend rows would cover a translucent name
+ else{unsigned hw,hh;legend_hint(&hw,&hh);reserve(8,LEGEND_HINT_Y,hw,hh);}
  hard_count=occupied_count;
  for(unsigned j=0;locks_enabled&&j<sizeof(doors)/sizeof(doors[0]);j++){
   const Icon *i=door_icon(doors+j,pl,mpl,floor,flags);
-  if(i){int x,y,w,h;icon_box(doors[j].x+dx,doors[j].y+dy,i,&x,&y,&w,&h);reserve(x,y,w,h);}
+  if(!i)continue;
+  int x,y,w,h,cx=MX(doors[j].x),cy=MY(doors[j].y);icon_box(cx,cy,i,&x,&y,&w,&h);reserve(x,y,w,h);
+  if(on_marker(rooms,cx,cy))reserve(x+MAP_BADGE,y+MAP_BADGE,w,h); // keep the name off its badge too (see draw_names)
  }
  for(unsigned j=0;documents_enabled&&j<sizeof(map_documents)/sizeof(map_documents[0]);j++){
-  const MapDocument *m=map_documents+j;if(document_shown(m,pl,mpl,floor))reserve(m->x+PROJ_CENTRE+dx-4,m->y+PROJ_CENTRE+dy-4,8,8);
+  const MapDocument *m=map_documents+j;if(document_shown(m,pl,mpl,floor))reserve(MX(m->x+PROJ_CENTRE)-4,MY(m->y+PROJ_CENTRE)-4,8,8);
  }
  for(unsigned j=0;room_names_enabled&&j<sizeof(map_markers)/sizeof(map_markers[0]);j++){
   const MapMarker *m=map_markers+j;
-  if(m->pl==mpl&&m->floor==floor&&room_shown(pl,floor,m->seen))reserve(m->x+PROJ_CENTRE+dx-4,m->y+PROJ_CENTRE+dy-4,8,8);
+  if(m->pl==mpl&&m->floor==floor&&room_shown(pl,floor,m->seen))reserve(MX(m->x+PROJ_CENTRE)-4,MY(m->y+PROJ_CENTRE)-4,8,8);
  }
  room_lo=occupied_count;
  for(unsigned j=0;room_names_enabled&&j<active_room_count();j++){
@@ -561,6 +601,7 @@ static unsigned draw_key_items(unsigned pl,unsigned mpl,unsigned floor,int dx,in
   const ItemLabel *l=key_label(i->item);
   unsigned t=cached_texture(active_item_cache(l->page),active_item_pixels(l->page));
   int x,y,sw=key_box(i,dx,dy,&x,&y);
+  if(zoom_on&&(x+sw<1||x>318||y+sw<1||y>238))continue; // place_at would pull the name back on screen, away from its star
   if(t){item_label_draw(x,y,sw,name_dimension(l->w),name_dimension(l->h),l->u,l->v,l->w,l->h,t);n++;}
  }
  // Drop the room-name stand-ins; the real room names are placed later and avoid the key-item names.
@@ -572,12 +613,12 @@ static unsigned draw_key_items(unsigned pl,unsigned mpl,unsigned floor,int dx,in
  unsigned name_end=occupied_count;
  for(unsigned j=0;j<sizeof(map_interactions)/sizeof(map_interactions[0]);j++){
   const MapInteraction *m=map_interactions+j;if(!puzzle_drawn(m,pl,mpl,floor))continue;
-  int x=m->x+PROJ_CENTRE+dx-3,y=m->y+PROJ_CENTRE+dy-3,hidden=0;
+  int x=MX(m->x+PROJ_CENTRE)-3,y=MY(m->y+PROJ_CENTRE)-3,hidden=0;
   for(unsigned k=rooms;k<name_end;k++){const Bounds *r=occupied+k;if(x<r->x+r->w&&r->x<x+6&&y<r->y+r->h&&r->y<y+6)hidden=1;}
   if(hidden)continue;
   for(unsigned k=0;k<sizeof(overlay_icons)/sizeof(overlay_icons[0]);k++)if(overlay_icons[k].kind==12){
    const OverlayIcon*i=overlay_icons+k;
-   quad_draw(m->x+PROJ_CENTRE+dx-3,m->y+PROJ_CENTRE+dy-3,6,6,i->u,i->v,OVERLAY_ICON_TEX,OVERLAY_ICON_TEX,st);break;
+   quad_draw(MX(m->x+PROJ_CENTRE)-3,MY(m->y+PROJ_CENTRE)-3,6,6,i->u,i->v,OVERLAY_ICON_TEX,OVERLAY_ICON_TEX,st);break;
   }
  }
  high_count=occupied_count;
@@ -606,7 +647,8 @@ static void draw_names(unsigned mode){
   if(!t)continue;
   if(r->lx0|r->ly0|r->lx1|r->ly1){ // axis-aligned leader line, opaque texel (0,0)
    int x0=r->lx0<r->lx1?r->lx0:r->lx1,y0=r->ly0<r->ly1?r->ly0:r->ly1;
-   quad_draw(x0+dx,y0+dy,(r->lx0>r->lx1?r->lx0-r->lx1:r->lx1-r->lx0)+1,(r->ly0>r->ly1?r->ly0-r->ly1:r->ly1-r->ly0)+1,0,0,1,1,t);
+   int z=zoom_on?2:1;
+   quad_draw(MX(x0),MY(y0),(r->lx0>r->lx1?r->lx0-r->lx1:r->lx1-r->lx0)*z+1,(r->ly0>r->ly1?r->ly0-r->ly1:r->ly1-r->ly0)*z+1,0,0,1,1,t);
   }
   int x,y,w,h;room_box(r,l,dx,dy,&x,&y,&w,&h);
   quad_draw(x,y,w,h,l->u,l->v,l->w,l->h,t);names++;
@@ -622,7 +664,7 @@ static void draw_names(unsigned mode){
   for(unsigned k=0;k<sizeof(overlay_icons)/sizeof(overlay_icons[0]);k++)if(overlay_icons[k].kind==m->kind){
    const OverlayIcon *i=overlay_icons+k;int w=OVERLAY_ICON_TEX/OVERLAY_ICON_SCALE;
    // Exact spot, no collision displacement (it pushed icons into neighbouring rooms).
-   if(!under_high(m->x+PROJ_CENTRE+dx-w/2,m->y+PROJ_CENTRE+dy-w/2,w,w))quad_draw(m->x+PROJ_CENTRE+dx-w/2,m->y+PROJ_CENTRE+dy-w/2,w,w,i->u,i->v,OVERLAY_ICON_TEX,OVERLAY_ICON_TEX,t);marks++;break;
+   if(!under_high(MX(m->x+PROJ_CENTRE)-w/2,MY(m->y+PROJ_CENTRE)-w/2,w,w))quad_draw(MX(m->x+PROJ_CENTRE)-w/2,MY(m->y+PROJ_CENTRE)-w/2,w,w,i->u,i->v,OVERLAY_ICON_TEX,OVERLAY_ICON_TEX,t);marks++;break;
   }
  }
  for(unsigned j=0;overlay_enabled&&documents_enabled&&j<sizeof(map_documents)/sizeof(map_documents[0]);j++){
@@ -633,13 +675,16 @@ static void draw_names(unsigned mode){
   if(!t)break;
   for(unsigned k=0;k<sizeof(overlay_icons)/sizeof(overlay_icons[0]);k++)if(overlay_icons[k].kind==11){
    const OverlayIcon *i=overlay_icons+k;int w=OVERLAY_ICON_TEX/OVERLAY_ICON_SCALE;
-   if(!under_high(d->x+PROJ_CENTRE+dx-w/2,d->y+PROJ_CENTRE+dy-w/2,w,w))quad_draw(d->x+PROJ_CENTRE+dx-w/2,d->y+PROJ_CENTRE+dy-w/2,w,w,i->u,i->v,OVERLAY_ICON_TEX,OVERLAY_ICON_TEX,t);docmarks++;break;
+   if(!under_high(MX(d->x+PROJ_CENTRE)-w/2,MY(d->y+PROJ_CENTRE)-w/2,w,w))quad_draw(MX(d->x+PROJ_CENTRE)-w/2,MY(d->y+PROJ_CENTRE)-w/2,w,w,i->u,i->v,OVERLAY_ICON_TEX,OVERLAY_ICON_TEX,t);docmarks++;break;
   }
  }
  for(unsigned j=0;overlay_enabled&&locks_enabled&&j<sizeof(doors)/sizeof(doors[0]);j++){
   const Door*d=doors+j;const Icon *i=door_icon(d,pl,mpl,floor,flags);if(!i)continue;
-  int x,y,w,h;icon_box(d->x+dx,d->y+dy,i,&x,&y,&w,&h);
-  if(!under_high(x,y,w,h)){quad_draw(x,y,w,h,i->u,i->v,i->w,i->h,tex);shown++;}
+  int x,y,w,h;icon_box(MX(d->x),MY(d->y),i,&x,&y,&w,&h);
+  // A locked box holding a key item shares its star's spot (611 Weapon Box): show the lock as a badge, like area maps.
+  int cx=MX(d->x),cy=MY(d->y),badge=on_marker(high_count,cx,cy);
+  if(badge){x+=MAP_BADGE;y+=MAP_BADGE;}
+  if(badge?!under_high_except(x,y,w,h,cx,cy):!under_high(x,y,w,h)){quad_draw(x,y,w,h,i->u,i->v,i->w,i->h,tex);shown++;}
  }
  unsigned monsters=0;
  for(unsigned j=0;overlay_enabled&&monsters_enabled&&j<sizeof(map_monsters)/sizeof(map_monsters[0]);j++){
@@ -650,7 +695,7 @@ static void draw_names(unsigned mode){
   if(!t)break;
   for(unsigned k=0;k<sizeof(overlay_icons)/sizeof(overlay_icons[0]);k++)if(overlay_icons[k].kind==MONSTER_KIND+m->cat){
    const OverlayIcon*i=overlay_icons+k;
-   if(!under_high(m->x+PROJ_CENTRE+dx-3,m->y+PROJ_CENTRE+dy-3,6,6))quad_draw(m->x+PROJ_CENTRE+dx-3,m->y+PROJ_CENTRE+dy-3,6,6,i->u,i->v,OVERLAY_ICON_TEX,OVERLAY_ICON_TEX,t);monsters++;break;
+   if(!under_high(MX(m->x+PROJ_CENTRE)-3,MY(m->y+PROJ_CENTRE)-3,6,6))quad_draw(MX(m->x+PROJ_CENTRE)-3,MY(m->y+PROJ_CENTRE)-3,6,6,i->u,i->v,OVERLAY_ICON_TEX,OVERLAY_ICON_TEX,t);monsters++;break;
   }
  }
  // Key items and puzzle diamonds were drawn first (draw_key_items); only common/map items remain.
@@ -663,7 +708,7 @@ static void draw_names(unsigned mode){
    if(!t)break;
    for(unsigned q=0;q<sizeof(overlay_icons)/sizeof(overlay_icons[0]);q++)if(overlay_icons[q].kind==((i->item>=200&&i->item<=205)?13:100+i->item)){
     const OverlayIcon *icon=overlay_icons+q;int w=(OVERLAY_ICON_TEX/OVERLAY_ICON_SCALE*90+50)/100;
-    int x=i->x+PROJ_CENTRE+dx-w/2,y=i->y+PROJ_CENTRE+dy-w/2;
+    int x=MX(i->x+PROJ_CENTRE)-w/2,y=MY(i->y+PROJ_CENTRE)-w/2;
     // Area maps are progression pickups: when a diamond/star covers the spot (East Office safe holds the police map),
     // show the map as a badge half under its lower-right corner instead of hiding it (user 2026-10-28). The marker it
     // belongs to (the box holding the pickup point) stays on top; generate_room_names keeps the badge box clear.
@@ -689,7 +734,7 @@ __declspec(dllexport) unsigned __cdecl KeyMapTestUploadPage(unsigned i){
  return 0;
 }
 __declspec(dllexport) void __cdecl KeyMapTestTexture(unsigned id){test_texture=1;texture=id;}
-__declspec(dllexport) void __cdecl KeyMapTestInit(unsigned char *g){game=g;flat_rect=(void*)addr(0x441170);check_bit=(void*)addr(0x503170);sprite_draw=(void*)addr(0x440280);}
+__declspec(dllexport) void __cdecl KeyMapTestInit(unsigned char *g){game=g;map_draw=(void*)addr(0x4fa990);flat_rect=(void*)addr(0x441170);check_bit=(void*)addr(0x503170);sprite_draw=(void*)addr(0x440280);}
 __declspec(dllexport) uintptr_t __cdecl KeyMapTestFillHook(void){return (uintptr_t)fill_stub;}
 __declspec(dllexport) void __cdecl KeyMapTestDraw(void){draw_names(*(unsigned char*)addr(0x691f62));}
 __declspec(dllexport) void __cdecl KeyMapTestToggle(unsigned mode,int down){update_toggle(mode,down);}
@@ -702,6 +747,7 @@ __declspec(dllexport) unsigned __cdecl KeyMapTestOpacity(void){return name_opaci
 __declspec(dllexport) unsigned __cdecl KeyMapTestOpacityValue(int v){return opacity_value(v);}
 __declspec(dllexport) unsigned __cdecl KeyMapTestScope(void){return scope;}
 __declspec(dllexport) unsigned __cdecl KeyMapTestSize(void){return name_size;}
+__declspec(dllexport) int __cdecl KeyMapTestLegend(void){return legend_enabled;}
 __declspec(dllexport) unsigned __cdecl KeyMapTestSizeValue(int v){return size_value(v);}
 static unsigned map_keys_down(void){return
  ((GetAsyncKeyState('0')&0x8000)?1:0)|((GetAsyncKeyState('1')&0x8000)?2:0)|
@@ -709,7 +755,7 @@ static unsigned map_keys_down(void){return
  ((GetAsyncKeyState('4')&0x8000)?16:0)|((GetAsyncKeyState('9')&0x8000)?32:0)|
  ((GetAsyncKeyState('5')&0x8000)?64:0)|((GetAsyncKeyState('6')&0x8000)?128:0)|
  ((GetAsyncKeyState('7')&0x8000)?256:0)|((GetAsyncKeyState(VK_OEM_PLUS)|GetAsyncKeyState(VK_ADD))&0x8000?512:0)|
- ((GetAsyncKeyState(VK_OEM_MINUS)|GetAsyncKeyState(VK_SUBTRACT))&0x8000?1024:0)|((GetAsyncKeyState(VK_SHIFT)&0x8000)?2048:0)|((GetAsyncKeyState('8')&0x8000)?4096:0);}
+ ((GetAsyncKeyState(VK_OEM_MINUS)|GetAsyncKeyState(VK_SUBTRACT))&0x8000?1024:0)|((GetAsyncKeyState(VK_SHIFT)&0x8000)?2048:0)|((GetAsyncKeyState('8')&0x8000)?4096:0)|((GetAsyncKeyState(VK_OEM_3)&0x8000)?8192:0);}
 // Native status-menu/map animation shares sprite storage. Repair missing UI templates before their draw.
 static void ensure_native_ui(void){
  int valid=1;
@@ -736,11 +782,93 @@ static int draw_all_room_outlines(void){
  for(unsigned i=0;i<count;i++){rooms[i*16+14]=mask[i][0];rooms[i*16+15]=mask[i][1];}
  DWORD unused;VirtualProtect(rooms,bytes,old_protect,&unused);*maps=old_map;return 1;
 }
-static void draw_map(unsigned mode){update_toggle(mode,map_keys_down());ensure_native_ui();if(scope!=3||!draw_all_room_outlines())map_draw();draw_names(mode);}
+// Off-screen packets stay queued, so they are hidden with the native alpha packet (see quad_draw) instead of moved.
+static void zoom_hide(unsigned char *p){*(unsigned*)(p+4)=0x400025;*(unsigned*)(p+28)=0;}
+static int zoom_clamp(int v,int hi){return v<0?0:v>hi?hi:v;}
+// One map texel becomes 2x2; crops stay even so UVs stay on whole texels. RE3's map_x with a fixed zoom of 200.
+static void zoom_axis(unsigned char *p,unsigned axis,int view,int hi){
+ short *c=(short*)(p+16)+axis;
+ int a=2*c[0]-view,b=2*c[2]+1-view,cut;
+ if(a<1){cut=(1-a+1)&~1;a+=cut;p[24+axis]=(unsigned char)(p[24+axis]+cut/2);}
+ if(b>hi){cut=(b-hi+1)&~1;b-=cut;p[26+axis]=(unsigned char)(p[26+axis]-cut/2);}
+ if(a>b){zoom_hide(p);a=b=1;}
+ c[0]=(short)a;c[2]=(short)b;
+}
+static void zoom_packets(uintptr_t start){
+ if(!zoom_on)return;
+ unsigned cursor=*(unsigned*)addr(0x67c7d8+20*12),ui=*(unsigned*)addr(0x67c7d8+30*12);
+ uintptr_t end=*(uintptr_t*)addr(0x524e1c);
+ if(zoom_center){
+  zoom_center=0;view_x=view_y=0;
+  int cx=160,cy=120;
+  for(uintptr_t a=start;a<end;a+=32){ // player cursor (v<24; floor arrows use v 24) if on this floor, else map centre
+   unsigned char *p=(unsigned char*)a;short *c=(short*)(p+16);
+   if(*(unsigned*)(p+8)==cursor&&p[25]<24){cx=c[0]+6;cy=c[1]+6;break;}
+  }
+  view_x=zoom_clamp(2*cx-160,320);view_y=zoom_clamp(2*cy-120,240);
+ }
+ for(uintptr_t a=start;a<end;a+=32){
+  unsigned char *p=(unsigned char*)a;unsigned tex=*(unsigned*)(p+8);short *c=(short*)(p+16);
+  if(tex==ui||(tex==cursor&&p[25]>=24)){
+   // Compass, title and floor arrows keep their place; room outlines (priority 9) would cover them (10): copy on top.
+   uintptr_t next=*(uintptr_t*)addr(0x524e1c),limit=*(uintptr_t*)addr(0x524e20);
+   if(next>limit||limit-next<32+8192)continue;
+   unsigned char *q=(unsigned char*)next;for(unsigned j=0;j<32;j++)q[j]=p[j];
+   void (__thiscall *queue)(void*,void*,unsigned)=(void*)addr(0x4021c0);
+   queue(*(void**)addr(0x6805b8),q,8);*(uintptr_t*)addr(0x524e1c)=next+32;
+  }else if(tex==cursor){ // keeps its size
+   int x=2*(c[0]+6)-view_x-6,y=2*(c[1]+6)-view_y-6;
+   if(x<1||x>306||y<1||y>226){zoom_hide(p);continue;}
+   c[0]=(short)x;c[1]=(short)y;c[2]=(short)(x+11);c[3]=(short)(y+11);
+  }else{zoom_axis(p,0,view_x,318);zoom_axis(p,1,view_y,238);}
+ }
+}
+static void draw_map(unsigned mode){
+ update_toggle(mode,map_keys_down());ensure_native_ui();
+ uintptr_t start=*(uintptr_t*)addr(0x524e1c);
+ if(scope!=3||!draw_all_room_outlines())map_draw();
+ zoom_packets(start);
+ draw_names(mode);
+}
+// Status-screen map: native 0x4fa46b..0x4fa523 changes floor on Up/Down; while zoomed those keys pan instead.
+#define FLOOR_SITE 0x4fa465
+static void floor_keys(int enabled){
+ static const unsigned char on[6]={0x0f,0x89,0xbb,0,0,0},off[6]={0xe9,0xbc,0,0,0,0x90};
+ unsigned char *site=(unsigned char*)addr(FLOOR_SITE);DWORD old,unused;
+ if(!VirtualProtect(site,6,PAGE_EXECUTE_READWRITE,&old)){log_line("floor key permissions failed\n");return;}
+ for(unsigned i=0;i<6;i++)site[i]=enabled?on[i]:off[i];
+ VirtualProtect(site,6,old,&unused);FlushInstructionCache(GetCurrentProcess(),site,6);
+}
+static void zoom_set(int on){
+ if(zoom_on==on)return;
+ zoom_on=on;zoom_center=on;floor_keys(!on);
+}
+// Same inputs as RE3 0x4ea61c/0x4ea691: decide (0x988608 bit 0x1000) toggles, held directions (0x9885fc) pan 4 px a frame.
+static unsigned zoom_key_was;
+static void zoom_input(void){
+ unsigned key=*(uint32_t*)addr(0x988608)&0x1000,pad=*(uint32_t*)addr(0x9885fc);
+ if(key&~zoom_key_was){
+  void (__cdecl *sound)(unsigned,unsigned)=(void*)addr(0x4ed950);
+  zoom_set(!zoom_on);sound(0x4040000,0);
+ }
+ zoom_key_was=key;
+ if(!zoom_on||zoom_center)return;
+ view_y=zoom_clamp(view_y+(pad&0x4000?4:0)-(pad&0x1000?4:0),240);
+ view_x=zoom_clamp(view_x+(pad&0x2000?4:0)-(pad&0x8000?4:0),320);
+}
+// Not remembered: a pause longer than any frame means the map was closed and reopened.
+static void zoom_reopen_check(void){
+ static LARGE_INTEGER last;LARGE_INTEGER now={0},rate={0};
+ QueryPerformanceFrequency(&rate);QueryPerformanceCounter(&now);
+ if(rate.QuadPart&&(!last.QuadPart||now.QuadPart-last.QuadPart>rate.QuadPart/2)){
+  zoom_set(0);zoom_key_was=*(uint32_t*)addr(0x988608)&0x1000; // the press that opened the map must not toggle
+ }
+ last=now;
+}
 // The status-screen selection handler 0x4fa240 draws at phase3; the ordinary map handler draws at phase0.
-static void __cdecl hook_status_selection(void){draw_map(0);}
+static void __cdecl hook_status_selection(void){zoom_reopen_check();zoom_input();draw_map(0);}
 static void __cdecl hook_map(void){draw_map(*(unsigned char*)addr(0x691f62));}
-static void __cdecl hook_status_entry(void){draw_map(0);}
+static void __cdecl hook_status_entry(void){zoom_set(0);draw_map(0);}
 __declspec(dllexport) void __cdecl KeyMapTestStatusDraw(void){draw_names(0);}
 __declspec(dllexport) void __cdecl KeyMapTestEnsureUI(void){ensure_native_ui();}
 // Status-map area/floor selection. Native Up/Down (0x4fb4df) needs bank0 bit0, skips floors 0/1 and only walks the
@@ -817,10 +945,18 @@ static void nav_arrows_draw(void){
 static unsigned nav_pad_was;
 static unsigned nav_press(unsigned pad){pad&=0xf000;unsigned pressed=pad&~nav_pad_was;nav_pad_was=pad;return map_nav(pressed);}
 static void __cdecl hook_status_map(void){
- if(*(unsigned char*)addr(0x691f61)!=2){hook_map();return;}
- if(nav_press(*(uint32_t*)addr(0x9885fc)))return; // the floor's map is reloaded first; native skips this frame's draw too
- hook_map();nav_arrows_draw();
+ if(*(unsigned char*)addr(0x691f61)!=2){zoom_set(0);hook_map();return;}
+ zoom_reopen_check();zoom_input();
+ if(zoom_on)nav_pad_was=*(uint32_t*)addr(0x9885fc)&0xf000; // directions pan; a release must not switch floors
+ else if(nav_press(*(uint32_t*)addr(0x9885fc)))return; // the floor's map is reloaded first; native skips this frame's draw too
+ hook_map();if(!zoom_on)nav_arrows_draw();
 }
+__declspec(dllexport) void __cdecl KeyMapTestDrawMap(void){draw_map(0);}
+__declspec(dllexport) void __cdecl KeyMapTestZoomInput(void){zoom_input();}
+__declspec(dllexport) void __cdecl KeyMapTestZoomView(int x,int y){view_x=x;view_y=y;}
+__declspec(dllexport) int __cdecl KeyMapTestZoomState(void){return zoom_on;}
+__declspec(dllexport) int __cdecl KeyMapTestZoomX(void){return view_x;}
+__declspec(dllexport) int __cdecl KeyMapTestZoomY(void){return view_y;}
 __declspec(dllexport) unsigned __cdecl KeyMapTestNav(unsigned pad){return map_nav(pad);}
 __declspec(dllexport) unsigned __cdecl KeyMapTestNavPress(unsigned pad){return nav_press(pad);}
 __declspec(dllexport) uintptr_t __cdecl KeyMapTestNavPixels(void){nav_build();return (uintptr_t)nav_pixels;}
@@ -847,6 +983,8 @@ BOOL WINAPI DllMain(HINSTANCE module,DWORD reason,LPVOID reserved){
  // Native status-map Up/Down (bank0 bit0 set in the police station/lab): jns 0x4fb5aa -> jmp, map_nav owns floors.
  const unsigned char native_nav[]={0x0f,0x89,0xbe,0x00,0x00,0x00};
  if(!equal((void*)addr(0x4fb4e6),native_nav,sizeof(native_nav))){log_line("unsupported native floor switch; no patch applied\n");return TRUE;}
+ const unsigned char floor_jns[]={0x0f,0x89,0xbb,0x00,0x00,0x00};
+ if(!equal((void*)addr(FLOOR_SITE),floor_jns,sizeof(floor_jns))){log_line("unsupported status floor switch; no patch applied\n");return TRUE;}
  map_draw=(void*)addr(0x4fa990);flat_rect=(void*)addr(0x441170);check_bit=(void*)addr(0x503170);sprite_draw=(void*)addr(0x440280);
  // Validate every call before mutation and acquire permissions for all four sites.
  DWORD olds[4];unsigned acquired=0;

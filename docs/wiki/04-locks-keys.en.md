@@ -9,16 +9,16 @@ Key icons mark doors that remain locked and are valid for the current scenario. 
 
 | Mode | Map ID | Room/slot | Key | x,y | Unlock bank:bit | Mask |
 | --- | --- | --- | --- | --- | --- | --- |
-| Leon | 1 | `seen=5` | Cabin Key (`88`) | 198,104 | `255:10` | 0 |
+| Leon | 1 | `seen=5` | Cabin Key (`88`) | 204,110 | `255:10` | 0 |
 
 ## Leon · Map ID 2
 
 | Mode | Map ID | Room/slot | Key | x,y | Unlock bank:bit | Mask |
 | --- | --- | --- | --- | --- | --- | --- |
-| Leon | 2 | Reception Room (`201`) | Small Key (`31`) | 97,137 | `255:1` | 0 |
+| Leon | 2 | Reception Room (`201`) | Small Key (`31`) | 103,143 | `255:1` | 0 |
 | Leon | 2 | West Corridor (`204`) | Spade Key (`89`) | 55,140 | `255:5` | 0 |
 | Leon | 2 | West Stairway (`207`) | Diamond Key (`90`) | 101,108 | `255:8` | 0 |
-| Leon | 2 | Darkroom (`208`) | ID 83 (`83`) | 109,82 | `4:175` | 0 |
+| Leon | 2 | Darkroom (`208`) | ID 83 (`83`) | 115,88 | `4:175` | 0 |
 | Leon | 2 | East Office (`20B`) | Heart Key (`91`) | 244,135 | `255:4` | 0 |
 | Leon | 2 | East Corridor (`20C`) | Club Key (`92`) | 211,122 | `255:12` | 0 |
 | Leon | 2 | East Corridor (`20C`) | Diamond Key (`90`) | 201,82 | `255:13` | 0 |
@@ -28,37 +28,37 @@ Key icons mark doors that remain locked and are valid for the current scenario. 
 
 | Mode | Map ID | Room/slot | Key | x,y | Unlock bank:bit | Mask |
 | --- | --- | --- | --- | --- | --- | --- |
-| Leon | 3 | Taxidermy Room (`10E`) | Small Key (`31`) | 183,113 | `255:18` | 0 |
-| Leon | 3 | West Corridor (`113`) | Small Key (`31`) | 88,143 | `255:2` | 0 |
+| Leon | 3 | Taxidermy Room (`10E`) | Small Key (`31`) | 189,119 | `255:18` | 0 |
+| Leon | 3 | West Corridor (`113`) | Small Key (`31`) | 94,149 | `255:2` | 0 |
 | Leon | 3 | S.T.A.R.S. Corridor (`114`) | Spade Key (`89`) | 64,159 | `255:9` | 128 |
-| Leon | 3 | S.T.A.R.S. Office (`115`) | Small Key (`31`) | 37,143 | `255:27` | 0 |
+| Leon | 3 | S.T.A.R.S. Office (`115`) | Small Key (`31`) | 43,149 | `255:27` | 0 |
 
 ## Leon · Map ID 5
 
 | Mode | Map ID | Room/slot | Key | x,y | Unlock bank:bit | Mask |
 | --- | --- | --- | --- | --- | --- | --- |
 | Leon | 5 | Basement Corridor (`211`) | Club Key (`92`) | 247,137 | `255:14` | 0 |
-| Leon | 5 | Basement Corridor (`211`) | Red Key Card (`52`) | 191,124 | `4:14` | 0 |
-| Leon | 5 | Kennel (`21A`) | Manhole Opener (`75`) | 96,116 | `4:59` | 0 |
+| Leon | 5 | Basement Corridor (`211`) | Red Key Card (`52`) | 197,130 | `4:14` | 0 |
+| Leon | 5 | Kennel (`21A`) | Manhole Opener (`75`) | 102,122 | `4:59` | 0 |
 
 ## Leon · Map ID 6
 
 | Mode | Map ID | Room/slot | Key | x,y | Unlock bank:bit | Mask |
 | --- | --- | --- | --- | --- | --- | --- |
-| Leon | 6 | Plug Passage (`303`) | King Plug (`62`) | 101,65 | `4:58` | 0 |
+| Leon | 6 | Plug Passage (`303`) | King Plug (`62`) | 107,71 | `4:58` | 0 |
 
 ## Leon · Map ID 10
 
 | Mode | Map ID | Room/slot | Key | x,y | Unlock bank:bit | Mask |
 | --- | --- | --- | --- | --- | --- | --- |
-| Leon | 10 | Control Room (`503`) | Up Key (`94`) | 156,124 | `4:98` | 0 |
-| Leon | 10 | Cargo Platform (`504`) | Down Key (`93`) | 198,98 | `4:101` | 0 |
+| Leon | 10 | Control Room (`503`) | Up Key (`94`) | 162,130 | `4:98` | 0 |
+| Leon | 10 | Cargo Platform (`504`) | Down Key (`93`) | 204,104 | `4:101` | 0 |
 
 ## Leon · Map ID 11
 
 | Mode | Map ID | Room/slot | Key | x,y | Unlock bank:bit | Mask |
 | --- | --- | --- | --- | --- | --- | --- |
-| Leon | 11 | Control Room (`503`) | Up Key (`94`) | 161,112 | `4:98` | 0 |
+| Leon | 11 | Control Room (`503`) | Up Key (`94`) | 167,118 | `4:98` | 0 |
 
 ## Leon · Map ID 13
 
@@ -79,34 +79,34 @@ Key icons mark doors that remain locked and are valid for the current scenario. 
 | Mode | Map ID | Room/slot | Key | x,y | Unlock bank:bit | Mask |
 | --- | --- | --- | --- | --- | --- | --- |
 | Leon | 17 | Laboratory Corridor (`614`) | Umbrella Key Card (`97`) | 71,60 | `255:23` | 0 |
-| Leon | 17 | Birkin's Laboratory (`615`) | Weapons Locker Key (`63`) | 86,102 | `4:159` | 0 |
+| Leon | 17 | Birkin's Laboratory (`615`) | Weapons Locker Key (`63`) | 92,108 | `4:159` | 0 |
 
 ## Leon · Map ID 18
 
 | Mode | Map ID | Room/slot | Key | x,y | Unlock bank:bit | Mask |
 | --- | --- | --- | --- | --- | --- | --- |
-| Leon | 18 | Platform Entrance (`700`) | Platform Key (`99`) | 184,110 | `255:26` | 0 |
+| Leon | 18 | Platform Entrance (`700`) | Platform Key (`99`) | 190,116 | `255:26` | 0 |
 
 ## Leon · Map ID 19
 
 | Mode | Map ID | Room/slot | Key | x,y | Unlock bank:bit | Mask |
 | --- | --- | --- | --- | --- | --- | --- |
-| Leon | 19 | 700,701,702,704 (`700,701,702,704`) | Platform Key (`99`) | 112,90 | `255:26` | 0 |
+| Leon | 19 | 700,701,702,704 (`700,701,702,704`) | Platform Key (`99`) | 118,96 | `255:26` | 0 |
 
 ## Claire · Map ID 1
 
 | Mode | Map ID | Room/slot | Key | x,y | Unlock bank:bit | Mask |
 | --- | --- | --- | --- | --- | --- | --- |
-| Claire | 1 | `seen=5` | Cabin Key (`88`) | 198,104 | `255:10` | 0 |
+| Claire | 1 | `seen=5` | Cabin Key (`88`) | 204,110 | `255:10` | 0 |
 
 ## Claire · Map ID 2
 
 | Mode | Map ID | Room/slot | Key | x,y | Unlock bank:bit | Mask |
 | --- | --- | --- | --- | --- | --- | --- |
-| Claire | 2 | Reception Room (`201`) | ID 48 (`48`) | 97,137 | `255:1` | 0 |
+| Claire | 2 | Reception Room (`201`) | ID 48 (`48`) | 103,143 | `255:1` | 0 |
 | Claire | 2 | West Corridor (`204`) | Spade Key (`89`) | 55,140 | `255:5` | 0 |
 | Claire | 2 | West Stairway (`207`) | Diamond Key (`90`) | 101,108 | `255:8` | 0 |
-| Claire | 2 | Darkroom (`208`) | ID 83 (`83`) | 109,82 | `4:175` | 0 |
+| Claire | 2 | Darkroom (`208`) | ID 83 (`83`) | 115,88 | `4:175` | 0 |
 | Claire | 2 | East Office (`20B`) | Heart Key (`91`) | 244,135 | `255:4` | 0 |
 | Claire | 2 | East Corridor (`20C`) | Club Key (`92`) | 211,122 | `255:12` | 0 |
 | Claire | 2 | East Corridor (`20C`) | Diamond Key (`90`) | 201,82 | `255:13` | 0 |
@@ -116,31 +116,31 @@ Key icons mark doors that remain locked and are valid for the current scenario. 
 
 | Mode | Map ID | Room/slot | Key | x,y | Unlock bank:bit | Mask |
 | --- | --- | --- | --- | --- | --- | --- |
-| Claire | 3 | Taxidermy Room (`10E`) | ID 48 (`48`) | 183,113 | `255:18` | 0 |
-| Claire | 3 | West Corridor (`113`) | ID 48 (`48`) | 88,143 | `255:2` | 0 |
+| Claire | 3 | Taxidermy Room (`10E`) | ID 48 (`48`) | 189,119 | `255:18` | 0 |
+| Claire | 3 | West Corridor (`113`) | ID 48 (`48`) | 94,149 | `255:2` | 0 |
 | Claire | 3 | S.T.A.R.S. Corridor (`114`) | Spade Key (`89`) | 64,159 | `255:9` | 128 |
-| Claire | 3 | S.T.A.R.S. Office (`115`) | ID 48 (`48`) | 37,143 | `255:27` | 0 |
+| Claire | 3 | S.T.A.R.S. Office (`115`) | ID 48 (`48`) | 43,149 | `255:27` | 0 |
 
 ## Claire · Map ID 5
 
 | Mode | Map ID | Room/slot | Key | x,y | Unlock bank:bit | Mask |
 | --- | --- | --- | --- | --- | --- | --- |
 | Claire | 5 | Basement Corridor (`211`) | Club Key (`92`) | 247,137 | `255:14` | 0 |
-| Claire | 5 | Basement Corridor (`211`) | Red Key Card (`52`) | 191,124 | `4:14` | 0 |
-| Claire | 5 | Kennel (`21A`) | Manhole Opener (`75`) | 96,116 | `4:59` | 0 |
+| Claire | 5 | Basement Corridor (`211`) | Red Key Card (`52`) | 197,130 | `4:14` | 0 |
+| Claire | 5 | Kennel (`21A`) | Manhole Opener (`75`) | 102,122 | `4:59` | 0 |
 
 ## Claire · Map ID 10
 
 | Mode | Map ID | Room/slot | Key | x,y | Unlock bank:bit | Mask |
 | --- | --- | --- | --- | --- | --- | --- |
-| Claire | 10 | Control Room (`503`) | Up Key (`94`) | 156,124 | `4:98` | 0 |
-| Claire | 10 | Cargo Platform (`504`) | Down Key (`93`) | 198,98 | `4:101` | 0 |
+| Claire | 10 | Control Room (`503`) | Up Key (`94`) | 162,130 | `4:98` | 0 |
+| Claire | 10 | Cargo Platform (`504`) | Down Key (`93`) | 204,104 | `4:101` | 0 |
 
 ## Claire · Map ID 11
 
 | Mode | Map ID | Room/slot | Key | x,y | Unlock bank:bit | Mask |
 | --- | --- | --- | --- | --- | --- | --- |
-| Claire | 11 | Control Room (`503`) | Up Key (`94`) | 161,112 | `4:98` | 0 |
+| Claire | 11 | Control Room (`503`) | Up Key (`94`) | 167,118 | `4:98` | 0 |
 
 ## Claire · Map ID 13
 
@@ -161,16 +161,16 @@ Key icons mark doors that remain locked and are valid for the current scenario. 
 | Mode | Map ID | Room/slot | Key | x,y | Unlock bank:bit | Mask |
 | --- | --- | --- | --- | --- | --- | --- |
 | Claire | 17 | Laboratory Corridor (`614`) | Umbrella Key Card (`97`) | 71,60 | `255:23` | 0 |
-| Claire | 17 | Birkin's Laboratory (`615`) | Weapons Locker Key (`63`) | 86,102 | `4:159` | 0 |
+| Claire | 17 | Birkin's Laboratory (`615`) | Weapons Locker Key (`63`) | 92,108 | `4:159` | 0 |
 
 ## Claire · Map ID 18
 
 | Mode | Map ID | Room/slot | Key | x,y | Unlock bank:bit | Mask |
 | --- | --- | --- | --- | --- | --- | --- |
-| Claire | 18 | Platform Entrance (`700`) | Platform Key (`99`) | 184,110 | `255:26` | 0 |
+| Claire | 18 | Platform Entrance (`700`) | Platform Key (`99`) | 190,116 | `255:26` | 0 |
 
 ## Claire · Map ID 19
 
 | Mode | Map ID | Room/slot | Key | x,y | Unlock bank:bit | Mask |
 | --- | --- | --- | --- | --- | --- | --- |
-| Claire | 19 | 700,701,702,704 (`700,701,702,704`) | Platform Key (`99`) | 112,90 | `255:26` | 0 |
+| Claire | 19 | 700,701,702,704 (`700,701,702,704`) | Platform Key (`99`) | 118,96 | `255:26` | 0 |

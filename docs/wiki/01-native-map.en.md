@@ -4,7 +4,7 @@
 
 Press `8` to cycle Visited → Revealed → All. Revealed requires the acquired floor-map flag and the room's scenario visibility mask. All removes the room-visit gate; it does not restore collected items or completed events.
 
-On the status-screen map, left/right selects an area and up/down selects a floor. Only visited floors are selectable, without wraparound. All scope does not add unvisited floors to the selection list.
+On the status-screen map, left/right selects an area and up/down selects a floor. Only visited floors are selectable, without wraparound. All scope does not add unvisited floors to the selection list. The Action button toggles 2x zoom, where directions move the map instead; reopening the map returns to 1x.
 
 | Area | Map IDs, top to bottom |
 | --- | --- |

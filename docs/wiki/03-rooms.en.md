@@ -8,23 +8,23 @@
 | Character | Map ID | Room code | 한국어 | English | seen | x,y |
 | --- | --- | --- | --- | --- | --- | --- |
 | Leon | 2 | `200` | 중앙 홀 | Main Hall | 30 | 154,142 |
-| Leon | 2 | `201` | 접견실 | Reception Room | 31 | 113,150 |
+| Leon | 2 | `201` | 접견실 | Reception Room | 31 | 99,171 |
 | Leon | 2 | `202` | 서쪽 사무실 | West Office | 32 | 101,120 |
 | Leon | 2 | `203` | 자료실 | Records Room | 33 | 70,133 |
 | Leon | 2 | `204` | 서쪽 복도 | West Corridor | 34 | 89,158 |
-| Leon | 2 | `205` | 서쪽 통로 | West Passage | 35 | 46,62 |
+| Leon | 2 | `205` | 서쪽 통로 | West Passage | 35 | 94,91 |
 | Leon | 2 | `206` | 작전실 | Operations Room | 36 | 68,95 |
-| Leon | 2 | `207` | 서쪽 계단 | West Stairway | 37 | 102,62 |
-| Leon | 2 | `208` | 암실 | Darkroom | 38 | 121,91 |
-| Leon | 2 | `209` | 증거품실 | Evidence Room | 39 | 78,61 |
+| Leon | 2 | `207` | 서쪽 계단 | West Stairway | 37 | 115,77 |
+| Leon | 2 | `208` | 암실 | Darkroom | 38 | 126,64 |
+| Leon | 2 | `209` | 증거품실 | Evidence Room | 39 | 32,110 |
 | Leon | 2 | `20A` | 휴게 복도 | Break Room Corridor | 40 | 200,132 |
 | Leon | 2 | `20B` | 동쪽 사무실 | East Office | 41 | 221,155 |
 | Leon | 2 | `20C` | 동쪽 복도 | East Corridor | 42 | 222,86 |
 | Leon | 2 | `20D` | 기자실 | Press Room | 43 | 224,109 |
 | Leon | 2 | `20E` | 취조실 | Interrogation Room | 44 | 169,80 |
-| Leon | 2 | `20F` | 동쪽 계단 | East Stairway | 45 | 243,72 |
+| Leon | 2 | `20F` | 동쪽 계단 | East Stairway | 45 | 246,72 |
 | Leon | 2 | `210` | 숙직실 | Watchman's Room | 46 | 288,109 |
-| Leon | 2 | `116` | 비상계단 | Emergency Stairway | 130 | 267,148 |
+| Leon | 2 | `116` | 비상계단 | Emergency Stairway | 130 | 285,159 |
 
 ## Leon · Map ID 3
 
@@ -35,14 +35,14 @@
 | Leon | 3 | `10A` | 헬기 복도 | Helicopter Corridor | 10 | 223,121 |
 | Leon | 3 | `10B` | 미술품 창고 | Art Storage | 11 | 227,143 |
 | Leon | 3 | `10C` | 서쪽 계단 | West Stairway | 12 | 107,98 |
-| Leon | 3 | `10D` | 서장실 복도 | Chief's Office Corridor | 13 | 182,61 |
-| Leon | 3 | `10E` | 박제실 | Taxidermy Room | 14 | 197,127 |
-| Leon | 3 | `10F` | 대기실 | Waiting Room | 15 | 179,176 |
+| Leon | 3 | `10D` | 서장실 복도 | Chief's Office Corridor | 13 | 184,61 |
+| Leon | 3 | `10E` | 박제실 | Taxidermy Room | 14 | 197,129 |
+| Leon | 3 | `10F` | 대기실 | Waiting Room | 15 | 182,176 |
 | Leon | 3 | `110` | 중앙 홀 | Main Hall | 16 | 124,121 |
 | Leon | 3 | `112` | 도서관 | Library | 18 | 95,124 |
-| Leon | 3 | `113` | 서쪽 복도 | West Corridor | 19 | 92,158 |
-| Leon | 3 | `114` | 특수부대 복도 | S.T.A.R.S. Corridor | 20 | 18,109 |
-| Leon | 3 | `115` | 특수부대실 | S.T.A.R.S. Office | 21 | 53,147 |
+| Leon | 3 | `113` | 서쪽 복도 | West Corridor | 19 | 76,148 |
+| Leon | 3 | `114` | 특수부대 복도 | S.T.A.R.S. Corridor | 20 | 18,112 |
+| Leon | 3 | `115` | 특수부대실 | S.T.A.R.S. Office | 21 | 17,138 |
 | Leon | 3 | `21B` | 서장실 | Chief's Office | 57 | 205,92 |
 | Leon | 3 | `116` | 비상계단 | Emergency Stairway | 129 | 263,176 |
 
@@ -51,15 +51,15 @@
 | Character | Map ID | Room code | 한국어 | English | seen | x,y |
 | --- | --- | --- | --- | --- | --- | --- |
 | Leon | 4 | `111` | 시계탑 | Clock Tower | 17 | 159,154 |
-| Leon | 4 | `117` | 중앙 홀 | Main Hall | 23 | 168,68 |
+| Leon | 4 | `117` | 중앙 홀 | Main Hall | 23 | 171,68 |
 | Leon | 4 | `112` | 도서관 | Library | 128 | 151,106 |
 
 ## Leon · Map ID 5
 
 | Character | Map ID | Room code | 한국어 | English | seen | x,y |
 | --- | --- | --- | --- | --- | --- | --- |
-| Leon | 5 | `211` | 지하 복도 | Basement Corridor | 47 | 220,135 |
-| Leon | 5 | `212` | 지하 수로 | Underground Waterway | 48 | 232,70 |
+| Leon | 5 | `211` | 지하 복도 | Basement Corridor | 47 | 220,137 |
+| Leon | 5 | `212` | 지하 수로 | Underground Waterway | 48 | 235,70 |
 | Leon | 5 | `213` | 발전실 | Power Room | 49 | 217,108 |
 | Leon | 5 | `214` | 무기고 | Armory | 50 | 192,116 |
 | Leon | 5 | `215` | 검시실 | Autopsy Room | 51 | 250,154 |
@@ -74,16 +74,16 @@
 
 | Character | Map ID | Room code | 한국어 | English | seen | x,y |
 | --- | --- | --- | --- | --- | --- | --- |
-| Leon | 6 | `302` | 처리장 복도 | Treatment Corridor | 60 | 89,136 |
-| Leon | 6 | `303` | 플러그 통로 | Plug Passage | 61 | 122,75 |
+| Leon | 6 | `302` | 처리장 복도 | Treatment Corridor | 60 | 89,138 |
+| Leon | 6 | `303` | 플러그 통로 | Plug Passage | 61 | 126,75 |
 | Leon | 6 | `304` | 하수도 입구 | Sewer Entrance | 62 | 126,62 |
 | Leon | 6 | `305` | 하수 처리장 | Sewage Disposal Plant | 63 | 167,91 |
 | Leon | 6 | `306` | 처리 수조 | Treatment Pool | 64 | 178,43 |
-| Leon | 6 | `307` | 공사장 통로 | Construction Passage | 65 | 217,94 |
-| Leon | 6 | `309` | 석판 통로 | Chess Plug Passage | 67 | 134,155 |
+| Leon | 6 | `307` | 공사장 통로 | Construction Passage | 65 | 220,94 |
+| Leon | 6 | `309` | 석판 통로 | Chess Plug Passage | 67 | 137,155 |
 | Leon | 6 | `30A` | 하수도 입구 | Sewer Entrance | 68 | 164,135 |
-| Leon | 6 | `30B` | 처리장 복도 | Treatment Corridor | 69 | 89,103 |
-| Leon | 6 | `30C` | 서쪽 관리실 | West Control Room | 70 | 74,116 |
+| Leon | 6 | `30B` | 처리장 복도 | Treatment Corridor | 69 | 89,106 |
+| Leon | 6 | `30C` | 서쪽 관리실 | West Control Room | 70 | 74,119 |
 | Leon | 6 | `30D` | 동쪽 관리실 | East Control Room | 71 | 219,143 |
 
 ## Leon · Map ID 7
@@ -95,7 +95,7 @@
 | Leon | 7 | `409` | 다리 위 | Above the Bridge | 81 | 133,141 |
 | Leon | 7 | `40B` | 환풍기 통로 | Ventilation Passage | 83 | 180,150 |
 | Leon | 7 | `401` | 남쪽 관리실 | South Control Room | 131 | 236,175 |
-| Leon | 7 | `403` | 북쪽 관리실 | North Control Room | 133 | 246,71 |
+| Leon | 7 | `403` | 북쪽 관리실 | North Control Room | 133 | 249,71 |
 
 ## Leon · Map ID 8
 
@@ -121,8 +121,8 @@
 | --- | --- | --- | --- | --- | --- | --- |
 | Leon | 9 | `500` | 케이블카 | Cable Car | 89 | 99,119 |
 | Leon | 9 | `501` | 공장 승강장 | Factory Platform | 90 | 111,109 |
-| Leon | 9 | `502` | 지하 통로 | Underground Passage | 91 | 126,133 |
-| Leon | 9 | `508` | 지하 통로 | Underground Passage | 97 | 181,79 |
+| Leon | 9 | `502` | 지하 통로 | Underground Passage | 91 | 129,133 |
+| Leon | 9 | `508` | 지하 통로 | Underground Passage | 97 | 184,79 |
 
 ## Leon · Map ID 10
 
@@ -153,7 +153,7 @@
 | --- | --- | --- | --- | --- | --- | --- |
 | Leon | 13 | `505` | 화물 열차 | Freight Train | 94 | 177,73 |
 | Leon | 13 | `600` | 화물 승강장 | Cargo Platform | 99 | 167,87 |
-| Leon | 13 | `601` | 승강기 | Elevator | 100 | 91,63 |
+| Leon | 13 | `601` | 승강기 | Elevator | 100 | 94,63 |
 | Leon | 13 | `602` | 연구소 복도 | Laboratory Corridor | 101 | 119,75 |
 | Leon | 13 | `604` | 동력실 상층 | Upper Power Room | 103 | 195,110 |
 | Leon | 13 | `603` | 펌프실 | Pump Room | 135 | 136,141 |
@@ -175,7 +175,7 @@
 | Character | Map ID | Room code | 한국어 | English | seen | x,y |
 | --- | --- | --- | --- | --- | --- | --- |
 | Leon | 16 | `505` | 화물 열차 | Freight Train | 94 | 197,63 |
-| Leon | 16 | `601` | 승강기 | Elevator | 100 | 111,55 |
+| Leon | 16 | `601` | 승강기 | Elevator | 100 | 114,55 |
 | Leon | 16 | `606` | 화물 승강장 | Cargo Platform | 105 | 187,77 |
 | Leon | 16 | `607` | 경비실 | Guard Room | 106 | 145,43 |
 | Leon | 16 | `608,611` | — | — | 107 | 142,104 |
@@ -192,9 +192,9 @@
 
 | Character | Map ID | Room code | 한국어 | English | seen | x,y |
 | --- | --- | --- | --- | --- | --- | --- |
-| Leon | 17 | `612` | 연구소 제어실 | Lab Control Room | 117 | 159,84 |
+| Leon | 17 | `612` | 연구소 제어실 | Lab Control Room | 117 | 162,85 |
 | Leon | 17 | `613` | 컴퓨터실 | Computer Room | 118 | 91,71 |
-| Leon | 17 | `614` | 연구소 복도 | Laboratory Corridor | 119 | 104,96 |
+| Leon | 17 | `614` | 연구소 복도 | Laboratory Corridor | 119 | 81,97 |
 | Leon | 17 | `615` | 버킨 연구실 | Birkin's Laboratory | 120 | 104,126 |
 | Leon | 17 | `616` | 인증 통로 | Identity Check Passage | 121 | 148,187 |
 | Leon | 17 | `617` | 탈출 승강장 | Escape Platform | 122 | 214,110 |
@@ -222,23 +222,23 @@
 | Character | Map ID | Room code | 한국어 | English | seen | x,y |
 | --- | --- | --- | --- | --- | --- | --- |
 | Claire | 2 | `200` | 중앙 홀 | Main Hall | 30 | 154,142 |
-| Claire | 2 | `201` | 접견실 | Reception Room | 31 | 113,150 |
+| Claire | 2 | `201` | 접견실 | Reception Room | 31 | 99,171 |
 | Claire | 2 | `202` | 서쪽 사무실 | West Office | 32 | 101,120 |
 | Claire | 2 | `203` | 자료실 | Records Room | 33 | 70,133 |
 | Claire | 2 | `204` | 서쪽 복도 | West Corridor | 34 | 89,158 |
-| Claire | 2 | `205` | 서쪽 통로 | West Passage | 35 | 46,62 |
+| Claire | 2 | `205` | 서쪽 통로 | West Passage | 35 | 94,91 |
 | Claire | 2 | `206` | 작전실 | Operations Room | 36 | 68,95 |
-| Claire | 2 | `207` | 서쪽 계단 | West Stairway | 37 | 102,62 |
-| Claire | 2 | `208` | 암실 | Darkroom | 38 | 121,91 |
-| Claire | 2 | `209` | 증거품실 | Evidence Room | 39 | 78,61 |
+| Claire | 2 | `207` | 서쪽 계단 | West Stairway | 37 | 115,77 |
+| Claire | 2 | `208` | 암실 | Darkroom | 38 | 126,64 |
+| Claire | 2 | `209` | 증거품실 | Evidence Room | 39 | 32,110 |
 | Claire | 2 | `20A` | 휴게 복도 | Break Room Corridor | 40 | 200,132 |
 | Claire | 2 | `20B` | 동쪽 사무실 | East Office | 41 | 221,155 |
 | Claire | 2 | `20C` | 동쪽 복도 | East Corridor | 42 | 222,86 |
 | Claire | 2 | `20D` | 기자실 | Press Room | 43 | 224,109 |
 | Claire | 2 | `20E` | 취조실 | Interrogation Room | 44 | 169,80 |
-| Claire | 2 | `20F` | 동쪽 계단 | East Stairway | 45 | 243,72 |
+| Claire | 2 | `20F` | 동쪽 계단 | East Stairway | 45 | 246,72 |
 | Claire | 2 | `210` | 숙직실 | Watchman's Room | 46 | 288,109 |
-| Claire | 2 | `116` | 비상계단 | Emergency Stairway | 130 | 267,148 |
+| Claire | 2 | `116` | 비상계단 | Emergency Stairway | 130 | 285,159 |
 
 ## Claire · Map ID 3
 
@@ -246,17 +246,17 @@
 | --- | --- | --- | --- | --- | --- | --- |
 | Claire | 3 | `108` | 옥상 | Rooftop | 8 | 252,99 |
 | Claire | 3 | `109` | 옥상 출입구 | Rooftop Entrance | 9 | 256,135 |
-| Claire | 3 | `10A` | 헬기 복도 | Helicopter Corridor | 10 | 208,176 |
+| Claire | 3 | `10A` | 헬기 복도 | Helicopter Corridor | 10 | 211,176 |
 | Claire | 3 | `10B` | 미술품 창고 | Art Storage | 11 | 227,143 |
 | Claire | 3 | `10C` | 서쪽 계단 | West Stairway | 12 | 107,98 |
-| Claire | 3 | `10D` | 서장실 복도 | Chief's Office Corridor | 13 | 190,191 |
-| Claire | 3 | `10E` | 박제실 | Taxidermy Room | 14 | 297,128 |
-| Claire | 3 | `10F` | 대기실 | Waiting Room | 15 | 179,176 |
+| Claire | 3 | `10D` | 서장실 복도 | Chief's Office Corridor | 13 | 185,61 |
+| Claire | 3 | `10E` | 박제실 | Taxidermy Room | 14 | 183,178 |
+| Claire | 3 | `10F` | 대기실 | Waiting Room | 15 | 196,191 |
 | Claire | 3 | `110` | 중앙 홀 | Main Hall | 16 | 124,121 |
 | Claire | 3 | `112` | 도서관 | Library | 18 | 95,124 |
-| Claire | 3 | `113` | 서쪽 복도 | West Corridor | 19 | 92,158 |
-| Claire | 3 | `114` | 특수부대 복도 | S.T.A.R.S. Corridor | 20 | 18,109 |
-| Claire | 3 | `115` | 특수부대실 | S.T.A.R.S. Office | 21 | 53,147 |
+| Claire | 3 | `113` | 서쪽 복도 | West Corridor | 19 | 76,148 |
+| Claire | 3 | `114` | 특수부대 복도 | S.T.A.R.S. Corridor | 20 | 18,112 |
+| Claire | 3 | `115` | 특수부대실 | S.T.A.R.S. Office | 21 | 17,138 |
 | Claire | 3 | `21B` | 서장실 | Chief's Office | 57 | 210,92 |
 | Claire | 3 | `116` | 비상계단 | Emergency Stairway | 129 | 263,176 |
 
@@ -265,15 +265,15 @@
 | Character | Map ID | Room code | 한국어 | English | seen | x,y |
 | --- | --- | --- | --- | --- | --- | --- |
 | Claire | 4 | `111` | 시계탑 | Clock Tower | 17 | 159,154 |
-| Claire | 4 | `117` | 중앙 홀 | Main Hall | 23 | 168,68 |
+| Claire | 4 | `117` | 중앙 홀 | Main Hall | 23 | 171,68 |
 | Claire | 4 | `112` | 도서관 | Library | 128 | 151,106 |
 
 ## Claire · Map ID 5
 
 | Character | Map ID | Room code | 한국어 | English | seen | x,y |
 | --- | --- | --- | --- | --- | --- | --- |
-| Claire | 5 | `211` | 지하 복도 | Basement Corridor | 47 | 220,135 |
-| Claire | 5 | `212` | 지하 수로 | Underground Waterway | 48 | 232,70 |
+| Claire | 5 | `211` | 지하 복도 | Basement Corridor | 47 | 220,137 |
+| Claire | 5 | `212` | 지하 수로 | Underground Waterway | 48 | 235,70 |
 | Claire | 5 | `213` | 발전실 | Power Room | 49 | 217,108 |
 | Claire | 5 | `214` | 무기고 | Armory | 50 | 192,116 |
 | Claire | 5 | `215` | 검시실 | Autopsy Room | 51 | 250,154 |
@@ -288,16 +288,16 @@
 
 | Character | Map ID | Room code | 한국어 | English | seen | x,y |
 | --- | --- | --- | --- | --- | --- | --- |
-| Claire | 6 | `302` | 처리장 복도 | Treatment Corridor | 60 | 89,136 |
+| Claire | 6 | `302` | 처리장 복도 | Treatment Corridor | 60 | 89,138 |
 | Claire | 6 | `303` | 플러그 통로 | Plug Passage | 61 | 122,75 |
 | Claire | 6 | `304` | 하수도 입구 | Sewer Entrance | 62 | 126,62 |
 | Claire | 6 | `305` | 하수 처리장 | Sewage Disposal Plant | 63 | 167,91 |
 | Claire | 6 | `306` | 처리 수조 | Treatment Pool | 64 | 178,43 |
-| Claire | 6 | `307` | 공사장 통로 | Construction Passage | 65 | 217,94 |
-| Claire | 6 | `309` | 석판 통로 | Chess Plug Passage | 67 | 134,155 |
+| Claire | 6 | `307` | 공사장 통로 | Construction Passage | 65 | 220,94 |
+| Claire | 6 | `309` | 석판 통로 | Chess Plug Passage | 67 | 137,155 |
 | Claire | 6 | `30A` | 하수도 입구 | Sewer Entrance | 68 | 166,134 |
 | Claire | 6 | `30B` | 처리장 복도 | Treatment Corridor | 69 | 133,107 |
-| Claire | 6 | `30C` | 서쪽 관리실 | West Control Room | 70 | 74,114 |
+| Claire | 6 | `30C` | 서쪽 관리실 | West Control Room | 70 | 74,117 |
 | Claire | 6 | `30D` | 동쪽 관리실 | East Control Room | 71 | 219,143 |
 
 ## Claire · Map ID 7
@@ -308,7 +308,7 @@
 | Claire | 7 | `402` | 하수도 | Sewers | 74 | 277,107 |
 | Claire | 7 | `409` | 다리 위 | Above the Bridge | 81 | 133,141 |
 | Claire | 7 | `40B` | 환풍기 통로 | Ventilation Passage | 83 | 180,150 |
-| Claire | 7 | `401` | 남쪽 관리실 | South Control Room | 131 | 203,166 |
+| Claire | 7 | `401` | 남쪽 관리실 | South Control Room | 131 | 223,159 |
 | Claire | 7 | `403` | 북쪽 관리실 | North Control Room | 133 | 257,92 |
 
 ## Claire · Map ID 8
@@ -335,8 +335,8 @@
 | --- | --- | --- | --- | --- | --- | --- |
 | Claire | 9 | `500` | 케이블카 | Cable Car | 89 | 99,119 |
 | Claire | 9 | `501` | 공장 승강장 | Factory Platform | 90 | 111,109 |
-| Claire | 9 | `502` | 지하 통로 | Underground Passage | 91 | 126,133 |
-| Claire | 9 | `508` | 지하 통로 | Underground Passage | 97 | 181,79 |
+| Claire | 9 | `502` | 지하 통로 | Underground Passage | 91 | 129,133 |
+| Claire | 9 | `508` | 지하 통로 | Underground Passage | 97 | 184,79 |
 
 ## Claire · Map ID 10
 
@@ -367,7 +367,7 @@
 | --- | --- | --- | --- | --- | --- | --- |
 | Claire | 13 | `505` | 화물 열차 | Freight Train | 94 | 177,73 |
 | Claire | 13 | `600` | 화물 승강장 | Cargo Platform | 99 | 167,87 |
-| Claire | 13 | `601` | 승강기 | Elevator | 100 | 91,63 |
+| Claire | 13 | `601` | 승강기 | Elevator | 100 | 94,63 |
 | Claire | 13 | `602` | 연구소 복도 | Laboratory Corridor | 101 | 119,75 |
 | Claire | 13 | `604` | 동력실 상층 | Upper Power Room | 103 | 195,110 |
 | Claire | 13 | `603` | 펌프실 | Pump Room | 135 | 136,141 |
@@ -389,7 +389,7 @@
 | Character | Map ID | Room code | 한국어 | English | seen | x,y |
 | --- | --- | --- | --- | --- | --- | --- |
 | Claire | 16 | `505` | 화물 열차 | Freight Train | 94 | 197,63 |
-| Claire | 16 | `601` | 승강기 | Elevator | 100 | 111,55 |
+| Claire | 16 | `601` | 승강기 | Elevator | 100 | 114,55 |
 | Claire | 16 | `606` | 화물 승강장 | Cargo Platform | 105 | 187,77 |
 | Claire | 16 | `607` | 경비실 | Guard Room | 106 | 145,43 |
 | Claire | 16 | `608,611` | — | — | 107 | 142,104 |
@@ -399,16 +399,16 @@
 | Claire | 16 | `60C` | 동쪽 복도 | East Corridor | 111 | 203,165 |
 | Claire | 16 | `60D` | 저온 실험실 | Cold Laboratory | 112 | 213,107 |
 | Claire | 16 | `60F` | 캡슐실 | Capsule Room | 114 | 176,210 |
-| Claire | 16 | `610` | 백신 실험실 | Vaccine Laboratory | 115 | 241,163 |
+| Claire | 16 | `610` | 백신 실험실 | Vaccine Laboratory | 115 | 257,174 |
 | Claire | 16 | `60E` | 식물 배양실 | Plant Cultivation Room | 137 | 116,200 |
 
 ## Claire · Map ID 17
 
 | Character | Map ID | Room code | 한국어 | English | seen | x,y |
 | --- | --- | --- | --- | --- | --- | --- |
-| Claire | 17 | `612` | 연구소 제어실 | Lab Control Room | 117 | 159,84 |
+| Claire | 17 | `612` | 연구소 제어실 | Lab Control Room | 117 | 162,85 |
 | Claire | 17 | `613` | 컴퓨터실 | Computer Room | 118 | 91,71 |
-| Claire | 17 | `614` | 연구소 복도 | Laboratory Corridor | 119 | 104,96 |
+| Claire | 17 | `614` | 연구소 복도 | Laboratory Corridor | 119 | 81,97 |
 | Claire | 17 | `615` | 버킨 연구실 | Birkin's Laboratory | 120 | 104,126 |
 | Claire | 17 | `616` | 인증 통로 | Identity Check Passage | 121 | 148,187 |
 | Claire | 17 | `617` | 탈출 승강장 | Escape Platform | 122 | 214,110 |

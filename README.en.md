@@ -52,9 +52,12 @@ Keys work on the map screen only. The current state is shown in the legend at th
 | 7 | Enemies (visited rooms) |
 | 8 | Visibility: visited rooms → revealed rooms (floor map picked up) → all rooms |
 | 9 | Korean / English |
+| ~ (left of 1) | Show or hide the legend |
 | - / = (+), numpad - / + | Name size in 10% steps (50–150%) |
 | Shift + those keys | Name opacity in 10% steps (10–100%) |
 | Left/right, up/down (status-screen map) | Select area and floor (visited floors only) |
+| Action button (map) | Toggle 2x map zoom (reopening the map returns to 1x) |
+| Directions (while zoomed) | Move the map |
 
 `[Z]` (`Z` in the screenshots) identifies a zapping-related item or interaction whose state is affected by choices or actions across scenarios A/B. It is not part of the item name.
 
