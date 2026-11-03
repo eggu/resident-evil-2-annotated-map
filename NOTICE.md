@@ -26,4 +26,5 @@ data and documentation.
 - **Ultimate ASI Loader** v9.7.4 (MIT, Copyright (c) 2023 ThirteenAG): the release ZIP includes its unmodified x86
   `dinput8.dll` renamed to `dsound.dll`, with its license in `scripts/UltimateASILoader-LICENSE.txt`.
   https://github.com/ThirteenAG/Ultimate-ASI-Loader
+- **Script opcode sizes** (`tools/mapgen/opcode-sizes.json`): from the constant table in [biohazard-utils](https://github.com/biorand/biohazard-utils) (MIT).
 - **Build and test tools**: Zig (via `ziglang`), Unicorn and Pillow are installed separately under their own licenses.

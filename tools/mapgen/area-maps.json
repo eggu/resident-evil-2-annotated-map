@@ -1,0 +1,1784 @@
+{
+  "exe_sha256": "21b2a647cbeddac1ec389be847f22a434a0264a18020589de91cb2824dcb1bf5",
+  "inputs": {
+    "Pl0/Rdt/ROOM20B0.RDT": "17ad49b239139ee6d001600fa9b6ade188b8c4617aaa57bd9bbf1d24bac20eff",
+    "Pl0/Rdt/ROOM2130.RDT": "451a76e86035711aaf88c9cb1e72368f0371f81139274c83000f90f776d56c82",
+    "Pl0/Rdt/ROOM3060.RDT": "30fea3476dca1b9ed6b522a45b7c214d1cf9468afb9f8daf06b4c93bc50d5386",
+    "Pl0/Rdt/ROOM4040.RDT": "76ec3be8d464199af2cb9624d2072622b25c8c7e79a92064e6999878d42cd599",
+    "Pl0/Rdt/ROOM5040.RDT": "59e91470fa824c6eeab9976075aed409fce87c9e499a7879ad2454f398418b82",
+    "Pl0/Rdt/ROOM5060.RDT": "fd3268016aaf20e16c50b7fa7f7e78323f7d13893b8040440c8708c0b0bbc3f0",
+    "Pl0/Rdt/ROOM6120.RDT": "a0818b0de6ed410030a231798169c0a1966abab7dd639b77faa2b925b2098296",
+    "Pl1/Rdt/ROOM20B1.RDT": "290e92ff79e7230d63e70a06ac85f7f0b9a5ee1411a8c2319959821ee32631d0",
+    "Pl1/Rdt/ROOM2131.RDT": "706b874082ead61c86977d22d295f5560fed6e11f799800d8df315024a0868f4",
+    "Pl1/Rdt/ROOM3061.RDT": "2158a7d4ccbc6f053c24dccc06c638c174b520c4711f95746ed772b43451adef",
+    "Pl1/Rdt/ROOM4041.RDT": "9ec38c4bd83bf18c02211f3990eab33bbb676065cb683e912ecab6ea47de4bba",
+    "Pl1/Rdt/ROOM5041.RDT": "bc7494845359432acfa3a4273772c5b55f12632aa2a47cb9bc54299b8ca28949",
+    "Pl1/Rdt/ROOM5061.RDT": "910fa463da7d9585cfb5f91450535f7c2bba5a134e66ba95fed0aa285bbc273b",
+    "Pl1/Rdt/ROOM6121.RDT": "2adaf536e210e080b6539cf4346ccf6e61d13149952f8e3afd6d23edd8fd3cb6"
+  },
+  "coordinates": "native 320x240 arrow top-left before pan/scale; add (6,6) for interaction-area display centers",
+  "maps": [
+    {
+      "kind": "police_station",
+      "pl": 0,
+      "room": "ROOM20B0.RDT",
+      "section": 17,
+      "procedure": 10,
+      "aot_owner_procedure": 0,
+      "aot_offset": 12552,
+      "aot_raw": "2c09033100004dcf5fcdbe05a406000000000000",
+      "local_aot_creation_guards": [
+        [
+          [
+            1,
+            6,
+            0
+          ]
+        ]
+      ],
+      "physical_taken": {
+        "bank": 8,
+        "bit": 83,
+        "instruction_offset": 14294
+      },
+      "map_unlock_bits": [
+        2,
+        3,
+        4
+      ],
+      "map_unlock_instruction_offsets": [
+        14298,
+        14302,
+        14306
+      ],
+      "position": {
+        "floor": 2,
+        "x": 220,
+        "y": 134,
+        "seen": 41,
+        "room_index": 11,
+        "bank": 8,
+        "world_xz": [
+          -11732,
+          -12111
+        ],
+        "vertices": null,
+        "anchor_method": "interaction rectangle center",
+        "nearest_room_mask_pixel": [
+          226,
+          140
+        ],
+        "room_mask_distance_squared": 0
+      },
+      "marker_inside_native_room_mask": true,
+      "event_dispatch": {
+        "thread": 255,
+        "procedure": 10,
+        "native_dispatch_verified": true
+      },
+      "safe_link": {
+        "map_aot_offset": 12670,
+        "map_aot_raw": "2c0b05310000204e204ebe05a406ff00180a0000",
+        "chain": "safe AOT9 -> procedure4 -> AOT_ON11 -> map procedure10"
+      }
+    },
+    {
+      "kind": "police_b1",
+      "pl": 0,
+      "room": "ROOM2130.RDT",
+      "section": 17,
+      "procedure": 5,
+      "aot_owner_procedure": 3,
+      "aot_offset": 4040,
+      "aot_raw": "2c050531000098bd6cd5b0042e04ff0018050000",
+      "local_aot_creation_guards": [
+        [
+          [
+            4,
+            122,
+            0
+          ]
+        ]
+      ],
+      "physical_taken": {
+        "bank": 4,
+        "bit": 122,
+        "instruction_offset": 6218
+      },
+      "map_unlock_bits": [
+        5
+      ],
+      "map_unlock_instruction_offsets": [
+        6210
+      ],
+      "position": {
+        "floor": 5,
+        "x": 219,
+        "y": 88,
+        "seen": 49,
+        "room_index": 5,
+        "bank": 8,
+        "world_xz": [
+          -16400,
+          -10365
+        ],
+        "vertices": null,
+        "anchor_method": "interaction rectangle center",
+        "nearest_room_mask_pixel": [
+          225,
+          94
+        ],
+        "room_mask_distance_squared": 0
+      },
+      "marker_inside_native_room_mask": true,
+      "event_dispatch": {
+        "thread": 255,
+        "procedure": 5,
+        "native_dispatch_verified": true
+      },
+      "safe_link": null
+    },
+    {
+      "kind": "sewage_disposal",
+      "pl": 0,
+      "room": "ROOM3060.RDT",
+      "section": 17,
+      "procedure": 22,
+      "aot_owner_procedure": 0,
+      "aot_offset": 8120,
+      "aot_raw": "2c03053103005ec6719b08070807ff0018160000",
+      "local_aot_creation_guards": [
+        [
+          [
+            8,
+            137,
+            0
+          ]
+        ]
+      ],
+      "physical_taken": {
+        "bank": 8,
+        "bit": 137,
+        "instruction_offset": 10318
+      },
+      "map_unlock_bits": [
+        6
+      ],
+      "map_unlock_instruction_offsets": [
+        10322
+      ],
+      "position": {
+        "floor": 6,
+        "x": 183,
+        "y": 61,
+        "seen": 64,
+        "room_index": 4,
+        "bank": 8,
+        "world_xz": [
+          -13854,
+          -24843
+        ],
+        "vertices": null,
+        "anchor_method": "interaction rectangle center",
+        "nearest_room_mask_pixel": [
+          189,
+          67
+        ],
+        "room_mask_distance_squared": 0
+      },
+      "marker_inside_native_room_mask": true,
+      "event_dispatch": {
+        "thread": 255,
+        "procedure": 22,
+        "native_dispatch_verified": true
+      },
+      "safe_link": null
+    },
+    {
+      "kind": "sewer",
+      "pl": 0,
+      "room": "ROOM4040.RDT",
+      "section": 17,
+      "procedure": 6,
+      "aot_owner_procedure": 5,
+      "aot_offset": 3946,
+      "aot_raw": "2c0405310000a7a3a6cf14057404ff0018060000",
+      "local_aot_creation_guards": [
+        [
+          [
+            8,
+            162,
+            0
+          ]
+        ]
+      ],
+      "physical_taken": {
+        "bank": 8,
+        "bit": 162,
+        "instruction_offset": 4024
+      },
+      "map_unlock_bits": [
+        7,
+        8
+      ],
+      "map_unlock_instruction_offsets": [
+        4028,
+        4032
+      ],
+      "position": {
+        "floor": 8,
+        "x": 221,
+        "y": 132,
+        "seen": 76,
+        "room_index": 3,
+        "bank": 8,
+        "world_xz": [
+          -22991,
+          -11808
+        ],
+        "vertices": null,
+        "anchor_method": "interaction rectangle center",
+        "nearest_room_mask_pixel": [
+          227,
+          137
+        ],
+        "room_mask_distance_squared": 1
+      },
+      "marker_inside_native_room_mask": false,
+      "event_dispatch": {
+        "thread": 255,
+        "procedure": 6,
+        "native_dispatch_verified": true
+      },
+      "safe_link": null
+    },
+    {
+      "kind": "factory",
+      "pl": 0,
+      "room": "ROOM5040.RDT",
+      "section": 17,
+      "procedure": 13,
+      "aot_owner_procedure": 0,
+      "aot_offset": 7546,
+      "aot_raw": "2c030531000027d054a9d007d007ff00180d0000",
+      "local_aot_creation_guards": [
+        [
+          [
+            1,
+            3,
+            0
+          ],
+          [
+            34,
+            25,
+            0
+          ]
+        ],
+        [
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            1,
+            3,
+            1
+          ],
+          [
+            34,
+            25,
+            0
+          ]
+        ]
+      ],
+      "physical_taken": {
+        "bank": 34,
+        "bit": 25,
+        "instruction_offset": 8584
+      },
+      "map_unlock_bits": [
+        9,
+        10,
+        11
+      ],
+      "map_unlock_instruction_offsets": [
+        8572,
+        8576,
+        8580
+      ],
+      "position": {
+        "floor": 10,
+        "x": 150,
+        "y": 118,
+        "seen": 93,
+        "room_index": 1,
+        "bank": 34,
+        "world_xz": [
+          -11249,
+          -21188
+        ],
+        "vertices": null,
+        "anchor_method": "interaction rectangle center",
+        "nearest_room_mask_pixel": [
+          156,
+          124
+        ],
+        "room_mask_distance_squared": 0
+      },
+      "marker_inside_native_room_mask": true,
+      "event_dispatch": {
+        "thread": 255,
+        "procedure": 13,
+        "native_dispatch_verified": true
+      },
+      "safe_link": null
+    },
+    {
+      "kind": "factory",
+      "pl": 0,
+      "room": "ROOM5060.RDT",
+      "section": 17,
+      "procedure": 4,
+      "aot_owner_procedure": 0,
+      "aot_offset": 3654,
+      "aot_raw": "2c0305310b0027d054a9d007d007ff0018040000",
+      "local_aot_creation_guards": [
+        [
+          [
+            34,
+            25,
+            0
+          ]
+        ]
+      ],
+      "physical_taken": {
+        "bank": 34,
+        "bit": 25,
+        "instruction_offset": 4158
+      },
+      "map_unlock_bits": [
+        9,
+        10,
+        11
+      ],
+      "map_unlock_instruction_offsets": [
+        4146,
+        4150,
+        4154
+      ],
+      "position": {
+        "floor": 11,
+        "x": 155,
+        "y": 106,
+        "seen": 95,
+        "room_index": 1,
+        "bank": 34,
+        "world_xz": [
+          -11249,
+          -21188
+        ],
+        "vertices": null,
+        "anchor_method": "interaction rectangle center",
+        "nearest_room_mask_pixel": [
+          161,
+          112
+        ],
+        "room_mask_distance_squared": 0
+      },
+      "marker_inside_native_room_mask": true,
+      "event_dispatch": {
+        "thread": 255,
+        "procedure": 4,
+        "native_dispatch_verified": true
+      },
+      "safe_link": null
+    },
+    {
+      "kind": "laboratory",
+      "pl": 0,
+      "room": "ROOM6120.RDT",
+      "section": 17,
+      "procedure": 3,
+      "aot_owner_procedure": 0,
+      "aot_offset": 4784,
+      "aot_raw": "6706053100008a8f04de569bf4e8b8a794df589ed0d5ff0018030000",
+      "local_aot_creation_guards": [
+        [
+          [
+            4,
+            165,
+            0
+          ]
+        ]
+      ],
+      "physical_taken": {
+        "bank": 4,
+        "bit": 165,
+        "instruction_offset": 5432
+      },
+      "map_unlock_bits": [
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "map_unlock_instruction_offsets": [
+        5380,
+        5384,
+        5388,
+        5394,
+        5398
+      ],
+      "position": {
+        "floor": 17,
+        "x": 126,
+        "y": 75,
+        "seen": 117,
+        "room_index": 0,
+        "bank": 34,
+        "world_xz": [
+          -25695,
+          -8350
+        ],
+        "vertices": [
+          [
+            -28790,
+            -8700
+          ],
+          [
+            -25770,
+            -5900
+          ],
+          [
+            -22600,
+            -8300
+          ],
+          [
+            -25000,
+            -10800
+          ]
+        ],
+        "anchor_method": "4-point interaction bounding-box center",
+        "nearest_room_mask_pixel": [
+          133,
+          82
+        ],
+        "room_mask_distance_squared": 2
+      },
+      "marker_inside_native_room_mask": false,
+      "event_dispatch": {
+        "thread": 255,
+        "procedure": 3,
+        "native_dispatch_verified": true
+      },
+      "safe_link": null
+    },
+    {
+      "kind": "police_station",
+      "pl": 1,
+      "room": "ROOM20B1.RDT",
+      "section": 17,
+      "procedure": 10,
+      "aot_owner_procedure": 0,
+      "aot_offset": 12552,
+      "aot_raw": "2c09033100004dcf5fcdbe05a406000000000000",
+      "local_aot_creation_guards": [
+        [
+          [
+            1,
+            6,
+            0
+          ]
+        ]
+      ],
+      "physical_taken": {
+        "bank": 8,
+        "bit": 83,
+        "instruction_offset": 14280
+      },
+      "map_unlock_bits": [
+        2,
+        3,
+        4
+      ],
+      "map_unlock_instruction_offsets": [
+        14284,
+        14288,
+        14292
+      ],
+      "position": {
+        "floor": 2,
+        "x": 220,
+        "y": 134,
+        "seen": 41,
+        "room_index": 11,
+        "bank": 8,
+        "world_xz": [
+          -11732,
+          -12111
+        ],
+        "vertices": null,
+        "anchor_method": "interaction rectangle center",
+        "nearest_room_mask_pixel": [
+          226,
+          140
+        ],
+        "room_mask_distance_squared": 0
+      },
+      "marker_inside_native_room_mask": true,
+      "event_dispatch": {
+        "thread": 255,
+        "procedure": 10,
+        "native_dispatch_verified": true
+      },
+      "safe_link": {
+        "map_aot_offset": 12670,
+        "map_aot_raw": "2c0b05310000204e204ebe05a406ff00180a0000",
+        "chain": "safe AOT9 -> procedure4 -> AOT_ON11 -> map procedure10"
+      }
+    },
+    {
+      "kind": "police_b1",
+      "pl": 1,
+      "room": "ROOM2131.RDT",
+      "section": 17,
+      "procedure": 5,
+      "aot_owner_procedure": 3,
+      "aot_offset": 4040,
+      "aot_raw": "2c050531000098bd6cd5b0042e04ff0018050000",
+      "local_aot_creation_guards": [
+        [
+          [
+            4,
+            122,
+            0
+          ]
+        ]
+      ],
+      "physical_taken": {
+        "bank": 4,
+        "bit": 122,
+        "instruction_offset": 6218
+      },
+      "map_unlock_bits": [
+        5
+      ],
+      "map_unlock_instruction_offsets": [
+        6210
+      ],
+      "position": {
+        "floor": 5,
+        "x": 219,
+        "y": 88,
+        "seen": 49,
+        "room_index": 5,
+        "bank": 8,
+        "world_xz": [
+          -16400,
+          -10365
+        ],
+        "vertices": null,
+        "anchor_method": "interaction rectangle center",
+        "nearest_room_mask_pixel": [
+          225,
+          94
+        ],
+        "room_mask_distance_squared": 0
+      },
+      "marker_inside_native_room_mask": true,
+      "event_dispatch": {
+        "thread": 255,
+        "procedure": 5,
+        "native_dispatch_verified": true
+      },
+      "safe_link": null
+    },
+    {
+      "kind": "sewage_disposal",
+      "pl": 1,
+      "room": "ROOM3061.RDT",
+      "section": 17,
+      "procedure": 22,
+      "aot_owner_procedure": 0,
+      "aot_offset": 8120,
+      "aot_raw": "2c03053103005ec6719b08070807ff0018160000",
+      "local_aot_creation_guards": [
+        [
+          [
+            8,
+            137,
+            0
+          ]
+        ]
+      ],
+      "physical_taken": {
+        "bank": 8,
+        "bit": 137,
+        "instruction_offset": 10318
+      },
+      "map_unlock_bits": [
+        6
+      ],
+      "map_unlock_instruction_offsets": [
+        10322
+      ],
+      "position": {
+        "floor": 6,
+        "x": 183,
+        "y": 61,
+        "seen": 64,
+        "room_index": 4,
+        "bank": 8,
+        "world_xz": [
+          -13854,
+          -24843
+        ],
+        "vertices": null,
+        "anchor_method": "interaction rectangle center",
+        "nearest_room_mask_pixel": [
+          189,
+          67
+        ],
+        "room_mask_distance_squared": 0
+      },
+      "marker_inside_native_room_mask": true,
+      "event_dispatch": {
+        "thread": 255,
+        "procedure": 22,
+        "native_dispatch_verified": true
+      },
+      "safe_link": null
+    },
+    {
+      "kind": "sewer",
+      "pl": 1,
+      "room": "ROOM4041.RDT",
+      "section": 17,
+      "procedure": 5,
+      "aot_owner_procedure": 4,
+      "aot_offset": 3770,
+      "aot_raw": "2c0405310000a7a3a6cf14057404ff0018050000",
+      "local_aot_creation_guards": [
+        [
+          [
+            8,
+            162,
+            0
+          ]
+        ]
+      ],
+      "physical_taken": {
+        "bank": 8,
+        "bit": 162,
+        "instruction_offset": 3848
+      },
+      "map_unlock_bits": [
+        7,
+        8
+      ],
+      "map_unlock_instruction_offsets": [
+        3852,
+        3856
+      ],
+      "position": {
+        "floor": 8,
+        "x": 221,
+        "y": 132,
+        "seen": 76,
+        "room_index": 3,
+        "bank": 8,
+        "world_xz": [
+          -22991,
+          -11808
+        ],
+        "vertices": null,
+        "anchor_method": "interaction rectangle center",
+        "nearest_room_mask_pixel": [
+          227,
+          137
+        ],
+        "room_mask_distance_squared": 1
+      },
+      "marker_inside_native_room_mask": false,
+      "event_dispatch": {
+        "thread": 255,
+        "procedure": 5,
+        "native_dispatch_verified": true
+      },
+      "safe_link": null
+    },
+    {
+      "kind": "factory",
+      "pl": 1,
+      "room": "ROOM5041.RDT",
+      "section": 17,
+      "procedure": 13,
+      "aot_owner_procedure": 0,
+      "aot_offset": 7546,
+      "aot_raw": "2c030531000027d054a9d007d007ff00180d0000",
+      "local_aot_creation_guards": [
+        [
+          [
+            1,
+            3,
+            0
+          ],
+          [
+            34,
+            25,
+            0
+          ]
+        ],
+        [
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            1,
+            3,
+            1
+          ],
+          [
+            34,
+            25,
+            0
+          ]
+        ]
+      ],
+      "physical_taken": {
+        "bank": 34,
+        "bit": 25,
+        "instruction_offset": 8584
+      },
+      "map_unlock_bits": [
+        9,
+        10,
+        11
+      ],
+      "map_unlock_instruction_offsets": [
+        8572,
+        8576,
+        8580
+      ],
+      "position": {
+        "floor": 10,
+        "x": 150,
+        "y": 118,
+        "seen": 93,
+        "room_index": 1,
+        "bank": 34,
+        "world_xz": [
+          -11249,
+          -21188
+        ],
+        "vertices": null,
+        "anchor_method": "interaction rectangle center",
+        "nearest_room_mask_pixel": [
+          156,
+          124
+        ],
+        "room_mask_distance_squared": 0
+      },
+      "marker_inside_native_room_mask": true,
+      "event_dispatch": {
+        "thread": 255,
+        "procedure": 13,
+        "native_dispatch_verified": true
+      },
+      "safe_link": null
+    },
+    {
+      "kind": "factory",
+      "pl": 1,
+      "room": "ROOM5061.RDT",
+      "section": 17,
+      "procedure": 4,
+      "aot_owner_procedure": 0,
+      "aot_offset": 3654,
+      "aot_raw": "2c0305310b0027d054a9d007d007ff0018040000",
+      "local_aot_creation_guards": [
+        [
+          [
+            34,
+            25,
+            0
+          ]
+        ]
+      ],
+      "physical_taken": {
+        "bank": 34,
+        "bit": 25,
+        "instruction_offset": 4158
+      },
+      "map_unlock_bits": [
+        9,
+        10,
+        11
+      ],
+      "map_unlock_instruction_offsets": [
+        4146,
+        4150,
+        4154
+      ],
+      "position": {
+        "floor": 11,
+        "x": 155,
+        "y": 106,
+        "seen": 95,
+        "room_index": 1,
+        "bank": 34,
+        "world_xz": [
+          -11249,
+          -21188
+        ],
+        "vertices": null,
+        "anchor_method": "interaction rectangle center",
+        "nearest_room_mask_pixel": [
+          161,
+          112
+        ],
+        "room_mask_distance_squared": 0
+      },
+      "marker_inside_native_room_mask": true,
+      "event_dispatch": {
+        "thread": 255,
+        "procedure": 4,
+        "native_dispatch_verified": true
+      },
+      "safe_link": null
+    },
+    {
+      "kind": "laboratory",
+      "pl": 1,
+      "room": "ROOM6121.RDT",
+      "section": 17,
+      "procedure": 14,
+      "aot_owner_procedure": 0,
+      "aot_offset": 5196,
+      "aot_raw": "6706053100008a8f04de569bf4e8b8a794df589ed0d5ff00180e0000",
+      "local_aot_creation_guards": [
+        [
+          [
+            3,
+            134,
+            0
+          ],
+          [
+            4,
+            165,
+            0
+          ]
+        ]
+      ],
+      "physical_taken": {
+        "bank": 4,
+        "bit": 165,
+        "instruction_offset": 7726
+      },
+      "map_unlock_bits": [
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "map_unlock_instruction_offsets": [
+        7674,
+        7678,
+        7682,
+        7688,
+        7692
+      ],
+      "position": {
+        "floor": 17,
+        "x": 126,
+        "y": 75,
+        "seen": 117,
+        "room_index": 0,
+        "bank": 34,
+        "world_xz": [
+          -25695,
+          -8350
+        ],
+        "vertices": [
+          [
+            -28790,
+            -8700
+          ],
+          [
+            -25770,
+            -5900
+          ],
+          [
+            -22600,
+            -8300
+          ],
+          [
+            -25000,
+            -10800
+          ]
+        ],
+        "anchor_method": "4-point interaction bounding-box center",
+        "nearest_room_mask_pixel": [
+          133,
+          82
+        ],
+        "room_mask_distance_squared": 2
+      },
+      "marker_inside_native_room_mask": false,
+      "event_dispatch": {
+        "thread": 255,
+        "procedure": 14,
+        "native_dispatch_verified": true
+      },
+      "safe_link": null
+    }
+  ],
+  "native_flag_tests": [
+    {
+      "bank": 4,
+      "bit": 122,
+      "base": "0x98eb4c",
+      "word_address": "0x98eb58",
+      "mask": "0x20",
+      "native_set_clear_and_check": true
+    },
+    {
+      "bank": 4,
+      "bit": 165,
+      "base": "0x98eb4c",
+      "word_address": "0x98eb60",
+      "mask": "0x4000000",
+      "native_set_clear_and_check": true
+    },
+    {
+      "bank": 8,
+      "bit": 83,
+      "base": "0x98ebb4",
+      "word_address": "0x98ebbc",
+      "mask": "0x1000",
+      "native_set_clear_and_check": true
+    },
+    {
+      "bank": 8,
+      "bit": 137,
+      "base": "0x98ebb4",
+      "word_address": "0x98ebc4",
+      "mask": "0x400000",
+      "native_set_clear_and_check": true
+    },
+    {
+      "bank": 8,
+      "bit": 162,
+      "base": "0x98ebb4",
+      "word_address": "0x98ebc8",
+      "mask": "0x20000000",
+      "native_set_clear_and_check": true
+    },
+    {
+      "bank": 33,
+      "bit": 2,
+      "base": "0x98ec1c",
+      "word_address": "0x98ec1c",
+      "mask": "0x20000000",
+      "native_set_clear_and_check": true
+    },
+    {
+      "bank": 33,
+      "bit": 3,
+      "base": "0x98ec1c",
+      "word_address": "0x98ec1c",
+      "mask": "0x10000000",
+      "native_set_clear_and_check": true
+    },
+    {
+      "bank": 33,
+      "bit": 4,
+      "base": "0x98ec1c",
+      "word_address": "0x98ec1c",
+      "mask": "0x8000000",
+      "native_set_clear_and_check": true
+    },
+    {
+      "bank": 33,
+      "bit": 5,
+      "base": "0x98ec1c",
+      "word_address": "0x98ec1c",
+      "mask": "0x4000000",
+      "native_set_clear_and_check": true
+    },
+    {
+      "bank": 33,
+      "bit": 6,
+      "base": "0x98ec1c",
+      "word_address": "0x98ec1c",
+      "mask": "0x2000000",
+      "native_set_clear_and_check": true
+    },
+    {
+      "bank": 33,
+      "bit": 7,
+      "base": "0x98ec1c",
+      "word_address": "0x98ec1c",
+      "mask": "0x1000000",
+      "native_set_clear_and_check": true
+    },
+    {
+      "bank": 33,
+      "bit": 8,
+      "base": "0x98ec1c",
+      "word_address": "0x98ec1c",
+      "mask": "0x800000",
+      "native_set_clear_and_check": true
+    },
+    {
+      "bank": 33,
+      "bit": 9,
+      "base": "0x98ec1c",
+      "word_address": "0x98ec1c",
+      "mask": "0x400000",
+      "native_set_clear_and_check": true
+    },
+    {
+      "bank": 33,
+      "bit": 10,
+      "base": "0x98ec1c",
+      "word_address": "0x98ec1c",
+      "mask": "0x200000",
+      "native_set_clear_and_check": true
+    },
+    {
+      "bank": 33,
+      "bit": 11,
+      "base": "0x98ec1c",
+      "word_address": "0x98ec1c",
+      "mask": "0x100000",
+      "native_set_clear_and_check": true
+    },
+    {
+      "bank": 33,
+      "bit": 13,
+      "base": "0x98ec1c",
+      "word_address": "0x98ec1c",
+      "mask": "0x40000",
+      "native_set_clear_and_check": true
+    },
+    {
+      "bank": 33,
+      "bit": 14,
+      "base": "0x98ec1c",
+      "word_address": "0x98ec1c",
+      "mask": "0x20000",
+      "native_set_clear_and_check": true
+    },
+    {
+      "bank": 33,
+      "bit": 15,
+      "base": "0x98ec1c",
+      "word_address": "0x98ec1c",
+      "mask": "0x10000",
+      "native_set_clear_and_check": true
+    },
+    {
+      "bank": 33,
+      "bit": 16,
+      "base": "0x98ec1c",
+      "word_address": "0x98ec1c",
+      "mask": "0x8000",
+      "native_set_clear_and_check": true
+    },
+    {
+      "bank": 33,
+      "bit": 17,
+      "base": "0x98ec1c",
+      "word_address": "0x98ec1c",
+      "mask": "0x4000",
+      "native_set_clear_and_check": true
+    },
+    {
+      "bank": 34,
+      "bit": 25,
+      "base": "0x98ebd4",
+      "word_address": "0x98ebd4",
+      "mask": "0x40",
+      "native_set_clear_and_check": true
+    }
+  ],
+  "flag_writes": [
+    {
+      "pl": 0,
+      "room": "ROOM20B0.RDT",
+      "section": 17,
+      "procedure": 10,
+      "offset": 14294,
+      "bank": 8,
+      "bit": 83,
+      "value": 1
+    },
+    {
+      "pl": 0,
+      "room": "ROOM20B0.RDT",
+      "section": 17,
+      "procedure": 10,
+      "offset": 14298,
+      "bank": 33,
+      "bit": 2,
+      "value": 1
+    },
+    {
+      "pl": 0,
+      "room": "ROOM20B0.RDT",
+      "section": 17,
+      "procedure": 10,
+      "offset": 14302,
+      "bank": 33,
+      "bit": 3,
+      "value": 1
+    },
+    {
+      "pl": 0,
+      "room": "ROOM20B0.RDT",
+      "section": 17,
+      "procedure": 10,
+      "offset": 14306,
+      "bank": 33,
+      "bit": 4,
+      "value": 1
+    },
+    {
+      "pl": 0,
+      "room": "ROOM2130.RDT",
+      "section": 17,
+      "procedure": 5,
+      "offset": 6210,
+      "bank": 33,
+      "bit": 5,
+      "value": 1
+    },
+    {
+      "pl": 0,
+      "room": "ROOM2130.RDT",
+      "section": 17,
+      "procedure": 5,
+      "offset": 6218,
+      "bank": 4,
+      "bit": 122,
+      "value": 1
+    },
+    {
+      "pl": 0,
+      "room": "ROOM3040.RDT",
+      "section": 17,
+      "procedure": 24,
+      "offset": 7056,
+      "bank": 33,
+      "bit": 2,
+      "value": 1
+    },
+    {
+      "pl": 0,
+      "room": "ROOM3040.RDT",
+      "section": 17,
+      "procedure": 24,
+      "offset": 7060,
+      "bank": 33,
+      "bit": 3,
+      "value": 1
+    },
+    {
+      "pl": 0,
+      "room": "ROOM3040.RDT",
+      "section": 17,
+      "procedure": 24,
+      "offset": 7064,
+      "bank": 33,
+      "bit": 4,
+      "value": 1
+    },
+    {
+      "pl": 0,
+      "room": "ROOM3040.RDT",
+      "section": 17,
+      "procedure": 24,
+      "offset": 7068,
+      "bank": 33,
+      "bit": 5,
+      "value": 1
+    },
+    {
+      "pl": 0,
+      "room": "ROOM3040.RDT",
+      "section": 17,
+      "procedure": 24,
+      "offset": 7072,
+      "bank": 33,
+      "bit": 6,
+      "value": 1
+    },
+    {
+      "pl": 0,
+      "room": "ROOM3040.RDT",
+      "section": 17,
+      "procedure": 24,
+      "offset": 7076,
+      "bank": 33,
+      "bit": 7,
+      "value": 1
+    },
+    {
+      "pl": 0,
+      "room": "ROOM3040.RDT",
+      "section": 17,
+      "procedure": 24,
+      "offset": 7080,
+      "bank": 33,
+      "bit": 8,
+      "value": 1
+    },
+    {
+      "pl": 0,
+      "room": "ROOM3060.RDT",
+      "section": 17,
+      "procedure": 22,
+      "offset": 10318,
+      "bank": 8,
+      "bit": 137,
+      "value": 1
+    },
+    {
+      "pl": 0,
+      "room": "ROOM3060.RDT",
+      "section": 17,
+      "procedure": 22,
+      "offset": 10322,
+      "bank": 33,
+      "bit": 6,
+      "value": 1
+    },
+    {
+      "pl": 0,
+      "room": "ROOM4040.RDT",
+      "section": 17,
+      "procedure": 6,
+      "offset": 4024,
+      "bank": 8,
+      "bit": 162,
+      "value": 1
+    },
+    {
+      "pl": 0,
+      "room": "ROOM4040.RDT",
+      "section": 17,
+      "procedure": 6,
+      "offset": 4028,
+      "bank": 33,
+      "bit": 7,
+      "value": 1
+    },
+    {
+      "pl": 0,
+      "room": "ROOM4040.RDT",
+      "section": 17,
+      "procedure": 6,
+      "offset": 4032,
+      "bank": 33,
+      "bit": 8,
+      "value": 1
+    },
+    {
+      "pl": 0,
+      "room": "ROOM5040.RDT",
+      "section": 17,
+      "procedure": 13,
+      "offset": 8572,
+      "bank": 33,
+      "bit": 9,
+      "value": 1
+    },
+    {
+      "pl": 0,
+      "room": "ROOM5040.RDT",
+      "section": 17,
+      "procedure": 13,
+      "offset": 8576,
+      "bank": 33,
+      "bit": 10,
+      "value": 1
+    },
+    {
+      "pl": 0,
+      "room": "ROOM5040.RDT",
+      "section": 17,
+      "procedure": 13,
+      "offset": 8580,
+      "bank": 33,
+      "bit": 11,
+      "value": 1
+    },
+    {
+      "pl": 0,
+      "room": "ROOM5040.RDT",
+      "section": 17,
+      "procedure": 13,
+      "offset": 8584,
+      "bank": 34,
+      "bit": 25,
+      "value": 1
+    },
+    {
+      "pl": 0,
+      "room": "ROOM5060.RDT",
+      "section": 17,
+      "procedure": 4,
+      "offset": 4146,
+      "bank": 33,
+      "bit": 9,
+      "value": 1
+    },
+    {
+      "pl": 0,
+      "room": "ROOM5060.RDT",
+      "section": 17,
+      "procedure": 4,
+      "offset": 4150,
+      "bank": 33,
+      "bit": 10,
+      "value": 1
+    },
+    {
+      "pl": 0,
+      "room": "ROOM5060.RDT",
+      "section": 17,
+      "procedure": 4,
+      "offset": 4154,
+      "bank": 33,
+      "bit": 11,
+      "value": 1
+    },
+    {
+      "pl": 0,
+      "room": "ROOM5060.RDT",
+      "section": 17,
+      "procedure": 4,
+      "offset": 4158,
+      "bank": 34,
+      "bit": 25,
+      "value": 1
+    },
+    {
+      "pl": 0,
+      "room": "ROOM6120.RDT",
+      "section": 17,
+      "procedure": 3,
+      "offset": 5380,
+      "bank": 33,
+      "bit": 13,
+      "value": 1
+    },
+    {
+      "pl": 0,
+      "room": "ROOM6120.RDT",
+      "section": 17,
+      "procedure": 3,
+      "offset": 5384,
+      "bank": 33,
+      "bit": 14,
+      "value": 1
+    },
+    {
+      "pl": 0,
+      "room": "ROOM6120.RDT",
+      "section": 17,
+      "procedure": 3,
+      "offset": 5388,
+      "bank": 33,
+      "bit": 15,
+      "value": 1
+    },
+    {
+      "pl": 0,
+      "room": "ROOM6120.RDT",
+      "section": 17,
+      "procedure": 3,
+      "offset": 5394,
+      "bank": 33,
+      "bit": 16,
+      "value": 1
+    },
+    {
+      "pl": 0,
+      "room": "ROOM6120.RDT",
+      "section": 17,
+      "procedure": 3,
+      "offset": 5398,
+      "bank": 33,
+      "bit": 17,
+      "value": 1
+    },
+    {
+      "pl": 0,
+      "room": "ROOM6120.RDT",
+      "section": 17,
+      "procedure": 3,
+      "offset": 5432,
+      "bank": 4,
+      "bit": 165,
+      "value": 1
+    },
+    {
+      "pl": 0,
+      "room": "ROOMB090.RDT",
+      "section": 16,
+      "procedure": 0,
+      "offset": 3588,
+      "bank": 8,
+      "bit": 83,
+      "value": 1
+    },
+    {
+      "pl": 1,
+      "room": "ROOM20B1.RDT",
+      "section": 17,
+      "procedure": 10,
+      "offset": 14280,
+      "bank": 8,
+      "bit": 83,
+      "value": 1
+    },
+    {
+      "pl": 1,
+      "room": "ROOM20B1.RDT",
+      "section": 17,
+      "procedure": 10,
+      "offset": 14284,
+      "bank": 33,
+      "bit": 2,
+      "value": 1
+    },
+    {
+      "pl": 1,
+      "room": "ROOM20B1.RDT",
+      "section": 17,
+      "procedure": 10,
+      "offset": 14288,
+      "bank": 33,
+      "bit": 3,
+      "value": 1
+    },
+    {
+      "pl": 1,
+      "room": "ROOM20B1.RDT",
+      "section": 17,
+      "procedure": 10,
+      "offset": 14292,
+      "bank": 33,
+      "bit": 4,
+      "value": 1
+    },
+    {
+      "pl": 1,
+      "room": "ROOM2131.RDT",
+      "section": 17,
+      "procedure": 5,
+      "offset": 6210,
+      "bank": 33,
+      "bit": 5,
+      "value": 1
+    },
+    {
+      "pl": 1,
+      "room": "ROOM2131.RDT",
+      "section": 17,
+      "procedure": 5,
+      "offset": 6218,
+      "bank": 4,
+      "bit": 122,
+      "value": 1
+    },
+    {
+      "pl": 1,
+      "room": "ROOM3041.RDT",
+      "section": 17,
+      "procedure": 10,
+      "offset": 5168,
+      "bank": 33,
+      "bit": 2,
+      "value": 1
+    },
+    {
+      "pl": 1,
+      "room": "ROOM3041.RDT",
+      "section": 17,
+      "procedure": 10,
+      "offset": 5172,
+      "bank": 33,
+      "bit": 3,
+      "value": 1
+    },
+    {
+      "pl": 1,
+      "room": "ROOM3041.RDT",
+      "section": 17,
+      "procedure": 10,
+      "offset": 5176,
+      "bank": 33,
+      "bit": 4,
+      "value": 1
+    },
+    {
+      "pl": 1,
+      "room": "ROOM3041.RDT",
+      "section": 17,
+      "procedure": 10,
+      "offset": 5180,
+      "bank": 33,
+      "bit": 5,
+      "value": 1
+    },
+    {
+      "pl": 1,
+      "room": "ROOM3041.RDT",
+      "section": 17,
+      "procedure": 10,
+      "offset": 5184,
+      "bank": 33,
+      "bit": 6,
+      "value": 1
+    },
+    {
+      "pl": 1,
+      "room": "ROOM3041.RDT",
+      "section": 17,
+      "procedure": 10,
+      "offset": 5188,
+      "bank": 33,
+      "bit": 7,
+      "value": 1
+    },
+    {
+      "pl": 1,
+      "room": "ROOM3041.RDT",
+      "section": 17,
+      "procedure": 10,
+      "offset": 5192,
+      "bank": 33,
+      "bit": 8,
+      "value": 1
+    },
+    {
+      "pl": 1,
+      "room": "ROOM3061.RDT",
+      "section": 17,
+      "procedure": 22,
+      "offset": 10318,
+      "bank": 8,
+      "bit": 137,
+      "value": 1
+    },
+    {
+      "pl": 1,
+      "room": "ROOM3061.RDT",
+      "section": 17,
+      "procedure": 22,
+      "offset": 10322,
+      "bank": 33,
+      "bit": 6,
+      "value": 1
+    },
+    {
+      "pl": 1,
+      "room": "ROOM4041.RDT",
+      "section": 17,
+      "procedure": 5,
+      "offset": 3848,
+      "bank": 8,
+      "bit": 162,
+      "value": 1
+    },
+    {
+      "pl": 1,
+      "room": "ROOM4041.RDT",
+      "section": 17,
+      "procedure": 5,
+      "offset": 3852,
+      "bank": 33,
+      "bit": 7,
+      "value": 1
+    },
+    {
+      "pl": 1,
+      "room": "ROOM4041.RDT",
+      "section": 17,
+      "procedure": 5,
+      "offset": 3856,
+      "bank": 33,
+      "bit": 8,
+      "value": 1
+    },
+    {
+      "pl": 1,
+      "room": "ROOM5041.RDT",
+      "section": 17,
+      "procedure": 13,
+      "offset": 8572,
+      "bank": 33,
+      "bit": 9,
+      "value": 1
+    },
+    {
+      "pl": 1,
+      "room": "ROOM5041.RDT",
+      "section": 17,
+      "procedure": 13,
+      "offset": 8576,
+      "bank": 33,
+      "bit": 10,
+      "value": 1
+    },
+    {
+      "pl": 1,
+      "room": "ROOM5041.RDT",
+      "section": 17,
+      "procedure": 13,
+      "offset": 8580,
+      "bank": 33,
+      "bit": 11,
+      "value": 1
+    },
+    {
+      "pl": 1,
+      "room": "ROOM5041.RDT",
+      "section": 17,
+      "procedure": 13,
+      "offset": 8584,
+      "bank": 34,
+      "bit": 25,
+      "value": 1
+    },
+    {
+      "pl": 1,
+      "room": "ROOM5061.RDT",
+      "section": 17,
+      "procedure": 4,
+      "offset": 4146,
+      "bank": 33,
+      "bit": 9,
+      "value": 1
+    },
+    {
+      "pl": 1,
+      "room": "ROOM5061.RDT",
+      "section": 17,
+      "procedure": 4,
+      "offset": 4150,
+      "bank": 33,
+      "bit": 10,
+      "value": 1
+    },
+    {
+      "pl": 1,
+      "room": "ROOM5061.RDT",
+      "section": 17,
+      "procedure": 4,
+      "offset": 4154,
+      "bank": 33,
+      "bit": 11,
+      "value": 1
+    },
+    {
+      "pl": 1,
+      "room": "ROOM5061.RDT",
+      "section": 17,
+      "procedure": 4,
+      "offset": 4158,
+      "bank": 34,
+      "bit": 25,
+      "value": 1
+    },
+    {
+      "pl": 1,
+      "room": "ROOM6121.RDT",
+      "section": 17,
+      "procedure": 14,
+      "offset": 7674,
+      "bank": 33,
+      "bit": 13,
+      "value": 1
+    },
+    {
+      "pl": 1,
+      "room": "ROOM6121.RDT",
+      "section": 17,
+      "procedure": 14,
+      "offset": 7678,
+      "bank": 33,
+      "bit": 14,
+      "value": 1
+    },
+    {
+      "pl": 1,
+      "room": "ROOM6121.RDT",
+      "section": 17,
+      "procedure": 14,
+      "offset": 7682,
+      "bank": 33,
+      "bit": 15,
+      "value": 1
+    },
+    {
+      "pl": 1,
+      "room": "ROOM6121.RDT",
+      "section": 17,
+      "procedure": 14,
+      "offset": 7688,
+      "bank": 33,
+      "bit": 16,
+      "value": 1
+    },
+    {
+      "pl": 1,
+      "room": "ROOM6121.RDT",
+      "section": 17,
+      "procedure": 14,
+      "offset": 7692,
+      "bank": 33,
+      "bit": 17,
+      "value": 1
+    },
+    {
+      "pl": 1,
+      "room": "ROOM6121.RDT",
+      "section": 17,
+      "procedure": 14,
+      "offset": 7726,
+      "bank": 4,
+      "bit": 165,
+      "value": 1
+    },
+    {
+      "pl": 1,
+      "room": "ROOMB091.RDT",
+      "section": 16,
+      "procedure": 0,
+      "offset": 3588,
+      "bank": 8,
+      "bit": 83,
+      "value": 1
+    }
+  ],
+  "parse_failures": [],
+  "unparsed_map_set_candidates": [],
+  "runtime_pickup_verified": false,
+  "notes": [
+    "Map information bank33 is distinct from physical pickup flags.",
+    "ROOM304 companion-transition procedure also grants bank33 bits2..8; do not use these as proof a physical map was collected.",
+    "ROOMB09 bonus room sets bank8 bit83; normal-game physical flag should still match the native AOT gate.",
+    "Laboratory bank33 bits13..15 are conditional on bank1 bit1=1 (B scenario); bits16..17 are unconditional after accepting the map.",
+    "Factory ROOM504/506 are two event-bearing room variants sharing bank34 bit25; ROOM501 has no bank33 map-grant instruction.",
+    "No game files, ASIs, or saves are modified."
+  ]
+}

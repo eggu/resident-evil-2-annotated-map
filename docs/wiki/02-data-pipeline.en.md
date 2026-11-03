@@ -14,6 +14,6 @@
 
 At runtime, character, game mode, current map, visit state, collection/unlock flags and guard conditions determine visibility. Scenario A/B differences are encoded in guards and door masks.
 
-Builds compile pinned headers. Editing JSON names or coordinates alone does not regenerate the rendered headers. Regenerate these wiki tables from the headers with `python3 tools/gen_wiki.py`; no game files are needed.
+Builds compile pinned headers. Editing JSON names or coordinates alone does not regenerate the rendered headers. Regenerate these wiki tables from the headers with `python3 tools/gen_wiki.py`; no game files are needed. `docs/DEVELOPMENT.md` explains how to regenerate the headers themselves.
 
 [Build documentation](../DEVELOPMENT.md)

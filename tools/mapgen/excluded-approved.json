@@ -1,0 +1,674 @@
+[
+[
+0,
+"ROOM1030.RDT",
+16566,
+83,
+"not a regular interactive floor pickup"
+],
+[
+0,
+"ROOM1090.RDT",
+8826,
+20,
+"unsupported condition/local room state"
+],
+[
+0,
+"ROOM1090.RDT",
+8936,
+20,
+"unsupported condition/local room state"
+],
+[
+0,
+"ROOM10D0.RDT",
+2134,
+21,
+"unsupported condition/local room state"
+],
+[
+0,
+"ROOM10D0.RDT",
+2242,
+22,
+"unsupported condition/local room state"
+],
+[
+0,
+"ROOM2040.RDT",
+9358,
+1,
+"not proven reachable from script root 0"
+],
+[
+0,
+"ROOM2080.RDT",
+5328,
+13,
+"projection outside native room rectangle"
+],
+[
+0,
+"ROOM2080.RDT",
+5384,
+80,
+"projection outside native room rectangle"
+],
+[
+0,
+"ROOM20B0.RDT",
+12610,
+21,
+"projection outside native room rectangle"
+],
+[
+0,
+"ROOM20C0.RDT",
+7414,
+21,
+"unsupported condition/local room state"
+],
+[
+0,
+"ROOM20C0.RDT",
+7440,
+29,
+"unsupported condition/local room state"
+],
+[
+0,
+"ROOM20C0.RDT",
+7534,
+21,
+"unsupported condition/local room state"
+],
+[
+0,
+"ROOM20C0.RDT",
+7598,
+29,
+"unsupported condition/local room state"
+],
+[
+0,
+"ROOM20D0.RDT",
+4770,
+20,
+"unsupported condition/local room state"
+],
+[
+0,
+"ROOM20D0.RDT",
+4982,
+20,
+"unsupported condition/local room state"
+],
+[
+0,
+"ROOM20E0.RDT",
+6898,
+58,
+"unsupported condition/local room state"
+],
+[
+0,
+"ROOM20E0.RDT",
+6924,
+58,
+"unsupported condition/local room state"
+],
+[
+0,
+"ROOM2140.RDT",
+1230,
+15,
+"not a regular interactive floor pickup"
+],
+[
+0,
+"ROOM30C0.RDT",
+1206,
+30,
+"projection outside native room rectangle"
+],
+[
+0,
+"ROOM4000.RDT",
+6758,
+40,
+"not proven reachable from script root 0"
+],
+[
+0,
+"ROOM4000.RDT",
+6818,
+40,
+"not proven reachable from script root 0"
+],
+[
+0,
+"ROOM4050.RDT",
+3922,
+21,
+"unsupported condition/local room state"
+],
+[
+0,
+"ROOM4100.RDT",
+7178,
+30,
+"projection outside native room rectangle"
+],
+[
+0,
+"ROOM4100.RDT",
+7200,
+35,
+"projection outside native room rectangle"
+],
+[
+0,
+"ROOM5070.RDT",
+8570,
+21,
+"projection outside native room rectangle"
+],
+[
+0,
+"ROOM5070.RDT",
+8596,
+26,
+"projection outside native room rectangle"
+],
+[
+0,
+"ROOM5070.RDT",
+8894,
+21,
+"unsupported condition/local room state"
+],
+[
+0,
+"ROOM5070.RDT",
+8920,
+26,
+"unsupported condition/local room state"
+],
+[
+0,
+"ROOM6020.RDT",
+2556,
+22,
+"projection outside native room rectangle"
+],
+[
+0,
+"ROOM6020.RDT",
+2652,
+22,
+"unsupported condition/local room state"
+],
+[
+1,
+"ROOM1031.RDT",
+16566,
+83,
+"not a regular interactive floor pickup"
+],
+[
+1,
+"ROOM1091.RDT",
+8822,
+20,
+"unsupported condition/local room state"
+],
+[
+1,
+"ROOM1091.RDT",
+8932,
+20,
+"unsupported condition/local room state"
+],
+[
+1,
+"ROOM10D1.RDT",
+2126,
+21,
+"unsupported condition/local room state"
+],
+[
+1,
+"ROOM10D1.RDT",
+2234,
+22,
+"unsupported condition/local room state"
+],
+[
+1,
+"ROOM1171.RDT",
+3468,
+24,
+"projection outside native room rectangle"
+],
+[
+1,
+"ROOM1171.RDT",
+3562,
+24,
+"unsupported condition/local room state"
+],
+[
+1,
+"ROOM2041.RDT",
+9358,
+1,
+"not proven reachable from script root 0"
+],
+[
+1,
+"ROOM2081.RDT",
+5336,
+13,
+"projection outside native room rectangle"
+],
+[
+1,
+"ROOM2081.RDT",
+5392,
+80,
+"projection outside native room rectangle"
+],
+[
+1,
+"ROOM20B1.RDT",
+12610,
+26,
+"projection outside native room rectangle"
+],
+[
+1,
+"ROOM20C1.RDT",
+7414,
+21,
+"unsupported condition/local room state"
+],
+[
+1,
+"ROOM20C1.RDT",
+7440,
+29,
+"unsupported condition/local room state"
+],
+[
+1,
+"ROOM20C1.RDT",
+7534,
+21,
+"unsupported condition/local room state"
+],
+[
+1,
+"ROOM20C1.RDT",
+7598,
+29,
+"unsupported condition/local room state"
+],
+[
+1,
+"ROOM20D1.RDT",
+4770,
+20,
+"unsupported condition/local room state"
+],
+[
+1,
+"ROOM20D1.RDT",
+4982,
+20,
+"unsupported condition/local room state"
+],
+[
+1,
+"ROOM20E1.RDT",
+6534,
+60,
+"unsupported condition/local room state"
+],
+[
+1,
+"ROOM20E1.RDT",
+6560,
+60,
+"unsupported condition/local room state"
+],
+[
+1,
+"ROOM2141.RDT",
+1238,
+15,
+"not a regular interactive floor pickup"
+],
+[
+1,
+"ROOM30D1.RDT",
+710,
+30,
+"projection outside native room rectangle"
+],
+[
+1,
+"ROOM4101.RDT",
+6792,
+30,
+"projection outside native room rectangle"
+],
+[
+1,
+"ROOM4101.RDT",
+6814,
+35,
+"projection outside native room rectangle"
+],
+[
+1,
+"ROOM5071.RDT",
+8570,
+21,
+"projection outside native room rectangle"
+],
+[
+1,
+"ROOM5071.RDT",
+8596,
+26,
+"projection outside native room rectangle"
+],
+[
+1,
+"ROOM5071.RDT",
+8894,
+21,
+"unsupported condition/local room state"
+],
+[
+1,
+"ROOM5071.RDT",
+8920,
+26,
+"unsupported condition/local room state"
+],
+[
+1,
+"ROOM6101.RDT",
+5098,
+81,
+"not a regular interactive floor pickup"
+],
+[
+1,
+"ROOM6151.RDT",
+11304,
+24,
+"not a regular interactive floor pickup"
+],
+[
+1,
+"ROOM6151.RDT",
+11326,
+24,
+"not a regular interactive floor pickup"
+],
+[
+2,
+"ROOMB0E0.RDT",
+6264,
+21,
+"unsupported condition/local room state"
+],
+[
+2,
+"ROOMB0E0.RDT",
+6330,
+21,
+"unsupported condition/local room state"
+],
+[
+2,
+"ROOMB0E0.RDT",
+6438,
+20,
+"unsupported condition/local room state"
+],
+[
+2,
+"ROOMB0E0.RDT",
+6466,
+20,
+"unsupported condition/local room state"
+],
+[
+2,
+"ROOMB0E0.RDT",
+6552,
+21,
+"unsupported condition/local room state"
+],
+[
+2,
+"ROOMB0E0.RDT",
+6618,
+21,
+"unsupported condition/local room state"
+],
+[
+2,
+"ROOMB0E0.RDT",
+6726,
+21,
+"unsupported condition/local room state"
+],
+[
+2,
+"ROOMB0E0.RDT",
+6754,
+21,
+"unsupported condition/local room state"
+],
+[
+2,
+"ROOMB0E0.RDT",
+6840,
+25,
+"unsupported condition/local room state"
+],
+[
+2,
+"ROOMB0E0.RDT",
+6906,
+25,
+"unsupported condition/local room state"
+],
+[
+2,
+"ROOMB0E0.RDT",
+7014,
+26,
+"unsupported condition/local room state"
+],
+[
+2,
+"ROOMB0E0.RDT",
+7042,
+26,
+"unsupported condition/local room state"
+],
+[
+2,
+"ROOMB0E0.RDT",
+7128,
+29,
+"unsupported condition/local room state"
+],
+[
+2,
+"ROOMB0E0.RDT",
+7194,
+29,
+"unsupported condition/local room state"
+],
+[
+2,
+"ROOMB0E0.RDT",
+7302,
+29,
+"unsupported condition/local room state"
+],
+[
+2,
+"ROOMB0E0.RDT",
+7330,
+29,
+"unsupported condition/local room state"
+],
+[
+2,
+"ROOMD080.RDT",
+10652,
+21,
+"unsupported condition/local room state"
+],
+[
+2,
+"ROOMD080.RDT",
+10718,
+21,
+"unsupported condition/local room state"
+],
+[
+3,
+"ROOMB0E1.RDT",
+6264,
+21,
+"unsupported condition/local room state"
+],
+[
+3,
+"ROOMB0E1.RDT",
+6330,
+21,
+"unsupported condition/local room state"
+],
+[
+3,
+"ROOMB0E1.RDT",
+6438,
+20,
+"unsupported condition/local room state"
+],
+[
+3,
+"ROOMB0E1.RDT",
+6466,
+20,
+"unsupported condition/local room state"
+],
+[
+3,
+"ROOMB0E1.RDT",
+6552,
+21,
+"unsupported condition/local room state"
+],
+[
+3,
+"ROOMB0E1.RDT",
+6618,
+21,
+"unsupported condition/local room state"
+],
+[
+3,
+"ROOMB0E1.RDT",
+6726,
+21,
+"unsupported condition/local room state"
+],
+[
+3,
+"ROOMB0E1.RDT",
+6754,
+21,
+"unsupported condition/local room state"
+],
+[
+3,
+"ROOMB0E1.RDT",
+6840,
+25,
+"unsupported condition/local room state"
+],
+[
+3,
+"ROOMB0E1.RDT",
+6906,
+25,
+"unsupported condition/local room state"
+],
+[
+3,
+"ROOMB0E1.RDT",
+7014,
+26,
+"unsupported condition/local room state"
+],
+[
+3,
+"ROOMB0E1.RDT",
+7042,
+26,
+"unsupported condition/local room state"
+],
+[
+3,
+"ROOMB0E1.RDT",
+7128,
+29,
+"unsupported condition/local room state"
+],
+[
+3,
+"ROOMB0E1.RDT",
+7194,
+29,
+"unsupported condition/local room state"
+],
+[
+3,
+"ROOMB0E1.RDT",
+7302,
+29,
+"unsupported condition/local room state"
+],
+[
+3,
+"ROOMB0E1.RDT",
+7330,
+29,
+"unsupported condition/local room state"
+],
+[
+3,
+"ROOMD081.RDT",
+10652,
+21,
+"unsupported condition/local room state"
+],
+[
+3,
+"ROOMD081.RDT",
+10718,
+21,
+"unsupported condition/local room state"
+]
+]

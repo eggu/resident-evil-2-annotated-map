@@ -9,7 +9,33 @@ TEX, SCALE = 32, 4
 
 def puzzle_marker():
     icon = Image.new('RGB', (TEX,TEX))
-    ImageDraw.Draw(icon).polygon(((16,2),(30,16),(16,30),(2,16)), fill=(238,184,48))
+    d = ImageDraw.Draw(icon)
+    # Dark rim (~1 map pixel at 6px draw size) keeps the amber diamond readable on orange pending rooms.
+    d.polygon(((16,1),(31,16),(16,31),(1,16)), fill=(8,8,8))
+    d.polygon(((16,7),(25,16),(16,25),(7,16)), fill=(238,184,48))
+    return icon
+
+
+def key_star():
+    # [3] key-item marker: star in the item-label cyan (generate_item_labels.FILL, the old dot colour), dark rim;
+    # drawn after the puzzle diamond so it stays on top and contrasts with the amber diamond.
+    icon = Image.new('RGB', (TEX, TEX))
+    d = ImageDraw.Draw(icon)
+    d.polygon(MONSTER_STAR, fill=(8, 8, 8))
+    d.polygon([(16 + (x - 16) * 0.55, 17 + (y - 17) * 0.55) for x, y in MONSTER_STAR], fill=(136, 232, 255))
+    return icon
+
+
+def puzzle_key():
+    # Key item on a puzzle spot, drawn at 7 px (same as the key star) in place of the 6 px diamond. The native map filters textures bilinearly, so
+    # a small cyan core blends into the amber (user 2026-10-23 screenshot: pale yellow); the cyan star fills ~70% of
+    # the diamond with a thin dark outline and the amber shows between its points.
+    icon = Image.new('RGB', (TEX, TEX))
+    d = ImageDraw.Draw(icon)
+    d.polygon(((16,0),(31,16),(16,31),(0,16)), fill=(8,8,8))
+    d.polygon(((16,2),(29,16),(16,29),(2,16)), fill=(238,184,48))
+    d.polygon([(16 + (x - 16) * 0.85, 17 + (y - 17) * 0.85) for x, y in MONSTER_STAR], fill=(8, 8, 8))
+    d.polygon([(16 + (x - 16) * 0.7, 17 + (y - 17) * 0.7) for x, y in MONSTER_STAR], fill=(136, 232, 255))
     return icon
 
 
@@ -22,6 +48,11 @@ def map_icon():
     d.polygon(((22,9),(26,7),(26,23),(22,26)), fill=(160,144,104))
     d.line(((7,19),(14,13),(18,17),(24,12)), fill=(88,104,72), width=2)
     return icon
+
+
+# Category order follows extract_monsters.CATEGORY; artwork: monster-icons-v2 (Evil Resource RE2 references).
+from extract_monsters import CATEGORY_NAMES as MONSTER_NAMES
+MONSTER_STAR = [(16, 1), (20, 11), (31, 12), (22, 19), (25, 30), (16, 24), (7, 30), (10, 19), (1, 12), (12, 11)]
 
 
 def rgb555(page):
@@ -39,6 +70,11 @@ def generate():
     assert len({load_icon(f'pickup-{item}', (TEX,TEX)).tobytes() for item in ammo}) == len(ammo)
     icons += [(100 + item, f'pickup-{item}', load_icon(f'pickup-{item}', (TEX,TEX))) for item in pickups]
     icons.append((13, 'map', map_icon()))
+    icons.append((14, 'keystar', key_star()))
+    icons.append((15, 'puzzle-key', puzzle_key()))
+    heads = [load_icon('monster-' + name, (TEX, TEX)) for name in MONSTER_NAMES]
+    assert len({im.tobytes() for im in heads}) == len(MONSTER_NAMES) == 12
+    icons += [(50 + c, 'monster-' + name, heads[c]) for c, name in enumerate(MONSTER_NAMES)]
     rows = []
     for i, (kind, name, im) in enumerate(icons):
         u, v = 1 + (i % 7) * (TEX + 2), 1 + (i // 7) * (TEX + 2)
