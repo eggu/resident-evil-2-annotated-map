@@ -14,6 +14,7 @@ import collections
 import json
 import struct
 
+import marker_names
 from extract_items import G, R, NativeMap, minimize, normalized, parse_functions, walk, room_paths, stage_of, mode_pl
 
 SCE_SAVE, SCE_ITEMBOX = 9, 10
@@ -45,6 +46,127 @@ def puzzle_spot(op, raw):
     # Item-locked doors are locks (doors-all.h, project_all.py), not puzzles: 52 Armory Red Card reader,
     # 75 Kennel manhole, 59-62 Plug Passage chess-plug panel.
     return raw[d] == 10 and 47 <= raw[d + 2] <= 99 and raw[d + 2] not in (52, 59, 60, 61, 62, 75)
+def evidence(op, raw):
+    """Marker-name evidence of an item-use puzzle AOT: the key item it asks for ('i<id>'); None for other AOTs."""
+    return f'i{raw[(14 if op == 44 else 22) + 2]}' if puzzle_spot(op, raw) else None
+
+
+EVENT_KIND = 20  # MapInteraction.kind of an event marker (spoiler story scene)
+OP_MOVIE = 111   # Movie_on: plays an FMV, the argument is the movie id
+EVENT_REPORT = []  # cutscene functions that could not be given a marker, with the reason
+
+
+def callee(r):
+    """Function a Gosub (0x18) or Evt_exec (0x04 ... 0x18 fn) instruction calls, else None."""
+    return r[1] if r[0] == 0x18 else r[3] if r[0] == 4 and len(r) > 3 and r[2] == 0x18 else None
+
+
+def movie_functions(functions):
+    """Indexes of the functions that play an FMV, directly or through calls."""
+    found = {i for i, ops in enumerate(functions) if any(r[0] == OP_MOVIE for r in ops.values())}
+    grew = True
+    while grew:
+        grew = False
+        for i, ops in enumerate(functions):
+            if i not in found and any(callee(r) in found for r in ops.values()):
+                found.add(i); grew = True
+    return found
+
+
+OP_SAVE, TIMER_VAR = 0x24, 0x23  # Save(var, value): variable 0x23 is the countdown (300 s in 701 Train Platform and 617, 120 s in 703)
+
+
+def timer_functions(functions):
+    """Indexes of the functions that start the self-destruct countdown (Save(0x23, n > 0)), directly or through calls."""
+    found = {i for i, ops in enumerate(functions)
+             if any(r[0] == OP_SAVE and r[1] == TIMER_VAR and struct.unpack_from('<H', r, 2)[0] for r in ops.values())}
+    grew = True
+    while grew:
+        grew = False
+        for i, ops in enumerate(functions):
+            if i not in found and any(callee(r) in found for r in ops.values()):
+                found.add(i); grew = True
+    return found
+
+
+PERSISTENT_BANKS = (3, 4)  # FG_SCENARIO / FG_COMMON: kept across rooms (bank 5 is per room, 1/2 are transient)
+BOSS_TYPES = {35, 39, 40, 42, 43, 44, 48, 49, 50, 51, 52, 53, 54, 55, 57, 58, 62}  # extract_monsters: alligator, G, Tyrant, plant 42, giant moth
+
+
+def event_flag(functions, fn):
+    """(bank, bit) a cutscene function sets as its 'scene played' flag: first persistent Set(.., 1) in it or its callees."""
+    seen, stack = set(), [fn]
+    while stack:
+        f = stack.pop(0)
+        if f in seen or f >= len(functions):
+            continue
+        seen.add(f)
+        for r in functions[f].values():
+            if r[0] == 0x22 and r[1] in PERSISTENT_BANKS and r[3] == 1:
+                return r[1], r[2]
+            if callee(r) is not None:
+                stack.append(callee(r))
+    return None
+
+
+def caller_flag(functions, fn):
+    """(bank, bit) a caller sets just before it starts the scene (Ck(b,x,0); Set(b,x,1); Evt_exec fn): the done flag when the
+    scene function itself sets none. Looks at the 3 instructions before each call site."""
+    for ops in functions:
+        items = list(ops.values())
+        for k, r in enumerate(items):
+            if callee(r) == fn:
+                for q in reversed(items[max(0, k - 3):k]):
+                    if q[0] == 0x22 and q[1] in PERSISTENT_BANKS and q[3] == 1:
+                        return q[1], q[2]
+    return None
+
+
+def event_bit(functions, fn):
+    """The FG_COMMON bit a cutscene function sets (its 'scene played' flag): first bank-4 Set(.., 1) in it or its callees."""
+    seen, stack = set(), [fn]
+    while stack:
+        f = stack.pop(0)
+        if f in seen or f >= len(functions):
+            continue
+        seen.add(f)
+        for r in functions[f].values():
+            if r[0] == 0x22 and r[1] == 4 and r[3] == 1:
+                return r[2]
+            if callee(r) is not None:
+                stack.append(callee(r))
+    return None
+
+
+def apply_resets(paths, resets):
+    """Hide an AOT once the script disables it: `Aot_reset(id, type != item-use)` under condition C (e.g. Ck(4,36,1) in the
+    room init, set by the scene that solved the puzzle) leaves the AOT visible only while C is false. `paths` and `resets` are
+    lists of guard conjunctions; the result is the list of conjunctions under which the AOT is still live."""
+    for conj in minimize(resets):
+        if not conj:
+            return []  # always reset: never live
+        live = []
+        for g in paths:
+            for bank, bit, value in conj:
+                n = normalized(tuple(g) + ((bank, bit, 1 - value),))
+                if n is not None and n not in live:
+                    live.append(n)
+        paths = minimize(live)
+    return paths
+
+
+def puzzle_completion(functions):
+    """A device disabled by the same routine that sets one permanent progress bit is complete at that bit."""
+    found = collections.defaultdict(set)
+    for ops in functions:
+        bits = {r[2] for r in ops.values() if r[0] == 0x22 and r[1] == 4 and r[3] == 1}
+        if len(bits) == 1:
+            for r in ops.values():
+                if r[0] == 70 and r[2] == 0:
+                    found[r[1]].update(bits)
+    return {aot: next(iter(bits)) for aot, bits in found.items() if len(bits) == 1}
+
+
 def switch_bit(functions, raw, follow_calls=False):
     """[5] device marker without an item (e.g. 605 power switch, user 2026-10-23): a press-to-use (SAT MANUAL) event
     AOT whose gosub target both tests and sets the same FG_COMMON (bank 4) bit, i.e. a one-shot progress switch.
@@ -124,6 +246,18 @@ def scan():
     for pl in (0, 1):
         for path in sorted((G / f'Pl{pl}/Rdt').glob('*.RDT')):
             blob = path.read_bytes()
+            completion = {}
+            file_resets = collections.defaultdict(list)  # AOT id -> guard conjunctions under which the script disables it
+            for section in (16, 17):
+                try:
+                    fns = parse_functions(blob, section, sizes)
+                except (AssertionError, ValueError, struct.error):
+                    continue
+                if fns:
+                    completion.update(puzzle_completion(fns))
+                    for offset, raw, guards, why in room_paths(fns, pl, path.name, section, wanted=(70,)):
+                        if raw[0] == 70 and raw[2] != SCE_FLAG_CHG and not why:
+                            file_resets[raw[1]].append(tuple(guards))
             for section in (16, 17):
                 try:
                     functions = parse_functions(blob, section, sizes)
@@ -132,6 +266,8 @@ def scan():
                 if not functions:
                     continue
                 reach = collections.defaultdict(list)
+                movies = movie_functions(functions) | timer_functions(functions)  # scenes, and the countdown start (701, 2026-11-09)
+                triggered = set()
                 for offset, raw, guards, why in room_paths(functions, pl, path.name, section, wanted=(44, 70, 78, 103, 105, 141)):
                     reach[offset].append((guards, why))
                 for ops in functions:
@@ -187,7 +323,7 @@ def scan():
                             except ValueError as error:
                                 excluded.append(dict(d, reason=str(error)))
                                 continue
-                            interactions += [dict(d, kind=SCE_FLAG_CHG, number_lock=bit, floor=p['floor'],
+                            interactions += [dict(d, kind=SCE_FLAG_CHG, number_lock=bit, ev=f'nl{bit}', floor=p['floor'],
                                                   x=p['x'], y=p['y'], seen=p['seen'], guards=g) for p in ps for g in paths]
                         elif op == 44 and raw[2] in (SCE_SAVE, SCE_ITEMBOX):
                             # Icons are not guarded: typewriters/boxes are fixed room furniture.
@@ -208,6 +344,22 @@ def scan():
                             # All other reachable AOTs are user-visible interaction targets.
                             if not offset in reach:
                                 continue
+                            if raw[2] == SCE_EVENT and raw[16] == 0x18 and raw[17] in movies and not switch_bit(functions, raw, follow_calls=path.name[4] == '7'):
+                                # (an AOT that is also a one-shot switch stays a puzzle: the 703 Train Car lever plays a scene but is a device)
+                                # Story scene (FMV): a purple event marker at its trigger, hidden once its progress flag is set.
+                                triggered.add(raw[17])
+                                bit = event_bit(functions, raw[17])
+                                if bit is None:
+                                    EVENT_REPORT.append(dict(pl=pl, room=path.name, fn=raw[17], reason='cutscene sets no FG_COMMON progress flag'))
+                                    continue
+                                try:
+                                    ps = native.projections(pl, path.name, raw)
+                                except ValueError as error:
+                                    EVENT_REPORT.append(dict(pl=pl, room=path.name, fn=raw[17], reason=str(error)))
+                                    continue
+                                interactions += [dict(d, kind=EVENT_KIND, floor=p['floor'], x=p['x'], y=p['y'], seen=p['seen'],
+                                                      guards=tuple(g) + ((4, bit, 0),), event_bit=bit) for p in ps for g, why in reach[offset]]
+                                continue
                             bit = switch_bit(functions, raw, follow_calls=path.name[4] == '7') if path.name[4] in '1234567' else None  # not Extreme Battle / 4th Survivor
                             if raw[2] in (SCE_FLAG_CHG, SCE_WATER) and not puzzle_spot(op, raw):
                                 continue
@@ -216,16 +368,22 @@ def scan():
                             except ValueError as error:
                                 excluded.append(dict(d, sce=raw[2], reason=str(error)))
                                 continue
-                            paths = [g for g, why in reach[offset]]
+                            paths = apply_resets([g for g, why in reach[offset]], file_resets.get(raw[1], ()))
+                            if puzzle_spot(op, raw) and raw[1] in completion:
+                                paths = [v for g in paths if (v := normalized(tuple(g) + ((4, completion[raw[1]], 0),))) is not None]
+                            if path.name[4:7] == '108' and puzzle_spot(op, raw):
+                                # Rooftop function 7 sets FG_COMMON 0 when the water scene completes; init reset is conditional on the B encounter.
+                                paths = [v for g in paths if (v := normalized(tuple(g) + ((4, 0, 0),))) is not None]
                             if path.name[4:7] == '702' and puzzle_spot(op, raw):
                                 # 702 init/function 4 disables all four plug AOTs when FG_COMMON 136 is set.
                                 paths = [v for g in paths if (v := normalized(tuple(g) + ((4, 136, 0),))) is not None]
-                            interactions += [dict(d, kind=raw[2], floor=p['floor'], x=p['x'], y=p['y'], seen=p['seen'], guards=g) for p in ps for g in paths]
+                            interactions += [dict(d, kind=raw[2], floor=p['floor'], x=p['x'], y=p['y'], seen=p['seen'], guards=g,
+                                                  ev=evidence(op, raw)) for p in ps for g in paths]
                             if bit is not None and (pl, bit) not in LOCK_BITS:  # drawn like an item-use puzzle spot until the switch flag is set
                                 switch_guards = ((4, bit, 0),)
                                 if path.name[4:7] == '700' and bit == 140:
                                     switch_guards += ((1, 1, 1),)  # Train gate panel is a scenario-B escape objective.
-                                interactions += [dict(d, kind=SCE_FLAG_CHG, switch=bit, floor=p['floor'], x=p['x'], y=p['y'], seen=p['seen'],
+                                interactions += [dict(d, kind=SCE_FLAG_CHG, switch=bit, ev=f'sw{bit}', floor=p['floor'], x=p['x'], y=p['y'], seen=p['seen'],
                                                       guards=tuple(g) + switch_guards) for p in ps for g in paths]
                         elif op == 103:
                             # Four-corner triggers: project their bounding-box centre onto the native map.
@@ -241,11 +399,115 @@ def scan():
                             except ValueError as error:
                                 excluded.append(dict(d, sce=raw[2], reason='4-point ' + str(error)))
                                 continue
-                            paths = [g for g, why in reach[offset]]
-                            interactions += [dict(d, kind=raw[2], floor=p['floor'], x=p['x'], y=p['y'], seen=p['seen'], guards=g) for p in ps for g in paths]
+                            if raw[2] == SCE_EVENT and raw[24] == 0x18 and raw[25] in movies:
+                                # Four-corner story trigger (701 Train Platform: the self-destruct countdown starts here), same rule as the point AOT.
+                                triggered.add(raw[25])
+                                bit = event_bit(functions, raw[25])
+                                if bit is None:
+                                    EVENT_REPORT.append(dict(pl=pl, room=path.name, fn=raw[25], reason='cutscene sets no FG_COMMON progress flag'))
+                                    continue
+                                interactions += [dict(d, kind=EVENT_KIND, floor=p['floor'], x=p['x'], y=p['y'], seen=p['seen'],
+                                                      guards=tuple(g) + ((4, bit, 0),), event_bit=bit) for p in ps for g, why in reach[offset]]
+                                continue
+                            paths = apply_resets([g for g, why in reach[offset]], file_resets.get(raw[1], ()))
+                            if puzzle_spot(op, raw) and raw[1] in completion:
+                                paths = [v for g in paths if (v := normalized(tuple(g) + ((4, completion[raw[1]], 0),))) is not None]
+                            interactions += [dict(d, kind=raw[2], floor=p['floor'], x=p['x'], y=p['y'], seen=p['seen'], guards=g,
+                                                  ev=evidence(op, raw)) for p in ps for g in paths]
                         elif op == 103 and raw[2] in (SCE_SAVE, SCE_ITEMBOX):
                             excluded.append(dict(d, sce=raw[2], reason='4-point AOT not projected'))
+    room_scene_events(native, interactions)
     return pickups, markers, documents, interactions, excluded
+
+
+def room_centres(native, pl, room_name):
+    """[(floor, seen, x, y)]: the native room rectangle's centre on every map floor the room can be drawn on, as the marker
+    origin (the map adds PROJ_CENTRE 6 when it draws, like for projected AOTs)."""
+    stage, room = stage_of(room_name), int(room_name[5:7], 16)
+    out = []
+    for floor in native.floors(pl, stage, room, 0):
+        index = native.call(0x4fb1c0, floor, room)
+        if not 0 <= floor < 20:
+            continue
+        ptr, count = struct.unpack('<IB', native.read((0x53eb98 if pl else 0x53eaf8) + floor * 8, 5))
+        if index >= count:
+            continue
+        record = native.read(ptr + index * 16, 16)
+        w, h, rx, ry = record[2], record[3], *struct.unpack_from('<hh', record, 4)
+        out.append((floor, record[12], rx + w // 2 - 6, ry + h // 2 - 6))
+    return out
+
+
+def room_scene_events(native, interactions):
+    """Cutscenes the room's own script starts (no event AOT of its own): an event marker at the room's centre while their
+    persistent done flag is unset. Rooms where a boss spawns (the boss keeps its enemy marker) and scenes without such a flag
+    are listed in EVENT_REPORT instead."""
+    sizes = json.loads((R / 'opcode-sizes.json').read_text())['sizes']
+    for pl in (0, 1):
+        for path in sorted((G / f'Pl{pl}/Rdt').glob('*.RDT')):
+            blob = path.read_bytes()
+            sections = {}
+            for section in (16, 17):
+                try:
+                    sections[section] = parse_functions(blob, section, sizes)
+                except (AssertionError, ValueError, struct.error):
+                    continue
+            functions = sections.get(17)
+            if not functions:
+                continue
+            aots = {r[17] for ops in functions for r in ops.values() if r[0] == 44 and len(r) > 17 and r[2] == SCE_EVENT and r[16] == 0x18}
+            movie_fns = {i for i, ops in enumerate(functions) if any(r[0] == OP_MOVIE for r in ops.values())}
+            boss = any(r[0] in (68, 142) and r[3] in BOSS_TYPES for fns in sections.values() for ops in fns for r in ops.values())
+            for fn in sorted(movie_fns):
+                if any(fn in movie_functions_from(functions, a) for a in aots):
+                    continue  # started by an event AOT: handled as an AOT event (or a puzzle)
+                note = dict(pl=pl, room=path.name, fn=fn, movie=sorted({r[1] for r in functions[fn].values() if r[0] == OP_MOVIE}))
+                flag = event_flag(functions, fn) or caller_flag(functions, fn)
+                if boss:
+                    EVENT_REPORT.append(dict(note, reason='a boss spawns in this room: entering starts the fight, the boss keeps its enemy marker'))
+                elif flag is None:
+                    EVENT_REPORT.append(dict(note, reason='no persistent (FG_SCENARIO/FG_COMMON) done flag'))
+                else:
+                    try:
+                        centres = room_centres(native, pl, path.name)
+                    except ValueError as error:
+                        EVENT_REPORT.append(dict(note, reason=str(error)))
+                        continue
+                    for floor, seen, x, y in centres:
+                        interactions.append(dict(pl=mode_pl(pl, path.name), room=path.name, section=17, offset=0, op=111, kind=EVENT_KIND,
+                                                 floor=floor, x=x, y=y, seen=seen, guards=((flag[0], flag[1], 0),), event_bit=flag[1],
+                                                 event_bank=flag[0], room_anchor=True))
+
+
+def untriggered_movies():
+    """Cutscene functions with no event AOT of their own (started by the room script or another scene): listed, never invented."""
+    sizes = json.loads((R / 'opcode-sizes.json').read_text())['sizes']
+    rows = []
+    for pl in (0, 1):
+        for path in sorted((G / f'Pl{pl}/Rdt').glob('*.RDT')):
+            try:
+                functions = parse_functions(path.read_bytes(), 17, sizes)
+            except (AssertionError, ValueError, struct.error):
+                continue
+            movies = movie_functions(functions)
+            direct = {i for i, ops in enumerate(functions) if any(r[0] == OP_MOVIE for r in ops.values())}
+            aots = {r[17] for ops in functions for r in ops.values() if r[0] == 44 and len(r) > 17 and r[2] == SCE_EVENT and r[16] == 0x18}
+            for fn in sorted(direct):
+                ids = sorted({r[1] for r in functions[fn].values() if r[0] == OP_MOVIE})
+                if not any(fn in movie_functions_from(functions, a) for a in aots):
+                    rows.append(dict(pl=pl, room=path.name, fn=fn, movie=ids, reason='not started by an event AOT of its own (room script or another scene)'))
+    return rows
+
+
+def movie_functions_from(functions, start):
+    seen, stack = set(), [start]
+    while stack:
+        f = stack.pop()
+        if f in seen or f >= len(functions):
+            continue
+        seen.add(f)
+        stack += [c for r in functions[f].values() if (c := callee(r)) is not None]
+    return seen
 
 
 def coalesce(pickups, markers, documents, interactions):
@@ -277,13 +539,19 @@ def coalesce(pickups, markers, documents, interactions):
     for key, paths in sorted(doc_groups.items()):
         for guards in sorted(minimize(paths)):
             docs.append(dict(zip(('pl', 'floor', 'seen', 'x', 'y', 'bank', 'item', 'bit'), key), guards=list(guards)))
-    int_groups = collections.defaultdict(list)
+    int_groups, int_ev = collections.defaultdict(list), collections.defaultdict(set)
     for d in interactions:
-        int_groups[tuple(d[k] for k in ('pl','floor','seen','kind','x','y'))].append(tuple(d['guards']))
+        key = tuple(d[k] for k in ('pl','floor','seen','kind','x','y'))
+        int_groups[key].append(tuple(d['guards']))
+        if d['kind'] == SCE_FLAG_CHG:
+            int_ev[key].add((d['room'][4:7], d['ev']))
     int_rows = []
     for key, paths in sorted(int_groups.items()):
+        unknown = [e for e in int_ev.get(key, ()) if e not in marker_names.RULES and e not in marker_names.UNRESOLVED]
+        assert not unknown, ('puzzle evidence missing from data/marker_names.json (name it or list it as unresolved)', unknown)
+        name = marker_names.puzzle_name_id(int_ev.get(key, ()))
         for guards in sorted(minimize(paths)):
-            int_rows.append(dict(zip(('pl','floor','seen','kind','x','y'), key), guards=list(guards)))
+            int_rows.append(dict(zip(('pl','floor','seen','kind','x','y'), key), guards=list(guards), name=name))
     return rows, [icons[k] for k in sorted(icons)], docs, int_rows
 
 
@@ -306,15 +574,15 @@ def write(rows, icons, documents, interactions, excluded):
         doc_guards += d['guards']
     interaction_guards, interaction_lines = [], []
     for d in interactions:
-        interaction_lines.append('{%d,%d,%d,%d,%d,%d,%d,%d},' % (
-            d['pl'],d['floor'],d['seen'],d['kind'],d['x'],d['y'],len(interaction_guards),len(d['guards'])))
+        interaction_lines.append('{%d,%d,%d,%d,%d,%d,%d,%d,%d},' % (
+            d['pl'],d['floor'],d['seen'],d['kind'],d['x'],d['y'],len(interaction_guards),len(d['guards']),d.get('name', 0)))
         interaction_guards += d['guards']
     out = ['/* Generated by extract_overlay.py: room pickups, furniture icons, documents, and interaction markers. */',
            '#ifndef RE2_OVERLAY_DATA_H', '#define RE2_OVERLAY_DATA_H',
            'typedef struct { unsigned char pl,floor,seen,bank; unsigned short bit,guard_start; unsigned char guard_count; } RoomPickup;',
            'typedef struct { unsigned char pl,floor,seen,kind; short x,y; } MapMarker; /* kind 9 typewriter, 10 item box */',
            'typedef struct { unsigned char pl,floor,seen,bank,item; short x,y; unsigned short bit,guard_start; unsigned char guard_count; } MapDocument;',
-           'typedef struct { unsigned char pl,floor,seen,kind; short x,y; unsigned short guard_start; unsigned char guard_count; } MapInteraction;',
+           'typedef struct { unsigned char pl,floor,seen,kind; short x,y; unsigned short guard_start; unsigned char guard_count,name; } MapInteraction; /* name: item_labels id of a named puzzle, else 0 */',
            'static const MapItemGuard interaction_guards[] = {']
     out += ['{%d,%d,%d},' % g for g in interaction_guards] or ['{0,0,0},']
     out += ['};', 'static const MapInteraction map_interactions[] = {'] + interaction_lines + ['};',
@@ -339,11 +607,19 @@ if __name__ == '__main__':
                (d['floor'], d['x'], d['y']) == (2, 149, 126) for d in interactions)
     switches = {(d['room'][4:7], d['switch']) for d in interactions if 'switch' in d}
     assert ('605', 145) in switches and len({r for r, _ in switches}) <= 16, switches  # B3 power switch; no event-flood
+    raw_events = [d for d in interactions if d['kind'] == EVENT_KIND]
     rows, icons, documents, interactions = coalesce(pickups, markers, documents, interactions)
     assert rows and icons and {0, 1} <= {r['pl'] for r in rows} <= {0, 1, 2, 3}
     assert all(r['bank'] in (8, 34) and r['bit'] < 256 and all(g[0] <= 34 or g[0] in (130, 131) for g in r['guards']) for r in rows)
     assert interactions and {0, 1} <= {d['pl'] for d in interactions} <= {0, 1, 2, 3}
     write(rows, icons, documents, interactions, excluded)
+    rk, re_ = (json.loads((R / f'room_names-{l}.json').read_text()) for l in ('ko', 'en'))
+    drawn = [dict(pl=d['pl'], room=d['room'][4:7], room_ko=rk.get(d['room'][4:7]), room_en=re_.get(d['room'][4:7]), floor=d['floor'], x=d['x'], y=d['y'],
+                  hidden_by_bit=f"bank {d.get('event_bank', 4)} bit {d['event_bit']}", anchored_at_room_centre=bool(d.get('room_anchor'))) for d in raw_events]
+    listed = [dict(r, room=r['room'][4:7], room_ko=rk.get(r['room'][4:7]), room_en=re_.get(r['room'][4:7])) for r in EVENT_REPORT]
+    (R / 'events-report.json').write_text(json.dumps(dict(
+        method='FMV scenes (script op 111, Movie_on) started by an event AOT (SCE 5, gosub) get a purple event marker at the AOT, hidden once the first FG_COMMON bit the scene sets is set. Scenes with no AOT of their own, or without such a bit, are listed, not drawn.',
+        drawn=drawn, not_drawn=listed), ensure_ascii=False, indent=1) + '\n')
     print(json.dumps(dict(pickup_aots=len(pickups), room_pickup_rows=len(rows), icons=len(icons),
                           save=sum(m['kind'] == SCE_SAVE for m in icons), itembox=sum(m['kind'] == SCE_ITEMBOX for m in icons), documents=len(documents), interactions=len(interactions),
                           excluded=collections.Counter(e['reason'] for e in excluded))))

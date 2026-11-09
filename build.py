@@ -8,6 +8,7 @@ EXE_SHA256 = '21b2a647cbeddac1ec389be847f22a434a0264a18020589de91cb2824dcb1bf5'
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--game-exe', type=Path, help='Run native/texture tests with this legally owned executable')
+    parser.add_argument('--candidate', type=int, help='Name the package and report as test candidate N; released ZIPs stay untouched')
     args = parser.parse_args()
     if args.game_exe:
         args.game_exe = args.game_exe.resolve()
@@ -28,9 +29,10 @@ def main():
         for p in (ROOT/'data').iterdir(): shutil.copy2(p,build/p.name)
         shutil.copytree(ROOT/'tests/fixtures',build,dirs_exist_ok=True)
         env = dict(os.environ, RE2_GAME_EXE=str(args.game_exe))
-        for name in ('test_native-v6.4.py','test_upload-v6.4.py'):
+        for name in ('test_native-v6.4.py','test_upload-v6.4.py','test_settings.py','test_legend.py','test_label_priority.py','test_zoom.py','test_factory_arrows.py','test_puzzle_completion.py'):
             subprocess.run([sys.executable,name],cwd=build,env=env,check=True,stdout=subprocess.DEVNULL)
-    package = dist/f'RE2-Annotated-Map-{version}.zip'
+    suffix = f'-candidate{args.candidate}' if args.candidate else ''
+    package = dist/f'RE2-Annotated-Map-{version}{suffix}.zip'
     loader = ROOT/'packaging/ultimate-asi-loader'
     files = {'scripts/RE2.AnnotatedMap.asi': build/'RE2.KeyMapNames-v6.4.asi',
              'scripts/RE2.AnnotatedMap.ini': ROOT/'packaging/RE2.AnnotatedMap.ini',
@@ -46,7 +48,7 @@ def main():
         for name,source in files.items(): assert z.read(name) == source.read_bytes(), name
     report = dict(version=version,asi_sha256=hashlib.sha256((build/'RE2.KeyMapNames-v6.4.asi').read_bytes()).hexdigest(),
         package_sha256=hashlib.sha256(package.read_bytes()).hexdigest(),native_tests_run=bool(args.game_exe),live_game_tested=False)
-    (dist/'build-report.json').write_text(json.dumps(report,indent=2)+'\n')
+    (dist/f'build-report{suffix}.json').write_text(json.dumps(report,indent=2)+'\n')
     print(json.dumps(report,indent=2)); print(package)
 
 if __name__ == '__main__': main()

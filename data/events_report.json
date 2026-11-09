@@ -1,0 +1,286 @@
+{
+ "method": "FMV scenes (script op 111, Movie_on) started by an event AOT (SCE 5, gosub) get a purple event marker at the AOT, hidden once the first FG_COMMON bit the scene sets is set. Scenes with no AOT of their own, or without such a bit, are listed, not drawn.",
+ "drawn": [
+  {
+   "pl": 0,
+   "room": "204",
+   "room_ko": "서쪽 복도",
+   "room_en": "West Corridor",
+   "floor": 2,
+   "x": 47,
+   "y": 127,
+   "hidden_by_bit": "bank 4 bit 86",
+   "anchored_at_room_centre": false
+  },
+  {
+   "pl": 0,
+   "room": "204",
+   "room_ko": "서쪽 복도",
+   "room_en": "West Corridor",
+   "floor": 2,
+   "x": 47,
+   "y": 127,
+   "hidden_by_bit": "bank 4 bit 86",
+   "anchored_at_room_centre": false
+  },
+  {
+   "pl": 0,
+   "room": "409",
+   "room_ko": "다리 위",
+   "room_en": "Above the Bridge",
+   "floor": 7,
+   "x": 144,
+   "y": 120,
+   "hidden_by_bit": "bank 4 bit 31",
+   "anchored_at_room_centre": false
+  },
+  {
+   "pl": 0,
+   "room": "409",
+   "room_ko": "다리 위",
+   "room_en": "Above the Bridge",
+   "floor": 7,
+   "x": 144,
+   "y": 120,
+   "hidden_by_bit": "bank 4 bit 31",
+   "anchored_at_room_centre": false
+  },
+  {
+   "pl": 0,
+   "room": "701",
+   "room_ko": "열차 승강장",
+   "room_en": "Train Platform",
+   "floor": 18,
+   "x": 176,
+   "y": 107,
+   "hidden_by_bit": "bank 4 bit 183",
+   "anchored_at_room_centre": false
+  },
+  {
+   "pl": 1,
+   "room": "204",
+   "room_ko": "서쪽 복도",
+   "room_en": "West Corridor",
+   "floor": 2,
+   "x": 47,
+   "y": 127,
+   "hidden_by_bit": "bank 4 bit 86",
+   "anchored_at_room_centre": false
+  },
+  {
+   "pl": 1,
+   "room": "204",
+   "room_ko": "서쪽 복도",
+   "room_en": "West Corridor",
+   "floor": 2,
+   "x": 47,
+   "y": 127,
+   "hidden_by_bit": "bank 4 bit 86",
+   "anchored_at_room_centre": false
+  },
+  {
+   "pl": 1,
+   "room": "408",
+   "room_ko": "다리 아래",
+   "room_en": "Under the Bridge",
+   "floor": 8,
+   "x": 140,
+   "y": 121,
+   "hidden_by_bit": "bank 4 bit 31",
+   "anchored_at_room_centre": false
+  },
+  {
+   "pl": 1,
+   "room": "701",
+   "room_ko": "열차 승강장",
+   "room_en": "Train Platform",
+   "floor": 18,
+   "x": 176,
+   "y": 107,
+   "hidden_by_bit": "bank 4 bit 183",
+   "anchored_at_room_centre": false
+  },
+  {
+   "pl": 0,
+   "room": "108",
+   "room_ko": "옥상",
+   "room_en": "Rooftop",
+   "floor": 3,
+   "x": 248,
+   "y": 97,
+   "hidden_by_bit": "bank 4 bit 179",
+   "anchored_at_room_centre": true
+  },
+  {
+   "pl": 0,
+   "room": "108",
+   "room_ko": "옥상",
+   "room_en": "Rooftop",
+   "floor": 3,
+   "x": 248,
+   "y": 97,
+   "hidden_by_bit": "bank 4 bit 181",
+   "anchored_at_room_centre": true
+  },
+  {
+   "pl": 0,
+   "room": "10B",
+   "room_ko": "미술품 창고",
+   "room_en": "Art Storage",
+   "floor": 3,
+   "x": 222,
+   "y": 138,
+   "hidden_by_bit": "bank 4 bit 43",
+   "anchored_at_room_centre": true
+  },
+  {
+   "pl": 0,
+   "room": "200",
+   "room_ko": "중앙 홀",
+   "room_en": "Main Hall",
+   "floor": 2,
+   "x": 167,
+   "y": 131,
+   "hidden_by_bit": "bank 4 bit 72",
+   "anchored_at_room_centre": true
+  },
+  {
+   "pl": 1,
+   "room": "108",
+   "room_ko": "옥상",
+   "room_en": "Rooftop",
+   "floor": 3,
+   "x": 248,
+   "y": 97,
+   "hidden_by_bit": "bank 4 bit 179",
+   "anchored_at_room_centre": true
+  },
+  {
+   "pl": 1,
+   "room": "108",
+   "room_ko": "옥상",
+   "room_en": "Rooftop",
+   "floor": 3,
+   "x": 248,
+   "y": 97,
+   "hidden_by_bit": "bank 4 bit 181",
+   "anchored_at_room_centre": true
+  },
+  {
+   "pl": 1,
+   "room": "10B",
+   "room_ko": "미술품 창고",
+   "room_en": "Art Storage",
+   "floor": 3,
+   "x": 222,
+   "y": 138,
+   "hidden_by_bit": "bank 4 bit 43",
+   "anchored_at_room_centre": true
+  },
+  {
+   "pl": 1,
+   "room": "200",
+   "room_ko": "중앙 홀",
+   "room_en": "Main Hall",
+   "floor": 2,
+   "x": 167,
+   "y": 131,
+   "hidden_by_bit": "bank 4 bit 72",
+   "anchored_at_room_centre": true
+  }
+ ],
+ "not_drawn": [
+  {
+   "pl": 0,
+   "room": "617",
+   "fn": 4,
+   "reason": "cutscene sets no FG_COMMON progress flag",
+   "room_ko": "탈출 승강장",
+   "room_en": "Escape Platform"
+  },
+  {
+   "pl": 0,
+   "room": "617",
+   "fn": 4,
+   "reason": "cutscene sets no FG_COMMON progress flag",
+   "room_ko": "탈출 승강장",
+   "room_en": "Escape Platform"
+  },
+  {
+   "pl": 0,
+   "room": "700",
+   "fn": 7,
+   "reason": "cutscene sets no FG_COMMON progress flag",
+   "room_ko": "승강장 입구",
+   "room_en": "Platform Entrance"
+  },
+  {
+   "pl": 1,
+   "room": "617",
+   "fn": 4,
+   "reason": "cutscene sets no FG_COMMON progress flag",
+   "room_ko": "탈출 승강장",
+   "room_en": "Escape Platform"
+  },
+  {
+   "pl": 1,
+   "room": "617",
+   "fn": 4,
+   "reason": "cutscene sets no FG_COMMON progress flag",
+   "room_ko": "탈출 승강장",
+   "room_en": "Escape Platform"
+  },
+  {
+   "pl": 1,
+   "room": "700",
+   "fn": 7,
+   "reason": "cutscene sets no FG_COMMON progress flag",
+   "room_ko": "승강장 입구",
+   "room_en": "Platform Entrance"
+  },
+  {
+   "pl": 0,
+   "room": "505",
+   "fn": 14,
+   "movie": [
+    6
+   ],
+   "reason": "a boss spawns in this room: entering starts the fight, the boss keeps its enemy marker",
+   "room_ko": "화물 열차",
+   "room_en": "Freight Train"
+  },
+  {
+   "pl": 0,
+   "room": "602",
+   "fn": 25,
+   "movie": [
+    7
+   ],
+   "reason": "a boss spawns in this room: entering starts the fight, the boss keeps its enemy marker",
+   "room_ko": "연구소 복도",
+   "room_en": "Laboratory Corridor"
+  },
+  {
+   "pl": 1,
+   "room": "505",
+   "fn": 14,
+   "movie": [
+    6
+   ],
+   "reason": "no persistent (FG_SCENARIO/FG_COMMON) done flag",
+   "room_ko": "화물 열차",
+   "room_en": "Freight Train"
+  },
+  {
+   "pl": 1,
+   "room": "602",
+   "fn": 6,
+   "movie": [
+    7
+   ],
+   "reason": "no persistent (FG_SCENARIO/FG_COMMON) done flag",
+   "room_ko": "연구소 복도",
+   "room_en": "Laboratory Corridor"
+  }
+ ]
+}

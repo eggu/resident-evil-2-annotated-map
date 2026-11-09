@@ -13,6 +13,24 @@ def puzzle_marker():
     # Dark rim (~1 map pixel at 6px draw size) keeps the amber diamond readable on orange pending rooms.
     d.polygon(((16,1),(31,16),(16,31),(1,16)), fill=(8,8,8))
     d.polygon(((16,7),(25,16),(16,25),(7,16)), fill=(238,184,48))
+    mark_exclamation(d)
+    return icon
+
+
+def mark_exclamation(d):
+    # RE0 rule (user 2026-11-08): the puzzle diamond carries a dark '!' (bar and dot).
+    d.rectangle((15,10,16,17), fill=(8,8,8))
+    d.rectangle((15,20,16,21), fill=(8,8,8))
+
+
+def event_marker():
+    # Events (spoiler story scenes): purple diamond (#B070FF, RE0 event colour) with a dark '?'.
+    icon = Image.new('RGB', (TEX,TEX))
+    d = ImageDraw.Draw(icon)
+    d.polygon(((16,1),(31,16),(16,31),(1,16)), fill=(8,8,8))
+    d.polygon(((16,7),(25,16),(16,25),(7,16)), fill=(176,112,255))
+    d.line(((13,12),(13,11),(14,10),(17,10),(18,11),(18,13),(16,15),(16,17)), fill=(8,8,8), width=1)
+    d.rectangle((15,20,16,21), fill=(8,8,8))
     return icon
 
 
@@ -72,6 +90,7 @@ def generate():
     icons.append((13, 'map', map_icon()))
     icons.append((14, 'keystar', key_star()))
     icons.append((15, 'puzzle-key', puzzle_key()))
+    icons.append((16, 'event', event_marker()))
     heads = [load_icon('monster-' + name, (TEX, TEX)) for name in MONSTER_NAMES]
     assert len({im.tobytes() for im in heads}) == len(MONSTER_NAMES) == 12
     icons += [(50 + c, 'monster-' + name, heads[c]) for c, name in enumerate(MONSTER_NAMES)]

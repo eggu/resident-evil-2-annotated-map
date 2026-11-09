@@ -4,6 +4,7 @@ import hashlib, json, os, re, struct
 from PIL import Image, ImageDraw, ImageFont
 from unicorn import Uc, UC_ARCH_X86, UC_MODE_32
 from unicorn.x86_const import UC_X86_REG_ESP, UC_X86_REG_EAX
+import category_colors
 
 R = Path(__file__).resolve().parent
 G = Path(os.environ['RE2_GAME'])
@@ -19,31 +20,44 @@ LANGUAGE = 'Korean'
 ROOM_NAMES_FILE = 'room_names-ko.json'
 # Text-only legend: ON rows use category colours; OFF rows are grey.
 HELP_TEXT = {
-    'Korean': ('표시 상태', '[0] 전체 켜짐', '[0] 전체 꺼짐', '[1] 방 이름 켜짐', '[1] 방 이름 꺼짐',
+    'Korean': ('지도 메모', '[0] 전체 켜짐', '[0] 전체 꺼짐', '[1] 방 이름 켜짐', '[1] 방 이름 꺼짐',
                '[2] 잠긴 문 켜짐', '[2] 잠긴 문 꺼짐', '[3] 핵심 아이템 켜짐', '[3] 핵심 아이템 꺼짐',
                '[4] 문서·지도 켜짐', '[4] 문서·지도 꺼짐', '[5] 퍼즐 켜짐', '[5] 퍼즐 꺼짐',
-               '[9] 언어: 한국어', '[9] 언어: 영어', '[7] 적 켜짐', '[7] 적 꺼짐',
-               '[6] 일반 아이템 켜짐', '[6] 일반 아이템 꺼짐',
-               '[8] 방문 방', '[8] 공개 방', '[8] 전체 방'),
-    'English': ('STATUS', '[0] ALL: ON', '[0] ALL: OFF', '[1] ROOMS: ON', '[1] ROOMS: OFF',
+               '[\\] 언어: 한국어', '[\\] 언어: 영어', '[8] 적 켜짐', '[8] 적 꺼짐',
+               '[7] 일반 아이템 켜짐', '[7] 일반 아이템 꺼짐',
+               '[9] 방문 방', '[9] 공개 방', '[9] 전체 방'),
+    'English': ('Map Notes', '[0] ALL: ON', '[0] ALL: OFF', '[1] ROOMS: ON', '[1] ROOMS: OFF',
                 '[2] LOCKS: ON', '[2] LOCKS: OFF', '[3] KEY ITEMS: ON', '[3] KEY ITEMS: OFF',
                 '[4] FILES & MAPS: ON', '[4] FILES & MAPS: OFF', '[5] PUZZLES: ON', '[5] PUZZLES: OFF',
-                '[9] LANGUAGE: KOREAN', '[9] LANGUAGE: ENGLISH', '[7] ENEMIES: ON', '[7] ENEMIES: OFF',
-                '[6] ITEMS: ON', '[6] ITEMS: OFF',
-                '[8] VISITED', '[8] REVEALED', '[8] ALL ROOMS'),
+                '[\\] LANGUAGE: KOREAN', '[\\] LANGUAGE: ENGLISH', '[8] ENEMIES: ON', '[8] ENEMIES: OFF',
+                '[7] ITEMS: ON', '[7] ITEMS: OFF',
+                '[9] VISITED', '[9] REVEALED', '[9] ALL ROOMS'),
 }
-for language, title in (('Korean', '[Shift -/+] 불투명도'), ('English', '[Shift -/+] Alpha')):
-    HELP_TEXT[language] += tuple(f'{title}: {percent}%' for percent in range(10, 101, 10))
-for language, title in (('Korean', '[-/+] 이름'), ('English', '[-/+] Size')):
-    HELP_TEXT[language] += tuple(f'{title}: {percent}%' for percent in range(50, 151, 10))
-HELP_TEXT['Korean'] += ('[결정] 확대: 1배', '[결정] 확대: 2배', '[~] 범례', '[~] 숨김')  # ids 43,44 decide as in RE3; 45 folded legend; 46 hide
-HELP_TEXT['English'] += ('[Action] Zoom: 1x', '[Action] Zoom: 2x', '[~] Legend', '[~] Hide')
+# Title and [9] rows as in the RE0 HD map mod ('지도 메모' / 'Map Notes'; user 2026-11-07: same title in every map mod).
+# Hint format of the RE0 HD map mod (candidate 49): a lone key in brackets ([~], [H], [결정]), '·' between alternatives,
+# '+' for combinations. ids 22/23 zoom, 24 folded legend, 25 hide, 26/27 marker names on/off; 28.. the readout panel
+# (re2_keymap.c readout_layout): two name hints, the Shift/Ctrl prefixes, two icon hints, then the values 10%..200%.
+HELP_TEXT['Korean'] += ('[결정] 확대: 1배', '[결정] 확대: 2배', '[~] 범례', '[~] 숨김', '[H] 아이템 이름: 모두', '[H] 아이템 이름: 끔',
+                        '[ · ] 이름 불투명도:', '- · + 이름 크기:', 'Shift +', 'Ctrl +', '[ · ] 아이콘 불투명도:', '- · + 아이콘 크기:')
+HELP_TEXT['English'] += ('[Action] Zoom: 1x', '[Action] Zoom: 2x', '[~] Legend', '[~] Hide', '[H] NAMES: ALL', '[H] NAMES: OFF',
+                         '[ · ] Name opacity:', '- · + Name size:', 'Shift +', 'Ctrl +', '[ · ] Icon opacity:', '- · + Icon size:')
+for language in HELP_TEXT:
+    HELP_TEXT[language] += tuple(f'{percent}%' for percent in range(10, 201, 10))
+# The third [H] state (ItemNames=2) is appended so no earlier id moves: id 26 ALL, 27 OFF, 54 NO COMMON (re2_keymap.c HELP_ITEM_NAMES_NO_COMMON).
+# Language row (ids 13/14) is '[\\]' since the number keys were renumbered (user 2026-11-08); it sits in the header next to [H].
+HELP_TEXT['Korean'] += ('[H] 아이템 이름: 일반 제외',)
+HELP_TEXT['English'] += ('[H] NAMES: NO COMMON',)
+# Events (user 2026-11-08, legend renumbering): [6] ON/OFF appended as ids 55/56 so no earlier id moves.
+HELP_TEXT['Korean'] += ('[6] 이벤트 켜짐', '[6] 이벤트 꺼짐')
+HELP_TEXT['English'] += ('[6] EVENTS: ON', '[6] EVENTS: OFF')
 HELP_SLOT = 6  # map pixels per marker slot (5 px marker + 1 px gap)
-_WHITE, _OFF = (255, 255, 255), (140, 140, 140)
+_WHITE, _OFF = (255, 255, 255), category_colors.OFF
 # RE3 build_assets.py CATEGORY_COLOR/PALETTE, in HELP_TEXT order; marker sprites stay unchanged.
-HELP_RGB = (_WHITE, _WHITE, _OFF, (240, 226, 190), _OFF, (255, 205, 70), _OFF, (90, 220, 255), _OFF,
-            (255, 140, 210), _OFF, (255, 150, 40), _OFF, _WHITE, _WHITE, (235, 60, 60), _OFF, (255, 120, 60), _OFF,
-            _WHITE, _WHITE, _WHITE) + (_WHITE,) * 25
+HELP_RGB = (_WHITE, _WHITE, _OFF, category_colors.ROOMS, _OFF, category_colors.NAME_RGB[category_colors.LOCK], _OFF,
+            category_colors.NAME_RGB[category_colors.KEY], _OFF, category_colors.NAME_RGB[category_colors.DOCUMENT], _OFF,
+            category_colors.NAME_RGB[category_colors.PUZZLE], _OFF, _WHITE, _WHITE, category_colors.MONSTERS, _OFF,
+            category_colors.NAME_RGB[category_colors.COMMON], _OFF,
+            _WHITE, _WHITE, _WHITE) + (_WHITE,) * 5 + (_OFF,) + (_WHITE,) * 27 + (category_colors.NAME_RGB[category_colors.EVENT], _OFF)
 # Native rects reachable from several RDTs: (floor, index) -> room code whose name labels it.
 # Floor 19 train map index 1 is the same rect as room 704's floor-18 train car, reached from 700/701/702/704.
 SHARED_RECT = {(19, 1): '704'}
@@ -212,16 +226,38 @@ def hit(a, b):
     return a[0] < b[0] + b[2] + 1 and b[0] < a[0] + a[2] + 1 and a[1] < b[1] + b[3] + 1 and b[1] < a[1] + a[3] + 1
 
 
-def fit_inside(m, s, ox, oy, lw, lh, placed):
-    """Best label-centre (absolute) whose lw x lh box sits on the room's own mask, else None."""
+def pole(m):
+    """Pole of inaccessibility: the mask pixel farthest from its edge (chessboard distance), ties nearest the centroid.
+    The bounding-box centre of an L-shaped room can fall outside it (RE0 HD map mod rule)."""
     h, w = len(m), len(m[0])
     pts = [(x, y) for y in range(h) for x in range(w) if m[y][x]]
-    if not pts:
-        return None
+    dist = {p: 0 for p in pts if p[0] in (0, w - 1) or p[1] in (0, h - 1) or
+            not all(m[p[1] + j][p[0] + i] for j in (-1, 0, 1) for i in (-1, 0, 1))}
+    todo = list(dist)
+    while todo:
+        nxt = []
+        for x, y in todo:
+            for j in (-1, 0, 1):
+                for i in (-1, 0, 1):
+                    q = (x + i, y + j)
+                    if 0 <= q[0] < w and 0 <= q[1] < h and m[q[1]][q[0]] and q not in dist:
+                        dist[q] = dist[(x, y)] + 1; nxt.append(q)
+        todo = nxt
     cx, cy = sum(p[0] for p in pts) / len(pts), sum(p[1] for p in pts) / len(pts)
+    return max(pts, key=lambda p: (dist[p], -((p[0] - cx) ** 2 + (p[1] - cy) ** 2)))
+
+
+def fit_inside(m, s, ox, oy, lw, lh, placed):
+    """Label centre (absolute) on the room's own mask nearest its pole of inaccessibility, among the spots within
+    0.05 of the best coverage (or fully covered) that overlap no placed box; else None."""
+    h, w = len(m), len(m[0])
+    if not any(map(any, m)):
+        return None
+    qx, qy = pole(m)
     best = None
     for scale, need in ((1.0, FIT), (SMALL, 1.0)):
         bw, bh = max(1, -(-int(lw * scale * 100) // 100)), max(1, -(-int(lh * scale * 100) // 100))
+        spots = []
         for by in range(-bh // 2, h - bh // 2):
             for bx in range(-bw // 2, w - bw // 2):
                 cov = box_sum(s, bx, by, bw, bh) / (bw * bh)
@@ -232,11 +268,12 @@ def fit_inside(m, s, ox, oy, lw, lh, placed):
                     continue
                 if any(hit((ox + px - lw // 2, oy + py - lh // 2, lw, lh), b) for b in placed):
                     continue
-                score = (px - cx) ** 2 + (py - cy) ** 2 - cov * 400
-                if best is None or score < best[0]:
-                    best = (score, ox + px, oy + py, box_sum(s, px - lw // 2, py - lh // 2, lw, lh) / (lw * lh))
-        if best:
-            return best[1:]
+                spots.append((cov, px, py))
+        if spots:
+            top = max(c for c, _, _ in spots)
+            _, px, py = min((sp for sp in spots if sp[0] >= top - 0.05 or sp[0] == 1.0),
+                            key=lambda sp: ((sp[1] - qx) ** 2 + (sp[2] - qy) ** 2, -sp[0]))
+            return ox + px, oy + py, box_sum(s, px - lw // 2, py - lh // 2, lw, lh) / (lw * lh)
     return None
 
 
@@ -308,48 +345,21 @@ def near_spot(r, px, occ, blocked, lw, lh, placed, lines, kmax=45, side=None):
     return best
 
 
-SRC = Path(__file__).resolve().parent  # marker headers stay beside this script when R points at a scratch dir
-PROJ = 6  # re2_keymap.c PROJ_CENTRE: item/marker coordinates are offset from room-label space by this much
-COMMON = {20, 21, 22, 24, 25, 26, 27, 29, 30, 35, 38, 39, 40}  # re2_keymap.c common_item
+# Room names are fixed first and nothing avoids them, and they avoid no marker (RE0 HD map mod rule, user 2026-11-07); they
+# only keep off each other and the legend/readout panels (re2_keymap.c LEGEND_Y and readout_layout).
+LEGEND_BOX = (1, 210, 317, 28)
+# ponytail: room names live in map space, panels on the screen; the native pan (0x691fb8, (4,6) in the tests) shifts
+# one against the other, so each panel is reserved PAN_MARGIN px larger toward the map. Per-floor pans would be exact.
+PAN_MARGIN = 8
 
 
-def c_rows(path, name):
-    body = (SRC / path).read_text().split(name, 1)[1].split('={', 1)[-1].split('};', 1)[0]
-    return [tuple(int(v, 0) for v in m.split(',')) for m in re.findall(r'\{([-0-9x, ]+)\}', body)]
-
-
-def marker_boxes():
-    """(pl, floor) -> boxes of every key-item star, puzzle diamond, save/item-box marker, document/area-map icon and
-    lock icon. Room names must never overlap these (user 2026-10-26); common items and monsters may be covered."""
-    out = {}
-    def add(pl, floor, x, y, w, h):
-        out.setdefault((pl, floor), []).append((x - w // 2, y - h // 2, w, h))
-    for pl, floor, x, y, seen, item, *_ in c_rows('items.h', 'map_items[]'):
-        if item not in COMMON:
-            add(pl, floor, x + PROJ, y + PROJ, 8, 8)
-    for pl, floor, seen, kind, x, y in c_rows('overlay_data.h', 'map_markers[]'):
-        add(pl, floor, x + PROJ, y + PROJ, 8, 8)
-    for pl, floor, seen, bank, item, x, y, *_ in c_rows('overlay_data.h', 'map_documents[]'):
-        add(pl, floor, x + PROJ, y + PROJ, 8, 8)
-    for pl, floor, seen, kind, x, y, *_ in c_rows('overlay_data.h', 'map_interactions[]'):
-        if kind == 6:
-            add(pl, floor, x + PROJ, y + PROJ, 6, 6)
-    def lock_size(w, h):  # re2_keymap.c icon_box: longest visible side LOCK_ICON_TENTHS/10 px
-        m = max(w, h)
-        return max(1, (w * 75 + m * 5) // (m * 10)), max(1, (h * 75 + m * 5) // (m * 10))
-    # Area maps covered by a star/diamond are drawn as a badge offset MAP_BADGE=3 px down-right (re2_keymap.c, user
-    # 2026-10-28).
-    high = [(pl, floor, x, y) for pl, floor, x, y, seen, item, *_ in c_rows('items.h', 'map_items[]')
-            if item not in COMMON and not 200 <= item <= 205]
-    high += [(pl, floor, x, y) for pl, floor, seen, kind, x, y, *_ in c_rows('overlay_data.h', 'map_interactions[]') if kind == 6]
-    for pl, floor, x, y, seen, item, *_ in c_rows('items.h', 'map_items[]'):
-        if 200 <= item <= 205 and any(h[:2] == (pl, floor) and abs(h[2] - x) < 7 and abs(h[3] - y) < 7 for h in high):
-            add(pl, floor, x + PROJ + 3, y + PROJ + 3, 7, 7)
-    lock = {item: lock_size(w, h) for item, u, v, w, h in c_rows('atlas.h', 'icons[]')}
-    for pl, floor, x, y, seen, unlock, key, *_ in c_rows('doors-all.h', 'doors[]'):
-        if key in lock:
-            add(pl, floor, x, y, *lock[key])
-    return out
+def readout_width(labels, help_start):
+    """re2_keymap.c readout_layout: a name column (opacity over size) and an icon column (modifier + opacity over
+    size); each value after its hint."""
+    q = lambda i: (labels[help_start + i]['w'] + LABEL_SCALE // 2) // LABEL_SCALE
+    value = max(q(i) for i in range(34, 54))
+    prefix = max(q(30), q(31))
+    return max(q(28), q(29)) + 2 + value + 6 + prefix + 2 + max(q(32), q(33)) + 2 + value
 
 
 def place_labels(rows, labels, masks):
@@ -374,8 +384,7 @@ def place_labels(rows, labels, masks):
             r['line'] = (0, 0, 0, 0)
             r['outside_reason'] = None
         blocked = {(x + i, y + j) for x, y in occ for j in (-1, 0, 1) for i in (-1, 0, 1)}
-        markers = MARKERS.get((group[0]['pl'], group[0]['floor']), [])
-        placed, lines = list(markers), []
+        placed, lines = list(PANELS), []
         for r in sorted(group, key=lambda r: sum(map(sum, r['_m']))):  # tightest rooms choose first
             spot = None  # 2px, then 1px wall margin, then none, before going outside
             for m, s in ((erode(erode(r['_m'])), None), (erode(r['_m']), None), (r['_m'], r['_s'])):  # outline is ~2px wide
@@ -417,7 +426,7 @@ def place_labels(rows, labels, masks):
                             else:
                                 lx = bx1 + GAP + lw // 2 + ring * (lw + 2); ly = c + along * (lh // 2 + 1); line = (sx, c, lx - lw // 2, c)
                             box = (lx - lw // 2, ly - lh // 2, lw, lh)
-                            if any(hit(box, b) for b in placed):
+                            if any(hit(box, b) for b in placed) or along_outline(set(px), occ, line):
                                 continue
                             lo_x, hi_x = sorted((line[0], line[2])); lo_y, hi_y = sorted((line[1], line[3]))
                             crossed = sum(1 for yy in range(lo_y, hi_y + 1) for xx in range(lo_x, hi_x + 1)
@@ -446,12 +455,15 @@ def generate():
     for r in rows:
         r['label'] = names.index((wrapped if LANGUAGE == 'English' else {}).get(r['ko'], r['ko']))
     masks = load_masks()
-    global MARKERS
-    MARKERS = marker_boxes()
+    global PANELS
+    width = readout_width(labels, len(labels) - len(HELP_TEXT[LANGUAGE]))
+    PANELS = [(1, LEGEND_BOX[1] - PAN_MARGIN, 317, LEGEND_BOX[3] + PAN_MARGIN),  # re2_keymap.c READOUT_X/READOUT_Y:
+              (8 - PAN_MARGIN, 1 - PAN_MARGIN, width + PAN_MARGIN, 16 + PAN_MARGIN)]
     place_labels(rows, labels, masks)
     # Wrap only between words: a single word is never split mid-word (user 2026-10-23: "Elev/ator"). Korean names
-    # are wrapped the same way (between words) and otherwise stay on one line.
-    retry = {r['ko'] for r in rows if r['outside_reason'] and len(r['ko'].split()) > 1}
+    # are wrapped the same way (between words) and otherwise stay on one line. Also wrapped: a one-line name wider
+    # than 150% of its room (RE0 HD map mod rule).
+    retry = {r['ko'] for r in rows if len(r['ko'].split()) > 1 and (r['outside_reason'] or r['lw'] > 1.5 * r['rect'][2])}
     for name in retry:
         parts = name.split()
         best = min(range(1, len(parts)), key=lambda n: abs(font.getlength(' '.join(parts[:n])) - font.getlength(' '.join(parts[n:]))))
@@ -515,6 +527,7 @@ def generate():
               f'#define ROOM_LABEL_PAGE_COUNT {len(pages)}', f'#define ROOM_LABEL_SCALE {LABEL_SCALE}', f'#define ROOM_LABEL_COUNT {len(labels)}',
               f'#define ROOM_HELP_LABEL {len(labels) - len(HELP_TEXT[LANGUAGE])}',
               f'#define ROOM_HELP_LABEL_COUNT {len(HELP_TEXT[LANGUAGE])}',
+              f'#define ROOM_READOUT_W {PANELS[1][2]}',
               'static const RoomLabel room_labels[]={' + ','.join('{%d,%d,%d,%d,%d}' %
               (d['page'],d['u'],d['v'],d['w'],d['h']) for d in labels) + '};',
               '/* map-pixel x of the first marker slot inside each legend row (0 = none) */',

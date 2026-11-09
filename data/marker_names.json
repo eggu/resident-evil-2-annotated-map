@@ -1,0 +1,2869 @@
+{
+ "_comment": "Names of document and puzzle markers. Documents: the Files-list names of the game (English: EXE item-name table; Korean: the Korean HD patch's name table, see documents_source.names); en_title/ko_title are the titles on the first page (bitmaps). Puzzles: one name per mechanism (see basis).",
+ "documents_source": {
+  "method": "Title = page 2 (4bpp 256x256 TIM) of Common/file/fileNN.bin (installed Korean HD patch) and fileNNu.bin (English); NN = item id - 104 (EXE 0x4fa864 adds 0x68). Pages are LZ-unpacked with the EXE's own decompressor 0x43c390 from raw[0x80+offset[2]:] (offset table = first 32 dwords). Titles were read from the bitmaps by eye; the Korean text is the patch's own title text, entries flagged ko_reading_uncertain need confirmation.",
+  "exe_sha256": "21b2a647cbeddac1ec389be847f22a434a0264a18020589de91cb2824dcb1bf5",
+  "extracted": "2026-11-07",
+  "files": {
+   "file02.bin": "df3eccea55d16969ada4671b4c724752a7d69e347e7e350bc325ee3218dee94b",
+   "file02u.bin": "8e5e6f0b36a75fb067fb26fb04cc3e0f114f36525f9e304a282fc9b9f3c3a55f",
+   "file03.bin": "e34e0dc0bc0ac46331905777208bd32a869815eab1a5809f68e609423357bad1",
+   "file03u.bin": "7a65ee3f168840cb4058d3ce6912ef8c69d329fd115b9dd6ea66eb872cde166e",
+   "file04.bin": "07291f07bbcf89b665a64389277aa6a683745f632055ea3fbcc6265acb582fdb",
+   "file04u.bin": "8c4501d0cd1cf3e80cc0789b4c86503b81f903c6bc3e948335263c9146e466fc",
+   "file05.bin": "42924fc0f86730df958a00c28a2fe0db27bb9d26d1d0a6ac4d87a23064cad712",
+   "file05u.bin": "4e894165bb67c0917402a2b0cb96afe90738de917d39526b246dcf8cd2062d74",
+   "file06.bin": "aa951c98292b71e0f795ffce9897ddc8227fdc27814311558872d9b6a4fb549a",
+   "file06u.bin": "77d841a15c739ab82d631ad4e50fcff7aba0cd07cb1a89a879f0bc59308a4645",
+   "file07.bin": "6703217fbc6d28a3b0c4fedec8d0b15c45ca94590d52ae63ac3add8bf5c82f7e",
+   "file07u.bin": "700480e20e6b9d2eb07fbad4a5e9f07cb03c35f1348519e4655f868ba435d322",
+   "file08.bin": "d7c7a22a5a959e8c9239b6efcd3f9e385d6e00876cd64636d8a1630cb96e71e7",
+   "file08u.bin": "0b1a47f2450f52e8d85b2a428557bfe7db01be8e9305eb213c1c7ad0c8c5ecc2",
+   "file09.bin": "8111aa368b51dbcd1cf68ba9ab3f8d86c0fae14fe73a8c158749e9be4c04d026",
+   "file09u.bin": "bc81e9124ea66e158f03b0c0cf67966026bf33bc7244132a4597f6a012e46f60",
+   "file0a.bin": "823593f51f5807bbb28debca0fda962b8310c626dd13278073dde68343fe2919",
+   "file0au.bin": "763bd8cdc665d46503ef7e052892d40c2033a3f77c5b42be446d77acc7970f73",
+   "file0b.bin": "dbd33b140f7dd45f083bda4b9b1d981a5d8b11f42c3518a48611fd3fb3f9e429",
+   "file0bu.bin": "87e30ee0fc4f3748e1ee0cf767fa64daa1f648bd5c9b0784fd0bef3e0b58aee3",
+   "file0c.bin": "d5fde8cca5f7954c232257fde0efe13ba59abcb3f8de802832a86bea41c9d8cc",
+   "file0cu.bin": "a404e8676124385455a0ec4218ff27edc17af36f0913a11b7456997dac0222cf",
+   "file0d.bin": "8a53d9168e4ec1cd61af1d94817e02db7e90a86ad392f9f4d31a5423e1a6d43b",
+   "file0du.bin": "c18c8f878270b92bc2e6753c3fa4063bff440997a4207c1430ada333febced01",
+   "file0e.bin": "59da1f2d8c520b874d122fb08b658d6ceee42c0d37a0266329ba521a1198fb7b",
+   "file0eu.bin": "4e18944d6a3fcddd5b0b6d45a73c9c15abcaca22e8dc1617e5d82bf2fd47ea83",
+   "file0f.bin": "b69d2f2b525e5e4130679d60d8ea243f19a030b1f81708f61e1fe46eb6a1dbb6",
+   "file0fu.bin": "a33e3505fec5c0062bf91e3c61c566f90e7888f83c082ef08b577afc159a235b",
+   "file10.bin": "369f19518d562f2e9fbff331fd6bc8ad0a73f9fdec563fe9c75a18815fc7b3e1",
+   "file10u.bin": "be44c57afa9e65189a4063ab96b1b7b3fad408ce7837999b7f976aa62f3be312",
+   "file11.bin": "aec07a0797593e244b95094b68a7be491b683bbf80cd5654394e7e55018ad8a5",
+   "file11u.bin": "c88908a2f158adef917016428069efaa65edc7b6c8bedf5cc9cd775012328c78",
+   "file12.bin": "4487dce7cfeb7209364995dfb3051b6759149ea643b61ce640ff66677ea9a9a6",
+   "file12u.bin": "617c2dc28343ea9691145e7a751a229a38ac95126625d909ece561310ec3b1fa",
+   "file13.bin": "faeb2f5c39b1350efb8353b465e2114d4dfc29a414f30eb82b3873114944c78b",
+   "file13u.bin": "8fd1d38709bfc90a462c3bcf45c888fe9d550f8fb2deffc62ed62ae6473b72f1",
+   "file14.bin": "5808b107c651f6369378af44970e93ab8aa9f915f9973573ce6dd493e28a59d6",
+   "file14u.bin": "73d67449c89d21bd926075b7838feb56ab7aef0a1f542d83f4c7b5048e99ca45",
+   "file15.bin": "67b83d34d1baae10c24e7f5453b01bf09945bd05e9e423e681027f5fa45fd11b",
+   "file15u.bin": "ff115cd2d23bafc8b2e486d1250f01eaa3a423f0617a5a9adc273c1844fc5c84",
+   "file16.bin": "eb10c3c8d2b3a8f7758ead30f34316af1da1cd627fdbb12158d545918cebee58",
+   "file16u.bin": "ca8dcedfd27f3d759125ad1bf260c9521348bad8f317ea55aaed5766a2d32976"
+  },
+  "names": {
+   "english": "Resident Evil 2.exe (SHA-256 21b2a647...) file offset 0x12eb98 (VA 0x52eb98): 0xf7-terminated strings in the game font encoding (byte+36 = ASCII, 0 = space, '^' apostrophe, '_' dash); string n is the name of item id n. Per-document offset, VA and SHA-256 are in en_source; tools/mapgen/extract_doc_names.py checks them.",
+   "extracted": "2026-11-07",
+   "korean": "korean.asi applies korean_hd.bin (KRP1) to the running game; its records `03 01 <table offset> <length> <bytes>` are the Korean item-name table (offsets contiguous from 0x800, f7-terminated, n-th record = item id n). `f1 xx`/`f2 xx` = cell xx / 252+xx of Common/Data/fontk1.adt (korean_rebirth.txt page 39), `f3 xx` = cell xx of the shared rows of Common/Data/font1..7.adt (page 9); 14x14 px cells, 18 per row. Per-document record offset, bytes and SHA-256 are in ko_source; cell readings in ko_glyphs. tools/mapgen/extract_ko_doc_names.py checks both against the game files.",
+   "japanese_code_table": "The EXE's own Japanese-code table (base VA 0x52e580, offsets VA 0x52ea80, getter 0x4c9909) is what the patch replaces; its strings are Japanese (e.g. 119 ジョージの日記), so they are not the Korean names.",
+   "korean_items": "Every item id of the map (key items, ammo, herbs, lock keys...) takes its Korean name from the same korean_hd.bin table (item_names_ko, with record offset, bytes and SHA-256 each); 0x01 = '.'. Area maps 200-205 are not in the table and keep the project's names."
+  }
+ },
+ "documents": {
+  "106": {
+   "en": "Memo to LEON",
+   "ko": "레온에게 보내는 메모",
+   "en_source": {
+    "file": "Resident Evil 2.exe",
+    "offset": "0x12f023",
+    "va": "0x52f023",
+    "sha256": "ef51bf5c485b8489ec222c973cf7250fc09face3f2769811381aaebbd5831d01"
+   },
+   "ko_source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x2a53",
+    "table_offset": "0xc48",
+    "bytes": "f241f30df1b4f11f00f145f1f7f1bd00f301f1a6f7",
+    "sha256": "b4791a9bd1bb2f36a862a9398810c329c8f464be0cdead308c789db79006a08b",
+    "note": "Files-list name of the Korean HD patch (korean.asi applies korean_hd.bin); glyph readings in ko_glyphs"
+   },
+   "file": "file02",
+   "en_title": "Memo to Leon",
+   "ko_title": "레온에게 남긴 메모",
+   "bitmap": {
+    "ko": {
+     "w": 104,
+     "h": 13,
+     "sha256": "10a2b65ee3cd3bbc9b2ef4b19f094cbc096a615e217f3c6f01884dcd0db87450"
+    },
+    "en": {
+     "w": 102,
+     "h": 10,
+     "sha256": "e6b359bc5b33259e7e70a1e5c247702312ac14cdbe3693cdf1140d34c8174e67"
+    }
+   },
+   "ko_reading_uncertain": false
+  },
+  "107": {
+   "en": "Police memorandum",
+   "ko": "경찰 메모",
+   "en_source": {
+    "file": "Resident Evil 2.exe",
+    "offset": "0x12f030",
+    "va": "0x52f030",
+    "sha256": "b1c0937dd2015d18d4f50a8acd52b5f6738b4a1be6ac16d05af10e633e079507"
+   },
+   "ko_source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x2a76",
+    "table_offset": "0xc5d",
+    "bytes": "f114f30300f301f1a6f7",
+    "sha256": "f336614aa77b8f548ea82382132223f5e5596758b7610449e401573a6cad1a6d",
+    "note": "Files-list name of the Korean HD patch (korean.asi applies korean_hd.bin); glyph readings in ko_glyphs"
+   },
+   "file": "file03",
+   "en_title": "Police Memorandum",
+   "ko_title": "서내 회람",
+   "bitmap": {
+    "ko": {
+     "w": 53,
+     "h": 13,
+     "sha256": "3ea43a5cd397e8e767f0b94d56f6623f42768a0828c17ad19979a7b50778cc96"
+    },
+    "en": {
+     "w": 150,
+     "h": 10,
+     "sha256": "92b46be3ec8d85211e792498f9e4aa2039753ef8a0bb2f8fde74270c68687824"
+    }
+   },
+   "ko_reading_uncertain": false
+  },
+  "108": {
+   "en": "Operation report 1",
+   "ko": "작전 보고서 1",
+   "en_source": {
+    "file": "Resident Evil 2.exe",
+    "offset": "0x12f042",
+    "va": "0x52f042",
+    "sha256": "350229822eb5457b7b27cef8e6fa5882197fb76e9f065a169940106764ba4d42"
+   },
+   "ko_source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x2a8e",
+    "table_offset": "0xc67",
+    "bytes": "f136f19f00f145f151f102000df7",
+    "sha256": "2c1340d62001a2fb4bb14ff33e24d0e721aab8956a0e7f7e08cead6d605ebe35",
+    "note": "Files-list name of the Korean HD patch (korean.asi applies korean_hd.bin); glyph readings in ko_glyphs"
+   },
+   "file": "file04",
+   "en_title": "Operation Report",
+   "ko_title": "작전 보고서",
+   "bitmap": {
+    "ko": {
+     "w": 63,
+     "h": 13,
+     "sha256": "a38f93232231ded8ee1e62e214271ea8577d34844e1c78cdd44d06dfb9c5a6a7"
+    },
+    "en": {
+     "w": 141,
+     "h": 10,
+     "sha256": "1108da82a841cb7d07fdefa5c14337bed3fd65ee7a6bf0b25ff4d1409ba9e150"
+    }
+   },
+   "ko_reading_uncertain": false
+  },
+  "109": {
+   "en": "Mail to the chief",
+   "ko": "서장에게 온 편지",
+   "en_source": {
+    "file": "Resident Evil 2.exe",
+    "offset": "0x12f055",
+    "va": "0x52f055",
+    "sha256": "f96da69ed1b23ba498b069bf90574add18a1d387d021245f66bc84838a126f36"
+   },
+   "ko_source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x2aaa",
+    "table_offset": "0xc75",
+    "bytes": "f102f11cf1b4f11f00f30d00f30ef120f7",
+    "sha256": "e0703811eaa814a0b0ddd16cab9ee05069f72e96f54b21ab36677bae3ef2bcfc",
+    "note": "Files-list name of the Korean HD patch (korean.asi applies korean_hd.bin); glyph readings in ko_glyphs"
+   },
+   "file": "file05",
+   "en_title": "Mail to the Chief",
+   "ko_title": "서장 앞으로 온 메일",
+   "bitmap": {
+    "ko": {
+     "w": 107,
+     "h": 13,
+     "sha256": "a2e0cb8dfbee4cf1741f406b064c4e9f62bd8fc40556cfcf1eca323e3a14ee81"
+    },
+    "en": {
+     "w": 140,
+     "h": 10,
+     "sha256": "133303da08bf4ff86c2657a7ed5c4dd710b248881ce0902ebfff42e1dd2bd7b9"
+    }
+   },
+   "ko_reading_uncertain": false
+  },
+  "110": {
+   "en": "Mail to the chief",
+   "ko": "서장에게 온 편지",
+   "en_source": {
+    "file": "Resident Evil 2.exe",
+    "offset": "0x12f067",
+    "va": "0x52f067",
+    "sha256": "f96da69ed1b23ba498b069bf90574add18a1d387d021245f66bc84838a126f36"
+   },
+   "ko_source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x2ac9",
+    "table_offset": "0xc86",
+    "bytes": "f102f11cf1b4f11f00f30d00f30ef120f7",
+    "sha256": "e0703811eaa814a0b0ddd16cab9ee05069f72e96f54b21ab36677bae3ef2bcfc",
+    "note": "Files-list name of the Korean HD patch (korean.asi applies korean_hd.bin); glyph readings in ko_glyphs"
+   },
+   "file": "file06",
+   "en_title": "Copy of Mail to the Chief",
+   "ko_title": "서장 앞으로 온 메일의 사본",
+   "bitmap": {
+    "ko": {
+     "w": 148,
+     "h": 13,
+     "sha256": "0ddb0fae32799c90b2e1067baf23f73170f83bc35b6af5457d78a6df43d95185"
+    },
+    "en": {
+     "w": 206,
+     "h": 10,
+     "sha256": "567a68840b54de0d89249190e2910a94d316f52d219baaac46fa7d2b0166a919"
+    }
+   },
+   "ko_reading_uncertain": false
+  },
+  "111": {
+   "en": "Secretary's diary A",
+   "ko": "비서의 일기 A",
+   "en_source": {
+    "file": "Resident Evil 2.exe",
+    "offset": "0x12f079",
+    "va": "0x52f079",
+    "sha256": "1caa125894d01696ef77f5430b2cad99ec3fb949aa06eea4d5ae2ace419c2706"
+   },
+   "ko_source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x2ae8",
+    "table_offset": "0xc97",
+    "bytes": "f1daf102f12500f101f1b3001df7",
+    "sha256": "59cd4f0bb092bc16698d2fb1628fe8529d263e98dd5352b7821202334e5992b3",
+    "note": "Files-list name of the Korean HD patch (korean.asi applies korean_hd.bin); glyph readings in ko_glyphs"
+   },
+   "file": "file07",
+   "en_title": "Chief Secretary's Diary A",
+   "ko_title": "서장 비서의 일기 A",
+   "bitmap": {
+    "ko": {
+     "w": 106,
+     "h": 13,
+     "sha256": "50f1ded596b6c17e90b90642754616fb1082a63d919a83d887454089a94d8714"
+    },
+    "en": {
+     "w": 209,
+     "h": 11,
+     "sha256": "b385eafa5633bd21bc7bfab91791345230bf860b2dfc7f2b8a0801a9cdd0085c"
+    }
+   },
+   "ko_reading_uncertain": false
+  },
+  "112": {
+   "en": "Secretary's diary B",
+   "ko": "비서의 일기 B",
+   "en_source": {
+    "file": "Resident Evil 2.exe",
+    "offset": "0x12f08d",
+    "va": "0x52f08d",
+    "sha256": "7a099aa1a603a9dc78463073b6de12e0a93d1599ada51add0f80608c82e262d8"
+   },
+   "ko_source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x2b04",
+    "table_offset": "0xca5",
+    "bytes": "f1daf102f12500f101f1b3001ef7",
+    "sha256": "bff04d958b5221fd8a7a9450c4d2e064fb1348b99fa1c2045f86f18f4c447c89",
+    "note": "Files-list name of the Korean HD patch (korean.asi applies korean_hd.bin); glyph readings in ko_glyphs"
+   },
+   "file": "file08",
+   "en_title": "Chief Secretary's Diary B",
+   "ko_title": "서장 비서의 일기 B",
+   "bitmap": {
+    "ko": {
+     "w": 105,
+     "h": 13,
+     "sha256": "b617179f4e6c9dbe00e8f05a9f8ebc7ff70875298ea7a895cedfa73b67a1f2ee"
+    },
+    "en": {
+     "w": 209,
+     "h": 11,
+     "sha256": "e6aa74fd02cd6c0ce4315d1831937121b8e729d457d21a77ce7bcb0874fd7ac8"
+    }
+   },
+   "ko_reading_uncertain": false
+  },
+  "113": {
+   "en": "Operation report 2",
+   "ko": "작전 보고서 2",
+   "en_source": {
+    "file": "Resident Evil 2.exe",
+    "offset": "0x12f0a1",
+    "va": "0x52f0a1",
+    "sha256": "2e753ada2004bba8abd587eb4dbd4de14a84896d6de0faf9c1e5ce664b39b573"
+   },
+   "ko_source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x2b20",
+    "table_offset": "0xcb3",
+    "bytes": "f136f19f00f145f151f102000ef7",
+    "sha256": "104d8027e3055a09dcbdef77c93d857a815ab36c40b310920d855973f5edb32b",
+    "note": "Files-list name of the Korean HD patch (korean.asi applies korean_hd.bin); glyph readings in ko_glyphs"
+   },
+   "file": "file09",
+   "en_title": "Operation Report 2",
+   "ko_title": "작전 보고서 2",
+   "bitmap": {
+    "ko": {
+     "w": 75,
+     "h": 13,
+     "sha256": "20e59baa599b8da3abe7b1582a3012f1a7a5b88dabafe79ebaac04894be16d76"
+    },
+    "en": {
+     "w": 155,
+     "h": 10,
+     "sha256": "a99b17f8ae2489210c2a585f3bf829fd062cca8399041e8333137782162540b7"
+    }
+   },
+   "ko_reading_uncertain": false
+  },
+  "114": {
+   "en": "User registration",
+   "ko": "사용자 등록증",
+   "en_source": {
+    "file": "Resident Evil 2.exe",
+    "offset": "0x12f0b4",
+    "va": "0x52f0b4",
+    "sha256": "80b68cd3448946c7b1fb23a014b88551ba06d411a2c5ca4ccba2ce865758b33e"
+   },
+   "ko_source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x2b3c",
+    "table_offset": "0xcc1",
+    "bytes": "f1b5f1a1f12800f30ff1d3f223f7",
+    "sha256": "b837b210e69043e4542bb17e7babb398de340151e0fdf77a76f7d059f3d98875",
+    "note": "Files-list name of the Korean HD patch (korean.asi applies korean_hd.bin); glyph readings in ko_glyphs"
+   },
+   "file": "file0a",
+   "en_title": "Temporary User Registration",
+   "ko_title": "임시 사용자 등록 방법",
+   "bitmap": {
+    "ko": {
+     "w": 119,
+     "h": 13,
+     "sha256": "0da8f8a59b151c509826f3aa3b5499f50d7fa03bf503cd9c396471d08b1c13e1"
+    },
+    "en": {
+     "w": 231,
+     "h": 10,
+     "sha256": "ee670869b480a8fb1fcac4cf378f44451bf58a4128277fbf2111761a2dcd339d"
+    }
+   },
+   "ko_reading_uncertain": false
+  },
+  "115": {
+   "en": "Film A",
+   "ko": "필름 A",
+   "en_source": {
+    "file": "Resident Evil 2.exe",
+    "offset": "0x12f0c6",
+    "va": "0x52f0c6",
+    "sha256": "9d369634fe26d12e95465e8746c108837a90c820b86069f86b6472d63ebb2ed8"
+   },
+   "ko_source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x2b58",
+    "table_offset": "0xccf",
+    "bytes": "f1e5f22a001df7",
+    "sha256": "607d92f87e845c7f7f6c080035ec2ecbdbaf4323b4e9c0d25ad45481cbfbfcb4",
+    "note": "Files-list name of the Korean HD patch (korean.asi applies korean_hd.bin); glyph readings in ko_glyphs"
+   },
+   "file": "file0b",
+   "en_title": "Film A",
+   "ko_title": "필름 A",
+   "bitmap": {
+    "ko": {
+     "w": 38,
+     "h": 13,
+     "sha256": "11d0740bb0ee96e3fff1add35819395d7fc2705b87154776ae93c2134079938c"
+    },
+    "en": {
+     "w": 49,
+     "h": 10,
+     "sha256": "170b5394d28eab44451733565ee233d21f117d4afca6c0e9dd035155f7a2cff2"
+    }
+   },
+   "ko_reading_uncertain": false
+  },
+  "116": {
+   "en": "Film B",
+   "ko": "필름 B",
+   "en_source": {
+    "file": "Resident Evil 2.exe",
+    "offset": "0x12f0cd",
+    "va": "0x52f0cd",
+    "sha256": "9faa8b39c1514c10e6e5152b615bcef38a1b07c6446b948439ff85f1cd103a5b"
+   },
+   "ko_source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x2b6d",
+    "table_offset": "0xcd6",
+    "bytes": "f1e5f22a001ef7",
+    "sha256": "88685aaaabdff39fcc6b207147aba39f255b866159fae6b67a80d3b72cd5e994",
+    "note": "Files-list name of the Korean HD patch (korean.asi applies korean_hd.bin); glyph readings in ko_glyphs"
+   },
+   "file": "file0c",
+   "en_title": "Film B",
+   "ko_title": "필름 B",
+   "bitmap": {
+    "ko": {
+     "w": 37,
+     "h": 13,
+     "sha256": "bf7073f886e8b1813882fdc173520d7035e98181f0bf5c3485abce3a166830ee"
+    },
+    "en": {
+     "w": 49,
+     "h": 10,
+     "sha256": "b21344abd3583ff9c17dbbf7a088b4bd5b126e62be3926b849fdbc27f2b50b2d"
+    }
+   },
+   "ko_reading_uncertain": false
+  },
+  "117": {
+   "en": "Film C",
+   "ko": "필름 C",
+   "en_source": {
+    "file": "Resident Evil 2.exe",
+    "offset": "0x12f0d4",
+    "va": "0x52f0d4",
+    "sha256": "74df9b79e99edec95302b1735315af2e5963d8ece00e3b94a1557b7b3b97774e"
+   },
+   "ko_source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x2b82",
+    "table_offset": "0xcdd",
+    "bytes": "f1e5f22a001ff7",
+    "sha256": "1f5e35626cb83e13ba1ebf09a0895d47515348774e13221f9f9605cb91facdfa",
+    "note": "Files-list name of the Korean HD patch (korean.asi applies korean_hd.bin); glyph readings in ko_glyphs"
+   },
+   "file": "file0d",
+   "en_title": "Film C",
+   "ko_title": "필름 C",
+   "bitmap": {
+    "ko": {
+     "w": 37,
+     "h": 13,
+     "sha256": "8200c502a9156de505982cb342b8207b611422cb255b1c6dc727d22b219058f9"
+    },
+    "en": {
+     "w": 49,
+     "h": 10,
+     "sha256": "2d08ce249e03a32d275c49bc739e641d85bfa89717e75b3784ce12b1017d305b"
+    }
+   },
+   "ko_reading_uncertain": false
+  },
+  "118": {
+   "en": "Patrol report",
+   "ko": "순찰 보고서",
+   "en_source": {
+    "file": "Resident Evil 2.exe",
+    "offset": "0x12f0db",
+    "va": "0x52f0db",
+    "sha256": "4ff1c0ee55cf990cac8d50bd22ef5c682daf454dd4d3f6342ac9e9d489561da5"
+   },
+   "ko_source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x2b97",
+    "table_offset": "0xce4",
+    "bytes": "f310f30300f145f151f102f7",
+    "sha256": "2a0952cf49d1d29e3578eaa53fd022b8ea8fe34fea3ca5dba6879d3b29f21a87",
+    "note": "Files-list name of the Korean HD patch (korean.asi applies korean_hd.bin); glyph readings in ko_glyphs"
+   },
+   "file": "file0e",
+   "en_title": "Patrol Report",
+   "ko_title": "순찰 보고서",
+   "bitmap": {
+    "ko": {
+     "w": 63,
+     "h": 13,
+     "sha256": "ffd81769af3acfb43ca6c807f29609d2e1d3b11b5739aee8756164a5cd1a186b"
+    },
+    "en": {
+     "w": 114,
+     "h": 10,
+     "sha256": "5674ff66874d458d719986d99984536129b2c238c24ef44f52a6b150474484d5"
+    }
+   },
+   "ko_reading_uncertain": false
+  },
+  "119": {
+   "en": "Watchman's diary",
+   "ko": "경비원의 일기",
+   "en_source": {
+    "file": "Resident Evil 2.exe",
+    "offset": "0x12f0e9",
+    "va": "0x52f0e9",
+    "sha256": "c91eff8b145174acaf61815d968fa7be2d008819b0470b8fb19f276d9b7842a7"
+   },
+   "ko_source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x2bb1",
+    "table_offset": "0xcf0",
+    "bytes": "f114f1daf20df12500f101f1b3f7",
+    "sha256": "adbf37a0ba1b1a4424b365df8cd22d6d7915a9c4157cc6c7b3a8a0209fa1db25",
+    "note": "Files-list name of the Korean HD patch (korean.asi applies korean_hd.bin); glyph readings in ko_glyphs; user-confirmed 2026-11-07"
+   },
+   "file": "file0f",
+   "en_title": "Night Watchman's Diary",
+   "ko_title": "조지의 일기",
+   "bitmap": {
+    "ko": {
+     "w": 63,
+     "h": 13,
+     "sha256": "1dfc81ee1938bb0dd2536f9ac6d452f8a2f33f8fadeeac49d715754a257910a4"
+    },
+    "en": {
+     "w": 184,
+     "h": 11,
+     "sha256": "063c8566e5e537e84ae0d4680b02b6e0e9ae597f3e06a749bd5ed240d86e359a"
+    }
+   },
+   "ko_reading_uncertain": false
+  },
+  "120": {
+   "en": "Chief's diary",
+   "ko": "서장의 일기",
+   "en_source": {
+    "file": "Resident Evil 2.exe",
+    "offset": "0x12f0fa",
+    "va": "0x52f0fa",
+    "sha256": "c53244660dbe5d4c092338009f48ba58c57bdd989d47aa6bfd8d4984182a7971"
+   },
+   "ko_source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x2bcd",
+    "table_offset": "0xcfe",
+    "bytes": "f102f11cf12500f101f1b3f7",
+    "sha256": "1196f7e7563c1bd9e12421b57340573b91cee7796a30942d0b9da78c17e282b7",
+    "note": "Files-list name of the Korean HD patch (korean.asi applies korean_hd.bin); glyph readings in ko_glyphs"
+   },
+   "file": "file10",
+   "en_title": "Chief's Diary",
+   "ko_title": "서장의 수기",
+   "bitmap": {
+    "ko": {
+     "w": 63,
+     "h": 13,
+     "sha256": "3750897d0aebca1948d5a7a77c9350372b69855c6e8722e9ba17d023c86be91c"
+    },
+    "en": {
+     "w": 107,
+     "h": 11,
+     "sha256": "772fc81c48ae953478e81818d68b7d7847eb3f1a55d831b780d41acaff23f651"
+    }
+   },
+   "ko_reading_uncertain": false
+  },
+  "121": {
+   "en": "Sewer manager diary",
+   "ko": "하수도 관리자의 일기",
+   "en_source": {
+    "file": "Resident Evil 2.exe",
+    "offset": "0x12f108",
+    "va": "0x52f108",
+    "sha256": "c377c798cbbf811c9eee2859fd9237e5bf0c72c57903154fe4db5a06399057b8"
+   },
+   "ko_source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x2be7",
+    "table_offset": "0xd0a",
+    "bytes": "f112f1d5f14b00f193f1c2f128f12500f101f1b3f7",
+    "sha256": "dde44f1cb002f136d58a5afc1e27367be7db51597c2d664c26d1337607905a89",
+    "note": "Files-list name of the Korean HD patch (korean.asi applies korean_hd.bin); glyph readings in ko_glyphs"
+   },
+   "file": "file11",
+   "en_title": "Sewer Manager's Diary",
+   "ko_title": "하수 관리인의 업무 일지",
+   "bitmap": {
+    "ko": {
+     "w": 131,
+     "h": 13,
+     "sha256": "f8f60f58d3b14ec1ff1cf847553bda284d4f35e7acde908d580a0845d1c1290f"
+    },
+    "en": {
+     "w": 178,
+     "h": 11,
+     "sha256": "4c8e26ad92fdb83d4128bb15ecd64ceeef106080b09b5e12094cdb1e60b66671"
+    }
+   },
+   "ko_reading_uncertain": false
+  },
+  "122": {
+   "en": "Sewer manager fax",
+   "ko": "하수도 관리자의 팩스",
+   "en_source": {
+    "file": "Resident Evil 2.exe",
+    "offset": "0x12f11c",
+    "va": "0x52f11c",
+    "sha256": "7f5ad84f8be0bf8589c42ea7e391c8cf1b915d6341557aa0a9e3c5ea722a8bf3"
+   },
+   "ko_source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x2c0a",
+    "table_offset": "0xd1f",
+    "bytes": "f112f1d5f14b00f193f1c2f128f12500f311f106f7",
+    "sha256": "e346179d82853dc9c76534cca9f1db8098de0300e2126181a763cfbf3b2f688e",
+    "note": "Files-list name of the Korean HD patch (korean.asi applies korean_hd.bin); glyph readings in ko_glyphs"
+   },
+   "file": "file12",
+   "en_title": "Fax to the Sewer Manager",
+   "ko_title": "하수 관리인에게 온 FAX",
+   "bitmap": {
+    "ko": {
+     "w": 133,
+     "h": 13,
+     "sha256": "9c3fd7e82e0497266d286d193736812e753181a06d3cb844e5fa470800c3b810"
+    },
+    "en": {
+     "w": 204,
+     "h": 10,
+     "sha256": "4be451e0f725989c1624240dd50653ae74ffc1d4bf183d892a2dda79add19e01"
+    }
+   },
+   "ko_reading_uncertain": false
+  },
+  "123": {
+   "en": "Film D",
+   "ko": "필름 D",
+   "en_source": {
+    "file": "Resident Evil 2.exe",
+    "offset": "0x12f12e",
+    "va": "0x52f12e",
+    "sha256": "d8c1adba5038c3fb6655e46e718c73d0dcda97f2040f6949f2dbf2f7242a8035"
+   },
+   "ko_source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x2c2d",
+    "table_offset": "0xd34",
+    "bytes": "f1e5f22a0020f7",
+    "sha256": "312682df081b02c26cb78d80f9304c2413e992e2f0b863508e89709270abcd94",
+    "note": "Files-list name of the Korean HD patch (korean.asi applies korean_hd.bin); glyph readings in ko_glyphs"
+   },
+   "file": "file13",
+   "en_title": "Recruit",
+   "ko_title": "기대되는 뉴페이스",
+   "bitmap": {
+    "ko": {
+     "w": 100,
+     "h": 13,
+     "sha256": "4d788afa254ed87428d0716e580bf776a266d29d41fff33fedc2f1ad5c975c20"
+    },
+    "en": {
+     "w": 61,
+     "h": 10,
+     "sha256": "4509119dea7dd546432032ebdd6d9d9d998141b8a78ed383d6cb23755ab1c231"
+    }
+   },
+   "ko_reading_uncertain": false
+  },
+  "124": {
+   "en": "Vaccine synthesis",
+   "ko": "백신 합성 기록",
+   "en_source": {
+    "file": "Resident Evil 2.exe",
+    "offset": "0x12f135",
+    "va": "0x52f135",
+    "sha256": "4b99a061792fa38ebb491f0ef10becbd79451f37cf0043e2c5187214de04d3dc"
+   },
+   "ko_source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x2c42",
+    "table_offset": "0xd3b",
+    "bytes": "f209f20a00f235f1cc00f1b3f1d3f7",
+    "sha256": "0ec0822db611519a5c9a2212dab08c37ef34e4f1468e58016187c78b798f7f84",
+    "note": "Files-list name of the Korean HD patch (korean.asi applies korean_hd.bin); glyph readings in ko_glyphs; user-confirmed 2026-11-07"
+   },
+   "file": "file14",
+   "en_title": "Instructions for Synthesis of the G-Virus Antigen: G-Vaccine, Code Named \"Devil.\"",
+   "ko_title": "더 G용 항원의 G백신 「DEVIL」 생성 방법",
+   "bitmap": {
+    "ko": {
+     "w": 96,
+     "h": 45,
+     "sha256": "eef0b243f553b66c4aaeae7f4108c9ab64ebbec812ef9ee6a161a7940e0b006e"
+    },
+    "en": {
+     "w": 248,
+     "h": 42,
+     "sha256": "f9e9c066c56f21d7936f083bd9c10a9b1bb6151effcebc9cc30cc09e28f251e1"
+    }
+   },
+   "ko_reading_uncertain": false
+  },
+  "125": {
+   "en": "Lab security manual",
+   "ko": "연구소 보안 매뉴얼",
+   "en_source": {
+    "file": "Resident Evil 2.exe",
+    "offset": "0x12f147",
+    "va": "0x52f147",
+    "sha256": "61928cc44b86ea81fb7b54aae1eee28f5f6745618aa5b0dbd749ad1eba672ee5"
+   },
+   "ko_source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x2c5f",
+    "table_offset": "0xd4a",
+    "bytes": "f10ef230f12200f145f31200f1c5f313f189f7",
+    "sha256": "45f8b9fb7105d01420ae49b9abe29eb69140c2497cb661456b568f7c540c13ca",
+    "note": "Files-list name of the Korean HD patch (korean.asi applies korean_hd.bin); glyph readings in ko_glyphs"
+   },
+   "file": "file15",
+   "en_title": "Laboratory Security Manual",
+   "ko_title": "연구 시설 보안 매뉴얼",
+   "bitmap": {
+    "ko": {
+     "w": 119,
+     "h": 13,
+     "sha256": "0bfbf5b0b667e7bcca923aeccdacb5b3c3a5998b5c70317072e97652bc362081"
+    },
+    "en": {
+     "w": 231,
+     "h": 10,
+     "sha256": "4c7ffcae6118e8a1ea1e1eed85b751e4929b8d607bf3474cb53752ce42afca16"
+    }
+   },
+   "ko_reading_uncertain": false
+  },
+  "126": {
+   "en": "P-epsilon report",
+   "ko": "P-엡실론 보고서",
+   "en_source": {
+    "file": "Resident Evil 2.exe",
+    "offset": "0x12f15b",
+    "va": "0x52f15b",
+    "sha256": "2b38ffa4d62efe111db63a7d1670d7fe0f05e01192558bcdd7c62e26377a7d6b"
+   },
+   "ko_source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x2c80",
+    "table_offset": "0xd5d",
+    "bytes": "2c3bf314f14ef31500f145f151f102f7",
+    "sha256": "47bf16e1361bf37bfa0e1eaef54d8ee32f919bc73c51da92dca9024fa0a60017",
+    "note": "Files-list name of the Korean HD patch (korean.asi applies korean_hd.bin); glyph readings in ko_glyphs"
+   },
+   "file": "file16",
+   "en_title": "Investigative Report on P-Epsilon Gas",
+   "ko_title": "P-ε 가스에 관한 추적 조사 보고",
+   "bitmap": {
+    "ko": {
+     "w": 172,
+     "h": 13,
+     "sha256": "932d5dd96be2161a1e30f3d3c1f1f44779f14bc0374ae639ef40e6075e6cf613"
+    },
+    "en": {
+     "w": 191,
+     "h": 26,
+     "sha256": "3938039299515794a298a8e9d66df5f60103d1b663b7ad71ae976c0a1ee464a2"
+    }
+   },
+   "ko_reading_uncertain": false
+  }
+ },
+ "puzzle_names": {
+  "210": {
+   "en": "Water Pressure Valve",
+   "ko": "수압 밸브",
+   "ko_basis": "project translation",
+   "basis": "Rooftop (room 108): 'A water pressure valve. Excessive pressure may rupture the water tank.' The Valve Handle is used on the pressure valve at the base of the water tower."
+  },
+  "211": {
+   "en": "Statue",
+   "ko": "조각상",
+   "ko_basis": "project translation",
+   "basis": "Art Storage (room 10B): the two Virgin Hearts (Red Jewels) are placed on the breast of the two statues in the Storage Room."
+  },
+  "212": {
+   "en": "Power Generator",
+   "ko": "발전기",
+   "ko_basis": "project translation",
+   "basis": "Power Control Platform (room 702): the Joint N/S plugs go into the high-yield generator to restore power."
+  },
+  "213": {
+   "en": "Safe",
+   "ko": "금고",
+   "ko_basis": "project translation",
+   "basis": "East Office (room 20B) number lock (op 70, FG_COMMON bit 37): the safe; the BDennis FAQ and the project's own tests/test_map_markers.py (test_safe_hides_after_unlock) identify it."
+  },
+  "214": {
+   "en": "Elevator Panel",
+   "ko": "승강기 패널",
+   "ko_basis": "project translation",
+   "basis": "Elevator (room 601): the Master Key is used on the rear console in the main Elevator."
+  },
+  "215": {
+   "en": "Bridge Valve",
+   "ko": "다리 밸브",
+   "ko_basis": "project translation",
+   "basis": "Water Pool (room 408): 'Insert the valve handle and rotate it to move the central bridge up or down'."
+  },
+  "216": {
+   "en": "Fan Regulator",
+   "ko": "환풍기 조절기",
+   "ko_basis": "project translation",
+   "basis": "Upper Walkway (room 409): 'Fan regulater. You can stop the rotation of the fan briefly' (Valve Handle)."
+  },
+  "217": {
+   "en": "Crank Slot",
+   "ko": "크랭크 홈",
+   "ko_basis": "project translation",
+   "basis": "Cog Room (room 111): 'It's a square hole'; the Square Crank lowers the wooden staircase there."
+  },
+  "218": {
+   "en": "Clock Mechanism",
+   "ko": "시계 장치",
+   "ko_basis": "project translation",
+   "basis": "Cog Room (room 111): the Gold Cogwheel completes the bell tower mechanism and opens the metal panel."
+  },
+  "219": {
+   "en": "Maiden Statue",
+   "ko": "여인상",
+   "ko_basis": "project translation",
+   "basis": "Main Hall 1F (room 200): the Unicorn Medal is used on the 'Statue of a Maiden'."
+  },
+  "220": {
+   "en": "Waterfall Mechanism",
+   "ko": "폭포 장치",
+   "ko_basis": "project translation",
+   "basis": "Sewer Passage 2 (room 407): Eagle and Wolf Medals stop the waterfall ('The water is flowing too fast for me to cross')."
+  },
+  "221": {
+   "en": "Turntable Control Panel",
+   "ko": "턴테이블 제어 패널",
+   "ko_basis": "project translation",
+   "basis": "Vacant Factory: the Down Key is used on the Turntable Yard, the Up Key at the Turntable Control Room panel (rooms 504, 503)."
+  },
+  "222": {
+   "en": "Power Core",
+   "ko": "동력 코어",
+   "ko_basis": "project translation",
+   "basis": "Main Shaft (rooms 608/611): the Main Fuse goes into the power core at the central point of the Main Shaft."
+  },
+  "223": {
+   "en": "Fuse Control Panel",
+   "ko": "퓨즈 제어 패널",
+   "ko_basis": "project translation",
+   "basis": "Cold Room (room 60D): the Fuse Case is used on the control panel to make the Main Fuse."
+  },
+  "224": {
+   "en": "VAM Machine",
+   "ko": "VAM 장치",
+   "ko_basis": "project translation",
+   "basis": "Active Treatment Experimentation Room (room 610): 'Activator -VAM- for base vaccine synthesis'; the Vaccine Cart goes into the machine."
+  },
+  "225": {
+   "en": "Vaccine Synthesis Machine",
+   "ko": "백신 합성기",
+   "ko_basis": "project translation",
+   "basis": "P-4 Laboratory (room 615): 'A vaccine synthesis machine. The base vaccine must go inside.'"
+  },
+  "226": {
+   "en": "Cargo Shutter Panel",
+   "ko": "화물 셔터 패널",
+   "ko_basis": "project translation",
+   "basis": "Central Corridor (room 616): the MO Disk opens the reinforced door/shutter to the Laboratory Cargo Room from a panel beside it."
+  },
+  "227": {
+   "en": "Electric Shutter Panel",
+   "ko": "전동 셔터 패널",
+   "ko_basis": "project translation",
+   "basis": "L Corridor (room 204) and Watchman's Corridor (room 20F): the Cord closes the electric shutters."
+  },
+  "228": {
+   "en": "Secret Elevator Panel",
+   "ko": "비밀 승강기 패널",
+   "ko_basis": "project translation",
+   "basis": "Chief's Office (room 21B): the Serpent, Jaguar and Eagle Stones go on the panel to open the Chief's secret elevator."
+  },
+  "229": {
+   "en": "Film Developer",
+   "ko": "필름 현상기",
+   "ko_basis": "project translation",
+   "basis": "Photography Darkroom (room 208): 'I can develop film here.' All four Films are developed there."
+  },
+  "230": {
+   "en": "Helicopter Debris",
+   "ko": "헬기 잔해",
+   "ko_basis": "project translation",
+   "basis": "Helipad Corridor (room 10A): helicopter debris seals the corridor; the Bomb & Detonator blows it open (Event: Detonator and Plastic Bomb)."
+  },
+  "231": {
+   "en": "Fireplace",
+   "ko": "벽난로",
+   "ko_basis": "project translation",
+   "basis": "Operations Room (room 206): the Lighter lights the fireplace to release the Virgin Heart."
+  },
+  "232": {
+   "en": "Lamp Pilot Light",
+   "ko": "램프 점화구",
+   "ko_basis": "project translation",
+   "basis": "Press Room (room 20D): the Lighter lights the pilot light of the lamps ('lit in the right order') to free the Gold Cogwheel."
+  },
+  "233": {
+   "en": "Oil Lamp",
+   "ko": "오일 램프",
+   "ko_basis": "project translation",
+   "basis": "Sewers (room 403, North Office): the sewer's only Lighter use is lighting the oil lamps (two spots here). Sources label the room 'Warehouse 2' / 'North Office' differently; the object is the same."
+  },
+  "234": {
+   "en": "Flare Gun",
+   "ko": "신호총",
+   "ko_basis": "project translation",
+   "basis": "Cable Car Platform (room 501): the Lighter activates the flare gun to show the Weapon Box Key."
+  },
+  "235": {
+   "en": "Spilled Fuel",
+   "ko": "쏟아진 연료",
+   "ko_basis": "project translation",
+   "basis": "Underground Laboratory sleeping quarters (room 60A): the Lighter ignites the fuel on the floor to destroy the vines. Evil Resource calls the room Sleeping Quarters A, Raccoon Insider's room IDs make 60A the B room; the object is the same."
+  },
+  "236": {
+   "en": "Light Switch",
+   "ko": "전등 스위치",
+   "ko_basis": "project translation",
+   "basis": "Taxidermy Display Room (10E) 'The light switch. Will you push it?' (Claire only) and Active Treatment Experimentation Room (610) 'the operating table stays dark until the switch in the corner is thrown'."
+  },
+  "237": {
+   "en": "Bookcase Switch",
+   "ko": "책장 스위치",
+   "ko_basis": "project translation",
+   "basis": "Library (room 112): the bookcase puzzle's switches ('A switch to slide the shelf left and right. Will you push it?')."
+  },
+  "238": {
+   "en": "Water Lever",
+   "ko": "수위 레버",
+   "ko_basis": "project translation",
+   "basis": "Cesspool (room 306): 'A lever to fill and drain water. Will you move it?'"
+  },
+  "239": {
+   "en": "Fingerprint Panel",
+   "ko": "지문 인식기",
+   "ko_basis": "project translation",
+   "basis": "East Area (room 60C): the fingerprint lock panel ('2 or more staff need to be present to enter')."
+  },
+  "240": {
+   "en": "VAM Control Panel",
+   "ko": "VAM 제어 패널",
+   "ko_basis": "project translation",
+   "basis": "Active Treatment Experimentation Room (room 610): Claire loads the cart into the machine, 'then work the control panel'. The switch AOT exists for Claire only (Pl1), which matches."
+  },
+  "241": {
+   "en": "Registration Terminal",
+   "ko": "등록 단말기",
+   "ko_basis": "project translation",
+   "basis": "Computer Room (room 613): the terminal where staff register ('registered at the Computer Room terminal'); matches the User Registration file."
+  },
+  "242": {
+   "en": "Train Gate Panel",
+   "ko": "열차 게이트 패널",
+   "ko_basis": "project translation",
+   "basis": "Gate Platform (room 700): the train gate panel, a scenario-B escape objective (extract_overlay.py comment); power is restored to the Gate Platform from the generator."
+  },
+  "243": {
+   "en": "Main Gate Switch",
+   "ko": "정문 스위치",
+   "ko_basis": "project translation",
+   "basis": "Main Platform (room 701): after the plugs, Leon 'opens the main gate into the train tunnel at the end'; the only interactable in the room besides the item box."
+  },
+  "244": {
+   "en": "Train Lever",
+   "ko": "열차 레버",
+   "ko_basis": "project translation",
+   "basis": "Train Front Carriage (room 703): 'What happens here is a lever and a set of gates'."
+  }
+ },
+ "puzzle_rules": {
+  "108:i50": 210,
+  "10B:i51": 211,
+  "702:i84": 212,
+  "702:i85": 212,
+  "20B:nl37": 213,
+  "601:i98": 214,
+  "408:i50": 215,
+  "409:i50": 216,
+  "111:i67": 217,
+  "111:i74": 218,
+  "200:i71": 219,
+  "407:i72": 220,
+  "407:i73": 220,
+  "503:i94": 221,
+  "504:i93": 221,
+  "608:i76": 222,
+  "611:i76": 222,
+  "60D:i77": 223,
+  "610:i79": 224,
+  "615:i81": 225,
+  "616:i96": 226,
+  "204:i86": 227,
+  "20F:i86": 227,
+  "21B:i54": 228,
+  "21B:i55": 228,
+  "21B:i58": 228,
+  "208:i68": 229,
+  "208:i69": 229,
+  "208:i70": 229,
+  "208:i80": 229,
+  "10A:i66": 230,
+  "206:i47": 231,
+  "20D:i47": 232,
+  "403:i47": 233,
+  "501:i47": 234,
+  "60A:i47": 235,
+  "10E:sw71": 236,
+  "610:sw100": 236,
+  "112:sw23": 237,
+  "306:sw146": 238,
+  "60C:sw142": 239,
+  "610:sw105": 240,
+  "613:sw90": 241,
+  "700:sw140": 242,
+  "701:sw144": 243,
+  "703:sw137": 244
+ },
+ "unresolved": {
+  "110:sw148": "Main Hall 2F: the cited room pages (Raccoon Insider 110) list only doors, the Unicorn Medal recess and zombies; no switch/panel is described, so the object behind this one-shot switch AOT is not identified.",
+  "309:sw58": "Cavernous Walkway (Claire's boss room, Pl1 only): the cited room page lists no interactable object; the switch AOT's object is not identified.",
+  "605:sw145": "Smelting Room: its page shows only the 'Iron smelting pool' sign; the lift switch is documented for the Steam Room (603), not this room, so the object here is not identified."
+ },
+ "puzzle_sources": {
+  "108:i50": [
+   "https://www.evilresource.com/resident-evil-2/items/valve-handle",
+   "https://raccooninsider.com/rooms/resident-evil-2/raccoon-police-department/police-station-2f/rooftop/"
+  ],
+  "10B:i51": [
+   "https://www.evilresource.com/resident-evil-2/items/virgin-heart"
+  ],
+  "702:i84": [
+   "https://www.evilresource.com/resident-evil-2/items/joint-n-plug",
+   "https://raccooninsider.com/rooms/resident-evil-2/underground-facility/transport/power-control-platform/"
+  ],
+  "702:i85": [
+   "https://www.evilresource.com/resident-evil-2/items/joint-s-plug",
+   "https://raccooninsider.com/rooms/resident-evil-2/underground-facility/transport/power-control-platform/"
+  ],
+  "20B:nl37": [
+   "https://gamefaqs.gamespot.com/ps/198458-resident-evil-2/faqs/4110"
+  ],
+  "601:i98": [
+   "https://www.evilresource.com/resident-evil-2/items/master-key"
+  ],
+  "408:i50": [
+   "https://www.evilresource.com/resident-evil-2/items/valve-handle",
+   "https://raccooninsider.com/rooms/resident-evil-2/sewers/sewer-b2/water-pool/"
+  ],
+  "409:i50": [
+   "https://www.evilresource.com/resident-evil-2/items/valve-handle",
+   "https://raccooninsider.com/rooms/resident-evil-2/sewers/sewer-b1/upper-walkway/"
+  ],
+  "111:i67": [
+   "https://www.evilresource.com/resident-evil-2/items/square-crank",
+   "https://raccooninsider.com/rooms/resident-evil-2/raccoon-police-department/police-station-3f/cog-room/"
+  ],
+  "111:i74": [
+   "https://www.evilresource.com/resident-evil-2/items/gold-cogwheel",
+   "https://raccooninsider.com/rooms/resident-evil-2/raccoon-police-department/police-station-3f/cog-room/"
+  ],
+  "200:i71": [
+   "https://www.evilresource.com/resident-evil-2/items/unicorn-medal"
+  ],
+  "407:i72": [
+   "https://www.evilresource.com/resident-evil-2/items/wolf-medal",
+   "https://raccooninsider.com/rooms/resident-evil-2/sewers/sewer-b2/sewer-passage-2/"
+  ],
+  "407:i73": [
+   "https://www.evilresource.com/resident-evil-2/items/eagle-medal",
+   "https://raccooninsider.com/rooms/resident-evil-2/sewers/sewer-b2/sewer-passage-2/"
+  ],
+  "503:i94": [
+   "https://www.evilresource.com/resident-evil-2/items/up-key",
+   "https://raccooninsider.com/rooms/resident-evil-2/umbrella-factory/vacant-factory-1f/"
+  ],
+  "504:i93": [
+   "https://www.evilresource.com/resident-evil-2/items/down-key",
+   "https://raccooninsider.com/rooms/resident-evil-2/umbrella-factory/vacant-factory-1f/"
+  ],
+  "608:i76": [
+   "https://www.evilresource.com/resident-evil-2/items/main-fuse",
+   "https://raccooninsider.com/rooms/resident-evil-2/underground-laboratory/laboratory-b4/main-shaft/"
+  ],
+  "611:i76": [
+   "https://www.evilresource.com/resident-evil-2/items/main-fuse",
+   "https://raccooninsider.com/rooms/resident-evil-2/underground-laboratory/laboratory-b4/main-shaft/"
+  ],
+  "60D:i77": [
+   "https://www.evilresource.com/resident-evil-2/items/fuse-case",
+   "https://raccooninsider.com/rooms/resident-evil-2/underground-laboratory/laboratory-b4/cold-room/"
+  ],
+  "610:i79": [
+   "https://www.evilresource.com/resident-evil-2/items/vaccine-cart",
+   "https://raccooninsider.com/rooms/resident-evil-2/underground-laboratory/laboratory-b4/active-treatment-experimentation-room/"
+  ],
+  "615:i81": [
+   "https://www.evilresource.com/resident-evil-2/items/base-vaccine",
+   "https://raccooninsider.com/rooms/resident-evil-2/underground-laboratory/laboratory-b5/p-4-laboratory/"
+  ],
+  "616:i96": [
+   "https://www.evilresource.com/resident-evil-2/items/mo-disk",
+   "https://raccooninsider.com/rooms/resident-evil-2/underground-laboratory/laboratory-b5/central-corridor/"
+  ],
+  "204:i86": [
+   "https://www.evilresource.com/resident-evil-2/items/cord",
+   "https://raccooninsider.com/rooms/resident-evil-2/raccoon-police-department/police-station-1f/l-corridor/"
+  ],
+  "20F:i86": [
+   "https://www.evilresource.com/resident-evil-2/items/cord"
+  ],
+  "21B:i54": [
+   "https://www.evilresource.com/resident-evil-2/items/serpent-stone"
+  ],
+  "21B:i55": [
+   "https://www.evilresource.com/resident-evil-2/items/jaguar-stone"
+  ],
+  "21B:i58": [
+   "https://www.evilresource.com/resident-evil-2/items/eagle-stone"
+  ],
+  "208:i68": [
+   "https://www.evilresource.com/resident-evil-2/items/film",
+   "https://raccooninsider.com/rooms/resident-evil-2/raccoon-police-department/police-station-1f/photography-darkroom/"
+  ],
+  "208:i69": [
+   "https://www.evilresource.com/resident-evil-2/items/film",
+   "https://raccooninsider.com/rooms/resident-evil-2/raccoon-police-department/police-station-1f/photography-darkroom/"
+  ],
+  "208:i70": [
+   "https://www.evilresource.com/resident-evil-2/items/film",
+   "https://raccooninsider.com/rooms/resident-evil-2/raccoon-police-department/police-station-1f/photography-darkroom/"
+  ],
+  "208:i80": [
+   "https://www.evilresource.com/resident-evil-2/items/film",
+   "https://raccooninsider.com/rooms/resident-evil-2/raccoon-police-department/police-station-1f/photography-darkroom/"
+  ],
+  "10A:i66": [
+   "https://www.evilresource.com/resident-evil-2/items/plastic-bomb",
+   "https://raccooninsider.com/rooms/resident-evil-2/raccoon-police-department/police-station-2f/helipad-corridor/"
+  ],
+  "206:i47": [
+   "https://www.evilresource.com/resident-evil-2/items/lighter"
+  ],
+  "20D:i47": [
+   "https://www.evilresource.com/resident-evil-2/items/lighter",
+   "https://raccooninsider.com/rooms/resident-evil-2/raccoon-police-department/police-station-1f/press-room/"
+  ],
+  "403:i47": [
+   "https://www.evilresource.com/resident-evil-2/items/lighter",
+   "https://raccooninsider.com/rooms/resident-evil-2/sewers/sewer-b1/north-office/"
+  ],
+  "501:i47": [
+   "https://www.evilresource.com/resident-evil-2/items/lighter"
+  ],
+  "60A:i47": [
+   "https://www.evilresource.com/resident-evil-2/items/lighter",
+   "https://raccooninsider.com/rooms/resident-evil-2/underground-laboratory/laboratory-b4/sleeping-quarters-a/"
+  ],
+  "10E:sw71": [
+   "https://raccooninsider.com/rooms/resident-evil-2/raccoon-police-department/police-station-2f/taxidermy-display-room/",
+   "https://residentevil.fandom.com/wiki/Taxidermy_Display_Room"
+  ],
+  "610:sw100": [
+   "https://raccooninsider.com/rooms/resident-evil-2/underground-laboratory/laboratory-b4/active-treatment-experimentation-room/"
+  ],
+  "112:sw23": [
+   "https://raccooninsider.com/rooms/resident-evil-2/raccoon-police-department/police-station-2f/library/"
+  ],
+  "306:sw146": [
+   "https://raccooninsider.com/rooms/resident-evil-2/sewers/sewage-disposal/cesspool/"
+  ],
+  "60C:sw142": [
+   "https://raccooninsider.com/rooms/resident-evil-2/underground-laboratory/laboratory-b4/east-area/"
+  ],
+  "610:sw105": [
+   "https://raccooninsider.com/rooms/resident-evil-2/underground-laboratory/laboratory-b4/active-treatment-experimentation-room/"
+  ],
+  "613:sw90": [
+   "https://raccooninsider.com/rooms/resident-evil-2/underground-laboratory/laboratory-b4/east-area/",
+   "https://raccooninsider.com/rooms/resident-evil-2/underground-laboratory/laboratory-b5/computer-room/"
+  ],
+  "700:sw140": [
+   "https://raccooninsider.com/rooms/resident-evil-2/underground-facility/transport/gate-platform/",
+   "https://www.evilresource.com/resident-evil-2/items/joint-n-plug"
+  ],
+  "701:sw144": [
+   "https://raccooninsider.com/rooms/resident-evil-2/underground-facility/transport/main-platform/"
+  ],
+  "703:sw137": [
+   "https://raccooninsider.com/rooms/resident-evil-2/underground-facility/transport/train-front-carriage/"
+  ]
+ },
+ "low_confidence": {
+  "60A:i47": {
+   "room_ko": "휴게실",
+   "room_en": "Lounge",
+   "reason": "Public sources disagree on the room label (Evil Resource: Sleeping Quarters A; Raccoon Insider ids: 609 is A, 60A is B). The map draws both 609 and 60A as 'Lounge / 휴게실'.",
+   "game_data": "ROOM60A0/60A1.RDT hold one Lighter (item 47) use AOT at map (68,125), floor 16, so the marker is in room file 60A whatever the sources call it. The RDT has no readable object text: what the Lighter lights (spilled fuel) is from public sources only."
+  },
+  "403:i47": {
+   "room_ko": "북쪽 관리실",
+   "room_en": "North Control Room",
+   "reason": "Sources label the room 'Warehouse 2' or 'North Office'; the map draws room 403 as 'North Control Room / 북쪽 관리실'.",
+   "game_data": "ROOM4030/4031.RDT hold two Lighter (item 47) use AOTs at map (243,103) and (272,84), floor 8, matching the two oil-lamp spots of the sources. Object identity (oil lamp) is from public sources only."
+  },
+  "610:sw100": {
+   "room_ko": "백신 실험실",
+   "room_en": "Vaccine Laboratory",
+   "reason": "Room-based guess between the room's two switch AOTs ('Light Switch').",
+   "game_data": "FG_COMMON bit 100 is tested and set only inside room 610, for both Leon and Claire; no other room consumes it, so the game data does not say which device it is."
+  },
+  "610:sw105": {
+   "room_ko": "백신 실험실",
+   "room_en": "Vaccine Laboratory",
+   "reason": "Room-based guess ('VAM Control Panel').",
+   "game_data": "Bit 105 is tested in room 610 for both players but set only by Claire's script (Pl1), which agrees with a Claire-only control panel; no other room consumes it."
+  },
+  "700:sw140": {
+   "room_ko": "승강장 입구",
+   "room_en": "Platform Entrance",
+   "reason": "Room-based guess ('Train Gate Panel').",
+   "game_data": "Bit 140 is tested and set in room 700 and also tested and set in room 703 ('Train Car / 열차 객실'), so the switch is part of the train gate sequence; which object it is stays a guess."
+  },
+  "701:sw144": {
+   "room_ko": "열차 승강장",
+   "room_en": "Train Platform",
+   "reason": "Room-based guess ('Main Gate Switch').",
+   "game_data": "Bit 144 is tested and set only inside room 701; the game data does not say which object it is."
+  }
+ },
+ "unresolved_game_data": {
+  "110:sw148": {
+   "room_ko": "중앙 홀",
+   "room_en": "Main Hall",
+   "game_data": "Bit 148 is tested and set in room 110 and tested (not set) in room 200 ('Main Hall / 중앙 홀' too): the switch changes something in the other Main Hall, but no object text is readable."
+  },
+  "309:sw58": {
+   "room_ko": "석판 통로",
+   "room_en": "Chess Plug Passage",
+   "game_data": "Pl1 only. Bit 58 is also tested and set in room 303 ('Plug Passage / 플러그 통로'), where it is the chess-plug panel's completion bit for Leon, so this switch may be the chess-plug panel; not applied."
+  },
+  "605:sw145": {
+   "room_ko": "동력실 하층",
+   "room_en": "Lower Power Room",
+   "game_data": "Bit 145 is set in room 605 and tested in room 602 ('Laboratory Corridor / 연구소 복도'); the project's earlier note calls it the B3 power switch, so 'Power Switch' is a likely name; not applied without a decision."
+  }
+ },
+ "ko_glyphs": {
+  "39:0": {
+   "syl": "독",
+   "basis": "read by eye",
+   "first_seen": 58
+  },
+  "39:1": {
+   "syl": "일",
+   "basis": "patch G table",
+   "first_seen": 111
+  },
+  "39:2": {
+   "syl": "서",
+   "basis": "read by eye",
+   "first_seen": 108
+  },
+  "39:6": {
+   "syl": "스",
+   "basis": "patch G table",
+   "first_seen": 122
+  },
+  "39:7": {
+   "syl": "트",
+   "basis": "read by eye",
+   "first_seen": 13
+  },
+  "39:11": {
+   "syl": "달",
+   "basis": "read by eye",
+   "first_seen": 71
+  },
+  "39:14": {
+   "syl": "연",
+   "basis": "read by eye",
+   "first_seen": 125
+  },
+  "39:17": {
+   "syl": "능",
+   "basis": "read by eye",
+   "first_seen": 98
+  },
+  "39:18": {
+   "syl": "하",
+   "basis": "patch G table",
+   "first_seen": 121
+  },
+  "39:20": {
+   "syl": "경",
+   "basis": "patch G table",
+   "first_seen": 107
+  },
+  "39:21": {
+   "syl": "권",
+   "basis": "read by eye",
+   "first_seen": 20
+  },
+  "39:25": {
+   "syl": "인",
+   "basis": "read by eye",
+   "first_seen": 76
+  },
+  "39:26": {
+   "syl": "치",
+   "basis": "read by eye",
+   "first_seen": 64
+  },
+  "39:28": {
+   "syl": "장",
+   "basis": "patch G table",
+   "first_seen": 109
+  },
+  "39:31": {
+   "syl": "게",
+   "basis": "read by eye",
+   "first_seen": 106
+  },
+  "39:32": {
+   "syl": "지",
+   "basis": "patch G table",
+   "first_seen": 109
+  },
+  "39:34": {
+   "syl": "소",
+   "basis": "patch G table",
+   "first_seen": 125
+  },
+  "39:35": {
+   "syl": "형",
+   "basis": "read by eye (checked against the item name)",
+   "first_seen": 84
+  },
+  "39:37": {
+   "syl": "의",
+   "basis": "read by eye",
+   "first_seen": 111
+  },
+  "39:38": {
+   "syl": "본",
+   "basis": "read by eye",
+   "first_seen": 30
+  },
+  "39:40": {
+   "syl": "자",
+   "basis": "read by eye",
+   "first_seen": 114
+  },
+  "39:54": {
+   "syl": "작",
+   "basis": "read by eye",
+   "first_seen": 108
+  },
+  "39:58": {
+   "syl": "잡",
+   "basis": "read by eye",
+   "first_seen": 50
+  },
+  "39:62": {
+   "syl": "석",
+   "basis": "read by eye",
+   "first_seen": 12
+  },
+  "39:63": {
+   "syl": "궁",
+   "basis": "read by eye (checked against the item name)",
+   "first_seen": 12
+  },
+  "39:66": {
+   "syl": "드",
+   "basis": "read by eye",
+   "first_seen": 52
+  },
+  "39:68": {
+   "syl": "카",
+   "basis": "read by eye",
+   "first_seen": 52
+  },
+  "39:69": {
+   "syl": "보",
+   "basis": "read by eye",
+   "first_seen": 106
+  },
+  "39:75": {
+   "syl": "도",
+   "basis": "read by eye",
+   "first_seen": 121
+  },
+  "39:78": {
+   "syl": "실",
+   "basis": "patch G table",
+   "first_seen": 126
+  },
+  "39:81": {
+   "syl": "고",
+   "basis": "patch G table",
+   "first_seen": 108
+  },
+  "39:83": {
+   "syl": "무",
+   "basis": "read by eye",
+   "first_seen": 63
+  },
+  "39:85": {
+   "syl": "거",
+   "basis": "read by eye",
+   "first_seen": 36
+  },
+  "39:93": {
+   "syl": "방",
+   "basis": "read by eye",
+   "first_seen": 16
+  },
+  "39:95": {
+   "syl": "급",
+   "basis": "read by eye",
+   "first_seen": 35
+  },
+  "39:97": {
+   "syl": "켓",
+   "basis": "read by eye",
+   "first_seen": 17
+  },
+  "39:113": {
+   "syl": "단",
+   "basis": "read by eye",
+   "first_seen": 15
+  },
+  "39:114": {
+   "syl": "쇠",
+   "basis": "read by eye",
+   "first_seen": 31
+  },
+  "39:116": {
+   "syl": "살",
+   "basis": "read by eye",
+   "first_seen": 29
+  },
+  "39:117": {
+   "syl": "간",
+   "basis": "read by eye",
+   "first_seen": 39
+  },
+  "39:124": {
+   "syl": "폭",
+   "basis": "read by eye",
+   "first_seen": 36
+  },
+  "39:131": {
+   "syl": "특",
+   "basis": "read by eye",
+   "first_seen": 83
+  },
+  "39:132": {
+   "syl": "빨",
+   "basis": "read by eye",
+   "first_seen": 39
+  },
+  "39:133": {
+   "syl": "란",
+   "basis": "read by eye",
+   "first_seen": 40
+  },
+  "39:135": {
+   "syl": "락",
+   "basis": "read by eye",
+   "first_seen": 48
+  },
+  "39:136": {
+   "syl": "픽",
+   "basis": "read by eye",
+   "first_seen": 48
+  },
+  "39:137": {
+   "syl": "얼",
+   "basis": "read by eye",
+   "first_seen": 125
+  },
+  "39:140": {
+   "syl": "밸",
+   "basis": "read by eye",
+   "first_seen": 50
+  },
+  "39:145": {
+   "syl": "플",
+   "basis": "read by eye",
+   "first_seen": 59
+  },
+  "39:146": {
+   "syl": "틱",
+   "basis": "read by eye",
+   "first_seen": 65
+  },
+  "39:147": {
+   "syl": "관",
+   "basis": "patch G table",
+   "first_seen": 121
+  },
+  "39:150": {
+   "syl": "금",
+   "basis": "read by eye",
+   "first_seen": 74
+  },
+  "39:152": {
+   "syl": "뱀",
+   "basis": "read by eye",
+   "first_seen": 54
+  },
+  "39:155": {
+   "syl": "돌",
+   "basis": "read by eye",
+   "first_seen": 54
+  },
+  "39:156": {
+   "syl": "재",
+   "basis": "read by eye",
+   "first_seen": 55
+  },
+  "39:157": {
+   "syl": "규",
+   "basis": "read by eye (checked against the item name)",
+   "first_seen": 55
+  },
+  "39:159": {
+   "syl": "전",
+   "basis": "read by eye",
+   "first_seen": 108
+  },
+  "39:161": {
+   "syl": "용",
+   "basis": "read by eye",
+   "first_seen": 114
+  },
+  "39:166": {
+   "syl": "모",
+   "basis": "patch G table",
+   "first_seen": 106
+  },
+  "39:175": {
+   "syl": "라",
+   "basis": "read by eye",
+   "first_seen": 47
+  },
+  "39:179": {
+   "syl": "기",
+   "basis": "patch G table",
+   "first_seen": 111
+  },
+  "39:180": {
+   "syl": "에",
+   "basis": "patch G table",
+   "first_seen": 106
+  },
+  "39:181": {
+   "syl": "사",
+   "basis": "patch G table",
+   "first_seen": 114
+  },
+  "39:183": {
+   "syl": "품",
+   "basis": "read by eye",
+   "first_seen": 32
+  },
+  "39:186": {
+   "syl": "탄",
+   "basis": "read by eye",
+   "first_seen": 7
+  },
+  "39:189": {
+   "syl": "는",
+   "basis": "read by eye",
+   "first_seen": 106
+  },
+  "39:190": {
+   "syl": "산",
+   "basis": "read by eye",
+   "first_seen": 7
+  },
+  "39:192": {
+   "syl": "약",
+   "basis": "read by eye",
+   "first_seen": 20
+  },
+  "39:194": {
+   "syl": "리",
+   "basis": "patch G table",
+   "first_seen": 121
+  },
+  "39:195": {
+   "syl": "즈",
+   "basis": "read by eye (checked against the item name)",
+   "first_seen": 76
+  },
+  "39:197": {
+   "syl": "매",
+   "basis": "read by eye",
+   "first_seen": 125
+  },
+  "39:198": {
+   "syl": "그",
+   "basis": "read by eye",
+   "first_seen": 5
+  },
+  "39:199": {
+   "syl": "넘",
+   "basis": "read by eye",
+   "first_seen": 5
+  },
+  "39:200": {
+   "syl": "유",
+   "basis": "read by eye",
+   "first_seen": 9
+  },
+  "39:201": {
+   "syl": "발",
+   "basis": "read by eye",
+   "first_seen": 9
+  },
+  "39:202": {
+   "syl": "화",
+   "basis": "read by eye",
+   "first_seen": 16
+  },
+  "39:203": {
+   "syl": "염",
+   "basis": "read by eye",
+   "first_seen": 16
+  },
+  "39:204": {
+   "syl": "성",
+   "basis": "user-confirmed name",
+   "first_seen": 124
+  },
+  "39:211": {
+   "syl": "록",
+   "basis": "read by eye",
+   "first_seen": 114
+  },
+  "39:213": {
+   "syl": "수",
+   "basis": "patch G table",
+   "first_seen": 121
+  },
+  "39:214": {
+   "syl": "초",
+   "basis": "read by eye",
+   "first_seen": 38
+  },
+  "39:215": {
+   "syl": "허",
+   "basis": "read by eye",
+   "first_seen": 38
+  },
+  "39:218": {
+   "syl": "비",
+   "basis": "patch G table",
+   "first_seen": 111
+  },
+  "39:219": {
+   "syl": "숍",
+   "basis": "read by eye (checked against the item name)",
+   "first_seen": 59
+  },
+  "39:223": {
+   "syl": "룩",
+   "basis": "read by eye (checked against the item name)",
+   "first_seen": 60
+  },
+  "39:224": {
+   "syl": "킹",
+   "basis": "read by eye",
+   "first_seen": 62
+  },
+  "39:229": {
+   "syl": "필",
+   "basis": "read by eye",
+   "first_seen": 115
+  },
+  "39:247": {
+   "syl": "내",
+   "basis": "read by eye",
+   "first_seen": 106
+  },
+  "39:248": {
+   "syl": "늑",
+   "basis": "read by eye",
+   "first_seen": 73
+  },
+  "39:250": {
+   "syl": "톱",
+   "basis": "read by eye",
+   "first_seen": 74
+  },
+  "39:252": {
+   "syl": "퀴",
+   "basis": "read by eye",
+   "first_seen": 74
+  },
+  "39:255": {
+   "syl": "맨",
+   "basis": "read by eye",
+   "first_seen": 75
+  },
+  "39:259": {
+   "syl": "퓨",
+   "basis": "read by eye",
+   "first_seen": 76
+  },
+  "39:260": {
+   "syl": "케",
+   "basis": "read by eye",
+   "first_seen": 77
+  },
+  "39:261": {
+   "syl": "백",
+   "basis": "user-confirmed name",
+   "first_seen": 124
+  },
+  "39:262": {
+   "syl": "신",
+   "basis": "patch G table",
+   "first_seen": 124
+  },
+  "39:265": {
+   "syl": "원",
+   "basis": "user-confirmed name",
+   "first_seen": 119
+  },
+  "39:266": {
+   "syl": "액",
+   "basis": "read by eye",
+   "first_seen": 81
+  },
+  "39:269": {
+   "syl": "색",
+   "basis": "read by eye",
+   "first_seen": 74
+  },
+  "39:274": {
+   "syl": "키",
+   "basis": "read by eye",
+   "first_seen": 52
+  },
+  "39:277": {
+   "syl": "코",
+   "basis": "read by eye",
+   "first_seen": 86
+  },
+  "39:287": {
+   "syl": "증",
+   "basis": "read by eye",
+   "first_seen": 114
+  },
+  "39:291": {
+   "syl": "은",
+   "basis": "read by eye",
+   "first_seen": 31
+  },
+  "39:294": {
+   "syl": "름",
+   "basis": "read by eye",
+   "first_seen": 115
+  },
+  "39:297": {
+   "syl": "바",
+   "basis": "read by eye",
+   "first_seen": 36
+  },
+  "39:300": {
+   "syl": "구",
+   "basis": "read by eye",
+   "first_seen": 125
+  },
+  "39:305": {
+   "syl": "합",
+   "basis": "user-confirmed name",
+   "first_seen": 124
+  },
+  "39:311": {
+   "syl": "콜",
+   "basis": "read by eye",
+   "first_seen": 13
+  },
+  "39:315": {
+   "syl": "잉",
+   "basis": "read by eye",
+   "first_seen": 30
+  },
+  "39:316": {
+   "syl": "응",
+   "basis": "read by eye (checked against the item name)",
+   "first_seen": 35
+  },
+  "39:317": {
+   "syl": "레",
+   "basis": "patch G table",
+   "first_seen": 106
+  },
+  "39:319": {
+   "syl": "손",
+   "basis": "read by eye",
+   "first_seen": 50
+  },
+  "39:320": {
+   "syl": "푸",
+   "basis": "read by eye",
+   "first_seen": 56
+  },
+  "9:0": {
+   "syl": "콘",
+   "basis": "read by eye",
+   "first_seen": 71
+  },
+  "9:1": {
+   "syl": "메",
+   "basis": "read by eye",
+   "first_seen": 106
+  },
+  "9:2": {
+   "syl": "너",
+   "basis": "read by eye",
+   "first_seen": 75
+  },
+  "9:3": {
+   "syl": "찰",
+   "basis": "read by eye",
+   "first_seen": 107
+  },
+  "9:5": {
+   "syl": "널",
+   "basis": "read by eye",
+   "first_seen": 93
+  },
+  "9:6": {
+   "syl": "룸",
+   "basis": "read by eye",
+   "first_seen": 95
+  },
+  "9:7": {
+   "syl": "디",
+   "basis": "read by eye",
+   "first_seen": 96
+  },
+  "9:8": {
+   "syl": "랫",
+   "basis": "read by eye",
+   "first_seen": 99
+  },
+  "9:9": {
+   "syl": "폼",
+   "basis": "read by eye",
+   "first_seen": 99
+  },
+  "9:13": {
+   "syl": "온",
+   "basis": "patch G table",
+   "first_seen": 106
+  },
+  "9:14": {
+   "syl": "편",
+   "basis": "patch G table",
+   "first_seen": 109
+  },
+  "9:15": {
+   "syl": "등",
+   "basis": "read by eye",
+   "first_seen": 114
+  },
+  "9:16": {
+   "syl": "순",
+   "basis": "read by eye",
+   "first_seen": 118
+  },
+  "9:17": {
+   "syl": "팩",
+   "basis": "read by eye",
+   "first_seen": 122
+  },
+  "9:18": {
+   "syl": "안",
+   "basis": "patch G table",
+   "first_seen": 125
+  },
+  "9:19": {
+   "syl": "뉴",
+   "basis": "read by eye",
+   "first_seen": 125
+  },
+  "9:20": {
+   "syl": "엡",
+   "basis": "read by eye",
+   "first_seen": 126
+  },
+  "9:21": {
+   "syl": "론",
+   "basis": "read by eye",
+   "first_seen": 126
+  },
+  "9:58": {
+   "syl": "붉",
+   "basis": "read by eye",
+   "first_seen": 51
+  },
+  "9:72": {
+   "syl": "랭",
+   "basis": "read by eye (checked against the item name)",
+   "first_seen": 67
+  }
+ },
+ "item_names_ko": {
+  "1": {
+   "ko": "나이프",
+   "en_project": "Knife",
+   "ko_project": "나이프",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x204d",
+    "table_offset": "0x800",
+    "bytes": "f1a2f1a3f1a4f7",
+    "sha256": "8f654db841e54630e327fa080acb9cf8ed73775a9a5aaa3d7b710d549a21e245"
+   }
+  },
+  "5": {
+   "ko": "매그넘",
+   "en_project": "Magnum",
+   "ko_project": "매그넘",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x20a2",
+    "table_offset": "0x81d",
+    "bytes": "f1c5f1c6f1c7f7",
+    "sha256": "c340e80514c783c3120eeec4a01c4f2c8b92585522e99e7848f8cbcd9804ad9d"
+   }
+  },
+  "7": {
+   "ko": "산탄총",
+   "en_project": "Shotgun",
+   "ko_project": "샷건",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x20d3",
+    "table_offset": "0x832",
+    "bytes": "f1bef1baf1bff7",
+    "sha256": "faa4b3163343d327e9b63995d5cc682eadb6c1930275fc0569969c47ce25166d"
+   }
+  },
+  "9": {
+   "ko": "유탄 발사기",
+   "en_project": "GrenadeLauncher",
+   "ko_project": "유탄 발사기",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x2104",
+    "table_offset": "0x847",
+    "bytes": "f1c8f1ba00f1c9f1b5f1b3f7",
+    "sha256": "ecb157c26ddc1b0140484a0b50a9eada2fc80e24e18a10f054cdfa4a8cc883c4"
+   }
+  },
+  "12": {
+   "ko": "석궁",
+   "en_project": "Bowgun",
+   "ko_project": "보우건",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x2152",
+    "table_offset": "0x86b",
+    "bytes": "f13ef13ff7",
+    "sha256": "ddbfad97a33cc5592cb9dd20d45f6be4a9673fabf4ad603db9ea3d980565b659"
+   }
+  },
+  "13": {
+   "ko": "콜트 S.A.A.",
+   "en_project": "ColtSAA",
+   "ko_project": "콜트 S.A.A.",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x2165",
+    "table_offset": "0x870",
+    "bytes": "f23bf107002f011d011d01f7",
+    "sha256": "3e323abc273ad60f29b9b5da847fee2d64def6de0bbcfa0d11a35e34ea2ea93e"
+   }
+  },
+  "15": {
+   "ko": "기관단총",
+   "en_project": "SubMachineGun",
+   "ko_project": "[Z] 기관단총",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x2197",
+    "table_offset": "0x886",
+    "bytes": "f1b3f193f171f1bff7",
+    "sha256": "9afd19b73e43a787e75bebe83b12d46cc3b9d518e48b83ee6ec51c5d5847313e"
+   }
+  },
+  "16": {
+   "ko": "화염방사기",
+   "en_project": "Flamethrower",
+   "ko_project": "화염 방사기",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x21ae",
+    "table_offset": "0x88f",
+    "bytes": "f1caf1cbf15df1b5f1b3f7",
+    "sha256": "5e3adb6902ef3932374dbb8f5cd6132cf322153b1514490825e100c8fe4a95ac"
+   }
+  },
+  "17": {
+   "ko": "로켓 발사기",
+   "en_project": "RocketLauncher",
+   "ko_project": "로켓 런처",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x21c7",
+    "table_offset": "0x89a",
+    "bytes": "f1cef16100f1c9f1b5f1b3f7",
+    "sha256": "e87e75a1e9a257e1e5881649ae59f46921c1162528e805bb8b1d0c9c412f2ee7"
+   }
+  },
+  "20": {
+   "ko": "권총 탄약",
+   "en_project": "HandgunBullets",
+   "ko_project": "권총 탄약",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x220c",
+    "table_offset": "0x8b5",
+    "bytes": "f115f1bf00f1baf1c0f7",
+    "sha256": "36cec7ff668e882b4255702e2efa1f77f7ca64c009eb405d57966d54ad4aa6fa"
+   }
+  },
+  "21": {
+   "ko": "산탄총 탄약",
+   "en_project": "ShotgunShells",
+   "ko_project": "샷건 탄약",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x2224",
+    "table_offset": "0x8bf",
+    "bytes": "f1bef1baf1bf00f1baf1c0f7",
+    "sha256": "811bd78998a1ff25d139a8fe1d9f1e751150389e51a5ed2f73ca674c75c5e89d"
+   }
+  },
+  "22": {
+   "ko": "매그넘 탄약",
+   "en_project": "MagnumBullets",
+   "ko_project": "매그넘 탄약",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x223e",
+    "table_offset": "0x8cb",
+    "bytes": "f1c5f1c6f1c700f1baf1c0f7",
+    "sha256": "364f095b432ba8d398d18d45fb9046e1c64d3094d5f8625c72ace6e4be0a53ea"
+   }
+  },
+  "24": {
+   "ko": "유탄",
+   "en_project": "GrenadeRounds",
+   "ko_project": "유탄",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x226b",
+    "table_offset": "0x8dc",
+    "bytes": "f1c8f1baf7",
+    "sha256": "9828f06311ee8f8466fc0047bb3d98862de77f3cd0a7e2c771acba9d0354a9af"
+   }
+  },
+  "25": {
+   "ko": "화염탄",
+   "en_project": "FlameRounds",
+   "ko_project": "화염탄",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x227e",
+    "table_offset": "0x8e1",
+    "bytes": "f1caf1cbf1baf7",
+    "sha256": "6533212e79092bb533a9e17e561f7299c3df60455f58f1940391b56d00d01802"
+   }
+  },
+  "26": {
+   "ko": "산성탄",
+   "en_project": "AcidRounds",
+   "ko_project": "산성탄",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x2293",
+    "table_offset": "0x8e8",
+    "bytes": "f1bef1ccf1baf7",
+    "sha256": "525c4e9492b3b4bf4f7766217777db4d80640da88e86837a9a6179d5a8b16bd5"
+   }
+  },
+  "27": {
+   "ko": "기관단총 탄약",
+   "en_project": "SMGBullets",
+   "ko_project": "기관단총 탄약",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x22a8",
+    "table_offset": "0x8ef",
+    "bytes": "f1b3f193f171f1bf00f1baf1c0f7",
+    "sha256": "49288f99a7568ef6030029327383b8cbc49d7392f25da59dcf51bb3d3532e267"
+   }
+  },
+  "29": {
+   "ko": "석궁 화살",
+   "en_project": "BowGunBolts",
+   "ko_project": "보우건 볼트",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x22e1",
+    "table_offset": "0x90c",
+    "bytes": "f13ef13f00f1caf174f7",
+    "sha256": "008fe736bff030c2c464ffa5965401c561eee9e9bf9548f4bdff3aff9054e962"
+   }
+  },
+  "30": {
+   "ko": "잉크 리본",
+   "en_project": "InkRibbon",
+   "ko_project": "잉크 리본",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x22f9",
+    "table_offset": "0x916",
+    "bytes": "f23ff13300f1c2f126f7",
+    "sha256": "e814ca9bcfe1fed54121179f050fcb388aae1ac9b3f4c25db2616669204b32de"
+   }
+  },
+  "31": {
+   "ko": "작은 열쇠",
+   "en_project": "SmallKey",
+   "ko_project": "작은 열쇠",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x2311",
+    "table_offset": "0x920",
+    "bytes": "f136f22700f11bf172f7",
+    "sha256": "30c791901fffbb286e88d10a2fdff9b97edc438a279bf9371c4ee9b3da81dd2f"
+   }
+  },
+  "32": {
+   "ko": "권총 부품",
+   "en_project": "HandgunParts",
+   "ko_project": "권총 부품",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x2329",
+    "table_offset": "0x92a",
+    "bytes": "f115f1bf00f176f1b7f7",
+    "sha256": "3feef16ad5a3ea471388fe2965673cb8bffa12548b0b41aeeefd7d2c9beac99d"
+   }
+  },
+  "33": {
+   "ko": "매그넘 부품",
+   "en_project": "MagnumParts",
+   "ko_project": "매그넘 부품",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x2341",
+    "table_offset": "0x934",
+    "bytes": "f1c5f1c6f1c700f176f1b7f7",
+    "sha256": "3c5c6fa7baa2601762f3a1ab382dbca9beb52f8b21214178fb143576a10b8938"
+   }
+  },
+  "34": {
+   "ko": "산탄총 부품",
+   "en_project": "ShotgunParts",
+   "ko_project": "샷건 부품",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x235b",
+    "table_offset": "0x940",
+    "bytes": "f1bef1baf1bf00f176f1b7f7",
+    "sha256": "108efff36e12c78c4a736b47de72bfbc15f448cdce2ce2ada1e1cbb601a4ffa9"
+   }
+  },
+  "35": {
+   "ko": "응급 스프레이",
+   "en_project": "FirstAidSpray",
+   "ko_project": "응급 스프레이",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x2375",
+    "table_offset": "0x94c",
+    "bytes": "f240f15f00f106f1a4f241f1a3f7",
+    "sha256": "74ea77ed0bd0b9457a01d7b09b23dee0f8ae0f4deddcb4a7fbb8205c639a1e7f"
+   }
+  },
+  "36": {
+   "ko": "바이러스 제거 폭탄",
+   "en_project": "AntiVirusBomb",
+   "ko_project": "항바이러스 폭탄",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x2391",
+    "table_offset": "0x95a",
+    "bytes": "f22df1a3f12ff10600f1b6f15500f17cf1baf7",
+    "sha256": "a58b30ee04d4851795a26936a0103514439af1e29a85d0e6dbd56c5cc0a57eb1"
+   }
+  },
+  "38": {
+   "ko": "초록 허브",
+   "en_project": "GreenHerb",
+   "ko_project": "허브 (초록)",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x23cc",
+    "table_offset": "0x979",
+    "bytes": "f1d6f1d300f1d7f1aef7",
+    "sha256": "1262d38f677736aa2e9e5b04a9b3914e3ce36c199a50280796e46023f2b3ba55"
+   }
+  },
+  "39": {
+   "ko": "빨간 허브",
+   "en_project": "RedHerb",
+   "ko_project": "허브 (빨강)",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x23e4",
+    "table_offset": "0x983",
+    "bytes": "f184f17500f1d7f1aef7",
+    "sha256": "f0f16ed2199adfa5d377ac825aa3ee41d37353371751d4b025dc50f7c63b9466"
+   }
+  },
+  "40": {
+   "ko": "파란 허브",
+   "en_project": "BlueHerb",
+   "ko_project": "허브 (파랑)",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x23fc",
+    "table_offset": "0x98d",
+    "bytes": "f1b8f18500f1d7f1aef7",
+    "sha256": "561391964ec36ab5fe6f28d2bc594c5c6b2e57715dd9f5d1263a2650ed3acab5"
+   }
+  },
+  "47": {
+   "ko": "라이터",
+   "en_project": "Lighter",
+   "ko_project": "라이터",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x24a4",
+    "table_offset": "0x9d3",
+    "bytes": "f1aff1a3f22bf7",
+    "sha256": "9b849c39a14b9d94b7adede772afe57c794e0a58290139127fb1dca0f39a03d0"
+   }
+  },
+  "48": {
+   "ko": "락픽",
+   "en_project": "Lockpick",
+   "ko_project": "키픽",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x24b9",
+    "table_offset": "0x9da",
+    "bytes": "f187f188f7",
+    "sha256": "53455c9fb500402d2a034e4334c22e8a5c713082b5d04d0b984d0f0f37fdcdc9"
+   }
+  },
+  "50": {
+   "ko": "밸브 손잡이",
+   "en_project": "ValveHandle",
+   "ko_project": "밸브 핸들",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x24df",
+    "table_offset": "0x9e4",
+    "bytes": "f18cf1ae00f243f13af1a3f7",
+    "sha256": "488f5b28fb61487d859d8f6cf71552686e40944879a67ece6f6c4b9d7111dd56"
+   }
+  },
+  "51": {
+   "ko": "붉은 보석",
+   "en_project": "RedJewel",
+   "ko_project": "붉은 보석",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x24f9",
+    "table_offset": "0x9f0",
+    "bytes": "f33af22700f145f13ef7",
+    "sha256": "e8908c1b12e08e81202e4ee63e0b2d52da56c12e58f04817dfa2d67018a44e45"
+   }
+  },
+  "52": {
+   "ko": "빨간 카드 키",
+   "en_project": "RedCard",
+   "ko_project": "빨간 카드",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x2511",
+    "table_offset": "0x9fa",
+    "bytes": "f184f17500f144f14200f216f7",
+    "sha256": "dd7d4887511a3e4a932bb8d50a6ab6ece879b574a56662ed356cc4e6b3c78931"
+   }
+  },
+  "53": {
+   "ko": "파란 카드 키",
+   "en_project": "BlueCard",
+   "ko_project": "파란 카드",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x252c",
+    "table_offset": "0xa07",
+    "bytes": "f1b8f18500f144f14200f216f7",
+    "sha256": "05136d751811489a6d8d91ea8d22e77aefe3caa89534824410b8b6816a21ea73"
+   }
+  },
+  "54": {
+   "ko": "뱀의 돌",
+   "en_project": "SerpentStone",
+   "ko_project": "뱀 석판",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x2547",
+    "table_offset": "0xa14",
+    "bytes": "f198f12500f19bf7",
+    "sha256": "4a80af6bd77c5cb1b80f2f2f9a9a15e353fac1a75ce38914fe531dd6979ce2d8"
+   }
+  },
+  "55": {
+   "ko": "재규어의 돌",
+   "en_project": "JaguarStone",
+   "ko_project": "재규어 석판",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x255d",
+    "table_offset": "0xa1c",
+    "bytes": "f19cf19df169f12500f19bf7",
+    "sha256": "bfd13b4cc36356fb7ea84e6f8f333a8509d1d1b5b8d3744636af18702c1a861a"
+   }
+  },
+  "56": {
+   "ko": "푸른 돌",
+   "en_project": "JaguarStoneL",
+   "ko_project": "석판 왼쪽",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x2577",
+    "table_offset": "0xa28",
+    "bytes": "f244f24500f19bf7",
+    "sha256": "01a468fd283e4aa53e93aa06864767547766e19c3465260083c14fb20b33477b"
+   }
+  },
+  "57": {
+   "ko": "푸른 돌",
+   "en_project": "JaguarStoneR",
+   "ko_project": "석판 오른쪽",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x258d",
+    "table_offset": "0xa30",
+    "bytes": "f244f24500f19bf7",
+    "sha256": "01a468fd283e4aa53e93aa06864767547766e19c3465260083c14fb20b33477b"
+   }
+  },
+  "58": {
+   "ko": "독수리의 돌",
+   "en_project": "EagleStone",
+   "ko_project": "독수리 석판",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x25a3",
+    "table_offset": "0xa38",
+    "bytes": "f100f1d5f1c2f12500f19bf7",
+    "sha256": "5afadd2d2aab7ebf0ddb77975ac1218cdf4fb2fa3c743d8e87ea1cb2303a991a"
+   }
+  },
+  "59": {
+   "ko": "비숍 플러그",
+   "en_project": "BishopPlug",
+   "ko_project": "비숍 플러그",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x25bd",
+    "table_offset": "0xa44",
+    "bytes": "f1daf1db00f191f12ff1c6f7",
+    "sha256": "330b9073b59d4d8849effb1afa765d52f18f0c8b9e4d1de65e322b6cac82bc1d"
+   }
+  },
+  "60": {
+   "ko": "룩 플러그",
+   "en_project": "RookPlug",
+   "ko_project": "룩 플러그",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x25d7",
+    "table_offset": "0xa50",
+    "bytes": "f1df00f191f12ff1c6f7",
+    "sha256": "f41731cd445ed9c23538c1522265a0983d365850eb32aea7249287476f3962e2"
+   }
+  },
+  "61": {
+   "ko": "나이트 플러그",
+   "en_project": "KnightPlug",
+   "ko_project": "나이트 플러그",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x25ef",
+    "table_offset": "0xa5a",
+    "bytes": "f1a2f1a3f10700f191f12ff1c6f7",
+    "sha256": "16ec196b7c3d3fe4785cb387fd9a628e06c4d6c8e7b147f467e346fd288e3b8d"
+   }
+  },
+  "62": {
+   "ko": "킹 플러그",
+   "en_project": "KingPlug",
+   "ko_project": "킹 플러그",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x260b",
+    "table_offset": "0xa68",
+    "bytes": "f1e000f191f12ff1c6f7",
+    "sha256": "2dbf5300caa5b89466a31b94e4a508a7df3dbf7e7aacbe505277fa766b2868eb"
+   }
+  },
+  "63": {
+   "ko": "무기 상자 열쇠",
+   "en_project": "WeaponBoxKey",
+   "ko_project": "무기고 열쇠",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x2623",
+    "table_offset": "0xa72",
+    "bytes": "f153f1b300f1d1f12800f11bf172f7",
+    "sha256": "2e9a9c0e0c87b8bcf85911344d7c4142c3dcb6707c0e7bcf9e4c01fa96b53545"
+   }
+  },
+  "64": {
+   "ko": "기폭 장치",
+   "en_project": "Detonator",
+   "ko_project": "신관",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x2640",
+    "table_offset": "0xa81",
+    "bytes": "f1b3f17c00f11cf11af7",
+    "sha256": "311c2be2f8564bb56508637f377c5e909e2af4d3ea175ba401adb5ee5c8eadab"
+   }
+  },
+  "65": {
+   "ko": "플라스틱 폭탄",
+   "en_project": "C4Explosive",
+   "ko_project": "폭약",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x2658",
+    "table_offset": "0xa8b",
+    "bytes": "f191f1aff106f19200f17cf1baf7",
+    "sha256": "39b71879a622ffc9568969f86c305e8b2773a722446e2953e00738021f17df47"
+   }
+  },
+  "66": {
+   "ko": "폭탄 기폭 장치",
+   "en_project": "C4Detonator",
+   "ko_project": "기폭 장치",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x2674",
+    "table_offset": "0xa99",
+    "bytes": "f17cf1ba00f1b3f17c00f11cf11af7",
+    "sha256": "31de3242c52141a2f5dbcd0f7f08a5a05305522ec959c2a3b8947188b053733e"
+   }
+  },
+  "67": {
+   "ko": "크랭크",
+   "en_project": "Crank",
+   "ko_project": "크랭크",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x2691",
+    "table_offset": "0xaa8",
+    "bytes": "f133f348f133f7",
+    "sha256": "88cbb94f0ee8c5f6353d0e9e9fd72a02a77197918c3c67964cb6d82bbbd7d1fd"
+   }
+  },
+  "68": {
+   "ko": "필름",
+   "en_project": "FilmA",
+   "ko_project": "필름 A",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x26a6",
+    "table_offset": "0xaaf",
+    "bytes": "f1e5f22af7",
+    "sha256": "75da499c60de929923f823bd7f6c0a196b8df57a0d0f9fe945540d70aa256d3d"
+   }
+  },
+  "69": {
+   "ko": "필름",
+   "en_project": "FilmB",
+   "ko_project": "필름 B",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x26b9",
+    "table_offset": "0xab4",
+    "bytes": "f1e5f22af7",
+    "sha256": "75da499c60de929923f823bd7f6c0a196b8df57a0d0f9fe945540d70aa256d3d"
+   }
+  },
+  "70": {
+   "ko": "필름",
+   "en_project": "FilmC",
+   "ko_project": "필름 C",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x26cc",
+    "table_offset": "0xab9",
+    "bytes": "f1e5f22af7",
+    "sha256": "75da499c60de929923f823bd7f6c0a196b8df57a0d0f9fe945540d70aa256d3d"
+   }
+  },
+  "71": {
+   "ko": "유니콘 메달",
+   "en_project": "UnicornMedal",
+   "ko_project": "유니콘 메달",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x26df",
+    "table_offset": "0xabe",
+    "bytes": "f1c8f1fbf30000f301f10bf7",
+    "sha256": "487ab4796e21788149a9f54cf9d479b1bd10ea46ef1f1ebde93ef4018eb2cdf9"
+   }
+  },
+  "72": {
+   "ko": "독수리 메달",
+   "en_project": "EagleMedal",
+   "ko_project": "독수리 메달",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x26f9",
+    "table_offset": "0xaca",
+    "bytes": "f100f1d5f1c200f301f10bf7",
+    "sha256": "cb90c49f82d007464a5cc3f8989b6fa4a0e6fb0d2744cc6ffda0c7b3277d05e6"
+   }
+  },
+  "73": {
+   "ko": "늑대 메달",
+   "en_project": "WolfMedal",
+   "ko_project": "늑대 메달",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x2713",
+    "table_offset": "0xad6",
+    "bytes": "f1f8f11300f301f10bf7",
+    "sha256": "d1887ebcfc84d97e6a0bdde2800a6cbacabd6fe9a41035392c7bf553c918597a"
+   }
+  },
+  "74": {
+   "ko": "금색 톱니바퀴",
+   "en_project": "Cog",
+   "ko_project": "톱니바퀴",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x272b",
+    "table_offset": "0xae0",
+    "bytes": "f196f21100f1faf1fbf22df200f7",
+    "sha256": "d4f322e343fc2b97c313e4666eb5043ba75ee5de6c691263e2fe9cd8f75547d1"
+   }
+  },
+  "75": {
+   "ko": "맨홀 오프너",
+   "en_project": "ManholeOpener",
+   "ko_project": "맨홀 손잡이",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x2747",
+    "table_offset": "0xaee",
+    "bytes": "f203f10a00f21bf1a4f302f7",
+    "sha256": "4a7b452aa8f4b75372710b3c54047b53d11372d2cb1a5b5f955cd418a102a1b7"
+   }
+  },
+  "76": {
+   "ko": "메인 퓨즈",
+   "en_project": "MainFuse",
+   "ko_project": "메인 퓨즈",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x2761",
+    "table_offset": "0xafa",
+    "bytes": "f301f11900f207f1c3f7",
+    "sha256": "5067a745025c3df27214ac06d560259d97fc12ab7e23d4f20cf31b9ec353a5c7"
+   }
+  },
+  "77": {
+   "ko": "퓨즈 케이스",
+   "en_project": "FuseCase",
+   "ko_project": "퓨즈 케이스",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x2779",
+    "table_offset": "0xb04",
+    "bytes": "f207f1c300f208f1a3f106f7",
+    "sha256": "38ac59360037524f699ab35a737e79d5349b50bd7b2116e257aa00005570e27c"
+   }
+  },
+  "78": {
+   "ko": "백신",
+   "en_project": "Vaccine",
+   "ko_project": "백신",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x2793",
+    "table_offset": "0xb10",
+    "bytes": "f209f20af7",
+    "sha256": "82b6b2124cb7a60b62a9f2aa86b3a84dc98a0c35a4e61cb78ef43ab979304298"
+   }
+  },
+  "79": {
+   "ko": "백신 카트리지",
+   "en_project": "VaccineCart",
+   "ko_project": "백신 카트리지",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x27a6",
+    "table_offset": "0xb15",
+    "bytes": "f209f20a00f144f107f1c2f120f7",
+    "sha256": "50dbc68b8bced34513b5c5206609220e699e6452e741a64ecfb6a596f8cc3375"
+   }
+  },
+  "80": {
+   "ko": "필름",
+   "en_project": "FilmD",
+   "ko_project": "필름 D",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x27c2",
+    "table_offset": "0xb23",
+    "bytes": "f1e5f22af7",
+    "sha256": "75da499c60de929923f823bd7f6c0a196b8df57a0d0f9fe945540d70aa256d3d"
+   }
+  },
+  "81": {
+   "ko": "백신 원액",
+   "en_project": "VaccineBase",
+   "ko_project": "백신 베이스",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x27d5",
+    "table_offset": "0xb28",
+    "bytes": "f209f20a00f20df20ef7",
+    "sha256": "30db6e643340fddd4979a0f4e90effaef5ff979252ba62151eed38ff20605488"
+   }
+  },
+  "82": {
+   "ko": "G 바이러스",
+   "en_project": "GVirus",
+   "ko_project": "G 바이러스",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x27ed",
+    "table_offset": "0xb32",
+    "bytes": "2300f22df1a3f12ff106f7",
+    "sha256": "e21bd90a7b78382b5574a4633f4a5935168ab622f0046f100566e250457fd8e9"
+   }
+  },
+  "83": {
+   "ko": "특수 열쇠",
+   "en_project": "SpecialKey",
+   "ko_project": "특수 열쇠",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x2806",
+    "table_offset": "0xb3d",
+    "bytes": "f183f1d500f11bf172f7",
+    "sha256": "434472342d3add6b68cf0412df700539c6a55e0df9a0cdd909b6323396d34d6f"
+   }
+  },
+  "84": {
+   "ko": "S자형 조인트 플러그",
+   "en_project": "JointPlugBlue",
+   "ko_project": "파란 조인트",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x281e",
+    "table_offset": "0xb47",
+    "bytes": "2ff128f12300f103f119f10700f191f12ff1c6f7",
+    "sha256": "c92e1b3c580cf677846c94679c870fef0e570431d84bab6dbcedbd4f2fd8a291"
+   }
+  },
+  "85": {
+   "ko": "N자형 조인트 플러그",
+   "en_project": "JointPlugRed",
+   "ko_project": "빨간 조인트",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x2840",
+    "table_offset": "0xb5b",
+    "bytes": "2af128f12300f103f119f10700f191f12ff1c6f7",
+    "sha256": "01667256fc7100b8a2a82cfc87aec3a88f2417dc2adb98c3e899bb980b9f5197"
+   }
+  },
+  "86": {
+   "ko": "코드",
+   "en_project": "Cord",
+   "ko_project": "전선",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x2862",
+    "table_offset": "0xb6f",
+    "bytes": "f219f142f7",
+    "sha256": "c01939ac81c645d3b7305cc3fd598b45a803c2f9f7d48523a5cd38e3e8ded2c4"
+   }
+  },
+  "88": {
+   "ko": "창고 열쇠",
+   "en_project": "CabinKey",
+   "ko_project": "관리실 열쇠",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x2888",
+    "table_offset": "0xb79",
+    "bytes": "f16ff15100f11bf172f7",
+    "sha256": "59d834f6b57aa94afa194576fb75bb8993a72686ac5716581fb13b50b222ae50"
+   }
+  },
+  "89": {
+   "ko": "경찰서 열쇠",
+   "en_project": "SpadeKey",
+   "ko_project": "스페이드 열쇠",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x28a0",
+    "table_offset": "0xb83",
+    "bytes": "f114f303f10200f11bf172f7",
+    "sha256": "0503290b06c0ec2f1d65af6b516269ac417ecfe20ba2e94d0794d9ed06f00cbf"
+   }
+  },
+  "90": {
+   "ko": "경찰서 열쇠",
+   "en_project": "DiamondKey",
+   "ko_project": "다이아 열쇠",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x28ba",
+    "table_offset": "0xb8f",
+    "bytes": "f114f303f10200f11bf172f7",
+    "sha256": "0503290b06c0ec2f1d65af6b516269ac417ecfe20ba2e94d0794d9ed06f00cbf"
+   }
+  },
+  "91": {
+   "ko": "경찰서 열쇠",
+   "en_project": "HeartKey",
+   "ko_project": "하트 열쇠",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x28d4",
+    "table_offset": "0xb9b",
+    "bytes": "f114f303f10200f11bf172f7",
+    "sha256": "0503290b06c0ec2f1d65af6b516269ac417ecfe20ba2e94d0794d9ed06f00cbf"
+   }
+  },
+  "92": {
+   "ko": "경찰서 열쇠",
+   "en_project": "ClubKey",
+   "ko_project": "클로버 열쇠",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x28ee",
+    "table_offset": "0xba7",
+    "bytes": "f114f303f10200f11bf172f7",
+    "sha256": "0503290b06c0ec2f1d65af6b516269ac417ecfe20ba2e94d0794d9ed06f00cbf"
+   }
+  },
+  "93": {
+   "ko": "C. 패널 열쇠",
+   "en_project": "DownKey",
+   "ko_project": "하강 열쇠",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x2908",
+    "table_offset": "0xbb3",
+    "bytes": "1f0100f304f30500f11bf172f7",
+    "sha256": "256fef0220ac0b3ccfc9ef695dbdea76d9b738dbd17cb9b354aa494136f302c3"
+   }
+  },
+  "94": {
+   "ko": "C. 패널 열쇠",
+   "en_project": "UpKey",
+   "ko_project": "상승 열쇠",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x2923",
+    "table_offset": "0xbc0",
+    "bytes": "1f0100f304f30500f11bf172f7",
+    "sha256": "256fef0220ac0b3ccfc9ef695dbdea76d9b738dbd17cb9b354aa494136f302c3"
+   }
+  },
+  "95": {
+   "ko": "P. 룸 열쇠",
+   "en_project": "PowerRoomKey",
+   "ko_project": "동력실 열쇠",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x293e",
+    "table_offset": "0xbcd",
+    "bytes": "2c0100f30600f11bf172f7",
+    "sha256": "ff600fade7028843e8c930b19452c461c2ddd049b817e04d4c5cce51c8cd245c"
+   }
+  },
+  "96": {
+   "ko": "MO 디스크",
+   "en_project": "MODisk",
+   "ko_project": "MO 디스크",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x2957",
+    "table_offset": "0xbd8",
+    "bytes": "292b00f307f106f133f7",
+    "sha256": "a07689ce8b8a183cf5196bbc9af9e447d392fa6b5753f97c6ee2cad0645777bf"
+   }
+  },
+  "97": {
+   "ko": "연구소 카드 키",
+   "en_project": "UmbrellaKeyCard",
+   "ko_project": "엄브렐러 카드",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x296f",
+    "table_offset": "0xbe2",
+    "bytes": "f10ef230f12200f144f14200f216f7",
+    "sha256": "0e947964a29c833f370fd98d3ff22000d817bf96ff5a4429a145e32c92850de9"
+   }
+  },
+  "98": {
+   "ko": "만능 열쇠",
+   "en_project": "MasterKey",
+   "ko_project": "마스터 열쇠",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x298c",
+    "table_offset": "0xbf1",
+    "bytes": "f158f11100f11bf172f7",
+    "sha256": "60605d6c45936d135741355ac05bc566dc69fb62c515b3afe496d39a38242f42"
+   }
+  },
+  "99": {
+   "ko": "플랫폼 열쇠",
+   "en_project": "PlatformKey",
+   "ko_project": "플랫폼 열쇠",
+   "source": {
+    "file": "korean_hd.bin",
+    "record_offset": "0x29a4",
+    "table_offset": "0xbfb",
+    "bytes": "f191f308f30900f11bf172f7",
+    "sha256": "dbda40edaab3a9e1ef9c568e5f04ced78ac6cc409d2f0d4fc938565c915581cc"
+   }
+  }
+ }
+}

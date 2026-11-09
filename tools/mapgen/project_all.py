@@ -29,6 +29,18 @@ def sub_floors(pl,stage,room,raw):
   for f in native.floors(pl,stage,room,level):
    if f not in out:out.append(f)
  return out
+def project(floor,ptr,index,x,z):
+ u.mem_write(0x989f28,struct.pack('<i',x));u.mem_write(0x989f30,struct.pack('<i',z));u.mem_write(0x691fb8,b'\0'*4);u.reg_write(UC_X86_REG_EBX,ptr+index*16);u.reg_write(UC_X86_REG_EBP,0);u.reg_write(UC_X86_REG_ESI,0x20001000);u.emu_start(0x4faa19,0x4faae3,count=200)
+ return tuple(v+PROJ for v in struct.unpack('<hh',u.mem_read(0x20001008,4)))
+def other_side(pl,floor,raw):
+ """LockSide=1 (RE1 HD map mod style, user 2026-11-07): the door AOT's own destination, Door_aot_se bytes 14..25
+ (next x,y,z,cdir_y, next_stage, next_room, next_cut, next_nfloor). The arrival point is projected into the destination
+ room when the native map draws that room on this floor; else (stairs, other floors) there is no other side (255)."""
+ nx,nz=struct.unpack_from('<hxxh',raw,14);stage,room,level=raw[22],raw[23],raw[25]
+ if floor not in native.floors(pl,stage,room,level):return 0,0,255
+ index=call(0x4fb1c0,floor,room);table=0x53eb98 if pl else 0x53eaf8;ptr,cnt=struct.unpack_from('<IB',b,off(table)+floor*8)
+ if index>=cnt:return 0,0,255
+ return project(floor,ptr,index,nx,nz)+(b[off(ptr)+index*16+12],)
 def native_lock_floors(lock):
  # Floors on which the native map itself places this door lock (0x53da70 table). A door in a multi-level room
  # (603 Pump Room spans B1/B2) is drawn only there, not on every sub-floor (user 2026-10-23: phantom B2 key).
@@ -43,19 +55,22 @@ for d0 in a:
   if index>=cnt:continue
   q=b[off(ptr)+index*16:off(ptr)+index*16+16];x,z,w,h=struct.unpack_from('<hhHH',raw,6)
   u.mem_write(0x989f28,struct.pack('<i',x+w//2));u.mem_write(0x989f30,struct.pack('<i',z+h//2));u.mem_write(0x691fb8,b'\0'*4);u.reg_write(UC_X86_REG_EBX,ptr+index*16);u.reg_write(UC_X86_REG_EBP,0);u.reg_write(UC_X86_REG_ESI,0x20001000);u.emu_start(0x4faa19,0x4faae3,count=200)
-  px,py=(v+PROJ for v in struct.unpack('<hh',u.mem_read(0x20001008,4)));lock=d['key_id'] if d['kind']=='event' else (d['key_id']&63 if d['kind']=='door' else struct.unpack_from('<H',raw,14)[0])
+  px,py=(v+PROJ for v in struct.unpack('<hh',u.mem_read(0x20001008,4)));ax,ay=px,py # AOT centre: the door's own side
+  x2,y2,seen2=other_side(d['pl'],floor,raw) if d['kind']=='door' else (0,0,255)
+  lock=d['key_id'] if d['kind']=='event' else (d['key_id']&63 if d['kind']=='door' else struct.unpack_from('<H',raw,14)[0])
   assert lock<(256 if d['kind']=='event' else 64)
   meta=0
   for va in range(0x53da70,0x53dae0,8):
    k,f,flags,_,xx,yy=struct.unpack_from('<BBBBhh',b,off(va))
    if k==lock and f==floor and d['kind']=='door':px,py,meta=xx,yy,flags;break
-  d.update(bank=4 if d['kind']=='event' else 255,floor=floor,room_index=index,x=px,y=py,seen=q[12],unlock=lock,scenario_mask=meta&192)
+  d.update(bank=4 if d['kind']=='event' else 255,floor=floor,room_index=index,x=px,y=py,seen=q[12],unlock=lock,scenario_mask=meta&192,
+           x1=ax,y1=ay,x2=x2,y2=y2,seen2=seen2)
   if not any((r['pl'],r['floor'],r['x'],r['y'],r['item'])==(d['pl'],floor,px,py,d['item']) for r in result):result.append(d)
 # The power-room boundary has an additional native marker on the other floor.
 for pl in (0,1):
  d=next(x for x in result if x['pl']==pl and x['item']==95).copy()
  floor=13;room=4;idx=call(0x4fb1c0,floor,room);table=0x53eb98 if pl else 0x53eaf8;ptr,cnt=struct.unpack_from('<IB',b,off(table)+floor*8);assert idx<cnt
- q=b[off(ptr)+idx*16:off(ptr)+idx*16+16];d.update(floor=floor,room_index=idx,seen=q[12],x=176,y=123,other_side=True);result.append(d)
+ q=b[off(ptr)+idx*16:off(ptr)+idx*16+16];d.update(floor=floor,room_index=idx,seen=q[12],x=176,y=123,x1=176,y1=123,x2=0,y2=0,seen2=255,other_side=True);result.append(d)
 # B4 east corridor (60C) shutter to the B4 experiment room: opened by using the Lab Card Key (97) at a
 # scripted reader, not a DoorAotSet lock. Native lock marker 21 sits at (203,172) on floor 16 (table 0x53daf0
 # region); 60C function 4 opens the shutter and sets bank4 bit 96 (also read by 610 init).
@@ -83,5 +98,6 @@ assert {d['item'] for d in result}=={31,48,63,83,88,89,90,91,92,93,94,95,97,98,9
 print([(d['pl'],d['room'],d['item'],d['floor'],d['x'],d['y'],d['unlock']) for d in result]);(R/'all-projected-locks.json').write_text(json.dumps(result,indent=2))
 seen_rows=set();result=[d for d in result if not ((d['pl'],d['floor'],d['x'],d['y'],d['item'],d['unlock'],d['seen']) in seen_rows or seen_rows.add((d['pl'],d['floor'],d['x'],d['y'],d['item'],d['unlock'],d['seen'])))]
 lines=['static const Door doors[]={']
-for d in result:lines.append('{%d,%d,%d,%d,%d,%d,%d,%d,%d},'%(d['pl'],d['floor'],d['x'],d['y'],d['seen'],d['unlock'],d['item'],d['scenario_mask'],d['bank']))
+for d in result:lines.append('{%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d},'%(d['pl'],d['floor'],d['x'],d['y'],d['seen'],d['unlock'],d['item'],d['scenario_mask'],d['bank'],
+             d.get('x1',d['x']),d.get('y1',d['y']),d.get('x2',0),d.get('y2',0),d.get('seen2',255)))
 lines.append('};');(R/'doors-all.h').write_text('\n'.join(lines))

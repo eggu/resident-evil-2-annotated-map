@@ -13,11 +13,11 @@ WORK = ROOT / 'build/regen'
 EN = WORK / 'english'
 OUT = WORK / 'bilingual'
 STEPS = ('decode_maps.py', 'extract_all.py', 'extract_items.py', 'extract_overlay.py', 'project_all.py', 'generate_overlay_icons.py',
-         'generate_atlas.py', 'generate_fill_masks.py', 'generate_rank_glyphs.py', 'extract_monsters.py')
-HEADERS = ('atlas.h', 'items.h', 'doors-all.h', 'overlay_data.h', 'overlay_icons.h', 'fill_masks.h', 'rank_glyphs.h', 'monsters.h')
+         'generate_atlas.py', 'generate_key_art.py', 'generate_fill_masks.py', 'generate_rank_glyphs.py', 'extract_monsters.py')
+HEADERS = ('atlas.h', 'key_art.h', 'items.h', 'doors-all.h', 'overlay_data.h', 'overlay_icons.h', 'fill_masks.h', 'rank_glyphs.h', 'monsters.h')
 LABELS = (('room_names', {'RoomName': 'RoomName', 'room_names': 'room_names'}),
           ('room_labels', {'RoomLabel': 'RoomLabel', 'ROOM_LABEL_PAGE_COUNT': 'ROOM_LABEL_PAGE_COUNT', 'ROOM_LABEL_SCALE': 'ROOM_LABEL_SCALE',
-                           'ROOM_LABEL_COUNT': 'ROOM_LABEL_COUNT', 'ROOM_HELP_LABEL_COUNT': 'ROOM_HELP_LABEL_COUNT', 'ROOM_HELP_LABEL': 'ROOM_HELP_LABEL',
+                           'ROOM_LABEL_COUNT': 'ROOM_LABEL_COUNT', 'ROOM_HELP_LABEL_COUNT': 'ROOM_HELP_LABEL_COUNT', 'ROOM_READOUT_W': 'ROOM_READOUT_W', 'ROOM_HELP_LABEL': 'ROOM_HELP_LABEL',
                            'room_labels': 'room_labels', 'room_label_pixels': 'room_label_pixels', 'room_help_icon_x': 'room_help_icon_x', 'RE2_ROOM_LABELS_H': 'RE2_ROOM_LABELS_H'}),
           ('item_labels', {'ItemLabel': 'ItemLabel', 'ITEM_LABEL_PAGE_COUNT': 'ITEM_LABEL_PAGE_COUNT', 'ITEM_LABEL_COUNT': 'ITEM_LABEL_COUNT',
                            'item_labels': 'item_labels', 'item_label_pixels': 'item_label_pixels', 'RE2_ITEM_LABELS_H': 'RE2_ITEM_LABELS_H'}))
@@ -30,7 +30,7 @@ def prepare(game):
         for p in folder.iterdir():
             if p.is_file():
                 shutil.copy2(p, WORK / p.name)
-    for name in ('generate_atlas.py', 'generate_overlay_icons.py', 'pixel_icons.py', 'key-layout.json'):
+    for name in ('generate_atlas.py', 'generate_key_art.py', 'key-art-provenance.json', 'generate_overlay_icons.py', 'pixel_icons.py', 'key-layout.json'):
         shutil.copy2(ROOT / 'assets' / name, WORK / name)
     shutil.copytree(ROOT / 'assets/icons', WORK / 'icons')
     shutil.copytree(ROOT / 'fonts', WORK / 'fonts')
@@ -51,7 +51,12 @@ def renamed(path, out, suffix, mapping):
 def generate(game):
     for step in STEPS:
         subprocess.run([sys.executable, '-B', step], cwd=WORK, check=True, stdout=subprocess.DEVNULL)
+    subprocess.run([sys.executable, '-B', 'extract_file_titles.py'], cwd=WORK, check=True)  # document titles still match the game files
+    subprocess.run([sys.executable, '-B', 'extract_doc_names.py'], cwd=WORK, check=True)  # document names still match the EXE item-name table
+    subprocess.run([sys.executable, '-B', 'extract_ko_doc_names.py'], cwd=WORK, check=True)  # Korean names still match korean_hd.bin
     shutil.copy2(WORK / 'items.h', EN / 'items.h')
+    shutil.copy2(WORK / 'overlay_data.h', EN / 'overlay_data.h')
+    shutil.copy2(WORK / 'doors-all.h', EN / 'doors-all.h')
     shutil.copy2(WORK / 'room_shapes.json', EN / 'room_shapes.json')
     rooms = importlib.import_module('generate_room_names')
     for folder, language, names, px, stroke, font in ((WORK, 'Korean', 'room_names-ko.json', 24, 3, rooms.FONT_KO), (EN, 'English', 'room_names-en.json', 20, 2, rooms.FONT_EN)):
@@ -63,6 +68,7 @@ def generate(game):
     items.generate()
     items.R, items.NAMES = EN, importlib.import_module('item_names_en').ITEM_EN
     items.FONT, items.FONT_PX = rooms.FONT_EN, rooms.FONT_PX
+    items.LANG = 'en'
     items.generate()
     includes = []
     for stem, mapping in LABELS:
@@ -78,6 +84,7 @@ def targets():
     """generated file -> tracked file"""
     pairs = {OUT / p.name: p for p in (ROOT / 'src').iterdir() if (OUT / p.name).exists()}
     pairs[WORK / 'room_shapes.json'] = ROOT / 'data/room_shapes.json'
+    pairs[WORK / 'events-report.json'] = ROOT / 'data/events_report.json'
     for name in ('room_names.h', 'room_labels.h', 'item_labels.h', 'room_names-provenance.json'):
         pairs[EN / name] = ROOT / 'tests/fixtures' / name
         pairs[WORK / name] = ROOT / 'tests/fixtures/korean-assets' / name
