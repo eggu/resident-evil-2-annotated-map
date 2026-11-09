@@ -45,22 +45,23 @@ class MapMarkers(unittest.TestCase):
         config.read(ROOT / 'packaging/RE2.AnnotatedMap.ini')
         self.assertEqual(config['MapOverlay']['Enemies'], '0')
         self.assertNotIn('Monsters', config['MapOverlay'])
-        for name in ('README.md', 'README.en.md'):
+        for name in ('README.md', 'README.ko.md'):
             text = (ROOT / name).read_text()
             self.assertIn('`Enemies`', text)
             self.assertNotIn('`Monsters`', text)
 
     def test_enemy_legend_uses_the_display_name(self):
-        for lang, folder, expected in [('ko', 'korean-assets', ['[7] 적 켜짐', '[7] 적 꺼짐']),
-                                      ('en', '', ['[7] ENEMIES: ON', '[7] ENEMIES: OFF'])]:
+        for lang, folder, expected in [('ko', 'korean-assets', ['[8] 적 켜짐', '[8] 적 꺼짐']),
+                                      ('en', '', ['[8] ENEMIES: ON', '[8] ENEMIES: OFF'])]:
             data = json.loads((ROOT / 'tests/fixtures' / folder / 'room_names-provenance.json').read_text())
-            self.assertEqual([r['text'] for r in data['labels'] if r['text'].startswith('[7] ')], expected)
+            self.assertEqual([r['text'] for r in data['labels'] if r['text'].startswith('[8] ')], expected)
 
     def test_zapping_tags_are_separate_from_item_names(self):
         for lang in ('ko', 'en'):
             text = (ROOT / f'src/item_labels-{lang}.h').read_text()
-            labels = {int(i): name for i, name in re.findall(
-                r'\{(\d+),[^}]+\}, /\* \S+ (.*?) \*/', text)}
+            labels = {}
+            for i, name in re.findall(r'\{(\d+),[^}]+\}, /\* \S+ (.*?) \*/', text):
+                labels.setdefault(int(i), name)  # a wrapped name: its first line carries the tag
             self.assertEqual({i for i, name in labels.items() if name.startswith('[Z] ')},
                              {15, 206, 207, 208, 209})
             self.assertFalse(any(name.startswith('Z ') for name in labels.values()))
@@ -80,6 +81,18 @@ class MapMarkers(unittest.TestCase):
                     visible = all(state[(bank, bit)] == value for bank, bit, value in conditions)
                     self.assertEqual(visible, not opened and not bonus)
 
+    def test_legend_hint_format(self):
+        # RE0 HD map mod candidate 49: a lone key in brackets, '·' between alternatives, '+' for combinations.
+        for file in ('room_names-provenance.json', 'korean-assets/room_names-provenance.json'):
+            hints = [label['text'] for label in json.loads((ROOT / 'tests/fixtures' / file).read_text())['labels']][-57:]
+            self.assertTrue(all(t.startswith('[') for t in hints[22:28]), file)  # [결정]/[Action], [~], [H]
+            self.assertTrue(hints[28].startswith('[ · ] ') and hints[32].startswith('[ · ] '), file)
+            self.assertTrue(hints[29].startswith('- · + ') and hints[33].startswith('- · + '), file)
+            self.assertEqual(hints[30:32], ['Shift +', 'Ctrl +'])
+            self.assertEqual(hints[34:54], [f'{v}%' for v in range(10, 201, 10)])
+            self.assertTrue(all(hints[i].startswith('[H] ') for i in (26, 27, 54)), file)  # [H] item names: all / off / no common (2026-11-08)
+            self.assertEqual(len({hints[26], hints[27], hints[54]}), 3)
+            self.assertFalse(any('/+' in t or '-/' in t for t in hints), file)
 
 if __name__ == '__main__':
     unittest.main()

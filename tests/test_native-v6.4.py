@@ -33,7 +33,7 @@ rv=struct.unpack_from('<I',b,o+96)[0];n=struct.unpack_from('<I',di,rv+24)[0];fun
 for i in range(n):
  p=struct.unpack_from('<I',di,names+4*i)[0];end=di.index(0,p);name=di[p:end].decode();ord=struct.unpack_from('<H',di,ords+2*i)[0];exports[name]=0x10000000+struct.unpack_from('<I',di,func+ord*4)[0]
 def call(name,*args):
- u.mem_write(0x20008000,struct.pack('<'+'I'*(len(args)+1),0x20000100,*args));u.reg_write(UC_X86_REG_ESP,0x20008000);u.emu_start(exports[name],0x20000100,count=1000000)
+ u.mem_write(0x20008000,struct.pack('<'+'I'*(len(args)+1),0x20000100,*args));u.reg_write(UC_X86_REG_ESP,0x20008000);u.emu_start(exports[name],0x20000100,count=20000000)
  assert u.reg_read(UC_X86_REG_ESP)==0x20008004
  return u.reg_read(UC_X86_REG_EAX)
 # ---- harness end (test_upload-v6.py execs everything above) ----
@@ -53,6 +53,8 @@ rooms=rows((R/'room_names.h').read_text(),'room_names[]')
 room_labels=rows((R/'room_labels.h').read_text(),'room_labels[]')
 item_labels=rows((R/'item_labels.h').read_text(),'item_labels[ITEM_LABEL_COUNT]')
 icons=rows((R/'atlas.h').read_text(),'icons[]')
+key_art=rows((R/'key_art.h').read_text(),'key_art[]')
+assert len(key_art)==37 and not {a[0] for a in key_art}&{i[0] for i in icons} # Codex key sprites (2026-11-08) beside the lock-icon sprites
 doors=rows((R/'doors-all.h').read_text(),'doors[]')
 ov=(R/'overlay_data.h').read_text()
 pick_guards=rows(ov,'room_pickup_guards[]');pickups=rows(ov,'room_pickups[]');markers=rows(ov,'map_markers[]')
@@ -66,8 +68,8 @@ LOCK_TENTHS=int(re.search(r'#define LOCK_ICON_TENTHS (\d+)',(R/'re2_keymap.c').r
 ICON_TEX=int(re.search(r'OVERLAY_ICON_TEX (\d+)',(R/'overlay_icons.h').read_text())[1]);ICON_W=ICON_TEX//int(re.search(r'OVERLAY_ICON_SCALE (\d+)',(R/'overlay_icons.h').read_text())[1])
 MAPS=set(range(200,206))
 COMMON={20,21,22,24,25,26,27,29,30,35,38,39,40}
-assert len(pickups)>300 and len(markers)>=50 and {m[3] for m in markers}=={9,10} and {i[0] for i in oicons}==({9,10,11,12,13,14,15}|{100+x for x in COMMON}|set(range(50,62)))
-assert len(interactions)>1000 and {0,1}<={m[0] for m in interactions}<={0,1,2,3} and {m[3] for m in interactions}=={0,3,4,5,6,9,10,11,12,13,14} # SCE_WATER (7) wading zones are not puzzles
+assert len(pickups)>300 and len(markers)>=50 and {m[3] for m in markers}=={9,10} and {i[0] for i in oicons}==({9,10,11,12,13,14,15,16}|{100+x for x in COMMON}|set(range(50,62)))
+assert len(interactions)>1000 and {0,1}<={m[0] for m in interactions}<={0,1,2,3} and {m[3] for m in interactions}=={0,3,4,5,6,9,10,11,12,13,14,20} # 20 = event markers; SCE_WATER (7) wading zones are not puzzles
 assert all(m[6]+m[7]<=len(interaction_guards) and m[1]<20 and m[2]<256 for m in interactions) and all((g[0]<=34 or g[0] in (130,131)) and g[2] in (0,1) for g in interaction_guards)
 assert all(p[3] in (8,34) and p[5]+p[6]<=len(pick_guards) for p in pickups) and all(g[0]<=34 or g[0] in (130,131) for g in pick_guards)
 doc_ids={106,107,108,109,111,112,113,114,115,116,117,118,119,120,121,122,123,125,126}
@@ -77,7 +79,7 @@ ROOM_HELP_LABEL=int(re.search(r'ROOM_HELP_LABEL (\d+)',(R/'room_labels.h').read_
 ROOM_HELP_LABEL_COUNT=int(re.search(r'ROOM_HELP_LABEL_COUNT (\d+)',(R/'room_labels.h').read_text())[1])
 help_icon_x=(lambda text:[int(v) for v in re.search(r'room_help_icon_x\[\]=\{([^}]*)\}',text)[1].split(',')])((R/'room_labels.h').read_text())
 ITEM_PAGES=int(re.search(r'ITEM_LABEL_PAGE_COUNT (\d+)',(R/'item_labels.h').read_text())[1])
-assert len(room_labels)>96 and ROOM_HELP_LABEL+ROOM_HELP_LABEL_COUNT==len(room_labels) and ROOM_HELP_LABEL_COUNT==47 and len(item_labels)==76 and len(items)==1178 # +event rewards (Main Fuse, plugs...) and 4-point pickups (Fuse Case), 2026-10-23
+assert len(room_labels)>96 and ROOM_HELP_LABEL+ROOM_HELP_LABEL_COUNT==len(room_labels) and ROOM_HELP_LABEL_COUNT==57 and len({l[0] for l in item_labels})==128 and len(items)==1178 # 128 = 126 + Lockpick and Special Key, which only name their locks (2026-11-07); +event rewards (Main Fuse, plugs...) and 4-point pickups (Fuse Case), 2026-10-23; 76 key/map/common names + 15 document titles + 35 puzzle names
 # Leon B Vacant Factory B1 Shotgun Parts (ROOM5020, AOT attribute 0x71 incl. UNDER) is a [3] key item; no Rocket Launcher event row.
 assert any(i[:2]==(0,9) and i[5]==34 and i[6:8]==(34,21) for i in items) and not any(i[5]==17 and i[0]<2 for i in items) # Rocket Launcher: Extreme Battle rows only
 assert {20,21,22,24,25,26,27,29,30,35,38,39,40} <= {i[0] for i in item_labels}
@@ -89,7 +91,7 @@ assert json.loads((R/'room_names-provenance.json').read_text())['legend_stroke']
 assert all(label['font_px']>16 for label in label_data[:ROOM_HELP_LABEL])
 wrapped=[label for label in label_data[:ROOM_HELP_LABEL] if '\n' in label['text']]
 assert (len(wrapped)>0)==(True) and all(len(label['text'].splitlines())==2 and label['w']<=204 for label in wrapped)
-assert help_text[:22]==(['STATUS', '[0] ALL: ON', '[0] ALL: OFF', '[1] ROOMS: ON', '[1] ROOMS: OFF', '[2] LOCKS: ON', '[2] LOCKS: OFF', '[3] KEY ITEMS: ON', '[3] KEY ITEMS: OFF', '[4] FILES & MAPS: ON', '[4] FILES & MAPS: OFF', '[5] PUZZLES: ON', '[5] PUZZLES: OFF', '[9] LANGUAGE: KOREAN', '[9] LANGUAGE: ENGLISH', '[7] ENEMIES: ON', '[7] ENEMIES: OFF', '[6] ITEMS: ON', '[6] ITEMS: OFF', '[8] VISITED', '[8] REVEALED', '[8] ALL ROOMS'] if True else ['표시 상태', '[0] 전체 켜짐', '[0] 전체 꺼짐', '[1] 방 이름 켜짐', '[1] 방 이름 꺼짐', '[2] 잠긴 문 켜짐', '[2] 잠긴 문 꺼짐', '[3] 핵심 아이템 켜짐', '[3] 핵심 아이템 꺼짐', '[4] 문서·지도 켜짐', '[4] 문서·지도 꺼짐', '[5] 퍼즐 켜짐', '[5] 퍼즐 꺼짐', '[9] 언어: 한국어', '[9] 언어: 영어', '[7] 적 켜짐', '[7] 적 꺼짐', '[6] 일반 아이템 켜짐', '[6] 일반 아이템 꺼짐', '[8] 방문 방', '[8] 공개 방', '[8] 전체 방'])
+assert help_text[:22]==(['Map Notes', '[0] ALL: ON', '[0] ALL: OFF', '[1] ROOMS: ON', '[1] ROOMS: OFF', '[2] LOCKS: ON', '[2] LOCKS: OFF', '[3] KEY ITEMS: ON', '[3] KEY ITEMS: OFF', '[4] FILES & MAPS: ON', '[4] FILES & MAPS: OFF', '[5] PUZZLES: ON', '[5] PUZZLES: OFF', '[\\] LANGUAGE: KOREAN', '[\\] LANGUAGE: ENGLISH', '[8] ENEMIES: ON', '[8] ENEMIES: OFF', '[7] ITEMS: ON', '[7] ITEMS: OFF', '[9] VISITED', '[9] REVEALED', '[9] ALL ROOMS'] if True else ['지도 메모', '[0] 전체 켜짐', '[0] 전체 꺼짐', '[1] 방 이름 켜짐', '[1] 방 이름 꺼짐', '[2] 잠긴 문 켜짐', '[2] 잠긴 문 꺼짐', '[3] 핵심 아이템 켜짐', '[3] 핵심 아이템 꺼짐', '[4] 문서·지도 켜짐', '[4] 문서·지도 꺼짐', '[5] 퍼즐 켜짐', '[5] 퍼즐 꺼짐', '[9] 한국어', '[9] 영어', '[7] 적 켜짐', '[7] 적 꺼짐', '[6] 일반 아이템 켜짐', '[6] 일반 아이템 꺼짐', '[8] 방문 방', '[8] 공개 방', '[8] 전체 방'])
 assert all(r[5]<len(room_labels) for r in rooms) and all(i[8]+i[9]<=len(guards) for i in items)
 assert all((i[6]<=34 or i[6]==255) and (g[0]<=34 or g[0] in (130,131)) for i in items for g in guards[i[8]:i[8]+i[9]]) # bank_bit table bound; 255 = never hidden (zapping B markers)
 room_px=pixels('room_labels.h','room_label_pixels');item_px=pixels('item_labels.h','item_label_pixels')
@@ -97,11 +99,12 @@ pages={bytes(struct.pack('<65536H',*room_px[k*65536:(k+1)*65536])):('room',k) fo
 pages.update({bytes(struct.pack('<65536H',*item_px[k*65536:(k+1)*65536])):('item',k) for k in range(ITEM_PAGES)})
 pages[bytes(struct.pack('<65536H',*pixels('atlas.h','atlas_pixels')))]=('atlas',0)
 pages[bytes(struct.pack('<65536H',*pixels('overlay_icons.h','overlay_icon_pixels')))]=('icon',0)
+pages[bytes(struct.pack('<65536H',*pixels('key_art.h','key_art_pixels')))]=('keyart',0)
 assert len(pages)>=ROOM_PAGES+ITEM_PAGES+2
 # C-style assets retain hard, palette-limited pixels in every packed icon region.
 key_pixels=pixels('atlas.h','atlas_pixels');overlay_pixels=pixels('overlay_icons.h','overlay_icon_pixels')
 style_regions=[(key_pixels,i[1],i[2],i[3],i[4]) for i in icons]+[(overlay_pixels,i[1],i[2],ICON_TEX,ICON_TEX) for i in oicons if i[0] not in (12,14,15) and not 50<=i[0]<62] # drawn markers excluded
-assert len(style_regions)==35 # 18 key icons (52 Red Card, 75 Manhole Opener, 62 Chess Plug added) + 17 overlay icons
+assert len(style_regions)==36 # 18 key icons (52 Red Card, 75 Manhole Opener, 62 Chess Plug added) + 18 overlay icons (the event diamond added 2026-11-08)
 for bitmap,x,y,w,h in style_regions:
  colors={bitmap[yy*256+xx] for yy in range(y,y+h) for xx in range(x,x+w)}-{0}
  assert 1<len(colors)<=17,(x,y,w,h,len(colors))
@@ -124,7 +127,7 @@ ko_item_pages=int(re.search(r'ITEM_LABEL_PAGE_COUNT (\d+)',(KO/'item_labels.h').
 ko_help_start=int(re.search(r'ROOM_HELP_LABEL (\d+)',ko_header)[1])
 ko_help_count=int(re.search(r'ROOM_HELP_LABEL_COUNT (\d+)',ko_header)[1])
 ko_help_text=[label['text'] for label in json.loads((KO/'room_names-provenance.json').read_text())['labels'][-ko_help_count:]]
-assert ko_help_count==47 and ko_help_text[:22]==['표시 상태', '[0] 전체 켜짐', '[0] 전체 꺼짐', '[1] 방 이름 켜짐', '[1] 방 이름 꺼짐', '[2] 잠긴 문 켜짐', '[2] 잠긴 문 꺼짐', '[3] 핵심 아이템 켜짐', '[3] 핵심 아이템 꺼짐', '[4] 문서·지도 켜짐', '[4] 문서·지도 꺼짐', '[5] 퍼즐 켜짐', '[5] 퍼즐 꺼짐', '[9] 언어: 한국어', '[9] 언어: 영어', '[7] 적 켜짐', '[7] 적 꺼짐', '[6] 일반 아이템 켜짐', '[6] 일반 아이템 꺼짐', '[8] 방문 방', '[8] 공개 방', '[8] 전체 방']
+assert ko_help_count==57 and ko_help_text[:22]==['지도 메모', '[0] 전체 켜짐', '[0] 전체 꺼짐', '[1] 방 이름 켜짐', '[1] 방 이름 꺼짐', '[2] 잠긴 문 켜짐', '[2] 잠긴 문 꺼짐', '[3] 핵심 아이템 켜짐', '[3] 핵심 아이템 꺼짐', '[4] 문서·지도 켜짐', '[4] 문서·지도 꺼짐', '[5] 퍼즐 켜짐', '[5] 퍼즐 꺼짐', '[\\] 언어: 한국어', '[\\] 언어: 영어', '[8] 적 켜짐', '[8] 적 꺼짐', '[7] 일반 아이템 켜짐', '[7] 일반 아이템 꺼짐', '[9] 방문 방', '[9] 공개 방', '[9] 전체 방']
 ko_room_px=pixels(KO/'room_labels.h','room_label_pixels');ko_item_px=pixels(KO/'item_labels.h','item_label_pixels')
 for k in range(ko_room_pages):pages.setdefault(bytes(struct.pack('<65536H',*ko_room_px[k*65536:(k+1)*65536])),('room',k))
 for k in range(ko_item_pages):pages.setdefault(bytes(struct.pack('<65536H',*ko_item_px[k*65536:(k+1)*65536])),('item',k))
@@ -155,12 +158,34 @@ def item_on(item,state):
  return bool(state&16) if item in MAPS else bool(call('KeyMapTestCommon')) if item in COMMON else bool(state&8)
 BANKS={33:0x98ec1c,6:0x98eb74,7:0x98eb94,0:0x989e6c,1:0x989ed0,3:0x98eb2c,4:0x98eb4c,8:0x98ebb4,29:0x98ed24,34:0x98ebd4,255:0x98ed2c} # 29 = FG_ZAPPING ([0x53b218+29*4])
 def visible_help(state):
- stage=call('KeyMapTestInteractionStage')
- indices=[0,43,46,1 if state&1 else 2,3 if state&2 else 4,5 if state&4 else 6,7 if state&8 else 8,9 if state&16 else 10,11 if stage else 12,17 if call('KeyMapTestCommon') else 18,15 if call('KeyMapTestMonsters') else 16,18+call('KeyMapTestScope'),14 if call('KeyMapTestLanguage') else 13,22+(call('KeyMapTestOpacity')-10)//10,32+(call('KeyMapTestSize')-50)//10]
- return Counter({('help',)+room_labels[ROOM_HELP_LABEL+n]:1 for n in indices})
+ return Counter(('help',)+room_labels[ROOM_HELP_LABEL+n] for n in help_ids(state))
+def help_ids(state):
+ # Title line: title, [H] item names (26 on / 27 off), zoom (22), hide (25); ten state rows; readout (2026-11-07):
+ # 28/29 name hints, 30/31 Shift/Ctrl, 32/33 icon hints, 34.. values 10%..200%.
+ stage=call('KeyMapTestInteractionStage');icons=call('KeyMapTestIcons')
+ return [0,{1:26,0:27,2:54}[icons>>19&3],22,25,1 if state&1 else 2,3 if state&2 else 4,5 if state&4 else 6,7 if state&8 else 8,9 if state&16 else 10,11 if stage else 12,17 if call('KeyMapTestCommon') else 18,15 if call('KeyMapTestMonsters') else 16,18+call('KeyMapTestScope'),14 if call('KeyMapTestLanguage') else 13,55 if call('KeyMapTestEvents') else 56,
+         28,29,30+(icons>>17&1),30+(icons>>17&1),32,33]+[33+v//10 for v in (call('KeyMapTestOpacity'),call('KeyMapTestSize'),icons>>8&255,icons&255)]
+CAT_KEY,CAT_LOCK,CAT_PUZZLE,CAT_DOCUMENT,CAT_COMMON=range(5) # ItemLabel.cat: each name category has its own colour
+def item_keys(item,cat=CAT_KEY):
+ # A wrapped name is two consecutive item_labels entries of the same item (generate_item_labels.display_lines).
+ return [('item',)+l[1:6] for l in item_labels if l[0]==item and l[6]==cat]
+def panels():
+ out=[]
+ for i in range(2):
+  v=call('KeyMapTestPanel',i)
+  if v:out.append((v&511,v>>9&255,v>>17&511,v>>26))
+ return out
+def in_panel(x,y,w,h):return any(x<px+pw and px<x+w and y<py+ph and py<y+h for px,py,pw,ph in panels())
+# [H] names every marker (2026-11-07): lock, area-map and common-item names are optional in the model (placement may
+# drop them: a common-item name only goes where it covers nothing of weight >= 2, and an icon may be hidden).
+OPTIONAL=Counter()
+def names_on():return call('KeyMapTestIcons')>>16&1
+def art_fit(x,y,sz,aw,ah): # key art: longest side fills the marker box, aspect kept, at least 2 px thick (2026-11-08)
+ m=max(aw,ah);mn=2 if sz>=4 else 1;w=max(mn,(sz*aw+m//2)//m);h=max(mn,(sz*ah+m//2)//m)
+ return (x+(sz-w)//2,y+(sz-h)//2,w,h)
 def model(pl,floor,flags,bits,seen,state=31,mode=0):
  def bb(bank,bit):return bit in bits.get(bank,()) or (bank==1 and bit<32 and flags&(0x80000000>>bit)!=0)
- out=Counter()
+ out=Counter();OPTIONAL.clear()
  if mode!=0 or floor>=20:return out
  stage=call('KeyMapTestInteractionStage')
  out.update(visible_help(state));out.update(rank_keys(flags));out.update(legend_keys(floor))
@@ -170,7 +195,7 @@ def model(pl,floor,flags,bits,seen,state=31,mode=0):
     i=[i for i in oicons if i[0]==m[3]][0];out[('icon',0,i[1],i[2],ICON_TEX,ICON_TEX)]+=1
  if state&5==5:
   for d in doors:
-   dpl,dfl,x,y,s,unlock,key,mask,bank=d
+   dpl,dfl,x,y,s,unlock,key,mask,bank,*_=d
    if dpl!=pl or dfl!=floor or s not in seen:continue
    if (key==93 and flags&0x40000000) or (key in (94,95,98,99) and not flags&0x40000000):continue
    if not flags&0x40000000:
@@ -179,6 +204,7 @@ def model(pl,floor,flags,bits,seen,state=31,mode=0):
    if bb(bank,unlock):continue
    ic=[i for i in icons if i[0]==key]
    if ic:out[('atlas',0,)+ic[0][1:]]+=1
+   if ic and names_on():OPTIONAL.update(item_keys(key,CAT_LOCK))
  replaced=set() # puzzles a key item turns into the combined marker: their plain diamond is not drawn
  if state&1:
   for it in items:
@@ -188,14 +214,21 @@ def model(pl,floor,flags,bits,seen,state=31,mode=0):
    if item in COMMON or item in MAPS:
     i=[i for i in oicons if i[0]==(13 if item in MAPS else 100+item)][0]
     out[('icon',0,i[1],i[2],ICON_TEX,ICON_TEX)]+=1
+    if names_on():OPTIONAL.update(item_keys(item,CAT_COMMON if item in COMMON else CAT_DOCUMENT))
    else:
-    l=[l for l in item_labels if l[0]==item][0]
     near=next((k for k,m in enumerate(interactions) if stage and m[0]==pl and m[1]==floor and m[2] in seen and m[3] in (6,7) and
                abs(m[4]-x)<=5 and abs(m[5]-y)<=5 and all(bb(g[0],g[1])==g[2] for g in interaction_guards[m[6]:m[6]+m[7]])),None)
     if near is not None:replaced.add(near)
+    sz,(cx,cy)=(PUZZLE_KEY_W,interactions[near][4:6]) if near is not None else ((ICON_W*90+50)//100,(x,y))
     near=near is not None
-    i=[i for i in oicons if i[0]==(15 if near else 14)][0]
-    out[('icon',0,i[1],i[2],ICON_TEX,ICON_TEX)]+=1;out[('item',)+l[1:]]+=1
+    if in_panel(min(max(cx+10-sz//2,1),318-sz),min(max(cy+12-sz//2,1),238-sz),sz,sz):continue # star and name skipped under a panel
+    art=next((a for a in icons if a[0]==item),None);kart=next((a for a in key_art if a[0]==item),None)
+    if kart:out[('keyart',0,)+kart[1:]]+=1
+    elif art:out[('keyatlas',0,)+art[1:]]+=1
+    else:
+     i=[i for i in oicons if i[0]==(15 if near else 14)][0]
+     out[('icon',0,i[1],i[2],ICON_TEX,ICON_TEX)]+=1
+    if call('KeyMapTestIcons')>>16&1:out.update(item_keys(item,CAT_KEY))
  if state&17==17:
   for d in documents:
    pl0,floor0,seen0,bank,item,x,y,bit,gs,gc=d
@@ -203,12 +236,15 @@ def model(pl,floor,flags,bits,seen,state=31,mode=0):
    if any(bb(g[0],g[1])!=g[2] for g in doc_guards[gs:gs+gc]):continue
    i=[i for i in oicons if i[0]==11][0]
    out[('icon',0,i[1],i[2],ICON_TEX,ICON_TEX)]+=1
+   if names_on():OPTIONAL.update(item_keys(item,CAT_DOCUMENT)) # document title, only where it covers nothing of weight >= 2
  if state&1 and stage:
   for k,m in enumerate(interactions):
    if k in replaced or m[0]!=pl or m[1]!=floor or m[2] not in seen or m[3] not in (6,7):continue
    if any(bb(g[0],g[1])!=g[2] for g in interaction_guards[m[6]:m[6]+m[7]]):continue
+   if in_panel(m[4]+10-3,m[5]+12-3,6,6):continue
    i=[i for i in oicons if i[0]==12][0]
    out[('icon',0,i[1],i[2],32,32)]+=1
+   if names_on() and m[8]:OPTIONAL.update(item_keys(m[8],CAT_PUZZLE)) # puzzle name, dropped like the diamond when a key name covers it
  if state&1 and call('KeyMapTestMonsters'):
   for m in monsters:
    mpl0,mfl,x,y,s0,cat,dbank,gid,gs,gc=m
@@ -233,7 +269,9 @@ u.hook_add(UC_HOOK_CODE,create,begin=0x405ec0,end=0x405ec0)
 call('KeyMapTestInit',0x400000)
 # RE1-style defaults: only All and Rooms start on; the checks below run with every category on.
 assert call('KeyMapTestState')==3 and call('KeyMapTestInteractionStage')==0 and call('KeyMapTestCommon')==0 and call('KeyMapTestMonsters')==0
-call('KeyMapTestToggle',0,0);call('KeyMapTestToggle',0,4|8|16|64|128);call('KeyMapTestToggle',0,0)
+assert call('KeyMapTestIcons')==100|80<<8 # icon size 100, icon opacity 80, [H] item names off, Shift, lock at the door
+call('KeyMapTestToggle',0,0);call('KeyMapTestToggle',0,4|8|16|64|128|16384);call('KeyMapTestToggle',0,0)
+assert call('KeyMapTestIcons')>>16&1
 
 def revealed_seen(pl,floor,flags):
  # Native unvisited-room test (0x4fae74..0x4faea9): entry mask +0xe (+0xf if 0x989ef8&1), bit0 needs B, bit1 needs A.
@@ -287,11 +325,25 @@ def run(pl,floor,flags=None,bits={},seen=range(256),free=0x20000,mode=0,mpl=None
   assert cmd in (0x24,0x400025) and tex in created and 1<=x<=x1<=318 and 1<=y<=y1<=238 and (x<x1 or y<y1),(x,y,x1,y1)
   kind,page=created[tex];uu,vv,sw,sh=q[24],q[25],q[26]-q[24]+1,q[27]-q[25]+1;w,h=x1-x+1,y1-y+1
   is_name=kind=='item' or kind=='room' and (page,uu,vv,sw,sh) not in room_labels[ROOM_HELP_LABEL:]
-  expected_cmd=0x400025 if is_name and call('KeyMapTestOpacity')<100 else 0x24
+  # Names use the name opacity, map icons (atlas/icon pages) the icon opacity (2026-11-07); legend text stays opaque.
+  alpha=call('KeyMapTestOpacity') if is_name else call('KeyMapTestIcons')>>8&255 if kind in ('icon','atlas','keyart') else 100
+  expected_cmd=0x400025 if alpha<100 else 0x24
   assert cmd==expected_cmd,(kind,cmd,expected_cmd)
-  if cmd==0x400025:assert struct.unpack_from('<I',q,28)[0]==(((call('KeyMapTestOpacity')*255+50)//100)<<24)|0x808080
+  if cmd==0x400025:assert struct.unpack_from('<I',q,28)[0]==(((alpha*255+50)//100)<<24)|0x808080
   if (w,h) in ((5,5),(3,3)) and kind in ('icon','atlas','item','fill'):
    got[('legend',kind,uu,vv,sw,sh)]+=1;legend_rects.append((x,y,w,h));continue
+  art_positions=[]
+  if kind in ('atlas','keyart'):
+   for it in items:
+    if it[0]!=mpl or it[1]!=floor or not any(a[0]==it[5] and tuple(a[1:])==(uu,vv,sw,sh) for a in (icons if kind=='atlas' else key_art)):continue
+    pz=next((m for m in interactions if puzzles and state&1 and m[0]==mpl and m[1]==floor and m[2] in seen and m[3]==6 and abs(m[4]-it[2])<=5 and abs(m[5]-it[3])<=5 and all(ibit(g[0],g[1])==g[2] for g in interaction_guards[m[6]:m[6]+m[7]])),None)
+    sz,(cx,cy)=(PUZZLE_KEY_W,pz[4:6]) if pz else ((ICON_W*90+50)//100,it[2:4])
+    art_positions.append(art_fit(min(max(cx+10-sz//2,1),318-sz),min(max(cy+12-sz//2,1),238-sz),sz,sw,sh))
+  if kind in ('atlas','keyart') and (x,y,w,h) in art_positions:
+   matches=[i for i in items if i[0]==mpl and i[1]==floor and any(a[0]==i[5] and tuple(a[1:])==(uu,vv,sw,sh) for a in (icons if kind=='atlas' else key_art))]
+   assert matches,(floor,uu,vv,sw,sh)
+   last_item_marker=(x+w//2,y+h//2,(max(w,h)+1)//2+1);reserved.append((x,y,w,h));got[('keyatlas' if kind=='atlas' else 'keyart',page,uu,vv,sw,sh)]+=1;continue
+  assert kind!='keyart',(x,y,w,h,uu,vv,sw,sh)
   if kind=='atlas':
    # icon_box (2026-10-27): longest visible side scaled to LOCK_ICON_TENTHS/10 px, aspect kept.
    assert any((uu,vv,sw,sh)==(i[1],i[2],i[3],i[4]) and (w,h)==tuple(max(1,(d*LOCK_TENTHS+max(sw,sh)*5)//(max(sw,sh)*10)) for d in (sw,sh)) for i in icons),(uu,vv,sw,sh,w,h)
@@ -327,6 +379,12 @@ def run(pl,floor,flags=None,bits={},seen=range(256),free=0x20000,mode=0,mpl=None
        min(max(m[4]+6+4-3,1),312)==x and min(max(m[5]+6+6-3,1),232)==y and
        all(ibit(g[0],g[1])==g[2] for g in interaction_guards[m[6]:m[6]+m[7]]) for m in interactions),(x,y)
     rects.append((x,y,w,h));reserved.append((x,y,w,h))
+   elif icon_kind==16:
+    assert (w,h)==(6,6) and call('KeyMapTestEvents') and state&1
+    assert any(m[0]==mpl and m[1]==floor and m[2] in seen and m[3]==20 and
+       min(max(m[4]+6+4-3,1),312)==x and min(max(m[5]+6+6-3,1),232)==y and
+       all(ibit(g[0],g[1])==g[2] for g in interaction_guards[m[6]:m[6]+m[7]]) for m in interactions),(x,y)
+    rects.append((x,y,w,h));reserved.append((x,y,w,h))
    else:
     assert (w,h)==(ICON_W,ICON_W);rects.append((x,y,w,h));reserved.append((x,y,w,h))
     # Exactly centred on projected point + 6 (arrow-sprite centre), pan (4,6), clamped only at edges.
@@ -342,15 +400,16 @@ def run(pl,floor,flags=None,bits={},seen=range(256),free=0x20000,mode=0,mpl=None
    assert w==1 or h==1;assert any(min(r[6],r[8])+4==x and min(r[7],r[9])+6==y and abs(r[8]-r[6])+1==w and abs(r[9]-r[7])+1==h for r in rooms if r[6]|r[7]|r[8]|r[9]),(x,y,w,h)
    reserved.append((x,y,w,h))
   elif kind=='room':
-   assert (w,h)==((sw+2)//4,(sh+2)//4),(w,h,sw,sh);rects.append((x,y,w,h))
    help_rows=room_labels[ROOM_HELP_LABEL:ROOM_HELP_LABEL+ROOM_HELP_LABEL_COUNT]
+   # name size 100% is the former 80% (2026-11-08): room and marker names draw at 1/5 of their raster, the legend at 1/4
+   assert (w,h)==(((sw+2)//4,(sh+2)//4) if (page,uu,vv,sw,sh) in help_rows else ((2*sw+5)//10,(2*sh+5)//10)),(w,h,sw,sh);rects.append((x,y,w,h))
    if (page,uu,vv,sw,sh) in help_rows:
     n=help_rows.index((page,uu,vv,sw,sh))
     state=call('KeyMapTestState');stage=call('KeyMapTestInteractionStage');language=call('KeyMapTestLanguage')
-    selected=[0,43,46,1 if state&1 else 2,3 if state&2 else 4,5 if state&4 else 6,7 if state&8 else 8,9 if state&16 else 10,11 if stage else 12,17 if call('KeyMapTestCommon') else 18,15 if call('KeyMapTestMonsters') else 16,18+call('KeyMapTestScope'),14 if language else 13,22+(call('KeyMapTestOpacity')-10)//10,32+(call('KeyMapTestSize')-50)//10]
+    selected=help_ids(state)
     assert n in selected,(n,selected)
     # Row-by-row 6/5-column legend (2026-10-26); exact layout is covered by the pre-release legend tests.
-    assert 0<x and x+w<=320 and 200<=y and y+h<=240,(x,y,w,h)
+    assert 0<x and x+w<=320 and (200<=y and y+h<=240 or n>=28 and y>=1 and y+h<=17),(x,y,w,h) # legend; readout top left (2026-11-07)
     got[('help',page,uu,vv,sw,sh)]+=1
     help_rects.append((x,y,w,h,help_icon_x[n]))
     reserved.append((x,y,w,h))
@@ -361,7 +420,7 @@ def run(pl,floor,flags=None,bits={},seen=range(256),free=0x20000,mode=0,mpl=None
    assert 1<=x and x+w<=319 and 1<=y and y+h<=239,(x,y,w,h)
    reserved.append((x,y,w,h))
   elif kind=='item':
-   assert (w,h)==((sw+2)//4,(sh+2)//4),(w,h,sw,sh)
+   assert (w,h)==((2*sw+5)//10,(2*sh+5)//10),(w,h,sw,sh)
    # Queue order is stars -> names -> diamonds (2026-10-26), so a name no longer follows its own marker.
    # Placement rule (8 marker-box candidates, 0 px gap, weighted overlap) is checked by test_label_priority.py.
    last_item_marker=None;rects.append((x,y,w,h));reserved.append((x,y,w,h))
@@ -375,8 +434,11 @@ def run(pl,floor,flags=None,bits={},seen=range(256),free=0x20000,mode=0,mpl=None
  return got,overlaps
 
 def fits(got,want):
- high={(i[1],i[2]) for i in oicons if i[0] in (12,14,15)}
- return not got-want and all(k[0] in ('icon','atlas') and (k[2],k[3]) not in high for k in want-got)
+ high={(i[1],i[2]) for i in oicons if i[0] in (14,15)}   # stars and combined markers are never skipped
+ diamond={(i[1],i[2]) for i in oicons if i[0]==12}      # a puzzle diamond a name covers is skipped (key names win, 2026-10-26)
+ names=any(k[0]=='item' for k in got)
+ # set-wise (2026-11-08): at the smaller name size two markers of one device may both keep their name, the model lists it once
+ return not set(got-want)-set(OPTIONAL) and all(k[0] in ('icon','atlas') and (k[2],k[3]) not in high and ((k[2],k[3]) not in diamond or names) for k in want-got)
 
 def check(pl,floor,flags=None,bits={},seen=range(256)):
  f=(pl<<31) if flags is None else flags
@@ -400,10 +462,10 @@ for pl in (0,1):
     if it[5] in COMMON or it[5] in MAPS:
      icon=next(i for i in oicons if i[0]==(13 if it[5] in MAPS else 100+it[5]));key=('icon',0,icon[1],icon[2],ICON_TEX,ICON_TEX)
     else:
-     l=[l for l in item_labels if l[0]==it[5]][0];key=('item',)+l[1:]
+     l=[l for l in item_labels if l[0]==it[5]][0];key=('item',)+l[1:6]
     after,_=check(pl,floor,flags,{it[6]:{it[7]}})
     if all(((g[0]==1 and g[1]<32 and flags&(0x80000000>>g[1])!=0))==g[2] for g in guards[it[8]:it[8]+it[9]]):
-     assert after[key]<base[key],it;pickup_hidden+=1
+     if base[key]:assert after[key]-OPTIONAL[key]<base[key],it;pickup_hidden+=1 # 0: star under the legend (RE0 rule); OPTIONAL: its lock's name
 # Vacant Factory 1F sub-floors: control room 503 (seen 92) is drawn on floor 10, and on floor 11 once the Up Key
 # raised the lift in scenario B (0x4faf80: bank4 bit98). Its markers exist on both sub-floor maps.
 for rpl in (0,1):
@@ -436,9 +498,9 @@ for rpl in (0,1):
 # spot -> combined sprite), Fuse Case (4-point AOT), 609 Lounge shotgun shells (user 2026-10-23).
 assert any(it[:2]==(0,16) and it[5]==76 for it in items) and any(it[:2]==(0,16) and it[5]==77 for it in items)
 assert sum(1 for it in items if it[:2]==(0,16) and it[5]==21 and (it[2],it[3])==(79,157))>=1
-combo=next(('icon',0,i[1],i[2],ICON_TEX,ICON_TEX) for i in oicons if i[0]==15)
+combo=next(('keyart',0)+a[1:] for a in key_art if a[0]==76) # Main Fuse has its own art (2026-11-08), which replaces the combined marker
 assert check(0,16,0x40000000)[0][combo]>=1
-master=('item',)+[l for l in item_labels if l[0]==98][0][1:]
+master=('item',)+[l for l in item_labels if l[0]==98][0][1:6]
 assert check(0,13,0x40000000)[0][master]==1 and check(0,13,0)[0][master]==0
 # Live rank line: DLL formula equals the independent restatement at every boundary.
 for secs in (0,9000,9001,12600,12601,45000,45001,99999):
@@ -462,7 +524,7 @@ call('KeyMapTestToggle',0,256);call('KeyMapTestToggle',0,0);assert call('KeyMapT
 # Zapping: A-only gas marker hides after Z14; B shows Poison Ivy only when A set Z14; one cord use hides both cord spots.
 ZAP={15,206,207,208,209}
 def zap_count(pl,floor,flags,bits):
- got,_=check(pl,floor,flags,bits);return sum(v for k,v in got.items() if k[0]=='item' and k[1:] in {l[1:] for l in item_labels if l[0] in ZAP} and k[3]!=0)
+ got,_=check(pl,floor,flags,bits);return sum(v for k,v in got.items() if k[0]=='item' and k[1:] in {l[1:6] for l in item_labels if l[0] in ZAP} and k[3]!=0)
 gas=next(i for i in items if i[5]==208 and i[0]==0);ivy=next(i for i in items if i[5]==209 and i[0]==0)
 assert zap_count(0,gas[1],0,{})>=1 and zap_count(0,gas[1],0,{29:{14}})<zap_count(0,gas[1],0,{})
 assert zap_count(0,ivy[1],0x40000000,{29:{14}})>zap_count(0,ivy[1],0x40000000,{})
@@ -491,7 +553,7 @@ assert check(0,6,0x40000000)[0][treatment_map]==1
 
 # Weapon Box Key is found at the cable-car platform in all four scenarios;
 # the separate Power Room Key at Laboratory B5 is scenario B only.
-weapon_label=('item',)+[l for l in item_labels if l[0]==63][0][1:]
+weapon_label=('item',)+[l for l in item_labels if l[0]==63][0][1:6]
 weapon_lock=('atlas',0)+[i for i in icons if i[0]==63][0][1:]
 for pl,scenario in ((0,0),(0,0x40000000),(1,0),(1,0x40000000)):
  got,_=check(pl,9,(pl<<31)|scenario,seen=[90]);assert got[weapon_label]==1,(pl,scenario,got.get(weapon_label,0))
@@ -501,7 +563,7 @@ for pl,scenario in ((0,0),(0,0x40000000),(1,0),(1,0x40000000)):
 # it is present in both scenarios and disappears after pickup.
 rook_rows=[it for it in items if it[0]==0 and it[1]==2 and it[2:5]==(176,90,44) and it[5]==60]
 assert len(rook_rows)==1 and rook_rows[0][7]==56 and rook_rows[0][6]==8 and rook_rows[0][9]==0
-rook_label=('item',)+[l for l in item_labels if l[0]==60][0][1:]
+rook_label=('item',)+[l for l in item_labels if l[0]==60][0][1:6]
 for scenario in (0,0x40000000):
  got,_=check(0,2,scenario,seen=[44]);assert got[rook_label]==1,('Rook Plug',scenario,got.get(rook_label,0))
  got,_=check(0,2,scenario,bits={8:{56}},seen=[44]);assert got.get(rook_label,0)==0,('Rook Plug pickup',scenario)
@@ -509,7 +571,7 @@ assert all(it[0]!=1 or it[5]!=60 for it in items)
 # Claire A/B's Eagle Stone replaces the Leon-only Rook Plug at the same shelf.
 eagle_rows=[it for it in items if it[0]==1 and it[1]==2 and it[2:5]==(176,90,44) and it[5]==58]
 assert len(eagle_rows)==1 and eagle_rows[0][7]==56 and eagle_rows[0][6]==8 and eagle_rows[0][9]==0
-eagle_label=('item',)+[l for l in item_labels if l[0]==58][0][1:]
+eagle_label=('item',)+[l for l in item_labels if l[0]==58][0][1:6]
 for scenario in (0,0x40000000):
  got,_=check(1,2,(1<<31)|scenario,seen=[44]);assert got[eagle_label]==1,('Eagle Stone',scenario)
  got,_=check(1,2,(1<<31)|scenario,bits={8:{56}},seen=[44]);assert got.get(eagle_label,0)==0,('Eagle Stone pickup',scenario)
@@ -597,7 +659,7 @@ for item,floor,seen,expected in ((93,10,93,{(0,0):1,(0,0x40000000):0,(1,0):1,(1,
  lock=('atlas',0)+[i for i in icons if i[0]==item][0][1:]
  for pl,scenario in ((0,0),(0,0x40000000),(1,0),(1,0x40000000)):
   got,_=check(pl,floor,(pl<<31)|scenario,seen=[seen]);assert got[lock]==expected[pl,scenario],(item,pl,scenario,got.get(lock,0))
-power_label=('item',)+[l for l in item_labels if l[0]==95][0][1:]
+power_label=('item',)+[l for l in item_labels if l[0]==95][0][1:6]
 for pl,scenario,expected in ((0,0,0),(0,0x40000000,1),(1,0,0),(1,0x40000000,1)):
  got,_=check(pl,17,(pl<<31)|scenario,seen=[120]);assert got[power_label]==expected,(pl,scenario,got.get(power_label,0))
 # The C. Panel Key (U) and Platform Key are B-scenario-only pickups; the third
@@ -605,16 +667,16 @@ for pl,scenario,expected in ((0,0,0),(0,0x40000000,1),(1,0,0),(1,0x40000000,1)):
 # the renderer's scenario filtering.
 for item,floor,seen,expected in ((94,11,96,{(0,0):0,(0,0x40000000):1,(1,0):0,(1,0x40000000):1}),
                                 (99,18,127,{(0,0):0,(0,0x40000000):1,(1,0):0,(1,0x40000000):1})):
- label=('item',)+[l for l in item_labels if l[0]==item][0][1:]
+ label=('item',)+[l for l in item_labels if l[0]==item][0][1:6]
  for pl,scenario in ((0,0),(0,0x40000000),(1,0),(1,0x40000000)):
   got,_=check(pl,floor,(pl<<31)|scenario,seen=[seen]);assert got[label]==expected[pl,scenario],(item,pl,scenario,got.get(label,0))
-small_key=('item',)+[l for l in item_labels if l[0]==31][0][1:]
+small_key=('item',)+[l for l in item_labels if l[0]==31][0][1:6]
 for pl,scenario,expected in ((0,0,0),(0,0x40000000,1),(1,0,0),(1,0x40000000,0)):
  got,_=check(pl,8,(pl<<31)|scenario,seen=[77]);assert got[small_key]==expected,(31,pl,scenario,got.get(small_key,0))
-master_key=('item',)+[l for l in item_labels if l[0]==98][0][1:]
+master_key=('item',)+[l for l in item_labels if l[0]==98][0][1:6]
 for pl,scenario,expected in ((0,0,0),(0,0x40000000,1),(1,0,0),(1,0x40000000,1)):
  got,_=check(pl,13 if pl==0 else 16,(pl<<31)|scenario,seen=[103 if pl==0 else 107],bits={4:{92}} if pl==1 and scenario else {});assert got[master_key]==expected,(98,pl,scenario,got.get(master_key,0))
-wolf_medal=('item',)+[l for l in item_labels if l[0]==73][0][1:]
+wolf_medal=('item',)+[l for l in item_labels if l[0]==73][0][1:6]
 for pl,scenario,expected in ((0,0,1),(0,0x40000000,1),(1,0,0),(1,0x40000000,1)):
  got,_=check(pl,8,(pl<<31)|scenario,seen=[77]);assert got[wolf_medal]==expected,(73,pl,scenario,got.get(wolf_medal,0))
 # Room labels/items only for visited rooms.
@@ -624,7 +686,7 @@ got,_=check(0,2,seen=[only200]);assert sum(v for k,v in got.items() if k[0]=='ro
 # Spot checks from items-report.md (would fail with the raw-mask bank_bit bug: value=1 guards).
 guard1=[it for it in items if any(g[2]==1 for g in guards[it[8]:it[8]+it[9]])]
 assert guard1
-seen_guard1=sum(1 for it in guard1 for extra in (0,0x40000000,0x02000000,0x42000000) if model(it[0],it[1],(it[0]<<31)|extra,{},set(range(256)))[('item',)+[l for l in item_labels if l[0]==it[5]][0][1:]])
+seen_guard1=sum(1 for it in guard1 for extra in (0,0x40000000,0x02000000,0x42000000) if model(it[0],it[1],(it[0]<<31)|extra,{},set(range(256)))[('item',)+[l for l in item_labels if l[0]==it[5]][0][1:6]])
 assert seen_guard1>0 # these rows are covered by the differential runs above
 assert counts['LAF2']['item']>0 and counts['LAF2']['room']>0 and counts['CBF3']['item']>0
 # Other characters/floors never leak: Leon data never drawn for Claire.
@@ -641,7 +703,7 @@ assert len(created)==before
 u.mem_write(0x228c8338,struct.pack('<I',2));run(0,2);assert len(created)>before
 # Enlarged OFF/scope rows can occupy pages not requested by the default draw state.
 expected_room_pages={r[0] for r in room_labels[:ROOM_HELP_LABEL]}|{k[1] for k in visible_help(call('KeyMapTestState'))}
-assert {('atlas',0),('icon',0)}|{('room',k) for k in expected_room_pages} <= set(created.values())
+assert {('atlas',0),('icon',0),('keyart',0)}|{('room',k) for k in expected_room_pages} <= set(created.values())
 # ---- v6.2 room tint: run the REAL native room loop 0x4fa990 (unicorn) with and without the fill hook ----
 EXE=GAME.read_bytes()
 def exe_va(va,n):
@@ -760,11 +822,12 @@ assert toggle(64)==31 and call('KeyMapTestInteractionStage')==1
 assert toggle(2,1)==31 # hotkeys outside the interactive map are ignored
 toggle(128) # [6] common pickups off too
 assert toggle(2)==29 and toggle(4)==25 and toggle(8)==17 and toggle(16)==1 # room, lock, item and document switches are independent
-g,_=check(0,2);assert g==visible_help(call('KeyMapTestState'))+rank_keys(0)+legend_keys(2)+Counter({k:v for k,v in g.items() if k[0]=='icon' and k[1:] in puzzle_uv}) and not any(k[0] in ('room','atlas','item') for k in g)
+pz_names={k for n in {m[8] for m in interactions if m[8]} for k in item_keys(n,CAT_PUZZLE)} # puzzle names belong to the puzzle switch
+g,_=check(0,2);g=Counter({k:v for k,v in g.items() if k not in pz_names});assert g==visible_help(call('KeyMapTestState'))+rank_keys(0)+legend_keys(2)+Counter({k:v for k,v in g.items() if k[0]=='icon' and k[1:] in puzzle_uv}) and not any(k[0] in ('room','atlas','item') for k in g)
 assert toggle(1)==0 # master off hides every overlay except the help line
 g,_=check(0,2);assert g==visible_help(call('KeyMapTestState'))+rank_keys(0)+legend_keys(2)
 assert toggle(2)==2 and toggle(1)==3 # category state is retained while master is off
-g,_=check(0,2);assert sum(v for k,v in g.items() if k[0]=='room')>0 and sum(v for k,v in g.items() if k[0]=='icon')>0 and not any(k[0]=='atlas' for k in g) and not any(k[0]=='item' for k in g)
+g,_=check(0,2);g=Counter({k:v for k,v in g.items() if k not in pz_names});assert sum(v for k,v in g.items() if k[0]=='room')>0 and sum(v for k,v in g.items() if k[0]=='icon')>0 and not any(k[0]=='atlas' for k in g) and not any(k[0]=='item' for k in g)
 assert toggle(2)==1 # hiding room names also hides typewriter/item-box icons
 g,_=check(0,2);assert not any(k[0]=='room' for k in g) and all(k[0]!='icon' or k[1:] in puzzle_uv for k in g)
 assert toggle(2)==3
@@ -773,7 +836,7 @@ toggle(128);assert call('KeyMapTestCommon')==1
 # [6] common pickups and [3] key items are independent; area maps follow [4] documents.
 common_n=lambda g:sum(v for k,v in g.items() if k[0]=='icon' and next(i[0] for i in oicons if (i[1],i[2])==k[2:4]) in {100+x for x in COMMON})
 map_n=lambda g:sum(v for k,v in g.items() if k[0]=='icon' and next(i[0] for i in oicons if (i[1],i[2])==k[2:4])==13)
-key_n=lambda g:sum(v for k,v in g.items() if k[0]=='item' and k[2:]!=(0,0,4,4))
+key_n=lambda g:sum(v for k,v in g.items() if k[0] in ('keyatlas','keyart') or k[0]=='icon' and next(i[0] for i in oicons if (i[1],i[2])==k[2:4]) in (14,15)) # key stars ([H] names now cover locks/common items too)
 g,_=check(0,2);assert common_n(g)>0 and key_n(g)>0
 toggle(128);assert call('KeyMapTestCommon')==0
 g2,_=check(0,2);assert common_n(g2)==0 and key_n(g2)==key_n(g)
@@ -816,8 +879,8 @@ assert toggle(32)==31 and call('KeyMapTestLanguage')==1
 rooms,room_labels,item_labels,ROOM_PAGES,ITEM_PAGES,ROOM_HELP_LABEL,ROOM_HELP_LABEL_COUNT,help_icon_x=english_fixture
 g,_=check(0,2);assert sum(v for k,v in g.items() if k[0]=='room')>0
 source=(R/'re2_keymap.c').read_text()
-assert 'GetPrivateProfileIntA("MapOverlay","English",1,settings_path)' in source and all(f'"{k}",0,settings_path)' in source for k in ('Locks','Items','Documents','Puzzles','CommonItems','Enemies')) and 'WritePrivateProfileStringA("MapOverlay",keys[i],value,settings_path)' in source
-assert 'keys[]={"All","Rooms","Locks","Items","Documents","Puzzles","English","Enemies","CommonItems"}' in source and 'if(pressed&14335)save_settings();' in source and '"Scope"' in source
+assert 'GetPrivateProfileIntA("MapOverlay","English",1,settings_path)' in source and all(f'"{k}",0,settings_path)' in source for k in ('Locks','Items','Documents','Puzzles','CommonItems','Enemies'))
+assert all(f'"{k}"' in source for k in ('ItemNames','IconSize','IconOpacity','Modifier','LockSide','Version','Scope')) # load/save/migration behaviour: test_settings.py
 report={'passed':True,'revision':'6.4-bilingual-puzzle-markers','dll_sha256':__import__('hashlib').sha256(DLL.read_bytes()).hexdigest(),
  'per_map_counts':counts,'label_overlap_pairs':overlaps,'pickups_hidden_by_own_bank_bit':pickup_hidden,'guard_value1_rows_visible':seen_guard1,'texture_creates':len(created),
  'checks':['six named area-map markers share toggle 3; Treatment Pool remains visible with bank33 map-info bits set and companion-state flag variations, hides after bank8 bit137 or when unvisited','differential model vs native draw for Leon/Claire x A/B x bank1 bit6 x floors 0-19','13 common pickups use small, item-specific icons only; names are omitted; pickup bank and scenario gates are preserved','four Leon Small-Key locks visible in A/B and hidden by unlock bits','document markers visible only before their own pickup bits and behind document-only toggle 4','all projected SCE 6/7 puzzle/device markers use a flat amber diamond in the core-item marker style and map-only key 5','all non-puzzle interaction AOT markers are excluded','visited-room gating for puzzle markers','pickup bank bit hiding','guard value=1 (raw-mask bit checker)','exit modes 1-3 and floor>=20 suppressed','8192-byte buffer headroom and sentinel','per-page texture cache and device reset','quad bounds/UV/quarter-size item label geometry','room names use the same collision-aware placement in both languages','all room names try one centered line, then retry as two centered lines if the room mask rejects it; Records Room and Emergency Stairway placement assertions','0-5 overlay toggles plus map-only 9 English/Korean language switch','English first-launch default and INI-backed saved toggle state','Pretendard Medium, one-map-pixel-line-gap, two-paragraph live-status legend always drawn, including when overlays are hidden','REAL native room loop 0x4fa990 hooked vs unhooked: native packets byte-identical, pink pass only for visited non-current rooms with pending pickups','current room stays native red row','cleared rooms no tint','unvisited untouched','tint buffer headroom','save/item-box icons visited-only and room-name-toggle gated'],
@@ -840,9 +903,10 @@ assert {it[0] for it in items}=={0,1,2,3} and any(it[0]==2 and it[5]==36 for it 
 for pl in (0,1):
  normal=kinds(mode_run(pl,2));ex=kinds(mode_run(pl,2,(7,)));hunk=kinds(mode_run(pl,2,(28,)))
  key=sum(1 for it in ex_rows(pl,2) if it[5] not in COMMON and it[5] not in MAPS)
- assert key==3 and ex['item']==key and normal['item']!=ex['item'],(pl,normal,ex,key)  # star icon + label per key item
+ lines=sum(len(item_keys(it[5])) for it in ex_rows(pl,2) if it[5] not in COMMON and it[5] not in MAPS)
+ assert key==3 and ex['item']>=lines and normal['item']!=ex['item'],(pl,normal,ex,key)  # star icon + label (1-2 lines) per key item; [H] adds other markers' names
  assert hunk['item']==0 and hunk['icon']==0 and hunk['room']==normal['room']>0 and ex['room']==normal['room'],(hunk,normal)
- assert kinds(mode_run(pl,6,(7,)))['item']==0<kinds(mode_run(pl,6))['item']  # no Extreme Battle pickups on floor 6
+ assert key_n(mode_run(pl,6,(7,)))==0<key_n(mode_run(pl,6))  # no Extreme Battle key items on floor 6 (its common pickups are named with [H])
  for var1f in (0,1,2,3):  # factory B100 bomb: exactly one row per level value
   assert sum(1 for it in ex_rows(pl,2,0,var1f) if it[5]==36 and it[7]==254)==1
  for var1e,want in ((0,{20}),(1,{24}),(2,{20}),(3,{20})):  # E030: Ada's?/Claire's grenade rounds by character
@@ -868,3 +932,84 @@ hf=next(m[1] for m in monsters if m[0]==0 and m[9]==0)
 assert mcount(mode_run(0,hf,(28,)))>0 and mcount(mode_run(0,hf,(28,)))==mcount(mode_run(0,hf))
 call('KeyMapTestToggle',0,256);call('KeyMapTestToggle',0,0)
 print('game-mode checks ok')
+# LockSide (2026-11-07): 0 keeps the lock on the door; 1 puts it in the room not entered yet: the destination (door AOT
+# arrival point) unless only the destination was visited, then the door's own side (AOT centre).
+lock_door=next(d for d in doors if d[13]!=255 and d[4]!=d[13] and (d[9],d[10])!=(d[11],d[12]) and d[6] in {i[0] for i in icons} and d[7]==0 and d[8]==255)
+lpl,lfl,lx,ly,lseen,_,lkey,_,_,lx1,ly1,lx2,ly2,lseen2=lock_door
+lic=next(i for i in icons if i[0]==lkey)
+def lock_at(seen,side):
+ call('KeyMapTestLockSide',side);got=[]
+ items_were_on=bool(call('KeyMapTestState')&8)
+ if items_were_on:toggle(8) # isolate door icons from pickups reusing the same atlas art
+ run(lpl,lfl,lpl<<31,seen=seen)
+ if items_were_on:toggle(8)
+ end=struct.unpack('<I',u.mem_read(0x524e1c,4))[0]
+ for p in range(0x21000000,end,32):
+  q=u.mem_read(p,32);x0,y0,x1,y1=struct.unpack_from('<4h',q,16)
+  if created.get(struct.unpack_from('<I',q,8)[0])==('atlas',0) and (q[24],q[25])==lic[1:3]:got.append(((x0+x1+1)//2,(y0+y1+1)//2))
+ call('KeyMapTestLockSide',0);return got
+assert lock_at([lseen],0)==[(lx+4,ly+6)] # pan (4,6)
+assert lock_at([lseen],1)==[(lx2+4,ly2+6)] and lock_at([lseen,lseen2],1)==[(lx2+4,ly2+6)]
+toggle(4096);toggle(4096);assert call('KeyMapTestScope')==3 # all rooms: the door shows before its own room is visited
+assert lock_at([lseen2],1)==[(lx1+4,ly1+6)]
+toggle(4096);assert call('KeyMapTestScope')==1
+print('lock side ok')
+# [H] names every marker that has a name (2026-11-07, RE0): with key items off, lock-key, area-map and common-item names
+# still appear on their markers; [H] off removes every name. Documents and puzzles have no name data in RE2.
+rev={('item',)+l[1:6]:l[0] for l in item_labels}
+if not call('KeyMapTestCommon'):toggle(128)
+assert call('KeyMapTestState')&31==31 and call('KeyMapTestIcons')>>16&1
+toggle(8) # key items off: no stars, no key names
+named=set()
+for f in range(20):
+ for k in run(0,f,0)[0]:
+  if k[0]=='item':named.add(rev[k])
+assert named&COMMON and named&MAPS and named&{d[6] for d in doors},named
+# [H] has three states (user 2026-11-08): all -> no common items -> off -> all.
+def names_by_state():
+ out=set()
+ for f in range(20):
+  for k in run(0,f,0)[0]:
+   if k[0]=='item':out.add(rev[k])
+ return out
+assert call('KeyMapTestIcons')>>19&3==1
+toggle(16384);assert call('KeyMapTestIcons')>>19&3==2
+no_common=names_by_state()
+assert not no_common&COMMON and no_common&MAPS and no_common&{d[6] for d in doors},no_common # everything but common items
+toggle(16384);assert call('KeyMapTestIcons')>>19&3==0 and not any(k[0]=='item' for f in (2,3,5) for k in run(0,f,0)[0])
+toggle(16384);assert call('KeyMapTestIcons')>>19&3==1 and names_by_state()&COMMON
+toggle(8)
+# key items back on: their names stay in the no-common state and go in the off state
+toggle(8);key_names=lambda:{k for f in range(20) for k in run(0,f,0)[0] if k[0]=='item' and rev[k] not in COMMON|MAPS and rev[k] not in {d[6] for d in doors}}
+toggle(16384);assert key_names();toggle(16384);assert not key_names();toggle(16384);assert key_names()
+toggle(8)
+# Events (2026-11-08): a purple '?' diamond at a story scene's trigger (extract_overlay: FMV cutscene started by an event AOT),
+# shown only with [6] on and hidden once the scene's progress flag (FG_COMMON bank 4) is set.
+ev_rows=[m for m in interactions if m[3]==20];assert len(ev_rows)>=10 and {m[0] for m in ev_rows}=={0,1}
+# scenes the room script starts at once (Rooftop, Art Storage, Main Hall) sit at the room's centre (2026-11-08, candidate 10); scenes without a persistent flag or in boss rooms have none
+assert {m[1] for m in ev_rows if m[0]==0}>={2,3,7},{m[1] for m in ev_rows}
+ev_icon=next(i for i in oicons if i[0]==16);ev_key=('icon',0,ev_icon[1],ev_icon[2],32,32)
+assert call('KeyMapTestEvents')==0
+for m in ev_rows:assert run(m[0],m[1],m[0]<<31)[0][ev_key]==0 # default off
+# Event marks have no names (RE0 rule, user 2026-11-08): the same item-name labels are drawn with events off and on, in every
+# [H] state, so no name raster is placed for an event diamond.
+def label_keys(pl,floor):return {k for k in run(pl,floor,pl<<31)[0] if k[0]=='item'}
+floors_with_events={(m[0],m[1]) for m in ev_rows}
+off_names={f:label_keys(*f) for f in floors_with_events}
+for mode in (1,2,0):
+ while call('KeyMapTestIcons')>>19&3!=mode:toggle(16384)
+ off_names={f:label_keys(*f) for f in floors_with_events}
+ toggle(131072)
+ assert {f:label_keys(*f) for f in floors_with_events}==off_names,('an event mark got a name',mode)
+ toggle(131072)
+while call('KeyMapTestIcons')>>19&3!=1:toggle(16384)
+toggle(131072);assert call('KeyMapTestEvents')==1
+for m in ev_rows:
+ bank,bit,value=interaction_guards[m[6]:m[6]+m[7]][-1];assert (bank,value)==(4,0)
+ assert run(m[0],m[1],m[0]<<31)[0][ev_key]>=1,m                      # drawn until the scene has played
+ here=[r for r in ev_rows if r[:2]==m[:2]];first=run(m[0],m[1],m[0]<<31)[0][ev_key]
+ assert run(m[0],m[1],m[0]<<31,{4:{bit}})[0][ev_key]<first,m          # one scene's flag removes its marker only
+ assert run(m[0],m[1],m[0]<<31,{4:{interaction_guards[r[6]:r[6]+r[7]][-1][1] for r in here}})[0][ev_key]==0,m # all flags set: none left
+ assert run(m[0],m[1],m[0]<<31,{},seen=())[0][ev_key]==0,m            # an unvisited room shows none
+toggle(131072);assert call('KeyMapTestEvents')==0 and all(run(m[0],m[1],m[0]<<31)[0][ev_key]==0 for m in ev_rows)
+print('marker names ok',sorted(named))

@@ -82,10 +82,15 @@ call('KeyMapTestZoomView',160,120);state(2);call('KeyMapTestDrawMap');got=[p for
 found=0
 for pl,fl,sn,x,y,label,lx0,ly0,lx1,ly1 in rows('room_names-en.h','room_names_EN[]'):
  if pl or fl!=2 or lx0|ly0|lx1|ly1:continue
- _,_,_,w,h=labels[label];w,h=(w+2)//4,(h+2)//4;sx,sy=2*x-160-w//2,2*y-120-h//2
+ _,_,_,w,h=labels[label];w,h=(w*100*143*4+100000)//200000,(h*100*143*4+100000)//200000;sx,sy=2*x-160-w//2,2*y-120-h//2 # names 143% at 2x, size 100% = the former 80% (2026-11-08)
  if 2<sx and sx+w<317 and 2<sy and sy+h<237:
   assert any(p['x0']==sx and p['y0']==sy and p['x1']==sx+w-1 and p['y1']==sy+h-1 for p in got),(x,y,sx,sy);found+=1
 assert found>=8,found
+# Zoom size (user 2026-11-07, RE0 name_zoom): names and icons 143% at 2x, times the icon size setting. The save/item-box
+# markers ([1] Rooms) are isz(8): 8 px at 1x, 11 at 2x; 200% icon size gives 23 at 2x.
+def squares():return {p['x1']-p['x0']+1 for p in packets() if p['t']==5000 and p['x1']-p['x0']==p['y1']-p['y0'] and 1<p['x0'] and p['x1']<317 and 1<p['y0'] and p['y1']<237}
+state(2);call('KeyMapTestDrawMap');zoomed=squares();assert 11 in zoomed and 8 not in zoomed,zoomed
+call('KeyMapTestSetIcons',200,80,0);state(2);call('KeyMapTestDrawMap');assert 23 in squares(),squares();call('KeyMapTestSetIcons',100,80,0)
 # D pan: 4 px per held frame, clamps to the doubled map.
 def hold(bit,n=1):
  u.mem_write(0x9885fc,struct.pack('<I',bit))
@@ -97,4 +102,5 @@ hold(0x2000);assert view()==(104,100);hold(0x8000,2);assert view()==(96,100);hol
 hold(0x2000,200);hold(0x4000,200);assert view()==(320,240);hold(0x8000,200);hold(0x1000,200);assert view()==(0,0)
 press();assert call('KeyMapTestZoomState')==0
 want=native(2);state(2);call('KeyMapTestDrawMap');assert [p['raw'] for p in packets()[:len(want)]]==[p['raw'] for p in want]
+assert 8 in squares() and 11 not in squares(),squares() # back to 1x
 print('PASS zoom',seen,'map packets',found,'names')

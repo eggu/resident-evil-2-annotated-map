@@ -1,6 +1,6 @@
 import os
 from pathlib import Path
-exec((Path(__file__).resolve().parent/'test_native-v6.4.py').read_text().replace('count=1000000','count=30000000').split('# ---- harness end')[0])
+exec((Path(__file__).resolve().parent/'test_native-v6.4.py').read_text().replace('count=20000000','count=30000000').split('# ---- harness end')[0])
 from unicorn import UC_HOOK_CODE,UC_HOOK_MEM_INVALID
 from unicorn.x86_const import UC_X86_REG_EIP
 u.mem_map(0x22000000,0x900000);u.mem_map(0x23000000,0x1000000)
@@ -63,13 +63,13 @@ def verify_pages(pages,language):
  call('KeyMapTestUploadPage',len(pages));assert u.reg_read(UC_X86_REG_EAX)==0
  return results
 call('KeyMapTestInit',0x400000)
-pages_en=[('atlas.h','atlas_pixels',0)]+[('room_labels.h','room_label_pixels',k) for k in range(ROOM_PAGES)]+[('item_labels.h','item_label_pixels',k) for k in range(ITEM_PAGES)]+[('overlay_icons.h','overlay_icon_pixels',0)]
+pages_en=[('atlas.h','atlas_pixels',0)]+[('room_labels.h','room_label_pixels',k) for k in range(ROOM_PAGES)]+[('item_labels.h','item_label_pixels',k) for k in range(ITEM_PAGES)]+[('overlay_icons.h','overlay_icon_pixels',0),('key_art.h','key_art_pixels',0)]
 results=verify_pages(pages_en,'English')
 call('KeyMapTestToggle',0,0);call('KeyMapTestToggle',0,32);assert call('KeyMapTestLanguage')==0
 ko=Path('korean-assets')
 KR=int(re.search(r'ROOM_LABEL_PAGE_COUNT (\d+)',(R/ko/'room_labels.h').read_text())[1])
 KI=int(re.search(r'ITEM_LABEL_PAGE_COUNT (\d+)',(R/ko/'item_labels.h').read_text())[1])
-pages_ko=[('atlas.h','atlas_pixels',0)]+[(ko/'room_labels.h','room_label_pixels',k) for k in range(KR)]+[(ko/'item_labels.h','item_label_pixels',k) for k in range(KI)]+[('overlay_icons.h','overlay_icon_pixels',0)]
+pages_ko=[('atlas.h','atlas_pixels',0)]+[(ko/'room_labels.h','room_label_pixels',k) for k in range(KR)]+[(ko/'item_labels.h','item_label_pixels',k) for k in range(KI)]+[('overlay_icons.h','overlay_icon_pixels',0),('key_art.h','key_art_pixels',0)]
 results+=verify_pages(pages_ko,'Korean')
 (R/'texture-upload-test-v6.2.json').write_text(json.dumps({'passed':True,'revision':'6.4-bilingual-documents','native_texture_allocator_and_pixel_copy':True,'gpu_tested':False,'size':[256,256],'pitch':512,'pages':results},indent=1))
 print('PASS native texture upload CPU path, all English/Korean pages')

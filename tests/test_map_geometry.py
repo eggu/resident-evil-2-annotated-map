@@ -16,7 +16,7 @@ for f in json.loads((R/'data/room_shapes.json').read_text())['floors']:
    for a,n in runs:
     for x in range(a,a+n):grid[(s['x']+x,s['y']+y)]=s['seen']
 failures=[]
-for pl,floor,x,y,seen,unlock,key,mask,bank in rows('doors-all.h','doors[]'):
+for pl,floor,x,y,seen,unlock,key,mask,bank,*_ in rows('doors-all.h','doors[]'):
  if key in (31,48) and floors[(pl,floor)].get((x,y))!=seen: # Small Key / Lockpick are always drawers, never doors
   failures.append(('drawer outside its room',pl,floor,x,y,seen,floors[(pl,floor)].get((x,y))))
 for name in ('room_names-en.h','room_names-ko.h'):
