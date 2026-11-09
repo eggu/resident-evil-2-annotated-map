@@ -1,0 +1,592 @@
+{
+ "tool": "image_gen.imagegen (built-in)",
+ "date": "2026-11-09",
+ "worker": "Orca Codex d0c0b8b3-1b32-4952-b217-f6fdfee53356",
+ "status": "All 37 candidates delivered; revised 33,56,57,86 awaiting visual approval; no build/install/game acceptance",
+ "reference_policy": "Game inventory references viewed locally only; never sent to generation tool, traced, copied or resampled into icons. Reduced reference thumbnails appear only in requested comparison preview.",
+ "postprocess": "Generated RGBA -> tight crop -> premultiplied channel-wise Lanczos reduction to max30 -> alpha threshold128 -> no-dither 14-colour quantization -> 1px RGB8 silhouette contour -> tight crop. No code primitives used to draw any item.",
+ "validation": "All current entries: RGBA, <=32px, binary alpha, <=16 total RGBA colours including transparency, tight bbox, exposed edge RGB8 verified by assertions.",
+ "entries": [
+  {
+   "id": 5,
+   "name": "Magnum",
+   "prompt": "Create ONE original retro survival-horror pixel art inventory map icon. Detailed 1990s C style, muted metal and leather colours, top-left light, 2-3 flat shading tones per material, chunky readable pixels and bold silhouette, dark black outline. Original drawing, not generic flat primitives. Isolated single item on genuine transparent background. No text, frame, shadow or floor. Tight composition, designed to remain recognizable reduced to 32 pixels maximum. Subject: A silver Desert Eagle automatic pistol, NOT revolver: broad straight silver slide and triangular dark muzzle at upper-left, blocky metallic receiver across upper portion pointing left, curved brown wood grip dropping down on right; no visible revolver cylinder. Reference pose barrel left grip right.",
+   "source": "exec-d956c5f6-d872-49c7-a498-f545298eb8c7.png",
+   "reference": "local/key-icon-refs/5.png",
+   "reference_sha256": "ffbdc6a12370a93b8deb21f90460fe320f9a509d1a5e2833c59b1677f4f71f8e",
+   "generated_sha256": "186fc2c2ffbac560fa722f78e8a3564aa2e615483038fc436717de3b67170044",
+   "output_sha256": "16df6ea03c9a577e59a70293ef301bbe814e221ff5c5a3f95346a50857557e26",
+   "size": [
+    32,
+    22
+   ],
+   "opaque_colours": 13
+  },
+  {
+   "id": 7,
+   "name": "Shotgun",
+   "prompt": "Create ONE original retro survival-horror pixel art inventory map icon. Detailed 1990s C style, muted metal and leather colours, top-left light, 2-3 flat shading tones per material, chunky readable pixels and bold silhouette, dark black outline. Original drawing, not generic flat primitives. Isolated single item on genuine transparent background. No text, frame, shadow or floor. Tight composition, designed to remain recognizable reduced to 32 pixels maximum. Subject: pump shotgun side view pointing right, long thin double grey barrel extending left of a broad charcoal receiver and short brown pistol grip at right; no long shoulder stock.",
+   "source": "exec-78073c0b-30ee-4448-b12b-a61862d42a8e.png",
+   "reference": "local/key-icon-refs/7.png",
+   "reference_sha256": "499d5c5f2a20250836b833a24a9bae01d9b3407c11eddc46da5b1804a7f47e6b",
+   "generated_sha256": "d496cfd53b4ee86dcdabcd2c2458e0d5182095756064554537fd9d6644aed588",
+   "output_sha256": "b642e688d2f917c00b58f6fcff3b9b47cc3036fa163c28c578f63451d0786a76",
+   "size": [
+    32,
+    10
+   ],
+   "opaque_colours": 14
+  },
+  {
+   "id": 9,
+   "name": "GrenadeLauncher",
+   "prompt": "Create ONE original retro survival-horror pixel art inventory map icon. Detailed 1990s C style, muted metal and leather colours, top-left light, 2-3 flat shading tones per material, chunky readable pixels and bold silhouette, dark black outline. Original drawing, not generic flat primitives. Isolated single item on genuine transparent background. No text, frame, shadow or floor. Tight composition, designed to remain recognizable reduced to 32 pixels maximum. Subject: large single-shot grenade launcher, broad open black circular muzzle facing left, grey cylindrical barrel tapering to right, brown wood curved pistol grip dropping at right.",
+   "source": "exec-f0548650-686f-436a-8271-d88a9b13ec65.png",
+   "reference": "local/key-icon-refs/9.png",
+   "reference_sha256": "b8b833a5532cba0477f92dae1b98d7d2f868662ed07e2e740fa9239fd04732b2",
+   "generated_sha256": "b5a52cf10d67ec925f18130fe1f33ae4b4718dd5715ff3661a720c8786a7eb05",
+   "output_sha256": "c896195b507eda8e86c1b937afa4c9dd2cc933284105c9511f6ed5185ba018b6",
+   "size": [
+    32,
+    17
+   ],
+   "opaque_colours": 14
+  },
+  {
+   "id": 12,
+   "name": "Bowgun",
+   "prompt": "Create ONE original retro survival-horror pixel art inventory map icon. Detailed 1990s C style, muted metal and leather colours, top-left light, 2-3 flat shading tones per material, chunky readable pixels and bold silhouette, dark black outline. Original drawing, not generic flat primitives. Isolated single item on genuine transparent background. No text, frame, shadow or floor. Tight composition, designed to remain recognizable reduced to 32 pixels maximum. Subject: dark steel crossbow oblique side view, long bow limb vertical on left, thin upper limb running up-right, central grey mechanism and dark pistol grip pointing down-right.",
+   "source": "exec-7f73f284-423f-4140-bf80-28928bb0a284.png",
+   "reference": "local/key-icon-refs/12.png",
+   "reference_sha256": "6a1d3ec408b292a9cbf70a8b9b389ceb340720911c6f8266612cceaa8f1d2185",
+   "generated_sha256": "072b4af2fc4cf8fd422aaa3f49e9105d7e9169fcc713a5800a55345c39967b06",
+   "output_sha256": "037fad01acc06212d531d0390f9955816de7337f8211eef09320477ff168c60f",
+   "size": [
+    32,
+    30
+   ],
+   "opaque_colours": 13
+  },
+  {
+   "id": 15,
+   "name": "SubMachineGun",
+   "prompt": "Create ONE original retro survival-horror pixel art inventory map icon. Detailed 1990s C style, muted metal and leather colours, top-left light, 2-3 flat shading tones per material, chunky readable pixels and bold silhouette, dark black outline. Original drawing, not generic flat primitives. Isolated single item on genuine transparent background. No text, frame, shadow or floor. Tight composition, designed to remain recognizable reduced to 32 pixels maximum. Subject: A very thin horizontally elongated rectangular grey metal submachine-gun inventory sprite seen almost end-on with folded components: silhouette is 31 units wide and only 7 units high; long silver barrel-like upper bar, dark rectangular lower bar, tiny vertical end plate at far right. Absolutely NO hanging grip, NO magazine, NO stock protrusions. Keep silhouette a narrow horizontal strip.",
+   "source": "exec-a229a60d-7845-4638-ad7b-c27ca98b0aa7.png",
+   "reference": "local/key-icon-refs/15.png",
+   "reference_sha256": "4af364f7b173ff561c173701cc039d9ad521be3b6af64fb55d5c1bf2d2790924",
+   "generated_sha256": "5a69139c16b32e7ae72c10127249811f4836fe1f7908f5929279db7c6b03b6b6",
+   "output_sha256": "b155ec8cd0f14468dfefaa6bfe7d062e089819f86b2aea53718326d568d82d6f",
+   "size": [
+    32,
+    6
+   ],
+   "opaque_colours": 14
+  },
+  {
+   "id": 16,
+   "name": "Flamethrower",
+   "prompt": "Create ONE original retro survival-horror pixel art inventory map icon. Detailed 1990s C style, muted metal and leather colours, top-left light, 2-3 flat shading tones per material, chunky readable pixels and bold silhouette, dark black outline. Original drawing, not generic flat primitives. Isolated single item on genuine transparent background. No text, frame, shadow or floor. Tight composition, designed to remain recognizable reduced to 32 pixels maximum. Subject: thin long flamethrower side view, narrow steel barrel left with small red trigger below, vented charcoal middle and thicker cylindrical grey tank at right.",
+   "source": "exec-6afcdc02-0e7f-4539-b74c-2e523ad1c62f.png",
+   "reference": "local/key-icon-refs/16.png",
+   "reference_sha256": "e85037800c46f1b1f6befed999421b4c350e49df7c1eeef7d1088c5a68ab8ab0",
+   "generated_sha256": "82d03f515b0da0dfafe55f8bdc3b2cd620bfa0686f441c7b4e2c2bf0179b2fbc",
+   "output_sha256": "c7ac8b93112284eb99358bff01c0782327d6940a64782d91ea387b6eea1a502e",
+   "size": [
+    32,
+    11
+   ],
+   "opaque_colours": 14
+  },
+  {
+   "id": 17,
+   "name": "RocketLauncher",
+   "prompt": "Create ONE original retro survival-horror pixel art inventory map icon. Detailed 1990s C style, muted metal and leather colours, top-left light, 2-3 flat shading tones per material, chunky readable pixels and bold silhouette, dark black outline. Original drawing, not generic flat primitives. Isolated single item on genuine transparent background. No text, frame, shadow or floor. Tight composition, designed to remain recognizable reduced to 32 pixels maximum. Subject: boxy dark olive rocket launcher side view, short silver cylindrical muzzle at left, long black body right, large rectangular upright carry handle above and olive rectangular box below.",
+   "source": "exec-8204a62e-2902-4294-b274-162bffd6a2c8.png",
+   "reference": "local/key-icon-refs/17.png",
+   "reference_sha256": "4aa63de9f0b9d6b5d5d6f7f80d9d07bb06b392cf4f86334a4b287418545f27d8",
+   "generated_sha256": "f8c07aaf1a3e8c789f6531a9439a8e5527139f6ce5511bdbad0402eca3af7b9b",
+   "output_sha256": "282f6944378bd678a49918f1043e5cc6314fce274c550fbe66753db5f91edbec",
+   "size": [
+    32,
+    17
+   ],
+   "opaque_colours": 13
+  },
+  {
+   "id": 32,
+   "name": "HandgunParts",
+   "prompt": "Create ONE original retro survival-horror pixel art inventory map icon. Detailed 1990s C style, muted metal and leather colours, top-left light, 2-3 flat shading tones per material, chunky readable pixels and bold silhouette, dark black outline. Original drawing, not generic flat primitives. Isolated single item on genuine transparent background. No text, frame, shadow or floor. Tight composition, designed to remain recognizable reduced to 32 pixels maximum. Subject: two separate dark steel handgun parts stacked: long rectangular squared suppressor housing above, smaller slim recoil assembly below; metallic edge glints. This is a harmless fictional videogame inventory illustration only, no people, no violence, no assembly instructions.",
+   "source": "exec-44ed50c8-e75a-4810-969a-80e112ee9d2b.png",
+   "reference": "local/key-icon-refs/32.png",
+   "reference_sha256": "3215ea4a5d97e3a35c0510f8712d80931f15a8c2249b88ebfefd488e8df5bf0a",
+   "generated_sha256": "132ef5366dbf4ef5532c2955fbc5d648d36f68c5645dc8ecf9e2338c4260227e",
+   "output_sha256": "1212cd724e9f853efd9a74f2483d98e7272d2e59f72666759ed7fcb05cafa376",
+   "size": [
+    32,
+    17
+   ],
+   "opaque_colours": 13
+  },
+  {
+   "id": 33,
+   "name": "MagnumParts",
+   "prompt": "Create one newly drawn detailed retro 1990s survival-horror inventory pixel-art icon in C style: chunky readable pixel clusters, muted colours, top-left directional light, 2-3 tones per material, dark outline. Tight isolated composition, genuinely transparent background. Designed to reduce to <=32 pixels. No text, label, frame, shadow or background. Three polished silver-grey metal machine parts laid horizontally in three rows: TOP long narrow cylindrical bar with a small bracket hanging beneath its middle and squared right end; MIDDLE shorter wider tapered silver metal mounting bracket with dark grooves at its right; BOTTOM a long thin silver coil spring on a straight rod. All three pieces should fit one wide rectangular icon, metallic highlights upper left, darker gunmetal lower right. No people or scene.",
+   "source": "exec-a1683e96-ad21-4701-a683-cf5ba306fa7c.png",
+   "reference": "local/key-icon-refs/33.png",
+   "reference_sha256": "4352c76f7aa4076a54ab66ccb869e4570d38bdc95c6b614ca4fc9621945c698a",
+   "generated_sha256": "6848bdbb5c75b3cf3b68418bea457d2a5c770d13c8d7cca49132ef3d1f8333df",
+   "output_sha256": "b67c47e6f29ecd61711b7a360d81526cb0b84775289c85b4cfe99d1363250efa",
+   "size": [
+    32,
+    16
+   ],
+   "opaque_colours": 12,
+   "revision_date": "2026-11-09"
+  },
+  {
+   "id": 34,
+   "name": "ShotgunParts",
+   "prompt": "Create ONE original retro survival-horror pixel art inventory map icon. Detailed 1990s C style, muted metal and leather colours, top-left light, 2-3 flat shading tones per material, chunky readable pixels and bold silhouette, dark black outline. Original drawing, not generic flat primitives. Isolated single item on genuine transparent background. No text, frame, shadow or floor. Tight composition, designed to remain recognizable reduced to 32 pixels maximum. Subject: two separate brown wooden shotgun parts stacked: slim brown pump foreend with short twin silver rails on left above, long curved honey-brown shoulder stock below with grey butt plate at right. This is a harmless fictional videogame inventory illustration only, no people, no violence, no assembly instructions.",
+   "source": "exec-228ff761-4675-4be3-993a-4bd73bcb0c15.png",
+   "reference": "local/key-icon-refs/34.png",
+   "reference_sha256": "d973fe33c59ac7aacb674ef464895c03d5ce678af26c2fef2c16c79ace549c38",
+   "generated_sha256": "959341a4a9b23e69a8467367b23428b6543b1a8adff8237413fabd8f2694ec91",
+   "output_sha256": "470e7efb4ce81435d145d535bafdcf9059b762852bec684a4d8f7af277637c42",
+   "size": [
+    32,
+    20
+   ],
+   "opaque_colours": 12
+  },
+  {
+   "id": 36,
+   "name": "AntiVirusBomb",
+   "prompt": "Create ONE original retro survival-horror pixel art inventory map icon. Detailed 1990s C style, muted metal and leather colours, top-left light, 2-3 flat shading tones per material, chunky readable pixels and bold silhouette, dark black outline. Original drawing, not generic flat primitives. Isolated single item on genuine transparent background. No text, frame, shadow or floor. Tight composition, designed to remain recognizable reduced to 32 pixels maximum. Subject: dark charcoal rectangular suitcase device viewed obliquely, four red-orange cylindrical charges on top in two pairs, tiny silver control plate and black handles. This is a harmless fictional videogame inventory illustration only, no people, no violence, no assembly instructions.",
+   "source": "exec-1a8a6172-752a-424e-b878-893c6b73cc7e.png",
+   "reference": "local/key-icon-refs/36.png",
+   "reference_sha256": "ebc594a8b8983411a221cbf7849772808d74f592c5db5dce73d69ab87dfa7ba5",
+   "generated_sha256": "6462569c6302b6ea4482af91576814e93301f4a1e46ccab581ee380998711ee4",
+   "output_sha256": "c5c4d88b7fcd664becf91da8aaffc173cd5f635b1e1f6306d3383fc523855eaa",
+   "size": [
+    32,
+    23
+   ],
+   "opaque_colours": 15
+  },
+  {
+   "id": 47,
+   "name": "Lighter",
+   "prompt": "Create ONE original retro survival-horror pixel art inventory map icon. Detailed 1990s C style, muted metal and leather colours, top-left light, 2-3 flat shading tones per material, chunky readable pixels and bold silhouette, dark black outline. Original drawing, not generic flat primitives. Isolated single item on genuine transparent background. No text, frame, shadow or floor. Tight composition, designed to remain recognizable reduced to 32 pixels maximum. Subject: open brass golden rectangular flip lighter, upright silver perforated chimney on top left, golden open hinged lid swung toward upper right. This is a harmless fictional videogame inventory illustration only, no people, no violence, no assembly instructions.",
+   "source": "exec-61c0d83e-3f35-48e0-a45c-92d4624ff53b.png",
+   "reference": "local/key-icon-refs/47.png",
+   "reference_sha256": "ff7bba36e232084d06ac79b80aefd68a1a73a6b61c87ba36f2b3c746638cb5f8",
+   "generated_sha256": "2ea66dae23d8c945cb1fb77c0e243dc0a168d8c06223b4cce90e075af26b098f",
+   "output_sha256": "52e14ba2f54bc6e89f01d9bbef10607f08ae54851bf347867b6cc1be088c8645",
+   "size": [
+    30,
+    32
+   ],
+   "opaque_colours": 15
+  },
+  {
+   "id": 50,
+   "name": "ValveHandle",
+   "prompt": "Create ONE original retro survival-horror pixel art inventory map icon. Detailed 1990s C style, muted metal and leather colours, top-left light, 2-3 flat shading tones per material, chunky readable pixels and bold silhouette, dark black outline. Original drawing, not generic flat primitives. Isolated single item on genuine transparent background. No text, frame, shadow or floor. Tight composition, designed to remain recognizable reduced to 32 pixels maximum. Subject: red circular metal valve wheel tilted obliquely with three red spokes, central grey shaft extending diagonally down-right into dark cylindrical base. This is a harmless fictional videogame inventory illustration only, no people, no violence, no assembly instructions.",
+   "source": "exec-7cb7bcfa-66e4-415e-8681-4d7dc5c26e09.png",
+   "reference": "local/key-icon-refs/50.png",
+   "reference_sha256": "3e320768c121e1f6ed60158ef708c843e7326ef435a3fa56805019444283d28c",
+   "generated_sha256": "fffb7bd7cc74559927a59915ecf613f34954a4abe39d72255c044b5af2189d9f",
+   "output_sha256": "8b9ab08f36748c473972c9e6dc361b69383c9afb5f7d58f6fca3127c3b2fb39f",
+   "size": [
+    31,
+    32
+   ],
+   "opaque_colours": 13
+  },
+  {
+   "id": 51,
+   "name": "RedJewel",
+   "prompt": "Create ONE original retro survival-horror pixel art inventory map icon. Detailed 1990s C style, muted metal and leather colours, top-left light, 2-3 flat shading tones per material, chunky readable pixels and bold silhouette, dark black outline. Original drawing, not generic flat primitives. Isolated single item on genuine transparent background. No text, frame, shadow or floor. Tight composition, designed to remain recognizable reduced to 32 pixels maximum. Subject: large irregular faceted ruby gemstone, broad top slanted right and pointed lower right, saturated muted brick red with salmon top-left glint. This is a harmless fictional videogame inventory illustration only, no people, no violence, no assembly instructions.",
+   "source": "exec-44d549b7-233d-456a-ad21-b962bc95eb46.png",
+   "reference": "local/key-icon-refs/51.png",
+   "reference_sha256": "8ba07e2c90acb9fead5fc4b560dba0daf0a416d5139051963c08bf73921b8027",
+   "generated_sha256": "508dcf9e1dd6c1ab1d93eb8fa66b3b4d9ee03a25ca7ed1098c187b7fe1b6f881",
+   "output_sha256": "a1b3558b6126d46ba2732cd8119179a15967c341e3763e19aa99f64cfe0fee2c",
+   "size": [
+    32,
+    30
+   ],
+   "opaque_colours": 15
+  },
+  {
+   "id": 53,
+   "name": "BlueCard",
+   "prompt": "Create ONE original retro survival-horror pixel art inventory map icon. Detailed 1990s C style, muted metal and leather colours, top-left light, 2-3 flat shading tones per material, chunky readable pixels and bold silhouette, dark black outline. Original drawing, not generic flat primitives. Isolated single item on genuine transparent background. No text, frame, shadow or floor. Tight composition, designed to remain recognizable reduced to 32 pixels maximum. Subject: blue rectangular plastic card tilted up-right, broad white horizontal center stripe, tiny dark blue square details, no readable text. This is a harmless fictional videogame inventory illustration only, no people, no violence, no assembly instructions.",
+   "source": "exec-138ad70f-5cb2-45a4-8764-5ddedc5873e8.png",
+   "reference": "local/key-icon-refs/53.png",
+   "reference_sha256": "aa9ca3477720391dc8dfd90c69b8e795cdde86056af6bfa04259e539da0be4ba",
+   "generated_sha256": "3faa21b5963b29d3b9d7e67f67b7a3c0f4da4757d8db326117a3b984b49cb065",
+   "output_sha256": "2ea70a4259179c0a631611955e829cac2f49c0f754beff3d21dc8fd629050c0b",
+   "size": [
+    32,
+    25
+   ],
+   "opaque_colours": 15
+  },
+  {
+   "id": 54,
+   "name": "SerpentStone",
+   "prompt": "Create ONE original retro survival-horror pixel art inventory map icon. Detailed 1990s C style, muted metal and leather colours, top-left light, 2-3 flat shading tones per material, chunky readable pixels and bold silhouette, dark black outline. Original drawing, not generic flat primitives. Isolated single item on genuine transparent background. No text, frame, shadow or floor. Tight composition, designed to remain recognizable reduced to 32 pixels maximum. Subject: square dark reddish bronze stone tablet in slight perspective, red-orange coiled snake relief on dark face, thick dark olive bevel edges. This is a harmless fictional videogame inventory illustration only, no people, no violence, no assembly instructions.",
+   "source": "exec-72c4ff68-d750-49ec-b853-1278a1658738.png",
+   "reference": "local/key-icon-refs/54.png",
+   "reference_sha256": "02149b98990b4fda24139a7c7d33f667489e4f31b5242494e4530f86bf2efd82",
+   "generated_sha256": "8e473f2a1b720fdf23d5261f4ef2896fe322f7e63472fc3d580b99ae3df1b9e8",
+   "output_sha256": "8dd25c64df14887646a72806236a73c0c9a28d65a80dfcc51728e513f402cc2a",
+   "size": [
+    32,
+    32
+   ],
+   "opaque_colours": 15
+  },
+  {
+   "id": 56,
+   "name": "JaguarStoneL",
+   "prompt": "Create one newly drawn detailed retro 1990s survival-horror inventory pixel-art icon in C style: chunky readable pixel clusters, muted colours, top-left directional light, 2-3 tones per material, dark outline. Tight isolated composition, genuinely transparent background. Designed to reduce to <=32 pixels. No text, label, frame, shadow or background. LEFT HALF of a broken BLUE STONE TABLET, a flat rectangular archaeological slab seen nearly face-on with a slight thick dark right side. A slate STONE SHARD with roughly rectangular silhouette: straight outer LEFT edge, straight top and bottom edges, central RIGHT edge broken into angular inward and outward steps. Broad flat planar front face carved with shallow cobalt jaguar relief lines. Its main read MUST be a flat broken tablet slab, not a figurine or chess piece: no animal head silhouette, no pedestal, no rounded neck. Saturated muted cobalt-blue face, cyan-blue relief lines, thick deep navy stone edges. Full slab would be a rectangle; this is only its left half. Hard flat stone corners and angular fracture. Center and fill the frame.",
+   "source": "exec-38a13f9e-adfc-406a-845b-c0e9a601bf3f.png",
+   "reference": "local/key-icon-refs/56.png",
+   "reference_sha256": "75423b041ac858a3520c6e10eb2e55bdac78ba032d895fc93e2925e0d333d453",
+   "generated_sha256": "014b64980f04b1284717cd7b452502c71f2627b92d7a64a6acb7330aedf280e5",
+   "output_sha256": "0a97b34dfb473b536961f482bbbddc6f06db20ef37ae16837cbb0f81d45054b0",
+   "size": [
+    26,
+    32
+   ],
+   "opaque_colours": 15,
+   "revision_date": "2026-11-09",
+   "previous_output_sha256": "dcfb8104a6dc9bfe82df9e7b1d962eb1524973c497117e2cb86ff17a4fa2b9b2"
+  },
+  {
+   "id": 57,
+   "name": "JaguarStoneR",
+   "prompt": "Create one newly drawn detailed retro 1990s survival-horror inventory pixel-art icon in C style: chunky readable pixel clusters, muted colours, top-left directional light, 2-3 tones per material, dark outline. Tight isolated composition, genuinely transparent background. Designed to reduce to <=32 pixels. No text, label, frame, shadow or background. RIGHT HALF of a broken BLUE STONE TABLET, a flat rectangular archaeological slab seen nearly face-on with a slight thick dark right side. A slate STONE SHARD with roughly rectangular silhouette: straight outer RIGHT edge, straight top and bottom edges, central LEFT edge broken into angular inward and outward steps. Broad flat planar front face carved with shallow cobalt jaguar relief lines. Its main read MUST be a flat broken tablet slab, not a figurine or chess piece: no animal head silhouette, no pedestal, no rounded neck. Saturated muted cobalt-blue face, cyan-blue relief lines, thick deep navy stone edges. Full slab would be a rectangle; this is only its right half. Hard flat stone corners and angular fracture. Center and fill the frame.",
+   "source": "exec-b3877abf-b373-461b-ad48-55af829db27a.png",
+   "reference": "local/key-icon-refs/57.png",
+   "reference_sha256": "2183c3db459f829bd8fbe625eff16ae8b882ee298076c3e03f012c2f1e639872",
+   "generated_sha256": "794b2db405dadf7c7a2d5ea46c22da4b671806b1e2b0805ab60914042ed03f11",
+   "output_sha256": "cfea0093e930fe1438071d48b9485c4ef6be98cf3c4bfcdac7c0f7ff52e5e8cf",
+   "size": [
+    27,
+    32
+   ],
+   "opaque_colours": 15,
+   "revision_date": "2026-11-09",
+   "previous_output_sha256": "59d5825d99d974be6a438de6e0de1cc188f1584db673e1450d8157ac3afdcc06"
+  },
+  {
+   "id": 58,
+   "name": "EagleStone",
+   "prompt": "Create ONE original retro survival-horror pixel art inventory map icon. Detailed 1990s C style, muted metal and leather colours, top-left light, 2-3 flat shading tones per material, chunky readable pixels and bold silhouette, dark black outline. Original drawing, not generic flat primitives. Isolated single item on genuine transparent background. No text, frame, shadow or floor. Tight composition, designed to remain recognizable reduced to 32 pixels maximum. Subject: square golden-brown stone tablet upright in slight perspective, raised ochre eagle relief, thick brown lower edge and bevel frame. This is a harmless fictional videogame inventory illustration only, no people, no violence, no assembly instructions.",
+   "source": "exec-9ac8bb66-498f-44f8-941b-26b4d3ba6062.png",
+   "reference": "local/key-icon-refs/58.png",
+   "reference_sha256": "13e419f69f200fd00a85eb49bbcae9845c2a1f582f11cb40c22c969685f62358",
+   "generated_sha256": "95dfcdfa76f129bf849ceac2ad4d6941a849f81d9d8ef596a745a4277c7eec5a",
+   "output_sha256": "a20b462a3003cde3ea3b7b58b0c60a7a1910b04c400cbd565f38da6207f7fc77",
+   "size": [
+    32,
+    32
+   ],
+   "opaque_colours": 15
+  },
+  {
+   "id": 59,
+   "name": "BishopPlug",
+   "prompt": "Create ONE original retro survival-horror pixel art inventory map icon. Detailed 1990s C style, muted metal and leather colours, top-left light, 2-3 flat shading tones per material, chunky readable pixels and bold silhouette, dark black outline. Original drawing, not generic flat primitives. Isolated single item on genuine transparent background. No text, frame, shadow or floor. Tight composition, designed to remain recognizable reduced to 32 pixels maximum. Subject: long diagonal chess electrical plug from top-left to bottom-right, black steel bishop chess head with pointed slit top at upper left, narrow dark segmented stem, copper ring near lower right and pointed silver connector. This is a harmless fictional videogame inventory illustration only, no people, no violence, no assembly instructions.",
+   "source": "exec-fce2c4d7-4a00-4fb9-93f4-5cea7281a042.png",
+   "reference": "local/key-icon-refs/59.png",
+   "reference_sha256": "c1fd8e23d2c1865b8b7cbc54f7de2e400fd8fc8a1a0cea4a14788f7f950474b5",
+   "generated_sha256": "8d0cd8705fff4ff6d2b6cb6c6f55503619458879c888a08dee78c13ed1148422",
+   "output_sha256": "85fcd63031df233684932daba9af6c6a02d576c6c96839490d265c5a76874c04",
+   "size": [
+    29,
+    32
+   ],
+   "opaque_colours": 13
+  },
+  {
+   "id": 60,
+   "name": "RookPlug",
+   "prompt": "Create ONE original retro survival-horror pixel art inventory map icon. Detailed 1990s C style, muted metal and leather colours, top-left light, 2-3 flat shading tones per material, chunky readable pixels and bold silhouette, dark black outline. Original drawing, not generic flat primitives. Isolated single item on genuine transparent background. No text, frame, shadow or floor. Tight composition, designed to remain recognizable reduced to 32 pixels maximum. Subject: long diagonal chess electrical plug from top-left to bottom-right, ivory golden rook crenellated chess head at upper left, pale bone segmented stem, copper ring near lower right and pointed silver connector. This is a harmless fictional videogame inventory illustration only, no people, no violence, no assembly instructions.",
+   "source": "exec-3394338d-3755-4c5b-a289-84ed4d7e987c.png",
+   "reference": "local/key-icon-refs/60.png",
+   "reference_sha256": "13863d79e616167af35afa868b9236624a6a603199dfd62a4f6f39aea7817168",
+   "generated_sha256": "0a3ade7d702b41d7b2eeb0efa868f140ede2b3bb84070d0f9d82d6921bfa2f2a",
+   "output_sha256": "adfac37a5471a557efc4c7dcba31b5d2d78074a7af15b6a3b889ca8d50592a7e",
+   "size": [
+    31,
+    32
+   ],
+   "opaque_colours": 13
+  },
+  {
+   "id": 64,
+   "name": "Detonator",
+   "prompt": "Create ONE original retro survival-horror pixel art inventory map icon. Detailed 1990s C style, muted metal and leather colours, top-left light, 2-3 flat shading tones per material, chunky readable pixels and bold silhouette, dark black outline. Original drawing, not generic flat primitives. Isolated single item on genuine transparent background. No text, frame, shadow or floor. Tight composition, designed to remain recognizable reduced to 32 pixels maximum. Subject: two upright separate objects: narrow orange-red dynamite stick left with tiny grey band and thin wire, larger dark grey rectangular detonator right with grey top and small orange front panel. This is a harmless fictional videogame inventory illustration only, no people, no violence, no assembly instructions.",
+   "source": "exec-e2feba8c-94d6-4902-ac03-f53e8d927437.png",
+   "reference": "local/key-icon-refs/64.png",
+   "reference_sha256": "6f570ff95eafeee82a65e9b328270f855b33a1d61c061190bf09f635e36d4997",
+   "generated_sha256": "bc0a52f508a468d77585c2f7c6632f2f326df887da95c17cf8606f4cc381f0ee",
+   "output_sha256": "c676018a41e7b44aff88036ac30b217664c33ec407ac640d45a506784be473b4",
+   "size": [
+    28,
+    32
+   ],
+   "opaque_colours": 15
+  },
+  {
+   "id": 67,
+   "name": "Crank",
+   "prompt": "Create ONE original retro survival-horror pixel art inventory map icon. Detailed 1990s C style, muted metal and leather colours, top-left light, 2-3 flat shading tones per material, chunky readable pixels and bold silhouette, dark black outline. Original drawing, not generic flat primitives. Isolated single item on genuine transparent background. No text, frame, shadow or floor. Tight composition, designed to remain recognizable reduced to 32 pixels maximum. Subject: squared Z-shaped brass hand crank, short horizontal socket top left, vertical shaft dropping in center, brown horizontal wooden grip bottom right. This is a harmless fictional videogame inventory illustration only, no people, no violence, no assembly instructions.",
+   "source": "exec-f1817d1f-240a-4233-be18-69461858047a.png",
+   "reference": "local/key-icon-refs/67.png",
+   "reference_sha256": "860c4b9736e363f4a06df3e4d4ccae2893214dcdc588a3f2d49999552146b9bc",
+   "generated_sha256": "12ec4e600ae52cd9cb571ed40c0c1ec8e4f8cc135141774552115cf2ac92bce5",
+   "output_sha256": "ccfb6a98fc1ec2f924a4dc07329c9c05f9c85a2227274cad0d395c2dcc2d2c57",
+   "size": [
+    32,
+    27
+   ],
+   "opaque_colours": 13
+  },
+  {
+   "id": 69,
+   "name": "FilmB",
+   "prompt": "Create ONE original retro survival-horror pixel art inventory map icon. Detailed 1990s C style, muted metal and leather colours, top-left light, 2-3 flat shading tones per material, chunky readable pixels and bold silhouette, dark black outline. Original drawing, not generic flat primitives. Isolated single item on genuine transparent background. No text, frame, shadow or floor. Tight composition, designed to remain recognizable reduced to 32 pixels maximum. Subject: pair of photographic film canisters standing: tall light-grey open cylindrical tube at left and shorter black canister at right with small gold stripe and blue-white band, variant tiny single notch, no letters. This is a harmless fictional videogame inventory illustration only, no people, no violence, no assembly instructions.",
+   "source": "exec-c1cd36d0-c2ae-49bd-9f64-e07b62a38959.png",
+   "reference": "local/key-icon-refs/69.png",
+   "reference_sha256": "b7bc265950ada66b98863036ba3ad9b70e941ad08836c2fcee224870e44f01ff",
+   "generated_sha256": "3d78ef8a5926d3acfae19a3f45d4350740b65fdeebc877b9b887a7715d7cb91b",
+   "output_sha256": "11b5db012837b42d1c89acf4eb882bf1c96f8a73019a65821ab94beae6bc7cbf",
+   "size": [
+    25,
+    32
+   ],
+   "opaque_colours": 15
+  },
+  {
+   "id": 70,
+   "name": "FilmC",
+   "prompt": "Create ONE original retro survival-horror pixel art inventory map icon. Detailed 1990s C style, muted metal and leather colours, top-left light, 2-3 flat shading tones per material, chunky readable pixels and bold silhouette, dark black outline. Original drawing, not generic flat primitives. Isolated single item on genuine transparent background. No text, frame, shadow or floor. Tight composition, designed to remain recognizable reduced to 32 pixels maximum. Subject: pair of photographic film canisters standing: tall light-grey open cylindrical tube at left and shorter black canister at right with small gold stripe and blue-white band, variant tiny double notch, no letters. This is a harmless fictional videogame inventory illustration only, no people, no violence, no assembly instructions.",
+   "source": "exec-2ab21202-b092-4563-ab84-a3d8a850dd42.png",
+   "reference": "local/key-icon-refs/70.png",
+   "reference_sha256": "b7bc265950ada66b98863036ba3ad9b70e941ad08836c2fcee224870e44f01ff",
+   "generated_sha256": "d4fe18b74d52526eee8a47fb69ae315b8df045eaa46a38688498be840df26e53",
+   "output_sha256": "ff50942d40d637edba3ac74c351d5814fce58efba2b7ebf886eb88ec1ea634b9",
+   "size": [
+    27,
+    32
+   ],
+   "opaque_colours": 15
+  },
+  {
+   "id": 71,
+   "name": "UnicornMedal",
+   "prompt": "Create ONE original retro survival-horror pixel art inventory map icon. Detailed 1990s C style, muted metal and leather colours, top-left light, 2-3 flat shading tones per material, chunky readable pixels and bold silhouette, dark black outline. Original drawing, not generic flat primitives. Isolated single item on genuine transparent background. No text, frame, shadow or floor. Tight composition, designed to remain recognizable reduced to 32 pixels maximum. Subject: round copper bronze medal face-on with raised pale copper unicorn head profile relief and double raised rim. This is a harmless fictional videogame inventory illustration only, no people, no violence, no assembly instructions.",
+   "source": "exec-72dc6c43-700d-49a2-9be1-ec48d4aefffd.png",
+   "reference": "local/key-icon-refs/71.png",
+   "reference_sha256": "c158fdf3136e9292aae36505418f0daf1e52cd34b8c3f4ff5bbd2d5c4f958737",
+   "generated_sha256": "ca9b3844d2437274100c133103ba4a77aab0a8a23c397096a5ce48b1cd9cff38",
+   "output_sha256": "ae7851afb55bc5c467e151ae0a90b161d7fc65475176c674a267f140e4bbe952",
+   "size": [
+    32,
+    32
+   ],
+   "opaque_colours": 15
+  },
+  {
+   "id": 72,
+   "name": "EagleMedal",
+   "prompt": "Create ONE original retro survival-horror pixel art inventory map icon. Detailed 1990s C style, muted metal and leather colours, top-left light, 2-3 flat shading tones per material, chunky readable pixels and bold silhouette, dark black outline. Original drawing, not generic flat primitives. Isolated single item on genuine transparent background. No text, frame, shadow or floor. Tight composition, designed to remain recognizable reduced to 32 pixels maximum. Subject: small round gold medal face-on, raised eagle wings relief and double golden rim. This is a harmless fictional videogame inventory illustration only, no people, no violence, no assembly instructions.",
+   "source": "exec-4d4ea81b-3c1f-4ae9-937b-3d71780182c3.png",
+   "reference": "local/key-icon-refs/72.png",
+   "reference_sha256": "250cd14e5b4d565ce01e608c107cf8a7092c66d540ca3b303ac6a108e0f095b3",
+   "generated_sha256": "a9736bea6611433c310e7e9115e7f75b8bb1da7f09bdf0520379aa8f474ce318",
+   "output_sha256": "558ab375d01015d63a5e787bf48d688578a67b01fdabd66eb41536f1c330850f",
+   "size": [
+    31,
+    32
+   ],
+   "opaque_colours": 15
+  },
+  {
+   "id": 73,
+   "name": "WolfMedal",
+   "prompt": "Create ONE original retro survival-horror pixel art inventory map icon. Detailed 1990s C style, muted metal and leather colours, top-left light, 2-3 flat shading tones per material, chunky readable pixels and bold silhouette, dark black outline. Original drawing, not generic flat primitives. Isolated single item on genuine transparent background. No text, frame, shadow or floor. Tight composition, designed to remain recognizable reduced to 32 pixels maximum. Subject: round silver grey medal face-on, raised wolf head profile relief and double silver rim. This is a harmless fictional videogame inventory illustration only, no people, no violence, no assembly instructions.",
+   "source": "exec-b0fa1726-f973-49c6-bfef-ba8a78fbd877.png",
+   "reference": "local/key-icon-refs/73.png",
+   "reference_sha256": "40ad619578172a67fd6bff17a0519f5a47c64bf3f512bc1e22530be0c66a54bc",
+   "generated_sha256": "faa0aaef168f72403212820b216edcdce9ddf70f3cf26b3ccb426f234ad1974d",
+   "output_sha256": "70882f669e2f9faf804a00d33f4cba8b8a05186791a9fd26bfc6e9cf8325a37e",
+   "size": [
+    31,
+    32
+   ],
+   "opaque_colours": 14
+  },
+  {
+   "id": 74,
+   "name": "Cog",
+   "prompt": "Create ONE original retro survival-horror pixel art inventory map icon. Detailed 1990s C style, muted metal and leather colours, top-left light, 2-3 flat shading tones per material, chunky readable pixels and bold silhouette, dark black outline. Original drawing, not generic flat primitives. Isolated single item on genuine transparent background. No text, frame, shadow or floor. Tight composition, designed to remain recognizable reduced to 32 pixels maximum. Subject: brass gold toothed cog gear viewed diagonally upright, dark open center with three thick spokes, chunky regular teeth and bright top-left metallic edges. This is a harmless fictional videogame inventory illustration only, no people, no violence, no assembly instructions.",
+   "source": "exec-f2484ef3-7909-40f2-aa32-178597f1b551.png",
+   "reference": "local/key-icon-refs/74.png",
+   "reference_sha256": "dccca00b622f412f1b42acba1ff86f4860f995ad95a2663952859e12a094a6fa",
+   "generated_sha256": "68425302bd5a62a0653282a372eeb1ed9ab9940471a76d2ebe9ae1f1731fd479",
+   "output_sha256": "c02f6e96ab8838b479d7f4cef7d2f505e47912b0f0d8fab08220569723cede6e",
+   "size": [
+    31,
+    32
+   ],
+   "opaque_colours": 14
+  },
+  {
+   "id": 76,
+   "name": "MainFuse",
+   "prompt": "Create ONE original retro survival-horror pixel art inventory map icon. Detailed 1990s C style, muted metal and leather colours, top-left light, 2-3 flat shading tones per material, chunky readable pixels and bold silhouette, dark black outline. Original drawing, not generic flat primitives. Isolated single item on genuine transparent background. No text, frame, shadow or floor. Tight composition, designed to remain recognizable reduced to 32 pixels maximum. Subject: slim dark grey capsule industrial fuse diagonal bottom-left to top-right, pointed copper contact at bottom-left, metallic silver cylinder center and narrow pin at upper-right. This is a harmless fictional videogame inventory illustration only, no people, no violence, no assembly instructions.",
+   "source": "exec-bf999ad5-ffda-4667-b0e8-a2dc971b8cc2.png",
+   "reference": "local/key-icon-refs/76.png",
+   "reference_sha256": "e6cb86d571b6c90c562c31d3e1a6dfdf0c5bfbdc62ca19abb778d0564e6522ee",
+   "generated_sha256": "6f7d25e1b94e1e2844fc196dc20c598e9e09baeb3ea4c53fef562fed198ae4b7",
+   "output_sha256": "b760c6fd0a471fa5aac4a40a0946c5ec4d6b8eb244cf6158188ab0da1ed459be",
+   "size": [
+    32,
+    32
+   ],
+   "opaque_colours": 15
+  },
+  {
+   "id": 77,
+   "name": "FuseCase",
+   "prompt": "Create ONE original retro survival-horror pixel art inventory map icon. Detailed 1990s C style, muted metal and leather colours, top-left light, 2-3 flat shading tones per material, chunky readable pixels and bold silhouette, dark black outline. Original drawing, not generic flat primitives. Isolated single item on genuine transparent background. No text, frame, shadow or floor. Tight composition, designed to remain recognizable reduced to 32 pixels maximum. Subject: hollow dark grey cylindrical fuse case diagonal bottom-left to top-right, broad open circular silver rim at upper right, narrow pointed copper connector lower left. This is a harmless fictional videogame inventory illustration only, no people, no violence, no assembly instructions.",
+   "source": "exec-2174d988-23ba-442c-84ef-535980a12090.png",
+   "reference": "local/key-icon-refs/77.png",
+   "reference_sha256": "81b4a62739661aad0c8bb52401d59eb2d97314ab8c320b2603da9aa7cd39bb1b",
+   "generated_sha256": "c39a78a6c7de8089ee8084fde5a9de4d9400bfe4ea9223e2262d70b98ded5040",
+   "output_sha256": "8b4a5d0d6e1db76a93dc62b468b919f763ec49833f4c3446f5b4846384d5a47a",
+   "size": [
+    32,
+    30
+   ],
+   "opaque_colours": 15
+  },
+  {
+   "id": 79,
+   "name": "VaccineCart",
+   "prompt": "Create ONE original retro survival-horror pixel art inventory map icon. Detailed 1990s C style, muted metal and leather colours, top-left light, 2-3 flat shading tones per material, chunky readable pixels and bold silhouette, dark black outline. Original drawing, not generic flat primitives. Isolated single item on genuine transparent background. No text, frame, shadow or floor. Tight composition, designed to remain recognizable reduced to 32 pixels maximum. Subject: silver horizontal vaccine cartridge angled down-right, long grey ribbed metal cylinder on left, black round collar middle-right and short pale cylinder sticking upward at right. This is a harmless fictional videogame inventory illustration only, no people, no violence, no assembly instructions.",
+   "source": "exec-904878f7-a661-4e76-8f99-f376311e7e26.png",
+   "reference": "local/key-icon-refs/79.png",
+   "reference_sha256": "1e4fe470d4fc4d4df1f51ea30612d99d15e455e6d1b1be482e40c64dcdea050b",
+   "generated_sha256": "83bd9dbaadd2f23bf70707ca082013e75298c434393a194a761ddecf80015edc",
+   "output_sha256": "7f5e8dd2f7a436f6c2a266b01e247a7adbe60d322992cd833180e3afa7cc469a",
+   "size": [
+    32,
+    20
+   ],
+   "opaque_colours": 15
+  },
+  {
+   "id": 80,
+   "name": "FilmD",
+   "prompt": "Create ONE original retro survival-horror pixel art inventory map icon. Detailed 1990s C style, muted metal and leather colours, top-left light, 2-3 flat shading tones per material, chunky readable pixels and bold silhouette, dark black outline. Original drawing, not generic flat primitives. Isolated single item on genuine transparent background. No text, frame, shadow or floor. Tight composition, designed to remain recognizable reduced to 32 pixels maximum. Subject: pair of photographic film canisters standing: tall light-grey open cylindrical tube at left and shorter black canister at right with small gold stripe and blue-white band, variant tiny triple notch, no letters. This is a harmless fictional videogame inventory illustration only, no people, no violence, no assembly instructions.",
+   "source": "exec-183368ff-b629-4f26-956c-1e35b2efb976.png",
+   "reference": "local/key-icon-refs/80.png",
+   "reference_sha256": "6ade14db49eb2623e8bd35ad98e1c4c0cbd25e84744c5d2b9b3dfd0b04ab45fd",
+   "generated_sha256": "7bd66e475c201e5ba68a7b31749513ce073202ba7782d47c26ace77887fea072",
+   "output_sha256": "0f9002e242d997319d8125bf5e21dfef3f6445109e7526030c3b1ea05363536a",
+   "size": [
+    27,
+    32
+   ],
+   "opaque_colours": 15
+  },
+  {
+   "id": 84,
+   "name": "JointPlugBlue",
+   "prompt": "Create ONE original retro survival-horror pixel art inventory map icon. Detailed 1990s C style, muted metal and leather colours, top-left light, 2-3 flat shading tones per material, chunky readable pixels and bold silhouette, dark black outline. Original drawing, not generic flat primitives. Isolated single item on genuine transparent background. No text, frame, shadow or floor. Tight composition, designed to remain recognizable reduced to 32 pixels maximum. Subject: short chunky olive grey cylindrical electrical plug diagonal upper-right to lower-left, two brass pins extending lower-left, blue rim on upper-right cap, attached thin blue cable curling toward bottom right. This is a harmless fictional videogame inventory illustration only, no people, no violence, no assembly instructions.",
+   "source": "exec-542fb523-7449-48c4-aa96-1d2d1a977413.png",
+   "reference": "local/key-icon-refs/84.png",
+   "reference_sha256": "1f53a8ed9f78c45524332d29b52aed239bc879bdcc0feb5dd3fc3dd189d4b834",
+   "generated_sha256": "d08d45432034a03c7aacd51de33a348845245fdd4218b61ba7f4548ef01b3a14",
+   "output_sha256": "20abf9dad272f38e2d77f1dfae8aa6fda9510ad1fa3ab12dfbf216ece0fdf8e6",
+   "size": [
+    32,
+    30
+   ],
+   "opaque_colours": 15
+  },
+  {
+   "id": 85,
+   "name": "JointPlugRed",
+   "prompt": "Create ONE original retro survival-horror pixel art inventory map icon. Detailed 1990s C style, muted metal and leather colours, top-left light, 2-3 flat shading tones per material, chunky readable pixels and bold silhouette, dark black outline. Original drawing, not generic flat primitives. Isolated single item on genuine transparent background. No text, frame, shadow or floor. Tight composition, designed to remain recognizable reduced to 32 pixels maximum. Subject: short chunky olive grey cylindrical electrical plug diagonal upper-right to lower-left, two brass pins extending lower-left, red rim on upper-right cap, attached thin red cable curling toward bottom right. This is a harmless fictional videogame inventory illustration only, no people, no violence, no assembly instructions.",
+   "source": "exec-c0364650-dc6b-4abc-8799-3d73002829ed.png",
+   "reference": "local/key-icon-refs/85.png",
+   "reference_sha256": "4fc7fa317d4adf9e2eb93f8f502712a8fc36ab8ef576662dd86fca0473a14a6c",
+   "generated_sha256": "9095e4943d449550d9c2a2a73b1d6f3d5a2ca0f0ffa39dad386d59903b2f8135",
+   "output_sha256": "7b2235860e1632599bde0f8ce106b88981eb1dca6313bcbe74760423372acf46",
+   "size": [
+    32,
+    29
+   ],
+   "opaque_colours": 13
+  },
+  {
+   "id": 86,
+   "name": "Cord",
+   "prompt": "Create one newly drawn detailed retro 1990s survival-horror inventory pixel-art icon in C style: chunky readable pixel clusters, muted colours, top-left directional light, 2-3 tones per material, dark outline. Tight isolated composition, genuinely transparent background. Designed to reduce to <=32 pixels. No text, label, frame, shadow or background. A BOLD LARGE coil of warm copper-brown electrical cable tied by a pale grey central band. Two clearly visible long oval wire loops side by side, horizontal coil slanting slightly upward right. Thick cable with bright warm copper highlight and dark brown underside, open hollow centers of both loops clearly visible. Both short loose ends extend outward, left one has red and blue stripped tips, right one tiny red and blue tips. Coil fills canvas, roughly 30 pixels wide and 17 pixels high at final size, cable at least 3 pixels thick at final size: bold substantial coil, NOT a single thin line, NOT tiny faint wire, NOT a straight rod. Black outline.",
+   "source": "exec-261ae44a-d9b1-4b5c-a048-0b2a7656c8bf.png",
+   "reference": "local/key-icon-refs/86.png",
+   "reference_sha256": "1e29019c32ad33d656390ba8409767c1dafc59ea41767989de2b0830532b5e57",
+   "generated_sha256": "cf59b2243123ed13133f85ea9886f5b5ec653c25ea72eec87eb0416af7599796",
+   "output_sha256": "9024caa8faea9fac9693c9e0109a7910cab909e867c47b4ed5f217f273907bc6",
+   "size": [
+    32,
+    17
+   ],
+   "opaque_colours": 13,
+   "revision_date": "2026-11-09",
+   "previous_output_sha256": "38e32ba2bfe14a965cc7a3250f7d24c638c77fbcd94bf8df320d351faf249999"
+  },
+  {
+   "id": 96,
+   "name": "MODisk",
+   "prompt": "Create ONE original retro survival-horror pixel art inventory map icon. Detailed 1990s C style, muted metal and leather colours, top-left light, 2-3 flat shading tones per material, chunky readable pixels and bold silhouette, dark black outline. Original drawing, not generic flat primitives. Isolated single item on genuine transparent background. No text, frame, shadow or floor. Tight composition, designed to remain recognizable reduced to 32 pixels maximum. Subject: dark grey rectangular magneto-optical disk in black cartridge, tilted diagonally lower-left to upper-right, silver white shutter at upper right with round black opening and grey label. This is a harmless fictional videogame inventory illustration only, no people, no violence, no assembly instructions.",
+   "source": "exec-9d979f14-c646-42ef-b0b9-15a8e162812e.png",
+   "reference": "local/key-icon-refs/96.png",
+   "reference_sha256": "3bb66efc6408278d0262164ee1dd841ae66b321f251c96dee7edd129927d3c50",
+   "generated_sha256": "0dc3ae16ecca446dafcd23ad78cb6ad1d34cdd51cb76581760c89ee179c5ce0f",
+   "output_sha256": "967c09033294d67125bd839775ca2dad1ae563f8257acd27b92dfa1eedaa7017",
+   "size": [
+    29,
+    32
+   ],
+   "opaque_colours": 14
+  }
+ ],
+ "complete": true,
+ "requested_count": 37,
+ "delivered_count": 37,
+ "blocked": [],
+ "visual_review": "All four revisions inspected at native size and 4x; slab halves have angular fractured edges and flat carved faces, cord has thick loops. Coordinator/user acceptance pending.",
+ "revisions": [
+  {
+   "date": "2026-11-09",
+   "ids": [
+    33,
+    56,
+    57,
+    86
+   ],
+   "reason": "Coordinator requested hardware-part generation retry, angular blue tablet halves, bold cable coil.",
+   "untouched_icon_hashes_verified": 33
+  }
+ ],
+ "superseded": "v1 (text-only drafts, assets/icons-new) and v2 were superseded by this v3 set (approved 2026-11-09); their folders were removed."
+}
