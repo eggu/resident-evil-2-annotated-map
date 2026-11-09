@@ -42,33 +42,49 @@ Inputs tracked in `tools/mapgen/`: `opcode-sizes.json` (script opcode lengths), 
 
 ## Name placement rules
 
-Room names are placed when the headers are generated (`generate_room_names.py`) and never move at runtime. Key-item names are placed at runtime (`src/re2_keymap.c`).
+These follow the RE0 HD map mod's rules, which are the default for every map mod since 2026-11-07. Room names are placed when the headers are generated (`generate_room_names.py`) and never move at runtime. Key-item names are placed at runtime (`src/re2_keymap.c`).
 
 Priority:
 
 - Key-item stars and names are never covered. Common items and enemies may be covered or hidden.
-- Room names never overlap key items or markers: save points, item boxes, documents, area maps, locks and puzzles. They may cover common items and enemies.
+- Room names avoid only each other and the legend/readout panels. They ignore markers, and nothing avoids them except that key-item names lean away from them.
+- A marker touching the legend or the readout panel is not drawn (a key star takes its name with it).
 
 Room names (`place_labels`):
 
-- Tightest rooms choose first. A name stays inside its room when it fits on the room's own mask, checked at 2 px, 1 px and no wall margin, then at 80% size.
-- Otherwise the name sits outside on an axis-aligned leader line that starts on a mask pixel of its own room: first the shortest line into free space (`near_spot`), then a fallback outside the floor's bounding box, which may cross another room at a right angle.
+- Tightest rooms choose first. A name stays inside its room when it fits on the room's own mask, checked at 2 px, 1 px and no wall margin, then at 80% size. Among the spots within 0.05 of the best coverage (or fully covered), the one nearest the mask's pole of inaccessibility wins (`pole`).
+- Otherwise the name sits outside on an axis-aligned leader line that starts on a mask pixel of its own room: first the shortest line into free space (`near_spot`, at most 45 px), then a fallback outside the floor's bounding box, which may cross another room at a right angle.
 - Leaders never share a line with a room outline (`along_outline`): they start at least 3 px from their own room's corners (narrow rooms use their centre), and no wall lies within 2 px beside them.
 - Leaders never run through another room name, and outside names never overlap a room mask. The generator asserts these checks and stops on a violation.
-- Multi-word names that do not fit are wrapped between words only.
+- Multi-word names are wrapped between words only: when they do not fit, or when one line is wider than 150% of the room.
+- The panels are reserved `PAN_MARGIN` px larger toward the map, since room names are in map space and panels on screen.
 
-Key-item names (`item_label_draw`, `place_at`):
+Marker names (`item_label_draw`):
 
-- A name touches its star with no gap: right, left, below, above, then below or above running from the star's edge. The candidate with the least weighted overlap wins: stars, diamonds and the legend count 8x, room names 4x, other markers 1x.
+- Names of 8+ characters wrap at the space nearest their middle (`generate_item_labels.display_lines`); each line is its own raster, and the second line is the next `item_labels` entry of the same item. Korean `A의 B` names drop `의` unless the stem is one syllable or listed in `KEEP_UI`.
+- Candidates touch the marker: right, left, below, above, then the four corners. The first spot with no overlap wins, else the least weighted overlap; only if that still overlaps, a second ring one name height further out is tried. Each reserved box carries its weight (`occupied_w`): stars, diamonds, panels and key names 8x, room names 4x, other names 2x, other markers 1x.
+- `[H]` names every drawn marker that has a name (`draw_marker_names`, after all icons): locks (the key's name), puzzles, area maps, documents, then common items; documents and common items only take a spot covering nothing of weight >= 2. Document titles and puzzle names come from `data/marker_names.json` (below).
+- Names and icons follow the map zoom: 143% at 2x (`ZOOM_GAIN`, the RE0 mod's 0.7 zoomed-out ratio), times the size settings.
+- Lines align toward the star: left-aligned on the right, right-aligned on the left, centred above or below.
 - A lower-priority icon overlapping a key star, key name or puzzle diamond is not drawn. An area map or lock centred on a star or diamond is drawn as a badge 3 px down and right instead.
 
 `tests/test_label_priority.py` and `tests/test_map_geometry.py` check these rules. Translucent names render below every opaque quad, so draw order alone cannot put a name over an icon.
 
+## Document and puzzle names
+
+`data/marker_names.json` is the only source of these names. Documents (item ids 106-126): the game's own file titles. They are bitmaps, page 2 of `Common/file/fileNN.bin` (Korean, from the installed HD patch) and `fileNNu.bin` (English), NN = item id - 104; `tools/mapgen/extract_file_titles.py` unpacks them with the EXE's own decompressor, and `regen.py` stops when a bitmap hash differs from the table. The titles were read from the bitmaps by eye; entries with `ko_reading_uncertain` are flagged for confirmation. Puzzles: one name per mechanism, keyed by room stem plus evidence (`i<id>` the key item an item-use AOT asks for, `sw<bit>` a switch event, `nl<bit>` a number lock). Every named evidence cites public pages in `puzzle_sources` (Evil Resource item pages, Raccoon Insider room pages that carry the game's room IDs and examine texts, the BDennis FAQ); Korean puzzle names are project translations (`ko_basis`). Evidence without a name sits in `unresolved` with its reason and the marker stays unnamed; `extract_overlay.py` stops on evidence that is in neither list. `tests/test_marker_names.py` checks that every document has a Korean and English title and that the generated labels equal the table.
+
+## Settings and keys
+
+`tests/test_settings.py` checks the INI handling with an in-memory file system: `Version=2` (an older file keeps its values and is rewritten once with the new keys), atomic save through `RE2.AnnotatedMap.ini.tmp`, value clamping, `Modifier=Shift|Ctrl` and the 350 ms rest period per key. `LockSide=1` uses each door AOT's own destination (Door_aot_se bytes 14..25) projected by the native map code (`project_all.py other_side`).
+
 ## Icon editing
 
+
+Key items draw their own art: 37 sprites in `assets/icons/key-<id>.png` are packed 1:1 by `assets/generate_key_art.py` into `src/key_art.h` (a second texture page, because the lock-icon page is full); the lock-icon sprites of `atlas.h` are reused for the other key items; items without art keep the cyan star. The art's longest side fills the star box and its aspect is kept (at least 2 px thick), and the item name touches the drawn art.
 Prepared AI-assisted C-style sprites are in `assets/icons/`, and `assets/key-layout.json` places the lock icons on the atlas. The map icon, puzzle diamond and key star are code-drawn in `assets/generate_overlay_icons.py`. After editing, regenerate as above.
 
-Lock icons use visible-texel atlas bounds and scale their longest side to approximately 7.5px; ordinary pickups/maps render at7px. Furniture/documents render at8px, puzzles at6px. Map IDs200–205 are synthetic overlay identifiers and are never written into game inventory.
+Lock icons use visible-texel atlas bounds and scale their longest side to approximately 7.5px; ordinary pickups/maps render at7px. Furniture/documents render at8px, puzzles at6px; all of these scale with `IconSize`. Map IDs200–205 are synthetic overlay identifiers and are never written into game inventory.
 
 ## Public scope and licensing
 

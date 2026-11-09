@@ -27,4 +27,4 @@ Reference for the map features and data in the original Resident Evil 2 (1998) P
 - A location may have multiple scenario, item or event variants. Row counts are not unique item counts or simultaneous marker counts.
 - Coordinates are logical source-map coordinates before panning and marker-centre offsets, not PC output pixels.
 
-[Installation and controls](../../README.en.md) · [Credits](../../NOTICE.md)
+[Installation and controls](../../README.md) · [Credits](../../NOTICE.md)

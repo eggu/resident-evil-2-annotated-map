@@ -21,6 +21,6 @@ Score = time points + save points + spray points − infinite-weapon penalty, cl
 
 ## Settings
 
-Settings are stored in `scripts/RE2.AnnotatedMap.ini`. In-game changes are saved automatically. The `~` key shows or hides the legend. Name size ranges from 50–150% and opacity from 10–100%, in 10% steps. Enlarged names may overlap on crowded maps.
+Settings are stored in `scripts/RE2.AnnotatedMap.ini`. In-game changes are saved automatically. The `~` key shows or hides the legend. Name size ranges from 50–200% and opacity from 10–100%, in 10% steps. Enlarged names may overlap on crowded maps.
 
-[All defaults and controls](../../README.en.md)
+[All defaults and controls](../../README.md)

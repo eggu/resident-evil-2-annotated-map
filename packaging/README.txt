@@ -17,13 +17,19 @@ RE2 리메이크(2019)용이 아닙니다.
 
 사용 (지도 화면에서만 작동)
 - 숫자 키: 0 전체 표시, 1 방 이름·타자기·아이템 상자, 2 잠긴 문·열쇠, 3 핵심 아이템, 4 문서·지도,
-  5 퍼즐, 6 일반 아이템, 7 적, 8 표시 범위(방문한 방 → 공개된 방 → 모든 방), 9 한국어 / English.
-- 범례 표시: ~ (숫자 1 왼쪽) 키로 켜고 끕니다.
-- 이름 크기: - / = (+), 불투명도: Shift + 위 키. 숫자패드 -/+도 지원합니다.
-- 상태 화면 지도: 좌/우 장소 선택, 위/아래 층 선택. 이미 방문한 층만 보입니다.
+  5 퍼즐, 6 이벤트(스포일러 장면, 보라색 ? 마름모), 7 일반 아이템, 8 적, 9 표시 범위(방문한 방 → 공개된 방 → 모든 방).
+- \(₩) 키: 한국어 / English (범례 제목 줄의 [H] 옆에 표시).
+- H: 표식 이름 3단계(누를 때마다 모두 표시 → 일반 아이템 제외 → 모두 숨김, 기본 숨김; 핵심 아이템·잠긴 문 열쇠·지도·일반 아이템 이름). 일반 아이템 이름은 빈 자리에만 표시합니다. 범례 제목 줄에 상태가 나옵니다.
+- 범례와 값 표시: ~ (숫자 1 왼쪽) 키로 켜고 끕니다. 범례·값 표시에 닿는 표식은 그리지 않습니다.
+- 이름 크기: - · = (+), 이름 불투명도: [ · ]. 숫자패드 - · +도 지원합니다.
+- 아이콘 크기: Shift + - · = (+), 아이콘 불투명도: Shift + [ · ]. INI의 Modifier=Ctrl로 Shift 대신 Ctrl을 씁니다.
+- 같은 키를 0.35초 안에 다시 누르면 무시합니다.
+- 상태 화면 지도: 좌 · 우 장소 선택, 위 · 아래 층 선택. 이미 방문한 층만 보입니다.
   다른 장소가 있으면 좌우 가장자리에 초록 화살표가 깜빡입니다.
 - 지도 2배 확대: 결정 버튼으로 켜고 끕니다. 확대 중에는 방향 입력으로 지도를 옮기며, 지도를 다시 열면 1배로 돌아옵니다.
-- 기본값: 영어, 이름 100%, 불투명도 70%, 방문한 방만 표시, 방 이름만 켬(2–7로 다른 항목 켬).
+- 기본값: 영어, 이름 크기 100%, 이름 불투명도 70%, 아이콘 크기 100%, 아이콘 불투명도 80%, 방문한 방만 표시,
+  방 이름만 켬(2–7로 다른 항목 켬), 표식 이름 끔.
+- 잠금 표식은 문 위에 표시합니다. INI의 LockSide=1이면 아직 들어가지 않은 쪽 방에 표시합니다.
 - 설정은 scripts/RE2.AnnotatedMap.ini에 저장됩니다.
 - [Z]는 A/B 시나리오 사이의 선택·행동과 관련된 재핑 표식이며 아이템 이름의 일부가 아닙니다.
 - 랭크 예상치는 INI의 Rank=1로 켭니다(기본 끔, 변경 후 게임 재실행).
@@ -57,14 +63,20 @@ When upgrading, skip scripts/RE2.AnnotatedMap.ini or back it up and restore it.
 
 Controls (on the map screen only)
 - Number keys: 0 all annotations, 1 room names/typewriters/item boxes, 2 doors/keys,
-  3 key items, 4 documents/maps, 5 puzzles, 6 common items, 7 enemies,
-  8 visibility (visited/revealed/all rooms), 9 Korean/English.
-- Legend: ~ (left of 1) shows or hides it.
-- Name size: - / = (+); opacity: Shift + those keys. Numpad -/+ is supported.
-- Status-screen map: left/right selects an area, up/down selects a floor. Only visited floors are shown.
+  3 key items, 4 documents/maps, 5 puzzles, 6 events (story-scene spoilers, purple ? diamond), 7 common items,
+  8 enemies, 9 visibility (visited/revealed/all rooms).
+- \ key (the won sign on Korean keyboards): Korean/English (shown next to [H] in the legend's title line).
+- H: marker names in three states, one per press: all -> all except common items -> all hidden (default hidden; key items, lock keys, maps, document names, some puzzles, common items). Document and common-item names only where there is room. The legend's title line shows the state.
+- Legend and values: ~ (left of 1) shows or hides them. Markers touching them are not drawn.
+- Name size: - · = (+); name opacity: [ · ]. Numpad - · + is supported.
+- Icon size: Shift + - · = (+); icon opacity: Shift + [ · ]. Modifier=Ctrl in the INI uses Ctrl instead of Shift.
+- A second press of the same key within 0.35 s is ignored.
+- Status-screen map: left · right selects an area, up · down selects a floor. Only visited floors are shown.
   Blinking green arrows at the left/right edges show that another area is available.
 - 2x map zoom: the Action button toggles it. While zoomed, directions move the map; reopening the map returns to 1x.
-- Defaults: English, size 100%, opacity 70%, visited rooms only, only Rooms on (2-7 turn on other categories).
+- Defaults: English, name size 100%, name opacity 70%, icon size 100%, icon opacity 80%, visited rooms only,
+  only Rooms on (2-7 turn on other categories), marker names off.
+- Lock markers sit on the door. LockSide=1 in the INI puts them in the room not entered yet.
 - Settings are saved in scripts/RE2.AnnotatedMap.ini.
 - [Z] marks zapping-related items/interactions affected by choices or actions across scenarios A/B; it is not part of the item name.
 - The live rank estimate is enabled with Rank=1 in the INI (off by default; restart after changing).

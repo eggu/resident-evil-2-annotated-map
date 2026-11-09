@@ -1,118 +1,132 @@
 # RE2 Annotated Map - Survivor's Notes — Resident Evil 2 (1998)
 
-[English](README.en.md) | 한국어
+English | [한국어](README.ko.md)
 
 <p align="center"><img src="docs/logo.png" alt="RE2 Annotated Map — Survivor’s Notes" width="320"></p>
 
-**상세 지도: 생존자의 메모** — 원작 Resident Evil 2 PC판(GOG판 `Resident Evil 2.exe` + [Classic REbirth](https://classicrebirth.com/))의 지도에 방 이름, 잠긴 문과 필요한 열쇠, 핵심 아이템, 문서·지도, 퍼즐, 일반 아이템, 타자기·아이템 상자, 몬스터를 표시하는 ASI 모드입니다. 한국어/영어를 지원합니다. RE2 리메이크(2019)용이 아닙니다.
+An ASI mod for the original Resident Evil 2 PC release (GOG `Resident Evil 2.exe` + [Classic REbirth](https://classicrebirth.com/)) that adds room names, locked doors and their keys, key items, documents and maps, puzzles, common items, typewriters and item boxes, and monsters to the map. Korean and English are supported. This is not for the 2019 remake.
 
-- 게임 자체의 지도 화면에 표시합니다. 주운 아이템, 연 문, 푼 퍼즐, 쓰러뜨린 몬스터는 지도에서 사라집니다. 아이템이 남은 방은 주황색으로 칠합니다.
-- 레온/클레어, A/B 시나리오에 따른 아이템·잠긴 문 차이를 반영합니다. 재핑 아이템도 표시합니다.
-- 상태 화면 지도에서 좌/우로 장소, 위/아래로 층을 고를 수 있습니다. 이미 방문한 층만 보입니다.
-- 결정 버튼으로 지도를 2배로 확대하고, 방향 입력으로 옮길 수 있습니다.
-- 원작 결과 화면 공식으로 계산한 랭크 예상치를 켤 수 있습니다(기본 끔).
+- Annotations are drawn on the game's own map screen. Picked-up items, opened doors, solved puzzles and killed monsters disappear from the map. Rooms with items left are tinted orange.
+- Item and lock differences between Leon/Claire and scenarios A/B are reflected. Zapping items are shown too.
+- On the status-screen map, left/right selects an area and up/down selects a floor. Only visited floors are shown.
+- The Action button zooms the map to 2x, and directions move it while zoomed.
+- An optional live rank estimate uses the original results-screen formula (off by default).
 
-## 스크린샷
+## Screenshots
 
-빨간 테두리는 비교할 몬스터 표시와 방 표시 범위의 범례를 강조합니다.
+Red outlines highlight the monster toggle and room visibility scope being compared.
 
-| | 방문한 방 | 모든 방 |
+| | Visited rooms | All rooms |
 |---|---|---|
-| 몬스터 끔 | ![경찰서 1층 — 방문한 방, 몬스터 끔](docs/screenshots/1-highlighted.png) | ![경찰서 1층 — 모든 방, 몬스터 끔](docs/screenshots/3-highlighted.png) |
-| 몬스터 켬 | ![경찰서 1층 — 방문한 방, 몬스터 켬](docs/screenshots/2-highlighted.png) | ![경찰서 1층 — 모든 방, 몬스터 켬](docs/screenshots/4-highlighted.png) |
+| Monsters off | ![Police Station 1F — Visited rooms, monsters off](docs/screenshots/1-highlighted.png) | ![Police Station 1F — All rooms, monsters off](docs/screenshots/3-highlighted.png) |
+| Monsters on | ![Police Station 1F — Visited rooms, monsters on](docs/screenshots/2-highlighted.png) | ![Police Station 1F — All rooms, monsters on](docs/screenshots/4-highlighted.png) |
 
-## 표시 범위와 기본값
+## Visibility and defaults
 
-새 설정은 **영어, 이름 크기 100%, 불투명도 70%, 방문한 방만 표시, 방 이름만 켬**으로 시작합니다. `9`로 한국어, `2`–`7`로 다른 항목을 켭니다. 랭크 예상치는 꺼져 있습니다. `8`로 범위를 바꿉니다. **모든 방**은 미방문 구역과 아이템을 미리 보여줍니다. 방문한 층만 장소·층 선택에 나타납니다.
+A new configuration starts in **English, name size 100%, name opacity 70%, icon size 100%, icon opacity 80%, visited rooms only, with only Rooms on and marker names off**. Press `H` to show marker names. Press `\` for Korean and `2`–`7` to turn on other categories. The rank estimate is off. Press `9` to change scope. **All rooms** reveals unexplored rooms and items. Area/floor selection still lists visited floors only.
 
-## 설치
+## Installation
 
-1. Resident Evil 2용 **Classic REbirth**를 먼저 설치합니다(1.0.9에서 확인). [공식 다운로드](https://classicrebirth.com/index.php/downloads/resident-evil-2-classic-rebirth/)
-2. 게임을 종료합니다. [Releases](https://github.com/eggu/resident-evil-2-annotated-map/releases/latest)에서 `RE2-Annotated-Map-<버전>.zip`을 받아 압축을 풉니다. `Source code`는 설치 파일이 아닙니다.
-3. ZIP의 내용(`dsound.dll`, `scripts/`)을 `Resident Evil 2.exe`가 있는 게임 폴더에 폴더 구조 그대로 복사합니다. ASI 로더인 [Ultimate ASI Loader](https://github.com/ThirteenAG/Ultimate-ASI-Loader) v9.7.4(MIT)가 `dsound.dll`로 포함되어 있습니다.
-   - 한글 패치 등으로 Ultimate ASI Loader가 이미 `dsound.dll`로 설치되어 있으면 `dsound.dll`은 건너뛰어도 됩니다.
-   - ASI 로더가 아닌 다른 `dsound.dll`(예: DSOAL)이 있으면 덮어쓰지 말고, 포함된 `dsound.dll`을 `winmm.dll` 이름으로 복사하세요.
+1. Install **Classic REbirth** for Resident Evil 2 first (tested with 1.0.9). [Official download](https://classicrebirth.com/index.php/downloads/resident-evil-2-classic-rebirth/)
+2. Close the game. Download `RE2-Annotated-Map-<version>.zip` from [Releases](https://github.com/eggu/resident-evil-2-annotated-map/releases/latest) and extract it. `Source code` is not the install package.
+3. Copy the ZIP contents (`dsound.dll`, `scripts/`) into the folder containing `Resident Evil 2.exe`, preserving the directory structure. [Ultimate ASI Loader](https://github.com/ThirteenAG/Ultimate-ASI-Loader) v9.7.4 (MIT) is included as `dsound.dll`.
+   - If Ultimate ASI Loader is already installed as `dsound.dll` (e.g. by a translation patch), you can skip `dsound.dll`.
+   - If you have a different `dsound.dll` (e.g. DSOAL), do not overwrite it: copy the included one as `winmm.dll`.
 
-업그레이드할 때는 `scripts/RE2.AnnotatedMap.ini`를 건너뛰거나 백업 후 복원하세요.
+When upgrading, skip `scripts/RE2.AnnotatedMap.ini` or back it up and restore it.
 
-제거: `scripts/RE2.AnnotatedMap.asi`, `.ini`, `.log`를 지웁니다. 다른 ASI 모드가 없으면 `dsound.dll`도 지웁니다. EXE와 세이브는 수정하지 않습니다. 지원 대상이 아닌 실행 파일에서는 코드 서명을 확인한 뒤 아무것도 패치하지 않고 로그만 남깁니다.
+Uninstall: delete `scripts/RE2.AnnotatedMap.asi`, `.ini` and `.log`. Also delete `dsound.dll` if no other ASI mod uses it. The EXE and save files are not modified. On an unsupported executable the mod checks the code signatures, patches nothing and only writes a log.
 
-## 단축키
+## Controls
 
-지도 화면에서만 작동하며, 현재 상태가 왼쪽 아래 범례에 표시됩니다.
+Keys work on the map screen only. The current state is shown in the legend at the lower left, sizes and opacities at the upper left. Names and icons grow 1.43x at 2x zoom. Markers touching the legend or the values are not drawn. A second press of the same key within 0.35 s is ignored.
 
-| 키 | 동작 |
+| Key | Action |
 |---|---|
-| 0 | 전체 표시 켜기/끄기 |
-| 1 | 방 이름·타자기·아이템 상자 |
-| 2 | 잠긴 문·열쇠 |
-| 3 | 핵심 아이템 (+ 재핑 아이템) |
-| 4 | 문서·지도 |
-| 5 | 퍼즐 |
-| 6 | 일반 아이템(탄약·회복·잉크 리본) |
-| 7 | 적 (방문한 방) |
-| 8 | 표시 범위: 방문한 방 → 공개된 방(층 지도 획득) → 모든 방 |
-| 9 | 한국어 / English |
-| ~ (숫자 1 왼쪽) | 범례 표시 켜기/끄기 |
-| - / = (+), 숫자패드 - / + | 이름 크기 10%씩 (50–150%) |
-| Shift + 위 키 | 이름 불투명도 10%씩 (10–100%) |
-| 좌/우, 위/아래 (상태 화면 지도) | 장소·층 선택 (방문한 층만) |
-| 결정 버튼 (지도) | 지도 2배 확대 켜기/끄기 (지도를 다시 열면 1배) |
-| 방향 입력 (2배 확대 중) | 지도 이동 |
+| 0 | All annotations on/off |
+| 1 | Room names, typewriters, item boxes |
+| 2 | Locked doors and keys |
+| 3 | Key items (+ zapping items) |
+| 4 | Documents and maps |
+| 5 | Puzzles |
+| 6 | Events (spoilers: where story scenes start, a purple `?` diamond with no name and unaffected by `H`; hidden once the scene has played) |
+| 7 | Common items (ammo, recovery, Ink Ribbons) |
+| 8 | Enemies (visited rooms) |
+| 9 | Visibility: visited rooms → revealed rooms (floor map picked up) → all rooms |
+| `\` (₩ on Korean keyboards) | Korean / English (shown next to `[H]` in the legend's title line) |
+| H | Marker names, three states on each press: all names -> all except common items -> all hidden (default hidden). Covers key items, lock keys, maps, document names, some puzzles and common items; document and common-item names only where there is room. The legend's title line shows the state |
+| ~ (left of 1) | Show or hide the legend and values |
+| - · = (+), numpad - · + | Name size in 10% steps (50–200%) |
+| [ · ] | Name opacity in 10% steps (10–100%) |
+| Shift + - · = (+) | Icon size in 10% steps (50–200%) |
+| Shift + [ · ] | Icon opacity in 10% steps (10–100%) |
+| Left · right, up · down (status-screen map) | Select area and floor (visited floors only) |
+| Action button (map) | Toggle 2x map zoom (reopening the map returns to 1x) |
+| Directions (while zoomed) | Move the map |
 
-`[Z]`(스크린샷의 `Z`)는 재핑 표식입니다. A/B 시나리오 사이의 선택이나 행동에 영향을 주고받는 항목이며, 아이템 이름의 일부가 아닙니다.
+`Modifier=Ctrl` in the INI makes `Ctrl` the modifier instead of `Shift`. The default is `Shift` because the game uses `Ctrl`.
 
-## 설정 (`scripts/RE2.AnnotatedMap.ini`)
+`[Z]` (`Z` in the screenshots) identifies a zapping-related item or interaction whose state is affected by choices or actions across scenarios A/B. It is not part of the item name.
 
-배포 ZIP에 설명 주석이 담긴 기본 설정 파일을 포함합니다. 편집 전 게임을 종료하고, 저장 후 게임을 다시 실행하세요. 게임 안에서 바꾼 설정은 자동으로 저장됩니다. 업그레이드할 때 기존 INI를 보존해야 사용자 설정을 유지할 수 있습니다.
+## Settings (`scripts/RE2.AnnotatedMap.ini`)
 
-| 항목 | 기본값 | 설명 |
+The release ZIP includes a default INI with comments. Close the game before editing, save, then restart. Settings changed in game are saved automatically. Keep your existing INI when upgrading to preserve your settings.
+
+| Setting | Default | Description |
 |---|---|---|
-| `All` | `1` | 전체 표시 스위치 |
-| `Rooms` | `1` | 방 이름·타자기·아이템 상자 |
-| `Locks` | `0` | 잠긴 문·열쇠 |
-| `Items` | `0` | 핵심 아이템 |
-| `Documents` | `0` | 문서·지도 |
-| `Puzzles` | `0` | 퍼즐·장치 |
-| `CommonItems` | `0` | 탄약·회복·잉크 리본 등 일반 아이템 |
-| `Enemies` | `0` | 적 |
-| `English` | `1` | `1` 영어, `0` 한국어 |
-| `Scope` | `1` | `1` 방문한 방, `2` 층 지도로 공개된 방, `3` 모든 방(스포일러) |
-| `NameSize` | `100` | 이름 크기(50–150) |
-| `NameOpacity` | `70` | 이름 불투명도(10–100) |
-| `Rank` | `0` | `1`이면 랭크 예상치 표시. 변경 후 재실행 |
+| `All` | `1` | Master switch |
+| `Rooms` | `1` | Room names, typewriters, item boxes |
+| `Locks` | `0` | Locked doors and keys |
+| `Items` | `0` | Key items |
+| `Documents` | `0` | Documents and maps |
+| `Puzzles` | `0` | Puzzles and devices |
+| `CommonItems` | `0` | Ammo, recovery items, Ink Ribbons and other common pickups |
+| `Enemies` | `0` | Enemies |
+| `Events` | `0` | Events (story-scene spoilers) |
+| `English` | `1` | `1` English, `0` Korean |
+| `Scope` | `1` | `1` visited rooms, `2` rooms revealed by a floor map, `3` all rooms (spoilers) |
+| `NameSize` | `100` | Name size (50–200). 100 is the former 80%; an older file's value is converted once so the size stays |
+| `NameOpacity` | `70` | Name opacity (10–100) |
+| `ItemNames` | `0` | Marker names (`H`): `1` all, `2` all except common items, `0` hidden. The old `1` (on) reads as all and `0` (off) as hidden |
+| `IconSize` | `100` | Icon size (50–200) |
+| `IconOpacity` | `80` | Icon opacity (10–100) |
+| `Modifier` | `Shift` | Modifier for icon size/opacity: `Shift` or `Ctrl` |
+| `LockSide` | `0` | `0` lock markers on the door, `1` in the room not entered yet (RE1 HD style) |
+| `Version` | `4` | Settings format, written automatically; do not edit |
+| `Rank` | `0` | `1` shows the rank estimate. Restart after changing |
 
-모든 항목은 `[MapOverlay]` 섹션에 있습니다.
+All settings are in the `[MapOverlay]` section.
 
-## 알려진 한계
+## Known limitations
 
-- GOG판 `Resident Evil 2.exe` + Classic REbirth만 지원합니다. 다른 실행 파일에서는 아무것도 적용하지 않고 로그만 남깁니다.
-- 확대한 이름은 기존 위치를 유지하므로 좁은 지도에서 겹칠 수 있습니다.
-- 적 표시는 출현 지점이며 실시간 위치가 아닙니다.
+- Only the GOG `Resident Evil 2.exe` with Classic REbirth is supported. Other executables load nothing and only write a log.
+- Enlarged names keep their positions, so they can overlap on crowded maps.
+- With `LockSide=1` the other side is the game's own spot just past the door, only a few pixels away. Doors leading to another floor keep the marker on the door.
+- Enemy markers show spawn points, not live enemy positions.
 
-## 문제 신고
+## Support
 
-[Issues](https://github.com/eggu/resident-evil-2-annotated-map/issues)에 게임 판본, Classic REbirth 버전, 캐릭터·시나리오, 방·층, 언어·표시 범위와 스크린샷을 함께 남겨 주세요. 로딩 문제는 `scripts/RE2.AnnotatedMap.log`도 첨부하면 도움이 됩니다. 로그의 개인 경로는 지워 주세요.
+Report issues in [Issues](https://github.com/eggu/resident-evil-2-annotated-map/issues) with the game edition, Classic REbirth version, character/scenario, room/floor, language/scope and a screenshot. For loading problems, include `scripts/RE2.AnnotatedMap.log`, removing personal paths before sharing.
 
-## 위키
+## Wiki
 
-방 목록, 잠긴 문과 열쇠, 아이템·퍼즐·문서·세이브 지점, 몬스터, 랭크 계산은 [한국어 위키](docs/wiki/README.md)와 [English wiki](docs/wiki/README.en.md)를 참고하세요. 목록에는 스포일러가 포함됩니다.
+See the [English wiki](docs/wiki/README.en.md) or [한국어 위키](docs/wiki/README.md) for rooms, locked doors and keys, items, puzzles, documents, save points, monsters and rank scoring. The reference tables contain spoilers.
 
-## 빌드
+## Build
 
 ```sh
 python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
 .venv/bin/python build.py                                              # dist/ ZIP
-.venv/bin/python build.py --game-exe '/path/to/Resident Evil 2.exe'    # + 원본 EXE 네이티브 테스트
+.venv/bin/python build.py --game-exe '/path/to/Resident Evil 2.exe'    # + native tests against the original EXE
 ```
 
-`src/re2_keymap.c`가 런타임 소스이고, 나머지 헤더는 고정된 지도·이름·아이콘 데이터입니다. 자세한 내용은 [개발 문서](docs/DEVELOPMENT.md)를 참고하세요.
+`src/re2_keymap.c` is the runtime source; the other headers are pinned map, label and icon data. See the [development notes](docs/DEVELOPMENT.md).
 
-## 다른 지도 모드
+## Other map mods
 
-- [RE1 Annotated Map - Survivor's Notes](https://github.com/eggu/resident-evil-annotated-map) — 바이오하자드 1 (1996)
-- [RE3 Annotated Map - Survivor's Notes](https://github.com/eggu/resident-evil-3-annotated-map) — 바이오하자드 3 (1999)
+- [RE1 Annotated Map - Survivor's Notes](https://github.com/eggu/resident-evil-annotated-map) — Resident Evil (1996)
+- [RE3 Annotated Map - Survivor's Notes](https://github.com/eggu/resident-evil-3-annotated-map) — Resident Evil 3: Nemesis (1999)
 
-## 크레딧과 라이선스
+## Credits and license
 
-제작: **커트씨**. 소스는 [MIT License](LICENSE)입니다. 비공식 팬 모드이며 Capcom 및 Classic REbirth와 관련이 없습니다. 참고 자료, 이미지·글꼴 출처는 [NOTICE](NOTICE.md)에 있습니다.
+Created by **커트씨**. The source code is under the [MIT License](LICENSE). This is an unofficial fan mod, unaffiliated with Capcom or Classic REbirth. References and image/font provenance are listed in [NOTICE](NOTICE.md).

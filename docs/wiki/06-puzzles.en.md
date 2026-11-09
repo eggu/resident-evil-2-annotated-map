@@ -11,19 +11,19 @@ Amber diamonds represent puzzle/device interactions with `kind=6`. The East Offi
 | --- | --- | --- | --- | --- |
 | Leon | 2 | Main Hall (`200`) | 149,126 | `1:6=0` ∧ `4:72=0` |
 | Leon | 2 | West Corridor (`204`) | 42,153 | `1:6=0` |
-| Leon | 2 | Operations Room (`206`) | 63,116 | — |
+| Leon | 2 | Operations Room (`206`) | 63,116 | `4:36=0` |
 | Leon | 2 | Darkroom (`208`) | 124,102 | — |
 | Leon | 2 | East Office (`20B`) | 220,134 | `1:6=0` ∧ `4:37=0` |
-| Leon | 2 | Press Room (`20D`) | 208,89 | — |
+| Leon | 2 | Press Room (`20D`) | 208,89 | `4:84=0` |
 | Leon | 2 | East Stairway (`20F`) | 261,84 | `1:6=0` |
 
 ## Leon · Map ID 3
 
 | Mode | Map ID | Room/slot | x,y | Conditions |
 | --- | --- | --- | --- | --- |
-| Leon | 3 | Rooftop (`108`) | 234,115 | — |
-| Leon | 3 | Art Storage (`10B`) | 218,153 | `4:18=0` |
-| Leon | 3 | Art Storage (`10B`) | 225,153 | `4:19=0` |
+| Leon | 3 | Rooftop (`108`) | 234,115 | `4:0=0` |
+| Leon | 3 | Art Storage (`10B`) | 218,153 | `4:18=0` ∧ `4:43=0` |
+| Leon | 3 | Art Storage (`10B`) | 225,153 | `4:19=0` ∧ `4:43=0` |
 | Leon | 3 | Main Hall (`110`) | 144,84 | `1:6=0` ∧ `4:148=0` |
 | Leon | 3 | Library (`112`) | 66,109 | `1:6=0` ∧ `4:23=0` |
 
@@ -44,16 +44,16 @@ Amber diamonds represent puzzle/device interactions with `kind=6`. The East Offi
 
 | Mode | Map ID | Room/slot | x,y | Conditions |
 | --- | --- | --- | --- | --- |
-| Leon | 7 | Above the Bridge (`409`) | 152,137 | `4:31=1` |
+| Leon | 7 | Above the Bridge (`409`) | 152,137 | `4:31=1` ∧ `4:32=0` |
 
 ## Leon · Map ID 8
 
 | Mode | Map ID | Room/slot | x,y | Conditions |
 | --- | --- | --- | --- | --- |
 | Leon | 8 | Sewers (`407`) | 124,96 | — |
-| Leon | 8 | Under the Bridge (`408`) | 111,138 | — |
+| Leon | 8 | Under the Bridge (`408`) | 111,138 | `4:30=0` |
 | Leon | 8 | Under the Bridge (`408`) | 132,137 | — |
-| Leon | 8 | Under the Bridge (`408`) | 150,141 | — |
+| Leon | 8 | Under the Bridge (`408`) | 150,141 | `4:30=0` |
 | Leon | 8 | North Control Room (`403`) | 243,100 | `4:124=0` |
 | Leon | 8 | North Control Room (`403`) | 272,84 | `4:125=0` |
 
@@ -67,7 +67,7 @@ Amber diamonds represent puzzle/device interactions with `kind=6`. The East Offi
 
 | Mode | Map ID | Room/slot | x,y | Conditions |
 | --- | --- | --- | --- | --- |
-| Leon | 10 | Control Room (`503`) | 156,124 | `1:1=1` |
+| Leon | 10 | Control Room (`503`) | 156,124 | `1:1=1` ∧ `4:98=0` |
 | Leon | 10 | Cargo Platform (`504`) | 198,98 | `1:0=0` ∧ `1:3=1` |
 | Leon | 10 | Cargo Platform (`504`) | 198,98 | `1:3=0` |
 
@@ -75,7 +75,7 @@ Amber diamonds represent puzzle/device interactions with `kind=6`. The East Offi
 
 | Mode | Map ID | Room/slot | x,y | Conditions |
 | --- | --- | --- | --- | --- |
-| Leon | 11 | Control Room (`503`) | 161,112 | `1:1=1` |
+| Leon | 11 | Control Room (`503`) | 161,112 | `1:1=1` ∧ `4:98=0` |
 
 ## Leon · Map ID 13
 
@@ -132,24 +132,24 @@ Amber diamonds represent puzzle/device interactions with `kind=6`. The East Offi
 | --- | --- | --- | --- | --- |
 | Claire | 2 | Main Hall (`200`) | 149,126 | `1:6=0` ∧ `4:72=0` |
 | Claire | 2 | West Corridor (`204`) | 42,153 | `1:6=0` |
-| Claire | 2 | Operations Room (`206`) | 63,116 | — |
+| Claire | 2 | Operations Room (`206`) | 63,116 | `4:36=0` |
 | Claire | 2 | Darkroom (`208`) | 124,102 | — |
 | Claire | 2 | East Office (`20B`) | 220,134 | `1:6=0` ∧ `4:37=0` |
-| Claire | 2 | Press Room (`20D`) | 208,89 | — |
+| Claire | 2 | Press Room (`20D`) | 208,89 | `4:84=0` |
 | Claire | 2 | East Stairway (`20F`) | 261,84 | `1:6=0` |
 
 ## Claire · Map ID 3
 
 | Mode | Map ID | Room/slot | x,y | Conditions |
 | --- | --- | --- | --- | --- |
-| Claire | 3 | Rooftop (`108`) | 234,115 | — |
+| Claire | 3 | Rooftop (`108`) | 234,115 | `4:0=0` |
 | Claire | 3 | Helicopter Corridor (`10A`) | 221,108 | `1:6=0` ∧ `4:87=0` |
-| Claire | 3 | Art Storage (`10B`) | 218,153 | `4:18=0` |
-| Claire | 3 | Art Storage (`10B`) | 225,153 | `4:19=0` |
+| Claire | 3 | Art Storage (`10B`) | 218,153 | `4:18=0` ∧ `4:43=0` |
+| Claire | 3 | Art Storage (`10B`) | 225,153 | `4:19=0` ∧ `4:43=0` |
 | Claire | 3 | Taxidermy Room (`10E`) | 197,117 | `4:71=0` |
 | Claire | 3 | Main Hall (`110`) | 144,84 | `1:6=0` ∧ `4:148=0` |
 | Claire | 3 | Library (`112`) | 66,109 | `1:6=0` ∧ `4:23=0` |
-| Claire | 3 | Chief's Office (`21B`) | 183,85 | `3:64=1` |
+| Claire | 3 | Chief's Office (`21B`) | 183,85 | `3:1=1` ∧ `3:64=1` |
 
 ## Claire · Map ID 4
 
@@ -169,22 +169,22 @@ Amber diamonds represent puzzle/device interactions with `kind=6`. The East Offi
 
 | Mode | Map ID | Room/slot | x,y | Conditions |
 | --- | --- | --- | --- | --- |
-| Claire | 7 | Above the Bridge (`409`) | 152,137 | — |
+| Claire | 7 | Above the Bridge (`409`) | 152,137 | `4:32=0` |
 
 ## Claire · Map ID 8
 
 | Mode | Map ID | Room/slot | x,y | Conditions |
 | --- | --- | --- | --- | --- |
 | Claire | 8 | Sewers (`407`) | 124,96 | — |
-| Claire | 8 | Under the Bridge (`408`) | 111,138 | `1:1=1` ∧ `1:3=1` ∧ `4:31=1` |
-| Claire | 8 | Under the Bridge (`408`) | 111,138 | `1:3=0` ∧ `4:31=1` |
-| Claire | 8 | Under the Bridge (`408`) | 111,138 | `4:31=0` |
+| Claire | 8 | Under the Bridge (`408`) | 111,138 | `1:1=1` ∧ `1:3=1` ∧ `4:30=0` ∧ `4:31=1` |
+| Claire | 8 | Under the Bridge (`408`) | 111,138 | `1:3=0` ∧ `4:30=0` ∧ `4:31=1` |
+| Claire | 8 | Under the Bridge (`408`) | 111,138 | `4:30=0` ∧ `4:31=0` |
 | Claire | 8 | Under the Bridge (`408`) | 132,137 | `1:1=1` ∧ `1:3=1` ∧ `4:31=1` |
 | Claire | 8 | Under the Bridge (`408`) | 132,137 | `1:3=0` ∧ `4:31=1` |
 | Claire | 8 | Under the Bridge (`408`) | 132,137 | `4:31=0` |
-| Claire | 8 | Under the Bridge (`408`) | 151,141 | `1:1=1` ∧ `1:3=1` ∧ `4:31=1` |
-| Claire | 8 | Under the Bridge (`408`) | 151,141 | `1:3=0` ∧ `4:31=1` |
-| Claire | 8 | Under the Bridge (`408`) | 151,141 | `4:31=0` |
+| Claire | 8 | Under the Bridge (`408`) | 151,141 | `1:1=1` ∧ `1:3=1` ∧ `4:30=0` ∧ `4:31=1` |
+| Claire | 8 | Under the Bridge (`408`) | 151,141 | `1:3=0` ∧ `4:30=0` ∧ `4:31=1` |
+| Claire | 8 | Under the Bridge (`408`) | 151,141 | `4:30=0` ∧ `4:31=0` |
 | Claire | 8 | North Control Room (`403`) | 243,100 | `4:124=0` |
 | Claire | 8 | North Control Room (`403`) | 272,84 | `4:125=0` |
 
@@ -198,7 +198,7 @@ Amber diamonds represent puzzle/device interactions with `kind=6`. The East Offi
 
 | Mode | Map ID | Room/slot | x,y | Conditions |
 | --- | --- | --- | --- | --- |
-| Claire | 10 | Control Room (`503`) | 156,124 | `1:1=1` |
+| Claire | 10 | Control Room (`503`) | 156,124 | `1:1=1` ∧ `4:98=0` |
 | Claire | 10 | Cargo Platform (`504`) | 198,98 | `1:0=0` ∧ `1:3=1` |
 | Claire | 10 | Cargo Platform (`504`) | 198,98 | `1:3=0` |
 
@@ -206,7 +206,7 @@ Amber diamonds represent puzzle/device interactions with `kind=6`. The East Offi
 
 | Mode | Map ID | Room/slot | x,y | Conditions |
 | --- | --- | --- | --- | --- |
-| Claire | 11 | Control Room (`503`) | 161,112 | `1:1=1` |
+| Claire | 11 | Control Room (`503`) | 161,112 | `1:1=1` ∧ `4:98=0` |
 
 ## Claire · Map ID 13
 

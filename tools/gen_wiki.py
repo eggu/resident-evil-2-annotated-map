@@ -39,12 +39,19 @@ rooms = labelled('room_names-en.h')
 assert rooms and all(len(row) == 10 for row, _ in rooms)
 room_keys = {(r[0], r[1], r[2]): note.split()[0] for r, note in rooms}
 room_names = {lang: json.loads((ROOT / f'data/room_names-{lang}.json').read_text()) for lang in ('ko', 'en')}
-item_names = {lang: {r[0]: note.split(' ', 1)[1] for r, note in labelled(f'item_labels-{lang}.h')}
-              for lang in ('ko', 'en')}
+def label_names(path):
+    """item -> name; a wrapped name's lines are consecutive entries of the same item."""
+    out = {}
+    for r, note in labelled(path):
+        out[r[0]] = (out[r[0]] + ' ' if r[0] in out else '') + note.split(' ', 1)[1]
+    return out
+
+
+item_names = {lang: label_names(f'item_labels-{lang}.h') for lang in ('ko', 'en')}
 common = {20, 21, 22, 24, 25, 26, 27, 29, 30, 35, 38, 39, 40}
 maps = set(range(200, 206))
 assert set(item_names['ko']) == set(item_names['en'])
-assert len(doors[0]) == 9 and len(items[0]) == 10 and len(monsters[0]) == 10
+assert len(doors[0]) == 14 and len(items[0]) == 10 and len(monsters[0]) == 10
 for rows, guards, start, count in ((items, item_guards, 8, 9), (documents, document_guards, 8, 9),
                                    (interactions, interaction_guards, 6, 7), (monsters, monster_guards, 8, 9)):
     assert all(0 <= r[start] <= r[start] + r[count] <= len(guards) for r in rows)
@@ -115,8 +122,8 @@ def generate(lang):
              '- Conditions `bank:bit=value` describe flag truth values. All conditions joined by `∧` must pass. Banks 130/131 compare SCD variables 0x1e/0x1f: `130:n=1` means equal to n, and `130:n=0` means unequal.\n'
              '- A location may have multiple scenario, item or event variants. Row counts are not unique item counts or simultaneous marker counts.\n'
              '- Coordinates are logical source-map coordinates before panning and marker-centre offsets, not PC output pixels.\n')
-    body += ('\n[설치와 단축키](../../README.md) · [라이선스](../../NOTICE.md)\n' if ko else
-             '\n[Installation and controls](../../README.en.md) · [Credits](../../NOTICE.md)\n')
+    body += ('\n[설치와 단축키](../../README.ko.md) · [라이선스](../../NOTICE.md)\n' if ko else
+             '\n[Installation and controls](../../README.md) · [Credits](../../NOTICE.md)\n')
     write('README', 'RE2 지도 모드 위키' if ko else 'RE2 Annotated Map Wiki', body)
 
     floors = json.loads((ROOT / 'data/room_shapes.json').read_text())['floors']
@@ -173,7 +180,7 @@ def generate(lang):
     body = ('열쇠 아이콘은 아직 잠겨 있고 현재 시나리오에서 유효한 문에 표시합니다. `bank=255`는 원작 문 해제 비트 배열을 뜻합니다. 그 외 값은 공통 플래그 bank를 사용합니다. 시나리오 마스크 64는 A 및 클레어 B에서 제외, 128은 B에서 제외됩니다. 하강 열쇠(93)는 A 전용, 상승 열쇠(94)·동력실 열쇠(95)·마스터 키(98)·플랫폼 열쇠(99)는 B 전용으로 거릅니다.\n\n' if ko else
             'Key icons mark doors that remain locked and are valid for the current scenario. `bank=255` selects the native door-unlock bit array; other values use the shared flag banks. Scenario mask 64 excludes A and Claire B; mask 128 excludes B. Down Key (93) is A-only; Up Key (94), Power Room Key (95), Master Key (98) and Platform Key (99) are B-only.\n\n')
     body += table(['모드' if ko else 'Mode', '지도 ID' if ko else 'Map ID', '방/슬롯' if ko else 'Room/slot', '열쇠' if ko else 'Key', 'x,y', '해제 bank:bit' if ko else 'Unlock bank:bit', 'Mask'],
-        [(mode(p), f, room(p, f, seen), item(k), f'{x},{y}', f'`{b}:{u}`', mask) for p, f, x, y, seen, u, k, mask, b in doors])
+        [(mode(p), f, room(p, f, seen), item(k), f'{x},{y}', f'`{b}:{u}`', mask) for p, f, x, y, seen, u, k, mask, b, *_ in doors])
     write(PAGES[3][0], name(PAGES[3]), body)
 
     def item_table(rows):
@@ -189,7 +196,7 @@ def generate(lang):
             'Amber diamonds represent puzzle/device interactions with `kind=6`. The East Office safe on Police Station 1F remains marked until unlocked. They disappear when their conditions no longer pass. The table identifies room/slot, position and conditions without inventing puzzle names.\n\n')
     body += table(['모드' if ko else 'Mode', '지도 ID' if ko else 'Map ID', '방/슬롯' if ko else 'Room/slot', 'x,y', '표시 조건' if ko else 'Conditions'],
         [(mode(p), f, room(p, f, seen), f'{x},{y}', conditions(interaction_guards, start, count))
-         for p, f, seen, kind, x, y, start, count in interactions if kind == 6])
+         for p, f, seen, kind, x, y, start, count, _name in interactions if kind == 6])
     write(PAGES[5][0], name(PAGES[5]), body)
 
     body = ('문서는 문서 아이콘, 층 지도는 접힌 지도 아이콘으로 표시합니다. 200–205는 모드 내부의 지도 ID이며 인벤토리에 쓰는 아이템 번호가 아닙니다. 문서 제목 데이터가 없는 행은 ID로 표시합니다.\n\n' if ko else
@@ -251,8 +258,8 @@ def generate(lang):
             '- Sprays: `100−15×count` for 0–5; zero from 6.\n'
             '- Subtract 50 when the infinite-weapon flag is set.\n\n')
     body += table(['랭크' if ko else 'Rank', '점수' if ko else 'Score'], [('A', '269–300'), ('B', '199–268'), ('C', '144–198'), ('D', '99–143'), ('E', '0–98')])
-    body += ('\n## 설정\n\n설정 파일은 `scripts/RE2.AnnotatedMap.ini`입니다. 게임 안에서 바꾼 값은 자동 저장됩니다. 범례는 `~` 키로 켜고 끕니다. 이름 크기는 50–150%, 불투명도는 10–100%이며 10%씩 조절합니다. 확대하면 좁은 지도에서 이름이 겹칠 수 있습니다.\n\n[전체 기본값과 단축키](../../README.md)\n' if ko else
-             '\n## Settings\n\nSettings are stored in `scripts/RE2.AnnotatedMap.ini`. In-game changes are saved automatically. The `~` key shows or hides the legend. Name size ranges from 50–150% and opacity from 10–100%, in 10% steps. Enlarged names may overlap on crowded maps.\n\n[All defaults and controls](../../README.en.md)\n')
+    body += ('\n## 설정\n\n설정 파일은 `scripts/RE2.AnnotatedMap.ini`입니다. 게임 안에서 바꾼 값은 자동 저장됩니다. 범례는 `~` 키로 켜고 끕니다. 이름 크기는 50–200%, 불투명도는 10–100%이며 10%씩 조절합니다. 확대하면 좁은 지도에서 이름이 겹칠 수 있습니다.\n\n[전체 기본값과 단축키](../../README.ko.md)\n' if ko else
+             '\n## Settings\n\nSettings are stored in `scripts/RE2.AnnotatedMap.ini`. In-game changes are saved automatically. The `~` key shows or hides the legend. Name size ranges from 50–200% and opacity from 10–100%, in 10% steps. Enlarged names may overlap on crowded maps.\n\n[All defaults and controls](../../README.md)\n')
     write(PAGES[11][0], name(PAGES[11]), body)
 
 

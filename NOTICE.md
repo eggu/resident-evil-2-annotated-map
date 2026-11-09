@@ -11,10 +11,15 @@ data and documentation.
 - **Room names**: reference retained from the original label tooling,
   https://coregamers.com/walkthrough/resident-evil-2-8 . The included English and Korean names were edited for this
   project.
+- **Document titles** (`data/marker_names.json`): the titles of the game's own files, read from the installed game's file bitmaps (English original; Korean from the installed Korean HD patch). Only the derived title text and bitmap hashes are included.
 - **Leon B transport sequence**: checked against Brandon W. Dennis's Resident Evil 2 FAQ (1998),
   https://gamefaqs.gamespot.com/ps/198458-resident-evil-2/faqs/4110 . No FAQ text is included.
 - **Enemy icons**: AI-assisted pixel art prepared for this mod (ChatGPT image generation, then reduced to 16-colour
   sprites); Evil Resource (https://www.evilresource.com) Resident Evil 2 images were used as visual reference only. The site's images are not included.
+- **Key-item sprites** (`assets/icons/key-<id>.png`, 37 items without lock-icon art): AI-assisted pixel art made for this mod with the
+  Codex image tool (2026-11-09, third set; the text-only first set and the second set were superseded), reduced to at most 16 colours;
+  prompts, processing and hashes are in `assets/key-art-provenance.json`. The game's own inventory images were looked at as
+  references only and are not included or traced. No game or third-party image pixels are in the sprites.
 - **Item, ammunition, recovery, Ink Ribbon, furniture and document sprites**: AI-assisted artwork prepared for this mod
   from game object identities and a retro pixel-art style. Provenance and extraction hashes are in
   `assets/artwork-provenance.json`. The folded map icon and amber puzzle diamond are code-drawn in
