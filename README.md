@@ -14,12 +14,20 @@ An ASI mod for the original Resident Evil 2 PC release (GOG `Resident Evil 2.exe
 
 ## Screenshots
 
-Red outlines highlight the monster toggle and room visibility scope being compared.
+![Police Station 1F with the legend and every category on, including puzzles and events.](docs/screenshots/1.3.0/police-station-1f-all-categories.png)
+*Police Station 1F with the legend and every category on, including puzzles and events.*
 
-| | Visited rooms | All rooms |
-|---|---|---|
-| Monsters off | ![Police Station 1F — Visited rooms, monsters off](docs/screenshots/1-highlighted.png) | ![Police Station 1F — All rooms, monsters off](docs/screenshots/3-highlighted.png) |
-| Monsters on | ![Police Station 1F — Visited rooms, monsters on](docs/screenshots/2-highlighted.png) | ![Police Station 1F — All rooms, monsters on](docs/screenshots/4-highlighted.png) |
+![2F zoomed in, visited rooms, marker names on.](docs/screenshots/1.3.0/police-station-2f-zoom-names.png)
+*2F zoomed in, visited rooms, marker names on.*
+
+![The same view with marker names off (icons only).](docs/screenshots/1.3.0/police-station-2f-zoom-icons-only.png)
+*The same view with marker names off (icons only).*
+
+![2F zoomed in, enemies shown with their names.](docs/screenshots/1.3.0/police-station-2f-zoom-enemies.png)
+*2F zoomed in, enemies shown with their names.*
+
+![1F with only rooms and locks on.](docs/screenshots/1.3.0/police-station-1f-rooms-and-locks.png)
+*1F with only rooms and locks on.*
 
 ## Visibility and defaults
 
@@ -66,7 +74,7 @@ Keys work on the map screen only. The current state is shown in the legend at th
 
 `Modifier=Ctrl` in the INI makes `Ctrl` the modifier instead of `Shift`. The default is `Shift` because the game uses `Ctrl`.
 
-`[Z]` (`Z` in the screenshots) identifies a zapping-related item or interaction whose state is affected by choices or actions across scenarios A/B. It is not part of the item name.
+`[Z]` marks a zapping-related item or interaction whose state is affected by choices or actions across scenarios A/B. It is not part of the item name.
 
 ## Settings (`scripts/RE2.AnnotatedMap.ini`)
 

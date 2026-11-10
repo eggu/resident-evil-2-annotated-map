@@ -14,12 +14,20 @@
 
 ## 스크린샷
 
-빨간 테두리는 비교할 몬스터 표시와 방 표시 범위의 범례를 강조합니다.
+![경찰서 1층: 범례와 모든 분류(퍼즐·이벤트 포함)를 켠 화면.](docs/screenshots/1.3.0/police-station-1f-all-categories.png)
+*경찰서 1층: 범례와 모든 분류(퍼즐·이벤트 포함)를 켠 화면.*
 
-| | 방문한 방 | 모든 방 |
-|---|---|---|
-| 몬스터 끔 | ![경찰서 1층 — 방문한 방, 몬스터 끔](docs/screenshots/1-highlighted.png) | ![경찰서 1층 — 모든 방, 몬스터 끔](docs/screenshots/3-highlighted.png) |
-| 몬스터 켬 | ![경찰서 1층 — 방문한 방, 몬스터 켬](docs/screenshots/2-highlighted.png) | ![경찰서 1층 — 모든 방, 몬스터 켬](docs/screenshots/4-highlighted.png) |
+![2층 확대, 방문한 방, 표식 이름 켬.](docs/screenshots/1.3.0/police-station-2f-zoom-names.png)
+*2층 확대, 방문한 방, 표식 이름 켬.*
+
+![같은 화면에서 표식 이름을 끈 모습(아이콘만).](docs/screenshots/1.3.0/police-station-2f-zoom-icons-only.png)
+*같은 화면에서 표식 이름을 끈 모습(아이콘만).*
+
+![2층 확대, 적을 이름과 함께 표시.](docs/screenshots/1.3.0/police-station-2f-zoom-enemies.png)
+*2층 확대, 적을 이름과 함께 표시.*
+
+![1층, 방과 잠금만 켠 화면.](docs/screenshots/1.3.0/police-station-1f-rooms-and-locks.png)
+*1층, 방과 잠금만 켠 화면.*
 
 ## 표시 범위와 기본값
 
@@ -66,7 +74,7 @@
 
 `Shift`는 INI의 `Modifier=Ctrl`로 `Ctrl`로 바꿀 수 있습니다. 게임이 `Ctrl`을 쓰므로 기본은 `Shift`입니다.
 
-`[Z]`(스크린샷의 `Z`)는 재핑 표식입니다. A/B 시나리오 사이의 선택이나 행동에 영향을 주고받는 항목이며, 아이템 이름의 일부가 아닙니다.
+`[Z]`는 재핑 표식입니다. A/B 시나리오 사이의 선택이나 행동에 영향을 주고받는 항목이며, 아이템 이름의 일부가 아닙니다.
 
 ## 설정 (`scripts/RE2.AnnotatedMap.ini`)
 
