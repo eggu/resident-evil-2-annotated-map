@@ -8,7 +8,7 @@ and 0x1d.. letters (byte + 36 = ASCII), and glyph pairs `f1 xx` = cell xx and `f
 Common/Data/fontk1.adt (page 39 in korean_rebirth.txt's G lines), `f3 xx` = cell xx of the shared rows of
 Common/Data/font1..7.adt (page 9). A cell is 14 x 14 px, 18 per row, from the top of the page. Cell -> syllable readings are
 in data/marker_names.json `ko_glyphs` (basis: the patch's own G table in korean_rebirth.txt, a user-confirmed name, or read
-by eye from the cell: see local/marker-names-*/c7/documents-ko-review.png).
+by eye from the cell: reviewed against the game's own bitmaps).
   RE2_GAME=<game dir> python extract_ko_doc_names.py           # check data/marker_names.json
   RE2_GAME=<game dir> python extract_ko_doc_names.py --dump"""
 from pathlib import Path

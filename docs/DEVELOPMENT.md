@@ -80,6 +80,8 @@ Marker names (`item_label_draw`):
 
 ## Icon editing
 
+Shared icon rules (style, sizes, references, review): `../../common/icon-style-guide.md` (workspace root).
+
 
 Key items draw their own art: 37 sprites in `assets/icons/key-<id>.png` are packed 1:1 by `assets/generate_key_art.py` into `src/key_art.h` (a second texture page, because the lock-icon page is full); the lock-icon sprites of `atlas.h` are reused for the other key items; items without art keep the cyan star. The art's longest side fills the star box and its aspect is kept (at least 2 px thick), and the item name touches the drawn art.
 Prepared AI-assisted C-style sprites are in `assets/icons/`, and `assets/key-layout.json` places the lock icons on the atlas. The map icon, puzzle diamond and key star are code-drawn in `assets/generate_overlay_icons.py`. After editing, regenerate as above.
@@ -89,3 +91,5 @@ Lock icons use visible-texel atlas bounds and scale their longest side to approx
 ## Public scope and licensing
 
 Project source is MIT-licensed; see LICENSE and NOTICE for the scope and third-party credits. Game assets and third-party components retain their own rights.
+
+`[6]` events show one marker per floor: the next pending scene, first by ascending FG_COMMON done flag (the flags follow play order), drawn right after the key stars so key names steer around it; it moves to a free neighbouring spot if a star sits on it. A scene whose flag is set is done and the next appears; a scene whose room is unvisited holds back the later ones.
