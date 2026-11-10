@@ -688,10 +688,6 @@ static int document_shown(const MapDocument *m,unsigned pl,unsigned mpl,unsigned
         guards_pass(document_guards+m->guard_start,m->guard_count);
 }
 // [6] events: story scenes (FMV), a purple '?' diamond at the scene's trigger until its progress flag is set.
-static int event_drawn(const MapInteraction *m,unsigned pl,unsigned mpl,unsigned floor){
- return events_enabled&&m->pl==mpl&&m->floor==floor&&m->kind==EVENT_KIND&&room_shown(pl,floor,m->seen)&&
-        guards_pass(interaction_guards+m->guard_start,m->guard_count);
-}
 static int puzzle_drawn(const MapInteraction *m,unsigned pl,unsigned mpl,unsigned floor){
  return puzzles_enabled&&m->pl==mpl&&m->floor==floor&&m->kind==6&&room_shown(pl,floor,m->seen)&&
         guards_pass(interaction_guards+m->guard_start,m->guard_count)&&!puzzle_replaced(m);
@@ -700,6 +696,36 @@ static int puzzle_drawn(const MapInteraction *m,unsigned pl,unsigned mpl,unsigne
 // top. Order: key stars, key names, puzzle diamonds, then (draw_names) room names and low-priority icons; key items are
 // never covered, common items and monsters always are. Names ignore those low-priority icons, avoid key and
 // puzzle markers, and only lean away from room names, which place themselves afterwards around the names.
+// [6] events (2026-11-10): one marker per floor, the next pending scene. Story order is the ascending FG_COMMON done flag (the
+// flags are handed out in play order); a scene whose flag is set is done and the next one appears. The marker is drawn here,
+// right after the key stars, so key names steer around it, and it slides to a free spot if a star sits on it.
+static const MapInteraction *next_event(unsigned mpl,unsigned floor){
+ const MapInteraction *best=0;unsigned best_bit=0x10000;
+ for(unsigned j=0;events_enabled&&j<sizeof(map_interactions)/sizeof(map_interactions[0]);j++){
+  const MapInteraction *m=map_interactions+j;
+  if(m->pl!=mpl||m->floor!=floor||m->kind!=EVENT_KIND||!guards_pass(interaction_guards+m->guard_start,m->guard_count))continue;
+  unsigned bit=interaction_guards[m->guard_start+m->guard_count-1].bit; // the done flag is the last guard
+  if(bit<best_bit){best_bit=bit;best=m;}
+ }
+ return best;
+}
+static void draw_event(unsigned pl,unsigned mpl,unsigned floor,int dx,int dy,unsigned st){
+ const MapInteraction *m=next_event(mpl,floor);
+ if(!m||!room_shown(pl,floor,m->seen))return; // the next pending scene's room is not revealed yet: no marker
+ for(unsigned k=0;k<sizeof(overlay_icons)/sizeof(overlay_icons[0]);k++)if(overlay_icons[k].kind==16){
+  const OverlayIcon *i=overlay_icons+k;
+  int d=isz(6),cx=MX(m->x+PROJ_CENTRE)-d/2,cy=MY(m->y+PROJ_CENTRE)-d/2,bx=cx,by=cy;
+  const signed char off[9][2]={{0,0},{1,0},{-1,0},{0,1},{0,-1},{1,1},{1,-1},{-1,1},{-1,-1}};
+  for(unsigned c=0;c<9;c++){
+   int x=cx+off[c][0]*d,y=cy+off[c][1]*d;
+   if(in_panel(x,y,d,d))continue;
+   if(!overlap_score(x,y,d,d,1)){bx=x;by=y;break;}
+  }
+  if(zoom_on&&(bx+d<1||bx>318||by+d<1||by>238))return;
+  if(!in_panel(bx,by,d,d))quad_draw(bx,by,d,d,i->u,i->v,OVERLAY_ICON_TEX,OVERLAY_ICON_TEX,st);
+  return;
+ }
+}
 static void name_marker(int x,int y,int w,int h,unsigned item,unsigned tier);
 static unsigned draw_key_items(unsigned pl,unsigned mpl,unsigned floor,int dx,int dy){
  unsigned n=0,st=cached_texture(&icon_texture,overlay_icon_pixels);
@@ -718,6 +744,8 @@ static unsigned draw_key_items(unsigned pl,unsigned mpl,unsigned floor,int dx,in
   for(unsigned q=0;q<sizeof(overlay_icons)/sizeof(overlay_icons[0]);q++)if(overlay_icons[q].kind==kind){
    quad_draw(x,y,sw,sw,overlay_icons[q].u,overlay_icons[q].v,OVERLAY_ICON_TEX,OVERLAY_ICON_TEX,st);break;}
  }
+
+ draw_event(pl,mpl,floor,dx,dy,st);
  for(unsigned j=0;j<sizeof(map_interactions)/sizeof(map_interactions[0]);j++){
   const MapInteraction *m=map_interactions+j;
   if(puzzle_drawn(m,pl,mpl,floor))reserve(MX(m->x+PROJ_CENTRE)-isz(6)/2,MY(m->y+PROJ_CENTRE)-isz(6)/2,isz(6),isz(6));
@@ -883,18 +911,6 @@ static void draw_names(unsigned mode){
    const OverlayIcon*i=overlay_icons+k;
    int d=isz(6),x=MX(m->x+PROJ_CENTRE)-d/2,y=MY(m->y+PROJ_CENTRE)-d/2;
    if(!under_high(x,y,d,d)&&!in_panel(x,y,d,d))quad_draw(x,y,d,d,i->u,i->v,OVERLAY_ICON_TEX,OVERLAY_ICON_TEX,t);monsters++;break;
-  }
- }
- unsigned events=0;(void)events;
- for(unsigned j=0;overlay_enabled&&events_enabled&&j<sizeof(map_interactions)/sizeof(map_interactions[0]);j++){
-  const MapInteraction *m=map_interactions+j;
-  if(!event_drawn(m,pl,mpl,floor))continue;
-  unsigned t=cached_texture(&icon_texture,overlay_icon_pixels);
-  if(!t)break;
-  for(unsigned k=0;k<sizeof(overlay_icons)/sizeof(overlay_icons[0]);k++)if(overlay_icons[k].kind==16){
-   const OverlayIcon*i=overlay_icons+k;
-   int d=isz(6),x=MX(m->x+PROJ_CENTRE)-d/2,y=MY(m->y+PROJ_CENTRE)-d/2;
-   if(!under_high(x,y,d,d)&&!in_panel(x,y,d,d)){quad_draw(x,y,d,d,i->u,i->v,OVERLAY_ICON_TEX,OVERLAY_ICON_TEX,t);events++;}break;
   }
  }
  // Key items and puzzle diamonds were drawn first (draw_key_items); only common/map items remain.
