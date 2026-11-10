@@ -1,476 +1,775 @@
 {
-  "style": "C: detailed retro survival-horror pixel art",
-  "source": "original generated sheet (not included)",
-  "source_sha256": "6c8fc0246faa1140ea80020a2ade3a53ec37da56f34d2312f59850de441be4ab",
-  "reference": "Resident Evil 2 item and key identities; retro pixel-art style",
-  "logical_max_dimension": 32,
-  "palette_colors": 16,
-  "alpha": "binary",
-  "sprites": [
-    {
-      "name": "key-31",
-      "file": "key-31.png",
-      "source_bounds": [
-        34,
-        69,
-        207,
-        221
-      ],
-      "size": [
-        32,
-        28
-      ],
-      "sha256": "96c7b322e615c5502fc9dbb19b43d1b45b819b67c0ce6901b0ee00c9e90f7d70"
+ "style": "C: detailed retro survival-horror pixel art",
+ "source": "original generated sheet (not included)",
+ "source_sha256": "6c8fc0246faa1140ea80020a2ade3a53ec37da56f34d2312f59850de441be4ab",
+ "reference": "Resident Evil 2 item and key identities; retro pixel-art style",
+ "logical_max_dimension": 32,
+ "palette_colors": 16,
+ "alpha": "binary",
+ "sprites": [
+  {
+   "name": "key-31",
+   "file": "key-31.png",
+   "source_bounds": [
+    34,
+    69,
+    207,
+    221
+   ],
+   "size": [
+    32,
+    28
+   ],
+   "sha256": "96c7b322e615c5502fc9dbb19b43d1b45b819b67c0ce6901b0ee00c9e90f7d70"
+  },
+  {
+   "name": "key-48",
+   "file": "key-48.png",
+   "source_bounds": [
+    243,
+    84,
+    432,
+    195
+   ],
+   "size": [
+    32,
+    19
+   ],
+   "sha256": "6d37a62225273fc5d8fce892ffa5d7e89f2419fbeb1e713e50e81eb4caabc594"
+  },
+  {
+   "name": "key-63",
+   "file": "key-63.png",
+   "source_bounds": [
+    472,
+    73,
+    663,
+    218
+   ],
+   "size": [
+    32,
+    24
+   ],
+   "sha256": "ca649952ea263964df02b8c8c7ea81077b052d1cfa5b2e68378fe388224df009"
+  },
+  {
+   "name": "key-83",
+   "file": "key-83.png",
+   "source_bounds": [
+    688,
+    64,
+    868,
+    221
+   ],
+   "size": [
+    32,
+    28
+   ],
+   "sha256": "c7257a5126d3f6d2ee6ffe7520add639381f52af13202782863430e4c5202901"
+  },
+  {
+   "name": "key-88",
+   "file": "key-88.png",
+   "source_bounds": [
+    904,
+    54,
+    1090,
+    227
+   ],
+   "size": [
+    32,
+    30
+   ],
+   "sha256": "710ecf365e363788be3de34f071ba6035751ff3b7737267b11c0ddf066ccd5cf"
+  },
+  {
+   "name": "key-89",
+   "file": "key-89.png",
+   "source_bounds": [
+    1137,
+    64,
+    1298,
+    218
+   ],
+   "size": [
+    32,
+    31
+   ],
+   "sha256": "d735c38271506c220379324361e14bf6c354e2217a6986841b96b700230a666d"
+  },
+  {
+   "name": "key-90",
+   "file": "key-90.png",
+   "source_bounds": [
+    1356,
+    64,
+    1518,
+    227
+   ],
+   "size": [
+    32,
+    32
+   ],
+   "sha256": "ca67332cf340bab2aa9b00b965f20c185aba54910d7316c88a2bfab4656f32a6"
+  },
+  {
+   "name": "key-91",
+   "file": "key-91.png",
+   "source_bounds": [
+    1578,
+    64,
+    1736,
+    218
+   ],
+   "size": [
+    32,
+    31
+   ],
+   "sha256": "1513e148c81212e19682da8ea2218bc344ae2e4bc84a99ac69de8f7e4f295105"
+  },
+  {
+   "name": "key-92",
+   "file": "key-92.png",
+   "source_bounds": [
+    36,
+    274,
+    206,
+    440
+   ],
+   "size": [
+    32,
+    31
+   ],
+   "sha256": "a392719b5b6a64692c4e0c6a5b6a92f26319e514ebca76da0aff57d7b8d9cb17"
+  },
+  {
+   "name": "key-93",
+   "file": "key-93.png",
+   "source_bounds": [
+    246,
+    275,
+    440,
+    429
+   ],
+   "size": [
+    32,
+    25
+   ],
+   "sha256": "773dd22d8f27c3464adbeb150914842ac7f2faf3aa1d14d3c557163f173b9093"
+  },
+  {
+   "name": "key-94",
+   "file": "key-94.png",
+   "source_bounds": [
+    467,
+    275,
+    660,
+    431
+   ],
+   "size": [
+    32,
+    26
+   ],
+   "sha256": "4f4bda49d1df184708c2195fb1200146b0a1dbda1f0fd14a9b93a32849397e8e"
+  },
+  {
+   "name": "key-95",
+   "file": "key-95.png",
+   "source_bounds": [
+    688,
+    276,
+    864,
+    429
+   ],
+   "size": [
+    32,
+    28
+   ],
+   "sha256": "1e20f7c9a6208a28950357af7ce7b3df767d0a9e0e67fc9aadd85d17c7328546"
+  },
+  {
+   "name": "key-97",
+   "file": "key-97.png",
+   "source_bounds": [
+    900,
+    278,
+    1096,
+    445
+   ],
+   "size": [
+    32,
+    27
+   ],
+   "sha256": "f192bec5e9cc07376e4cdb35d658c36d6fcc1f0f9c9be2a5f3618728b647b2db"
+  },
+  {
+   "name": "key-98",
+   "file": "key-98.png",
+   "source_bounds": [
+    1130,
+    288,
+    1298,
+    427
+   ],
+   "size": [
+    32,
+    26
+   ],
+   "sha256": "fd4a3ab93e7b60a6e279965d225a1445b6836c7fb36f0beca4bfef1cbcfbb5ce"
+  },
+  {
+   "name": "key-99",
+   "file": "key-99.png",
+   "source_bounds": [
+    1340,
+    284,
+    1519,
+    440
+   ],
+   "size": [
+    32,
+    28
+   ],
+   "sha256": "8786335cad7fd9335dc5be6f788b9f73384e4906265eb696c1f5c8c49020ebc9"
+  },
+  {
+   "name": "typewriter",
+   "file": "typewriter.png",
+   "source_bounds": [
+    1549,
+    253,
+    1754,
+    448
+   ],
+   "size": [
+    32,
+    30
+   ],
+   "sha256": "aa3c27ebfa7ca0ff7ffaadd195ab88f9163be64ffe3764c3cc974756dc090703"
+  },
+  {
+   "name": "itembox",
+   "file": "itembox.png",
+   "source_bounds": [
+    32,
+    469,
+    221,
+    644
+   ],
+   "size": [
+    32,
+    30
+   ],
+   "sha256": "c949165168dce1fdd6bf72577fe0c744f4cc3af814a19b06368d2d5dfeb71ffa"
+  },
+  {
+   "name": "document",
+   "file": "document.png",
+   "source_bounds": [
+    257,
+    488,
+    429,
+    641
+   ],
+   "size": [
+    32,
+    28
+   ],
+   "sha256": "9f72cd5aed955d9e961e8a5c8f0626064c80dcecdbb355da47265bcc077d1819"
+  },
+  {
+   "name": "pickup-20",
+   "file": "pickup-20.png",
+   "source_bounds": [
+    702,
+    496,
+    869,
+    632
+   ],
+   "size": [
+    32,
+    26
+   ],
+   "sha256": "a0e7a5e2e65fadbe38833810688ce8fa341da455c5d4fd3b092e5de1fbe42da0"
+  },
+  {
+   "name": "pickup-21",
+   "file": "pickup-21.png",
+   "source_bounds": [
+    927,
+    492,
+    1073,
+    632
+   ],
+   "size": [
+    32,
+    31
+   ],
+   "sha256": "f13d39c3f44aa6315d95a4a1c1bc9dcef363b19cd030614d6fbbf292e4611290"
+  },
+  {
+   "name": "pickup-22",
+   "file": "pickup-22.png",
+   "source_bounds": [
+    1130,
+    492,
+    1302,
+    650
+   ],
+   "size": [
+    32,
+    29
+   ],
+   "sha256": "6e50b69ba7ee2f652b048746c643ce015a5213cce1ca7156dc5e3011bf91ab76"
+  },
+  {
+   "name": "pickup-24",
+   "file": "pickup-24.png",
+   "source_bounds": [
+    1356,
+    484,
+    1506,
+    648
+   ],
+   "size": [
+    29,
+    32
+   ],
+   "sha256": "b4f2d2098a4cf789630d601cc148ce18280eb2d164735d8c6c00602219afe1e9"
+  },
+  {
+   "name": "pickup-25",
+   "file": "pickup-25.png",
+   "source_bounds": [
+    1576,
+    484,
+    1723,
+    648
+   ],
+   "size": [
+    29,
+    32
+   ],
+   "sha256": "1b41335aed3d50d95b042860eb01a2fa9d17fe6dd8a90fb580de7e6a48a83244"
+  },
+  {
+   "name": "pickup-26",
+   "file": "pickup-26.png",
+   "source_bounds": [
+    51,
+    678,
+    197,
+    841
+   ],
+   "size": [
+    29,
+    32
+   ],
+   "sha256": "b597a9f78f4800fc83b9a6d437336f59e44e2f873b74bc961ba68b20b6ad8f6b"
+  },
+  {
+   "name": "pickup-27",
+   "file": "pickup-27.png",
+   "source_bounds": [
+    247,
+    672,
+    413,
+    849
+   ],
+   "size": [
+    30,
+    32
+   ],
+   "sha256": "428689a30d68ef5bc7fb79ef643fb04b3be7fa9240111a3ca29146674183feff"
+  },
+  {
+   "name": "pickup-29",
+   "file": "pickup-29.png",
+   "source_bounds": [
+    466,
+    707,
+    648,
+    808
+   ],
+   "size": [
+    32,
+    18
+   ],
+   "sha256": "e40eebbb65ca1d5f8b86a41331fc6151b73ce4f752d1d0bc5b26a05a87c05419"
+  },
+  {
+   "name": "pickup-30",
+   "file": "pickup-30.png",
+   "source_bounds": [
+    701,
+    682,
+    871,
+    845
+   ],
+   "size": [
+    32,
+    31
+   ],
+   "sha256": "266447ed27ede484f672dc2abc9eabb9befc1fe8d0930ed07ebb6bb86cba1769"
+  },
+  {
+   "name": "pickup-35",
+   "file": "pickup-35.png",
+   "source_bounds": [
+    964,
+    675,
+    1037,
+    849
+   ],
+   "size": [
+    13,
+    32
+   ],
+   "sha256": "7956e4a89190e77932e6ebe9343e92df1e746c7f70aacb937dd9ac461b73709a"
+  },
+  {
+   "name": "pickup-38",
+   "file": "pickup-38.png",
+   "source_bounds": [
+    1139,
+    675,
+    1310,
+    849
+   ],
+   "size": [
+    31,
+    32
+   ],
+   "sha256": "22bc90b7b9bb48c543ae4d6f263ab9222b2ef104038043f7537c372c842783d6"
+  },
+  {
+   "name": "pickup-39",
+   "file": "pickup-39.png",
+   "source_bounds": [
+    1362,
+    679,
+    1523,
+    849
+   ],
+   "size": [
+    30,
+    32
+   ],
+   "sha256": "0fd6bdc5952db0186bf22231ea72981c1eba2f0d77ec44d0058df9ae5d74ad87"
+  },
+  {
+   "name": "pickup-40",
+   "file": "pickup-40.png",
+   "source_bounds": [
+    1578,
+    682,
+    1738,
+    849
+   ],
+   "size": [
+    31,
+    32
+   ],
+   "sha256": "c587f4ef00fc594c1b556410b67d2a3ade74651b76c48370769044eb9ab421c9"
+  }
+ ],
+ "superseded": "Sprites key-31, 52, 62, 75, 88, 89, 90, 91, 92, 95, 98 were redrawn on 2026-11-09 (see redraws); the October versions made from item names only are superseded. key-48, 63, 83, 93, 94, 97, 99 are still the October sprites.",
+ "redraws": {
+  "v10": {
+   "date": "2026-11-09",
+   "worker": "Codex Orca deabd54c-6192-4f5e-ab44-8f2ac976a217",
+   "tool": "built-in image_gen",
+   "prompts": [
+    "Use case precise-object-edit. Edit supplied 64x64 pixel-art teal spade key master. Change ONLY centre of teal head: add small DARK SPADE-SHAPED CUTOUT, miniature unmistakable spade symbol with pointed upper tip, two round lobes and short stem, oriented along head axis. Hole about 9x9 at 64px so stays readable few pixels at32px. Preserve EXACT outer head size shape colours, silver rim, shaft thickness length teeth and diagonal pose. Do not enlarge or shrink head. Crisp chunky retro survival horror pixel art, limited palette, dark outline 2px at64px, transparent background. Output single key, same framing.",
+    "Use case precise-object-edit. FIRST image edit target red diamond key v9; SECOND approved heart size reference. Enlarge ONLY red diamond HEAD moderately to approximately approved heart head size (about 1.25x existing head linear size). Keep compact nearly-square rhombus, deep crimson red, silver rim, tiny dark square centre hole, southwest CORNER directly joining silver shaft. Preserve shaft teeth thickness and diagonal pose. Dark outline 2px at64px equivalent1px at32px, chunky retro survival horror pixel art, upper-left light,2-3 shades/material, limited palette no dithering. Transparent background, single key fills frame.",
+    "Edit target red key. Change ONLY head to a compact nearly square rhombus about 24x24 pixels at64px. Current long leaf shaped head is WRONG. Make it broad and chunky, square with nearly horizontal/vertical edges, opposing northeast and southwest CORNERS align to shaft. Diagonal ratio at most1.15. Head bounding width equals height. About approved heart head size. Keep tiny dark square hole, deep red, silver rim, black outline and silver shaft teeth. Retro chunky pixel art64px master. Transparent background. Preserve diagonal key pose.",
+    "Edit FIRST supplied v9 red key image. SECOND image approved heart only head SIZE reference. Keep EXACT SAME HEAD ORIENTATION as FIRST: nearly horizontal top/bottom edges and nearly vertical left/right edges; shaft joins BOTTOM LEFT CORNER of head. DO NOT turn head into diamond with vertical top point. Make ONLY red head 20 percent larger, extending toward left and bottom while retaining top right position. Preserve compact square-like rhombus, small dark square hole, crimson palette, silver rim, dark outline and exact shaft/teeth. Transparent pixel art. No other changes.",
+    "Edit supplied red key. Enlarge red HEAD ONLY by 45 percent. It is too small relative to shaft. Head must occupy 40 percent of total key width and 40 percent total height, comparable to large heart key. Preserve compact almost square rhombus with nearly horizontal top/bottom edges, nearly vertical side edges, shaft joining bottom-left CORNER. Keep whole key size unchanged, shorten exposed shaft as needed. Keep red colour silver rim dark square centre hole black outline. No change to teeth. Transparent chunky pixel art."
+   ],
+   "method": "Generated edit of v9 masters; alpha bbox crop; premultiplied RGBa Lanczos to64 then32; binary alpha threshold128;15-colour quantization no dither; transparent pixels zeroed. No code-drawn shapes.",
+   "approved_untouched": {
+    "91": {
+     "path": "assets/icons-new-v8/key-91.png",
+     "sha256": "fd82c39f48fed494836da5d949b4cfa44c334d5c1ca7fb7e52010d50426c276a",
+     "master_sha256": "f302b922e2a4b6ad75466b3088f22e28006dbf60f8364e61fe9496810cec2917"
     },
-    {
-      "name": "key-48",
-      "file": "key-48.png",
-      "source_bounds": [
-        243,
-        84,
-        432,
-        195
-      ],
-      "size": [
-        32,
-        19
-      ],
-      "sha256": "6d37a62225273fc5d8fce892ffa5d7e89f2419fbeb1e713e50e81eb4caabc594"
+    "92": {
+     "path": "assets/icons-new-v6/key-92.png",
+     "sha256": "4a2e3dc7bf773d2c2e4e393175a5a4bdf75b780738e8128fd2d689c4e498b3d8",
+     "master_sha256": "464d09e58845daefc1db4d161b5d5f109d15fe80e0cfaec4fa1fca4c2d295b76"
     },
-    {
-      "name": "key-63",
-      "file": "key-63.png",
-      "source_bounds": [
-        472,
-        73,
-        663,
-        218
-      ],
-      "size": [
-        32,
-        24
-      ],
-      "sha256": "ca649952ea263964df02b8c8c7ea81077b052d1cfa5b2e68378fe388224df009"
-    },
-    {
-      "name": "key-83",
-      "file": "key-83.png",
-      "source_bounds": [
-        688,
-        64,
-        868,
-        221
-      ],
-      "size": [
-        32,
-        28
-      ],
-      "sha256": "c7257a5126d3f6d2ee6ffe7520add639381f52af13202782863430e4c5202901"
-    },
-    {
-      "name": "key-88",
-      "file": "key-88.png",
-      "source_bounds": [
-        904,
-        54,
-        1090,
-        227
-      ],
-      "size": [
-        32,
-        30
-      ],
-      "sha256": "710ecf365e363788be3de34f071ba6035751ff3b7737267b11c0ddf066ccd5cf"
-    },
-    {
-      "name": "key-89",
-      "file": "key-89.png",
-      "source_bounds": [
-        1137,
-        64,
-        1298,
-        218
-      ],
-      "size": [
-        32,
-        31
-      ],
-      "sha256": "d735c38271506c220379324361e14bf6c354e2217a6986841b96b700230a666d"
-    },
-    {
-      "name": "key-90",
-      "file": "key-90.png",
-      "source_bounds": [
-        1356,
-        64,
-        1518,
-        227
-      ],
-      "size": [
-        32,
-        32
-      ],
-      "sha256": "ca67332cf340bab2aa9b00b965f20c185aba54910d7316c88a2bfab4656f32a6"
-    },
-    {
-      "name": "key-91",
-      "file": "key-91.png",
-      "source_bounds": [
-        1578,
-        64,
-        1736,
-        218
-      ],
-      "size": [
-        32,
-        31
-      ],
-      "sha256": "1513e148c81212e19682da8ea2218bc344ae2e4bc84a99ac69de8f7e4f295105"
-    },
-    {
-      "name": "key-92",
-      "file": "key-92.png",
-      "source_bounds": [
-        36,
-        274,
-        206,
-        440
-      ],
-      "size": [
-        32,
-        31
-      ],
-      "sha256": "a392719b5b6a64692c4e0c6a5b6a92f26319e514ebca76da0aff57d7b8d9cb17"
-    },
-    {
-      "name": "key-93",
-      "file": "key-93.png",
-      "source_bounds": [
-        246,
-        275,
-        440,
-        429
-      ],
-      "size": [
-        32,
-        25
-      ],
-      "sha256": "773dd22d8f27c3464adbeb150914842ac7f2faf3aa1d14d3c557163f173b9093"
-    },
-    {
-      "name": "key-94",
-      "file": "key-94.png",
-      "source_bounds": [
-        467,
-        275,
-        660,
-        431
-      ],
-      "size": [
-        32,
-        26
-      ],
-      "sha256": "4f4bda49d1df184708c2195fb1200146b0a1dbda1f0fd14a9b93a32849397e8e"
-    },
-    {
-      "name": "key-95",
-      "file": "key-95.png",
-      "source_bounds": [
-        688,
-        276,
-        864,
-        429
-      ],
-      "size": [
-        32,
-        28
-      ],
-      "sha256": "1e20f7c9a6208a28950357af7ce7b3df767d0a9e0e67fc9aadd85d17c7328546"
-    },
-    {
-      "name": "key-97",
-      "file": "key-97.png",
-      "source_bounds": [
-        900,
-        278,
-        1096,
-        445
-      ],
-      "size": [
-        32,
-        27
-      ],
-      "sha256": "f192bec5e9cc07376e4cdb35d658c36d6fcc1f0f9c9be2a5f3618728b647b2db"
-    },
-    {
-      "name": "key-98",
-      "file": "key-98.png",
-      "source_bounds": [
-        1130,
-        288,
-        1298,
-        427
-      ],
-      "size": [
-        32,
-        26
-      ],
-      "sha256": "fd4a3ab93e7b60a6e279965d225a1445b6836c7fb36f0beca4bfef1cbcfbb5ce"
-    },
-    {
-      "name": "key-99",
-      "file": "key-99.png",
-      "source_bounds": [
-        1340,
-        284,
-        1519,
-        440
-      ],
-      "size": [
-        32,
-        28
-      ],
-      "sha256": "8786335cad7fd9335dc5be6f788b9f73384e4906265eb696c1f5c8c49020ebc9"
-    },
-    {
-      "name": "typewriter",
-      "file": "typewriter.png",
-      "source_bounds": [
-        1549,
-        253,
-        1754,
-        448
-      ],
-      "size": [
-        32,
-        30
-      ],
-      "sha256": "aa3c27ebfa7ca0ff7ffaadd195ab88f9163be64ffe3764c3cc974756dc090703"
-    },
-    {
-      "name": "itembox",
-      "file": "itembox.png",
-      "source_bounds": [
-        32,
-        469,
-        221,
-        644
-      ],
-      "size": [
-        32,
-        30
-      ],
-      "sha256": "c949165168dce1fdd6bf72577fe0c744f4cc3af814a19b06368d2d5dfeb71ffa"
-    },
-    {
-      "name": "document",
-      "file": "document.png",
-      "source_bounds": [
-        257,
-        488,
-        429,
-        641
-      ],
-      "size": [
-        32,
-        28
-      ],
-      "sha256": "9f72cd5aed955d9e961e8a5c8f0626064c80dcecdbb355da47265bcc077d1819"
-    },
-    {
-      "name": "pickup-20",
-      "file": "pickup-20.png",
-      "source_bounds": [
-        702,
-        496,
-        869,
-        632
-      ],
-      "size": [
-        32,
-        26
-      ],
-      "sha256": "a0e7a5e2e65fadbe38833810688ce8fa341da455c5d4fd3b092e5de1fbe42da0"
-    },
-    {
-      "name": "pickup-21",
-      "file": "pickup-21.png",
-      "source_bounds": [
-        927,
-        492,
-        1073,
-        632
-      ],
-      "size": [
-        32,
-        31
-      ],
-      "sha256": "f13d39c3f44aa6315d95a4a1c1bc9dcef363b19cd030614d6fbbf292e4611290"
-    },
-    {
-      "name": "pickup-22",
-      "file": "pickup-22.png",
-      "source_bounds": [
-        1130,
-        492,
-        1302,
-        650
-      ],
-      "size": [
-        32,
-        29
-      ],
-      "sha256": "6e50b69ba7ee2f652b048746c643ce015a5213cce1ca7156dc5e3011bf91ab76"
-    },
-    {
-      "name": "pickup-24",
-      "file": "pickup-24.png",
-      "source_bounds": [
-        1356,
-        484,
-        1506,
-        648
-      ],
-      "size": [
-        29,
-        32
-      ],
-      "sha256": "b4f2d2098a4cf789630d601cc148ce18280eb2d164735d8c6c00602219afe1e9"
-    },
-    {
-      "name": "pickup-25",
-      "file": "pickup-25.png",
-      "source_bounds": [
-        1576,
-        484,
-        1723,
-        648
-      ],
-      "size": [
-        29,
-        32
-      ],
-      "sha256": "1b41335aed3d50d95b042860eb01a2fa9d17fe6dd8a90fb580de7e6a48a83244"
-    },
-    {
-      "name": "pickup-26",
-      "file": "pickup-26.png",
-      "source_bounds": [
-        51,
-        678,
-        197,
-        841
-      ],
-      "size": [
-        29,
-        32
-      ],
-      "sha256": "b597a9f78f4800fc83b9a6d437336f59e44e2f873b74bc961ba68b20b6ad8f6b"
-    },
-    {
-      "name": "pickup-27",
-      "file": "pickup-27.png",
-      "source_bounds": [
-        247,
-        672,
-        413,
-        849
-      ],
-      "size": [
-        30,
-        32
-      ],
-      "sha256": "428689a30d68ef5bc7fb79ef643fb04b3be7fa9240111a3ca29146674183feff"
-    },
-    {
-      "name": "pickup-29",
-      "file": "pickup-29.png",
-      "source_bounds": [
-        466,
-        707,
-        648,
-        808
-      ],
-      "size": [
-        32,
-        18
-      ],
-      "sha256": "e40eebbb65ca1d5f8b86a41331fc6151b73ce4f752d1d0bc5b26a05a87c05419"
-    },
-    {
-      "name": "pickup-30",
-      "file": "pickup-30.png",
-      "source_bounds": [
-        701,
-        682,
-        871,
-        845
-      ],
-      "size": [
-        32,
-        31
-      ],
-      "sha256": "266447ed27ede484f672dc2abc9eabb9befc1fe8d0930ed07ebb6bb86cba1769"
-    },
-    {
-      "name": "pickup-35",
-      "file": "pickup-35.png",
-      "source_bounds": [
-        964,
-        675,
-        1037,
-        849
-      ],
-      "size": [
-        13,
-        32
-      ],
-      "sha256": "7956e4a89190e77932e6ebe9343e92df1e746c7f70aacb937dd9ac461b73709a"
-    },
-    {
-      "name": "pickup-38",
-      "file": "pickup-38.png",
-      "source_bounds": [
-        1139,
-        675,
-        1310,
-        849
-      ],
-      "size": [
-        31,
-        32
-      ],
-      "sha256": "22bc90b7b9bb48c543ae4d6f263ab9222b2ef104038043f7537c372c842783d6"
-    },
-    {
-      "name": "pickup-39",
-      "file": "pickup-39.png",
-      "source_bounds": [
-        1362,
-        679,
-        1523,
-        849
-      ],
-      "size": [
-        30,
-        32
-      ],
-      "sha256": "0fd6bdc5952db0186bf22231ea72981c1eba2f0d77ec44d0058df9ae5d74ad87"
-    },
-    {
-      "name": "pickup-40",
-      "file": "pickup-40.png",
-      "source_bounds": [
-        1578,
-        682,
-        1738,
-        849
-      ],
-      "size": [
-        31,
-        32
-      ],
-      "sha256": "c587f4ef00fc594c1b556410b67d2a3ade74651b76c48370769044eb9ab421c9"
+    "95": {
+     "path": "assets/icons-new-v7/key-95.png",
+     "sha256": "f4070b1f9d66a55789720b092c427a591400fce9f7b9f35c2e7d1603a48a9a46",
+     "master_sha256": "42505e97eacf3ba738a1e434184a6a50a34445e9042d3fcfb106eb75618cb851"
     }
-  ]
+   },
+   "preview_sha256": "07b2525df935b0a83a3e23f10b503cbc52c4957a4bf8405a96cc35e43cb4a7bd",
+   "status": "Review candidate; no build install commit or runtime check",
+   "ids": [
+    89,
+    90
+   ],
+   "entries": [
+    {
+     "id": 89,
+     "source": "codex-imagegen/exec-e6999c44-9e1a-4802-b468-82267554e256.png",
+     "source_sha256": "3be6bba86c142a0092878f10f4f845145d811f2428e500f3fee2016d5d07b59e",
+     "edit_target": "assets/icons-new-v9/key-89-2x.png",
+     "edit_target_sha256": "638a13cd7b47155865aecc7f52bc726259e4e6269ce435a877da037229ade4ee",
+     "64": {
+      "sha256": "0185662e0318d4b261f974ba5b0080cc9b0a551b73f3d6fced9955b4d751a763",
+      "rgba_colours": 16,
+      "bbox": [
+       3,
+       1,
+       62,
+       62
+      ]
+     },
+     "32": {
+      "sha256": "f46fc2a0ff297a889419850806843ae65b965418dcb205e08c6db8b7f28ebf23",
+      "rgba_colours": 15,
+      "bbox": [
+       2,
+       0,
+       31,
+       31
+      ]
+     }
+    },
+    {
+     "id": 90,
+     "source": "codex-imagegen/exec-663d26e5-e1f5-48db-aad5-f0b22f7c6452.png",
+     "source_sha256": "6340696ebf3aac58df1462b8a96b1ab6a74a6c3af2070c0761561893f3af2d95",
+     "edit_target": "assets/icons-new-v9/key-90-2x.png",
+     "edit_target_sha256": "29256ee8bbfcc77d4a067efda90b81c1d2a102194910a383e0a84d820d1bdce8",
+     "64": {
+      "sha256": "13b4447a85ea787b209f4ff4d0f571a4b83babe7213caee51127245842573d8b",
+      "rgba_colours": 15,
+      "bbox": [
+       0,
+       1,
+       63,
+       61
+      ]
+     },
+     "32": {
+      "sha256": "ac8bfdbcb719fd85e33f97508ff5419b31cd535556f57f3615edf303561a901c",
+      "rgba_colours": 16,
+      "bbox": [
+       0,
+       0,
+       32,
+       30
+      ]
+     }
+    }
+   ]
+  },
+  "v4": {
+   "tool": "image_gen.imagegen (built-in)",
+   "date": "2026-11-09",
+   "worker": "Orca Codex bc965924-f6a4-4b15-9f90-c797ac4def02",
+   "status": "18 candidates; awaiting coordinator visual approval; no build or install",
+   "reference_policy": "Game inventory references viewed locally only; never sent to generation tool, traced, copied or resampled into icon art. Reduced reference thumbnails appear only in requested comparison preview.",
+   "postprocess": "Generated RGBA -> crop -> premultiplied RGBa Lanczos max30 -> alpha128 -> no-dither 14-colour maximum-coverage quantization from opaque pixels -> exterior 1px RGB8 contour -> tight crop and zero hidden RGB.",
+   "validation": "18 RGBA icons: <=32px, alpha 0/255, <=16 RGBA colours, tight bounds, exposed edge RGB8 verified by assertions.",
+   "ids": [
+    31,
+    52,
+    62,
+    75,
+    88,
+    98
+   ],
+   "entries": [
+    {
+     "id": 31,
+     "name": "Small Key",
+     "prompt": "Create ONE original detailed 1990s retro survival horror pixel art inventory icon, style C. Muted metal and leather colours, top-left light, 2-3 clear shading tones per material, chunky readable pixels, crisp dark outline. Match a cohesive realistic miniature game item sprite set, not flat geometric pictogram or cartoon. Single item centered, genuine transparent background, no text, border, shadow, floor or extra objects. Designed for clean reduction to 30px long side; preserve bold distinctive silhouette and large openings. Subject: Small silver steel key, round open circular bow at upper right, short shaft descending diagonally to lower left ending in a short square toothed bit. Wide open hole in bow.",
+     "reference": "game inventory icon of item 31 (Common/Data/itemall.bin, not included)",
+     "reference_sha256": "14c3ecf3f70fff6c09e3dd21937640af634b55dce3c15235473ea9fc01539e80",
+     "generated_sha256": "cfe7d343fb0f8c582d4d5c27385ecf26ee9afa2b812175cec3cfb4a32824e253",
+     "output_sha256": "20e5e3b3ea75ba30193e41d97b4e0d4a0c8a953231a22c2c6ed8e60ab11c2013",
+     "size": [
+      30,
+      32
+     ],
+     "opaque_colours": 15,
+     "source": "exec-239c957b-6bf7-4d50-b05a-529f0e7cbbed.png"
+    },
+    {
+     "id": 52,
+     "name": "Red Key Card",
+     "prompt": "Create ONE original detailed 1990s retro survival horror pixel art inventory icon, style C. Muted metal and leather colours, top-left light, 2-3 clear shading tones per material, chunky readable pixels, crisp dark outline. Match a cohesive realistic miniature game item sprite set, not flat geometric pictogram or cartoon. Single item centered, genuine transparent background, no text, border, shadow, floor or extra objects. Designed for clean reduction to 30px long side; preserve bold distinctive silhouette and large openings. Subject: Red rectangular card tilted 20 degrees rising toward upper right, white wide horizontal band across upper middle and tiny dark blue mark below. No logo or legible text.",
+     "reference": "game inventory icon of item 52 (Common/Data/itemall.bin, not included)",
+     "reference_sha256": "965b9e900f711821b83a2fbc1603818a97c61d4a902346f34f5b28a95aacb628",
+     "generated_sha256": "5785f6e92289a16e85a3e533dfe76f0023dede29b3652b75fb61c195e9f83059",
+     "output_sha256": "1a8a1e9d47aa74d1539cc32c1f2cb284c00994a2f4a1bcc4b9a8848d2be4a3b8",
+     "size": [
+      32,
+      26
+     ],
+     "opaque_colours": 15,
+     "source": "exec-db32287e-3a50-4517-8d9e-cbd6fa952726.png"
+    },
+    {
+     "id": 62,
+     "name": "King Plug",
+     "prompt": "Create ONE original detailed 1990s retro survival horror pixel art inventory icon, style C. Muted metal and leather colours, top-left light, 2-3 clear shading tones per material, chunky readable pixels, crisp dark outline. Match a cohesive realistic miniature game item sprite set, not flat geometric pictogram or cartoon. Single item centered, genuine transparent background, no text, border, shadow, floor or extra objects. Designed for clean reduction to 30px long side; preserve bold distinctive silhouette and large openings. Subject: Chess king shaped electrical plug oriented from upper left to lower right: pale gold small crown with chunky lobes at upper left, bulbous knobbed brass shaft tapering through two raised rings to a narrow dark pointed metal tip at lower right. Continuous spindle shape, NOT stack of discs.",
+     "reference": "game inventory icon of item 62 (Common/Data/itemall.bin, not included)",
+     "reference_sha256": "54cda99882aa9d1b7ff3859e3330af2381403a34d015a3e9bb3490796121a328",
+     "generated_sha256": "9821174863484772bfec0531d3136d2ba17ff9fd16afef8eac5a9f02ce633ca2",
+     "output_sha256": "3ddce2c5040a18f97a536519542ef3fe516244648409e2c496227abb818a819e",
+     "size": [
+      31,
+      32
+     ],
+     "opaque_colours": 15,
+     "source": "exec-87559a28-f047-473f-83c3-89c0b35f67b2.png"
+    },
+    {
+     "id": 75,
+     "name": "Manhole Opener",
+     "prompt": "Create ONE original detailed 1990s retro survival horror pixel art inventory icon, style C. Muted metal and leather colours, top-left light, 2-3 clear shading tones per material, chunky readable pixels, crisp dark outline. Match a cohesive realistic miniature game item sprite set, not flat geometric pictogram or cartoon. Single item centered, genuine transparent background, no text, border, shadow, floor or extra objects. Designed for clean reduction to 30px long side; preserve bold distinctive silhouette and large openings. Subject: Very long slender nearly black iron rod running lower left to upper right, with a short bent hook at lower left and small flat bent end upper right. One thin grey highlight along rod. Slender narrow silhouette.",
+     "reference": "game inventory icon of item 75 (Common/Data/itemall.bin, not included)",
+     "reference_sha256": "c618f1c894daf8ff4437af0f9076ce1a7fa0d812d29eac2b30c5f792cdd0b3c1",
+     "generated_sha256": "36115c0c18b887cc0fe213d5554f722e5c6a42f6c6510715d362776bc3424a46",
+     "output_sha256": "1c9736352add082da32dbd59e2606f38a955d8f0e44f0b61488bed06e819ebbc",
+     "size": [
+      32,
+      22
+     ],
+     "opaque_colours": 15,
+     "source": "exec-c798a2fe-9d56-4e83-9194-60c7b5b16154.png"
+    },
+    {
+     "id": 88,
+     "name": "Cabin Key",
+     "prompt": "Create ONE original detailed 1990s retro survival horror pixel art inventory icon, style C. Muted metal and leather colours, top-left light, 2-3 clear shading tones per material, chunky readable pixels, crisp dark outline. Match a cohesive realistic miniature game item sprite set, not flat geometric pictogram or cartoon. Single item centered, genuine transparent background, no text, border, shadow, floor or extra objects. Designed for clean reduction to 30px long side; preserve bold distinctive silhouette and large openings. Subject: Large thin silver wire oval key ring spanning horizontally at slight downward right angle; small silver key hanging diagonally down left from lower-left attachment point. Ring interior entirely empty, ring dominates silhouette.",
+     "reference": "game inventory icon of item 88 (Common/Data/itemall.bin, not included)",
+     "reference_sha256": "674c04da3699d2d8729cd221a124d3eea33e03fba4901ca1294014e17025bcfb",
+     "generated_sha256": "7726d117e081d13e40c4844cca259244ed85038e5f0e043c4a5660338f975f42",
+     "output_sha256": "eb3cda9470f27a256828365a3174ca745115f0a461444f57771c0cefcb1eee1b",
+     "size": [
+      32,
+      23
+     ],
+     "opaque_colours": 15,
+     "source": "exec-6ee33a6b-c753-477e-bde5-0fc9f649b9d4.png"
+    },
+    {
+     "id": 98,
+     "name": "Master Key",
+     "prompt": "Create ONE original detailed 1990s retro survival horror pixel art inventory icon, style C. Muted metal and leather colours, top-left light, 2-3 clear shading tones per material, chunky readable pixels, crisp dark outline. Match a cohesive realistic miniature game item sprite set, not flat geometric pictogram or cartoon. Single item centered, genuine transparent background, no text, border, shadow, floor or extra objects. Designed for clean reduction to 30px long side; preserve bold distinctive silhouette and large openings. Subject: Black oblong electronic fob with rounded corners and bright silver outer rim at upper right, dark recessed central panel, short narrow steel blade emerging lower left. Diagonal lower left to upper right.",
+     "reference": "game inventory icon of item 98 (Common/Data/itemall.bin, not included)",
+     "reference_sha256": "6272bcc94a93f19cfc4018bc8f850d31a3f140fa39419941154778bff4f9f4a4",
+     "generated_sha256": "6cec172000de17addb25be6de8b4794c2b0d93074817a79f178f4d2f26c6e410",
+     "output_sha256": "dd819fbb6af1202eab8b35ff461c13973c64595a9e5da8804a72588f9c1264cf",
+     "size": [
+      32,
+      27
+     ],
+     "opaque_colours": 15,
+     "source": "exec-930011c0-02db-4b0d-83cd-87a22eaf7a49.png"
+    }
+   ]
+  },
+  "v6": {
+   "tool": "built-in image_gen",
+   "date": "2026-11-09",
+   "worker": "Codex / Orca task_5025e39c7c8a",
+   "references": "Viewed locally only; never sent to generator, traced, copied or resampled into artwork. Preview contains local reference comparisons only.",
+   "processing": "Generated square-filling art -> alpha crop -> premultiplied 64x64 master -> premultiplied 32x32; binary alpha; no dither; 14 quantized colours plus dark inner outline and transparent.",
+   "preview_sha256": "15a0472e83edc9d7978510da0c137da69b7f097fe5e8cd3e303941f45568eff8",
+   "ids": [
+    92
+   ],
+   "entries": [
+    {
+     "id": 92,
+     "prompt": "Use case: stylized-concept. Asset: one retro survival horror inventory pixel icon. Draw NEW chunky key: green three-lobed clover head with three fat round lobes. Transparent background. 64x64 MASTER design, pixel art enlarged for output, each conceptual pixel sharp, no smoothing, no dither, <=15 opaque colours. MUST FILL THE SQUARE, head upper right nearly touches top/right, tip lower left nearly touches bottom/left. Bounding box spans 62x62 of the conceptual 64x64 canvas. Oversized bold head occupies upper-right 32x32, thick shaft about 10 conceptual pixels, strong steel teeth lower left. Old silver steel key with same family diagonal angle 45 degrees, thick steel shaft, two chunky teeth on lower left. Muted metal 3 shade steps, coloured head 3 shade steps, upper-left highlights, near-black outline 2 conceptual pixels thick (1px at final 32). Crisp detailed RETRO pixel art, substantial silhouette readable at 8x8. No text, no border, no ground shadow. Do not draw a thin realistic long key; exaggerate WIDTH and head so the whole silhouette fills a square.",
+     "reference_sha256": "dce5baf57cc764efd62779747fa16d5f6d18f21a0ebb1f6ae1e758f2ddcd645e",
+     "current_sha256": "a392719b5b6a64692c4e0c6a5b6a92f26319e514ebca76da0aff57d7b8d9cb17",
+     "generated_source": "codex-imagegen/exec-afedddf0-dcb1-4ba0-9502-468c15289f8f.png",
+     "generated_sha256": "d4e96a23f3a3aa8531b5ac01524264cb98cab0708469042d9c4fcaf836d16349",
+     "master_sha256": "464d09e58845daefc1db4d161b5d5f109d15fe80e0cfaec4fa1fca4c2d295b76",
+     "final_sha256": "4a2e3dc7bf773d2c2e4e393175a5a4bdf75b780738e8128fd2d689c4e498b3d8",
+     "bbox": [
+      0,
+      0,
+      32,
+      32
+     ],
+     "rgba_colors": 12
+    }
+   ]
+  },
+  "v7": {
+   "tool": "built-in image_gen.imagegen",
+   "date": "2026-11-09",
+   "worker": "Orca task_dfc5b9f7528a",
+   "reference_policy": "Local references viewed only and included only in requested preview; no reference pixels provided to generator or used in icon artwork.",
+   "processing": "Alpha crop; premultiplied channelwise Lanczos to 64px master then 32px; binary alpha threshold128; 14 colors no dithering plus dark inner silhouette contour and transparency.",
+   "family_reference_sha256": "4a2e3dc7bf773d2c2e4e393175a5a4bdf75b780738e8128fd2d689c4e498b3d8",
+   "validation": "32x32 and 64x64 RGBA, binary alpha, <=16 RGBA colors asserted for all eight files. Visual approval and game check pending.",
+   "preview_sha256": "5ef736dcca0ead5624472d3c511024185c4a4acbb8186b6073b661323226b47a",
+   "ids": [
+    95
+   ],
+   "entries": [
+    {
+     "id": 95,
+     "prompt": "Create ONE standalone chunky retro survival horror inventory pixel-art key on true transparent background, no text. Pixel art designed as a 64x64 master filling essentially the entire square, for reduction to 32px: bold dark outline about 2 master pixels, 2-3 flat tones per material, <=16 colors, crisp pixels, no gradients. Key diagonally from lower left bit at (5,59) to upper right head centered (46,18). Thick bright silver shaft 8px wide from (12,51) to (37,29), with two chunky square teeth on lower-right edge near lower-left tip, stepped diagonal edges, grey metal highlight upper-left and dark underside. Large bold head occupies upper right 30x30 region. Overall bbox nearly 60x60. Same shaft geometry for all suit keys. This is modern car-style POWER ROOM key, not antique suit key. WIDE BRIGHT STEEL BLADE lower left, two PARALLEL FLAT ridged sections with white and light grey highlight strips extending from lower-left tip directly into plastic head. Broad blade not thin stem. BLACK rounded rectangular plastic head upper right, angled along diagonal shaft, dark green-black shadows and grey-green lit edges, small RED MARK on top face near center. Chunky wide silhouette fills square; head and blade each occupy roughly half diagonal length. NO keyring hole.",
+     "reference_sha256": "41a8764bc5292c4403a7f23d7d435dcf44243163824eef6f4668a8ad94724ae1",
+     "current_sha256": "1e20f7c9a6208a28950357af7ce7b3df767d0a9e0e67fc9aadd85d17c7328546",
+     "source": "exec-9f801fc4-af9e-47f1-b90d-6f3ed988e041.png",
+     "source_sha256": "52b3b476773dba788d51013013931fe44c263e27624ae28ac40c43a02109cfa5",
+     "master_sha256": "42505e97eacf3ba738a1e434184a6a50a34445e9042d3fcfb106eb75618cb851",
+     "final_sha256": "f4070b1f9d66a55789720b092c427a591400fce9f7b9f35c2e7d1603a48a9a46",
+     "bbox": [
+      0,
+      0,
+      32,
+      32
+     ],
+     "rgba_colours": 15
+    }
+   ]
+  },
+  "v8": {
+   "date": "2026-11-09",
+   "worker": "Codex Orca task_dfabefbe5dbf",
+   "tool": "image_gen built-in",
+   "method": "New imagery described in words; references inspected only. Alpha-bbox crop, premultiplied Lanczos per channel to 64px master then 32px final; binary alpha threshold 0.5; opaque median-cut 15 colours; no dithering. No reference pixels in sprites.",
+   "approved_untouched": {
+    "92": "4a2e3dc7bf773d2c2e4e393175a5a4bdf75b780738e8128fd2d689c4e498b3d8",
+    "95": "f4070b1f9d66a55789720b092c427a591400fce9f7b9f35c2e7d1603a48a9a46"
+   },
+   "preview_sha256": "08d340cf69fa2075b7816ce942ee213a097bd7069e32e1ed20afb086ec6e6000",
+   "ids": [
+    91
+   ],
+   "entries": [
+    {
+     "id": 91,
+     "prompt": "Use case: stylized-concept. Generate ONE NEW standalone retro survival-horror pixel art inventory key on truly transparent background. No text, no shadow outside object. Chunky 64x64 sprite design filling canvas edge to edge, output enlarged if necessary. Diagonal key: notched silver bit at lower left, head at upper right. Thick silver shaft (8 of 64 pixels wide), shaft axis runs southwest to northeast, square teeth near lower left on southeast edge. Dark 1px outline at final 32px, thin grey metal rim, 2-3 flat shades each material, <=16 colours, crisp chunky pixels no dithering or gradients. Head width approximately 27 of 64 pixels, shaft visible length approximately 34 pixels. Full silhouette about 60x60; do not make slender. Top-left light. Head is a HEART rotated so pointed bottom tip faces SOUTHWEST and directly joins shaft, and two round lobes face outward NORTHEAST. Deep notch between lobes at northeast. Deep RED CRIMSON enamel, thin silver grey rim and tiny dark round hole at centre. Compact head about 25x25 of 64 pixels, roughly 12 percent smaller than a large traditional heart key head, leave a strong thick long shaft. Attach only at southwest pointed vertex.",
+     "source": "exec-bc7437c5-5a93-4623-95f7-92ae78fb9d9d.png",
+     "source_sha256": "d18501d91b83f3412a1ee50caf610fe1905d8eaf7b5a9d3b35c97c75b1747630",
+     "reference_sha256": "cafcd5bdef6cc1ea10f28d5d067456900cc77a859757bcbcb089624aff937851",
+     "previous_sha256": "ded9d2eafe98cd982290b8ccb727c6d17140755f7b6a0750665bb152eaed6964",
+     "master_sha256": "f302b922e2a4b6ad75466b3088f22e28006dbf60f8364e61fe9496810cec2917",
+     "final_sha256": "fd82c39f48fed494836da5d949b4cfa44c334d5c1ca7fb7e52010d50426c276a",
+     "bbox": [
+      0,
+      0,
+      32,
+      32
+     ],
+     "rgba_colours": 16
+    }
+   ]
+  }
+ }
 }

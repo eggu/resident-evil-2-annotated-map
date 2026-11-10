@@ -20,6 +20,10 @@ data and documentation.
   Codex image tool (2026-11-09, third set; the text-only first set and the second set were superseded), reduced to at most 16 colours;
   prompts, processing and hashes are in `assets/key-art-provenance.json`. The game's own inventory images were looked at as
   references only and are not included or traced. No game or third-party image pixels are in the sprites.
+- **Lock/key sprites** (items 31, 52, 62, 75, 88, 89, 90, 91, 92, 95, 98): redrawn on 2026-11-09 with the Codex image tool against the game's own
+  inventory images (looked at as references only, never included or traced) and reduced to at most 16 colours; they replace the earlier
+  October sprites drawn from item names. 64 px masters are in `assets/icons/masters/`; prompts and hashes are in the `redraws` section of
+  `assets/artwork-provenance.json`.
 - **Item, ammunition, recovery, Ink Ribbon, furniture and document sprites**: AI-assisted artwork prepared for this mod
   from game object identities and a retro pixel-art style. Provenance and extraction hashes are in
   `assets/artwork-provenance.json`. The folded map icon and amber puzzle diamond are code-drawn in
