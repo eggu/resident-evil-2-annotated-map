@@ -1006,10 +1006,20 @@ while call('KeyMapTestIcons')>>19&3!=1:toggle(16384)
 toggle(131072);assert call('KeyMapTestEvents')==1
 for m in ev_rows:
  bank,bit,value=interaction_guards[m[6]:m[6]+m[7]][-1];assert (bank,value)==(4,0)
- assert run(m[0],m[1],m[0]<<31)[0][ev_key]>=1,m                      # drawn until the scene has played
- here=[r for r in ev_rows if r[:2]==m[:2]];first=run(m[0],m[1],m[0]<<31)[0][ev_key]
- assert run(m[0],m[1],m[0]<<31,{4:{bit}})[0][ev_key]<first,m          # one scene's flag removes its marker only
- assert run(m[0],m[1],m[0]<<31,{4:{interaction_guards[r[6]:r[6]+r[7]][-1][1] for r in here}})[0][ev_key]==0,m # all flags set: none left
- assert run(m[0],m[1],m[0]<<31,{},seen=())[0][ev_key]==0,m            # an unvisited room shows none
+# One marker per floor (2026-11-10): the next pending scene, first by ascending done flag (play order); when it is done the next
+# one appears; none once all are done; none while that scene's own room is unvisited (the later scenes wait for it).
+for f in sorted(floors_with_events):
+ rows=sorted((r for r in ev_rows if r[:2]==f),key=lambda r:interaction_guards[r[6]:r[6]+r[7]][-1][1])
+ bits=[]
+ for r in rows:
+  b=interaction_guards[r[6]:r[6]+r[7]][-1][1]
+  if b not in bits:bits.append(b)
+ for k in range(len(bits)+1):
+  got=run(f[0],f[1],f[0]<<31,{4:set(bits[:k])})[0][ev_key]
+  assert got==(1 if k<len(bits) else 0),(f,k,bits,got)               # exactly one while any is pending, none when all are done
+  if k<len(bits):
+   nxt=next(r for r in rows if interaction_guards[r[6]:r[6]+r[7]][-1][1]==bits[k])
+   assert run(f[0],f[1],f[0]<<31,{4:set(bits[:k])},seen=[x for x in range(256) if x!=nxt[2]])[0][ev_key]==0,(f,k) # its room is unvisited: none
+ assert run(f[0],f[1],f[0]<<31,{},seen=())[0][ev_key]==0,f             # an unvisited floor shows none
 toggle(131072);assert call('KeyMapTestEvents')==0 and all(run(m[0],m[1],m[0]<<31)[0][ev_key]==0 for m in ev_rows)
 print('marker names ok',sorted(named))
