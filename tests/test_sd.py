@@ -42,22 +42,27 @@ sprites={}
 for lang in ('en','ko'):
  rows=hrows(f'room_names-{lang}.h')
  body=arr(assets,f'sd_rooms_{lang}[] = {{')
- table=re.findall(r'\{(\d+),(-?\d+),(-?\d+),(\d+),\{([-\d,]+)\},(\d+),(-?\d+),(-?\d+)\}',body)
+ table=re.findall(r'\{(\d+),(-?\d+),(-?\d+),(\d+),\{([-\d,]+)\},(\d+),(-?\d+),(-?\d+),(\d+),\{([-\d,]+)\}\}',body)
  assert len(table)==len(rows)==248==len([l for l in (R/f'room_names-{lang}.h').read_text().splitlines() if l.startswith('{')])   # every runtime row
  if lang=='en':table_en=table
  by_floor={}
  for j,(pl,fl,seen,code,name) in enumerate(rows):
-  sp,x,y,n,pts,isp,ix,iy=table[j];sp,x,y,n,isp,ix,iy=int(sp),int(x),int(y),int(n),int(isp),int(ix),int(iy);pts=[int(v) for v in pts.split(',')]
+  sp,x,y,n,pts,isp,ix,iy,zn,zpts=table[j];sp,x,y,n,isp,ix,iy,zn=int(sp),int(x),int(y),int(n),int(isp),int(ix),int(iy),int(zn);zpts=[int(v) for v in zpts.split(',')];pts=[int(v) for v in pts.split(',')]
   assert sp!=0xFFFF,(lang,code,name)
   _,_,_,w,h=SPR[sp];assert n>=2,(lang,name,'no leader')
   box=(x,y,w-1,h-1);assert 2<=x and x+w<=318 and 2<=y and y+h<=238,(lang,name,box)
-  by_floor.setdefault((pl,fl),[]).append((seen,name,box,[(pts[2*k],pts[2*k+1]) for k in range(n)],(isp,ix,iy)))
+  by_floor.setdefault((pl,fl),[]).append((seen,name,box,[(pts[2*k],pts[2*k+1]) for k in range(n)],(isp,ix,iy),(zn,zpts)))
  for (pl,fl),names in by_floor.items():
   rects=next(f['rooms'] for f in shapes if (f['pl'],f['floor'])==(pl,fl));cells={r['seen']:rect_cells(r) for r in rects};allc=set().union(*cells.values())
-  boxes=[b for _,_,b,_,_ in names]
+  boxes=[b for _,_,b,_,_,_ in names]
   inner=[]
-  for i,(seen,name,box,leader,(isp,ix,iy)) in enumerate(names):
+  for i,(seen,name,box,leader,(isp,ix,iy),(zn,zpts)) in enumerate(names):
    x,y,w,h=box
+   if isp==0xFFFF:   # 2x leader: horizontal/vertical, at most one bend, starts 1..3 px inside the doubled room, ends at the doubled end
+    assert zn in (1,2),(lang,pl,fl,name,'no 2x leader')
+    c2={(2*a+i2,2*b+j2) for a,b in cells[seen] for i2 in (0,1) for j2 in (0,1)};pts2=[(zpts[2*k],zpts[2*k+1]) for k in range(zn)]+[(2*leader[-1][0],2*leader[-1][1])]
+    assert pts2[0] in c2,(lang,pl,fl,name,'2x leader starts outside its room')
+    assert all(a_[0]==b_[0] or a_[1]==b_[1] for a_,b_ in zip(pts2,pts2[1:])),(lang,pl,fl,name,'2x leader is not horizontal/vertical',pts2)
    if isp!=0xFFFF:   # 2x zoom: the name inside its doubled room, clear of the 9x9 markers, clear of the other inside names
     _,_,_,iw,ih=SPR[isp];c2={(2*a+i2,2*b+j2) for a,b in cells[seen] for i2 in (0,1) for j2 in (0,1)}
     assert all((ix+i2,iy+j2) in c2 for i2 in range(iw) for j2 in range(ih)),(lang,pl,fl,name,'inside name leaves its room')
@@ -118,7 +123,7 @@ for floor in (2,3,4,9,13,16):
  pos={(p['x0'],p['y0'],p['x1']-p['x0']+1,p['y1']-p['y0']+1) for p in q}
  for j,(pl,fl,seen,code,name) in enumerate(hrows('room_names-en.h')):
   if (pl,fl)!=(0,floor):continue
-  sp,x,y,n,_,_,_,_=table_en[j];_,_,_,w,h=SPR[int(sp)]
+  sp,x,y,n,_,_,_,_,_,_=table_en[j];_,_,_,w,h=SPR[int(sp)]
   assert (int(x),int(y),w,h) in pos or int(y)+h>238-5*11-6,(floor,name)
  legend=[p for p in q if p['y0']>=238-5*11-4]
  assert len(legend)>=14,(floor,len(legend))                       # title, hide, 12 rows (+ names that sit above)
@@ -146,7 +151,7 @@ call('KeyMapTestZoomView',160,120);q=draw(2);pos={(p['x0'],p['y0']) for p in q}
 inside_drawn=0
 for j,(pl,fl,seen,code,name) in enumerate(hrows('room_names-en.h')):
  if (pl,fl)!=(0,2):continue
- sp,x,y,n,_,isp,ix,iy=table_en[j]
+ sp,x,y,n,_,isp,ix,iy,_,_=table_en[j]
  if int(isp)==0xFFFF:continue
  _,_,_,iw,ih=SPR[int(isp)];sx,sy=int(ix)-160,int(iy)-120
  if 2<=sx and 2<=sy and sx+iw<=318 and sy+ih<=238 and not(sy+ih>238-5*11-4 and sx<2+280):
@@ -159,10 +164,17 @@ va,vb=sprite_quads(120,90),sprite_quads(150,110)
 moved=0
 for j,(pl,fl,seen,code,name) in enumerate(hrows('room_names-en.h')):
  if (pl,fl)!=(0,2):continue
- sp,x,y,n,pts,isp,ix,iy=table_en[j];_,_,_,w,h=SPR[int(sp)];pts=[int(v) for v in pts.split(',')];n=int(n)
+ sp,x,y,n,pts,isp,ix,iy,_,_=table_en[j];_,_,_,w,h=SPR[int(sp)];pts=[int(v) for v in pts.split(',')];n=int(n)
  a_=(2*pts[2*n-2]-120+int(x)-pts[2*n-2],2*pts[2*n-1]-90+int(y)-pts[2*n-1],w,h)   # leader end follows the map, the name keeps its offset
  b_=(a_[0]-30,a_[1]-20,w,h)
  if int(isp)==0xFFFF and 8<=a_[0] and a_[0]+w<=310 and 8<=a_[1] and a_[1]+h<=230 and 8<=b_[0] and b_[0]+w<=310 and 8<=b_[1] and b_[1]+h<=230 and not (a_[1]+h>180 or b_[1]+h>180):
   assert a_ in va and b_ in vb,(name,a_,b_);moved+=1
 assert moved>=2,moved
+# 2x leaders are exactly horizontal or vertical: every 1 px leader run of a zoomed frame is a one-pixel-thick bar, never a staircase
+call('KeyMapTestZoomView',100,60)
+for floor in (2,3,13):
+ q=draw(floor);runs=[p for p in q if (p['uv'][2]-p['uv'][0]+1,p['uv'][3]-p['uv'][1]+1)==(1,1) and p['t']==5000]
+ assert runs,floor
+ assert all(p['x0']==p['x1'] or p['y0']==p['y1'] for p in runs),(floor,[p for p in runs if p['x0']!=p['x1'] and p['y0']!=p['y1']][:3])
+ assert len(runs)<=3*len(hrows('room_names-en.h')),len(runs)   # one or two bars per name, not a staircase of rows
 print('SD tests passed')

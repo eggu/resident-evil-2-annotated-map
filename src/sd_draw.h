@@ -59,6 +59,11 @@ static unsigned sd_room_names(unsigned pl,unsigned floor,int dx,int dy){
   if(n){x=px[n-1]+o->x-o->pt[2*n-2];y=py[n-1]+o->y-o->pt[2*n-1];}
   else{x=MX(o->x+sp->w/2)-sp->w/2;y=MY(o->y+sp->h/2)-sp->h/2;}
   if(x+sp->w<=1||x>=318||y+sp->h<=1||y>=238||sd_hits_panel(x,y,sp->w,sp->h))continue;
+  if(zoom_on&&o->zn){ // 2x: straight or one-bend horizontal/vertical leader from the doubled end (sd_layout.py add_zoom_leaders)
+   int ex=px[n-1],ey=py[n-1];n=o->zn+1;
+   for(int k=0;k<(int)o->zn;k++){px[k]=2*dx+o->zpt[2*k]-view_x;py[k]=2*dy+o->zpt[2*k+1]-view_y;}
+   px[n-1]=ex;py[n-1]=ey;
+  }
   for(int k=1;k<n;k++)sd_line(px[k-1],py[k-1],px[k],py[k]);
   sd_put(x,y,o->sprite);names++;
  }

@@ -197,8 +197,64 @@ def floor_layout(pl, floor, rects, rows, marks, lang):
                       leader=[list(p) for p in (o.get('poly') or [])][:3], forced=bool(o.get('forced')))
     for i, (text, bx, by) in inside_boxes(cells, todo, marks).items():
         out[i]['inside'] = dict(text=text, x=bx, y=by)
+    add_zoom_leaders(pl, floor, rects, rows, out)
     print(f'pl {pl} floor {floor} {lang}: {len(out)} names, forced {[o["text"] for o in out.values() if o["forced"]]}', flush=True)
     return out
+
+
+def add_zoom_leaders(pl, floor, rects, rows, entries):
+    """2x leaders (user 2026-11-13): at 2x zoom a leader is horizontal or vertical, with at most one right-angle bend. The 1x layout
+    uses a slightly slanted leader when no straight one fits beside the room's edge-run middle; doubled, that slant is plain to see.
+    At 2x the rooms are twice as big, so the leader is rebuilt from the name's end (the doubled 1x end, the name keeps its offset to
+    it): straight along the axis the name hangs on into its own room, else one L. It starts 3 px inside the room, crosses no other
+    room and no other name. Sets entry['zoom'] = [[x, y], ...] (start, optional bend; doubled-map coordinates) where one exists."""
+    cells = {r['seen']: rect_cells(r) for r in rects}
+    cells2 = {seen: {(2 * x + i, 2 * y + j) for x, y in cs for i in (0, 1) for j in (0, 1)} for seen, cs in cells.items()}
+    seen_of = {i: seen for i, seen, _ in rows}
+    ends = {}
+    for i, e in entries.items():
+        e.pop('zoom', None)
+        if len(e['leader']) >= 2 and not e.get('inside'):
+            w, h = size_of(e['text']); ex, ey = e['leader'][-1]
+            ends[i] = (2 * ex + (e['x'] - ex), 2 * ey + (e['y'] - ey), w, h, 2 * ex, 2 * ey)   # name box at 2x (anchored to its end)
+    for i, (bx, by, w, h, ex, ey) in ends.items():
+        e = entries[i]
+        own = cells2.get(seen_of[i], set())
+        others = set().union(*(c for s2, c in cells2.items() if s2 != seen_of[i])) if cells2 else set()
+        boxes = [(b2[0] - 1, b2[1] - 1, b2[2] + 3, b2[3] + 3) for k, b2 in ends.items() if k != i]
+        mine = (bx, by, w, h)
+        cross = [False]   # second pass: a leader may cross other rooms, as at 1x when nothing else is free
+        free = lambda p: (0 <= p[0] < 2 * W and 0 <= p[1] < 2 * H and (cross[0] or p not in others)
+                          and not any(x0 <= p[0] < x0 + bw and y0 <= p[1] < y0 + bh for x0, y0, bw, bh in boxes))
+        def into(p, d):
+            """Walk from p along d to the own room and LEADER_INSET px into it: (length, start) or None."""
+            for k in range(1, 260):
+                q = (p[0] + d[0] * k, p[1] + d[1] * k)
+                if q in own and not (0 <= q[0] < 2 * W and 0 <= q[1] < 2 * H): return None
+                if not free(q) and q not in own: return None
+                if q in own:
+                    n = 0
+                    while n < LEADER_INSET and (q[0] + d[0] * (n + 1), q[1] + d[1] * (n + 1)) in own: n += 1
+                    return (k + n, (q[0] + d[0] * n, q[1] + d[1] * n)) if n >= 1 else None
+            return None
+        dirs = ((0, -1), (0, 1), (-1, 0), (1, 0))
+        in_mine = lambda p: mine[0] <= p[0] < mine[0] + mine[2] and mine[1] <= p[1] < mine[1] + mine[3]
+        best = None
+        for cross[0] in (False, True):
+            for d in dirs:   # straight
+                if in_mine((ex + d[0], ey + d[1])): continue
+                r = into((ex, ey), d)
+                if r and (not best or r[0] < best[0]): best = (r[0], [r[1]])
+            if not best:   # one L: out along d1 for a px, then toward the room along a perpendicular
+                for d1 in dirs:
+                    for a in range(3, 120):
+                        q = (ex + d1[0] * a, ey + d1[1] * a)
+                        if not free(q) or q in own or in_mine(q): break
+                        for d2 in ((d1[1], d1[0]), (-d1[1], -d1[0])):
+                            r = into(q, d2)
+                            if r and (not best or a + r[0] + 8 < best[0]): best = (a + r[0] + 8, [r[1], q])
+            if best: break
+        if best: e['zoom'] = [list(p) for p in best[1]]
 
 
 def _job(args):
@@ -207,6 +263,22 @@ def _job(args):
     rects = next(f['rooms'] for f in shapes if (f['pl'], f['floor']) == (pl, floor))
     rows = [(i, r[2], r[4]) for i, r in enumerate(header_rows(ROOT / f'src/room_names-{lang}.h')) if (r[0], r[1]) == (pl, floor)]
     return pl, floor, lang, floor_layout(pl, floor, rects, rows, markers().get((pl, floor), set()), lang)
+
+
+def zoom_only():
+    """Recompute only the 2x leaders of data/sd-layout.json (seconds)."""
+    path = ROOT / 'data/sd-layout.json'
+    layout = json.loads(path.read_text())
+    shapes = json.loads((ROOT / 'data/room_shapes.json').read_text())['floors']
+    for lang in ('en', 'ko'):
+        hr = header_rows(ROOT / f'src/room_names-{lang}.h')
+        for key, rooms in layout.items():
+            pl, floor = (int(v) for v in key.split(','))
+            rects = next(f['rooms'] for f in shapes if (f['pl'], f['floor']) == (pl, floor))
+            rows = [(i, r[2], r[4]) for i, r in enumerate(hr) if (r[0], r[1]) == (pl, floor)]
+            ents = {int(j): o[lang] for j, o in rooms.items() if lang in o}
+            add_zoom_leaders(pl, floor, rects, rows, ents)
+    path.write_text(json.dumps(layout, ensure_ascii=False, indent=0, sort_keys=True) + '\n')
 
 
 def main():
@@ -224,4 +296,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    zoom_only() if sys.argv[1:] == ['--zoom'] else main()
