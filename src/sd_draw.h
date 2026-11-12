@@ -33,36 +33,34 @@ static void sd_line(int x0,int y0,int x1,int y1){
   ax=bx=cx;ay=by=cy;
  }
 }
-// Room names fixed at build time (sd_layout.py), 1x and zoomed: the leader's start follows the map, the name keeps its offset
-// to the leader's end. A name cut by the screen edge or under the legend moves inside and its leader re-ends on it (RE3 rule).
+// Room names fixed at build time (sd_layout.py) and part of the map (user 2026-11-13): 1x they sit where the layout put them; zoomed, the
+// leader's start follows its room and the name keeps its offset to the leader's end, so panning moves them with the map and nothing is
+// re-placed at runtime. At 2x a name that fits inside its room is drawn there. Parts beyond the screen are cropped by quad_draw; a name
+// under the legend is not drawn.
+static int sd_hits_panel(int x,int y,int w,int h){
+ for(unsigned m=0;m<panel_count;m++){const Bounds *b=panels+m;if(x<b->x+b->w&&b->x<x+w&&y<b->y+b->h&&b->y<y+h)return 1;}
+ return 0;
+}
 static unsigned sd_room_names(unsigned pl,unsigned floor,int dx,int dy){
  unsigned names=0;
  const SdRoom *table=english_enabled?sd_rooms_en:sd_rooms_ko;
  for(unsigned j=0;overlay_enabled&&room_names_enabled&&j<active_room_count();j++){
   const RoomName *r=active_room_names()+j;
   if(r->pl!=pl||r->floor!=floor||!room_shown(pl,floor,r->seen)||table[j].sprite==0xFFFF)continue;
-  const SdRoom *o=table+j;const SdSprite *sp=sd_sprites+o->sprite;
-  if(zoom_on&&o->in_sprite!=0xFFFF){ // 2x zoom (user 2026-11-13): a name that fits inside its room goes there, no leader; it follows the map
-   const SdSprite *is=sd_sprites+o->in_sprite;int ix=2*dx+o->ix-view_x,iy=2*dy+o->iy-view_y,hit=0;
-   for(unsigned m=0;m<panel_count;m++){const Bounds *b=panels+m;if(ix<b->x+b->w&&b->x<ix+is->w&&iy<b->y+b->h&&b->y<iy+is->h)hit=1;}
-   if(!hit&&ix>=2&&iy>=2&&ix+is->w<=318&&iy+is->h<=238){sd_put(ix,iy,o->in_sprite);names++;continue;} // cut by the screen edge or under the legend: outside style below
+  const SdRoom *o=table+j;
+  if(zoom_on&&o->in_sprite!=0xFFFF){
+   const SdSprite *is=sd_sprites+o->in_sprite;int ix=2*dx+o->ix-view_x,iy=2*dy+o->iy-view_y;
+   if(!sd_hits_panel(ix,iy,is->w,is->h)&&ix+is->w>1&&ix<318&&iy+is->h>1&&iy<238){sd_put(ix,iy,o->in_sprite);names++;}
+   continue;
   }
+  const SdSprite *sp=sd_sprites+o->sprite;
   int n=o->n,px[3]={0},py[3]={0},x,y;
   for(int k=0;k<n;k++){px[k]=MX(o->pt[2*k]);py[k]=MY(o->pt[2*k+1]);}
   if(n){x=px[n-1]+o->x-o->pt[2*n-2];y=py[n-1]+o->y-o->pt[2*n-1];}
   else{x=MX(o->x+sp->w/2)-sp->w/2;y=MY(o->y+sp->h/2)-sp->h/2;}
-  if(zoom_on&&(n?px[0]<0||px[0]>=320||py[0]<0||py[0]>=240:x+sp->w<0||x>=320||y+sp->h<0||y>=240))continue; // the room is off screen: so is its name
-  int nx=x<2?2:x+sp->w>318?318-sp->w:x,ny=y<2?2:y+sp->h>238?238-sp->h:y;
-  for(unsigned m=0;m<panel_count;m++){
-   const Bounds *b=panels+m;
-   if(nx<b->x+b->w&&b->x<nx+sp->w&&ny<b->y+b->h&&b->y<ny+sp->h)ny=b->y-2-sp->h;
-  }
-  if(n>1&&(nx!=x||ny!=y)){
-   int qx=px[n-2],qy=py[n-2];
-   px[n-1]=qx<nx?nx-1:qx>=nx+sp->w?nx+sp->w:qx;py[n-1]=qy<ny?ny-1:qy>=ny+sp->h?ny+sp->h:qy;
-  }
+  if(x+sp->w<=1||x>=318||y+sp->h<=1||y>=238||sd_hits_panel(x,y,sp->w,sp->h))continue;
   for(int k=1;k<n;k++)sd_line(px[k-1],py[k-1],px[k],py[k]);
-  sd_put(nx,ny,o->sprite);names++;
+  sd_put(x,y,o->sprite);names++;
  }
  return names;
 }

@@ -152,4 +152,17 @@ for j,(pl,fl,seen,code,name) in enumerate(hrows('room_names-en.h')):
  if 2<=sx and 2<=sy and sx+iw<=318 and sy+ih<=238 and not(sy+ih>238-5*11-4 and sx<2+280):
   assert (sx,sy) in pos,(name,sx,sy);inside_drawn+=1
 assert inside_drawn>=3,inside_drawn
+# names are part of the map: panning moves every drawn name by exactly the view change (no pulling to the screen edge, no leader re-ending)
+def sprite_quads(vx,vy):
+ call('KeyMapTestZoomView',vx,vy);return [(p['x0'],p['y0'],p['x1']-p['x0']+1,p['y1']-p['y0']+1) for p in draw(2) if p['t']==5000]
+va,vb=sprite_quads(120,90),sprite_quads(150,110)
+moved=0
+for j,(pl,fl,seen,code,name) in enumerate(hrows('room_names-en.h')):
+ if (pl,fl)!=(0,2):continue
+ sp,x,y,n,pts,isp,ix,iy=table_en[j];_,_,_,w,h=SPR[int(sp)];pts=[int(v) for v in pts.split(',')];n=int(n)
+ a_=(2*pts[2*n-2]-120+int(x)-pts[2*n-2],2*pts[2*n-1]-90+int(y)-pts[2*n-1],w,h)   # leader end follows the map, the name keeps its offset
+ b_=(a_[0]-30,a_[1]-20,w,h)
+ if int(isp)==0xFFFF and 8<=a_[0] and a_[0]+w<=310 and 8<=a_[1] and a_[1]+h<=230 and 8<=b_[0] and b_[0]+w<=310 and 8<=b_[1] and b_[1]+h<=230 and not (a_[1]+h>180 or b_[1]+h>180):
+  assert a_ in va and b_ in vb,(name,a_,b_);moved+=1
+assert moved>=2,moved
 print('SD tests passed')
