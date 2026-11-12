@@ -42,6 +42,11 @@ static unsigned sd_room_names(unsigned pl,unsigned floor,int dx,int dy){
   const RoomName *r=active_room_names()+j;
   if(r->pl!=pl||r->floor!=floor||!room_shown(pl,floor,r->seen)||table[j].sprite==0xFFFF)continue;
   const SdRoom *o=table+j;const SdSprite *sp=sd_sprites+o->sprite;
+  if(zoom_on&&o->in_sprite!=0xFFFF){ // 2x zoom (user 2026-11-13): a name that fits inside its room goes there, no leader; it follows the map
+   const SdSprite *is=sd_sprites+o->in_sprite;int ix=2*dx+o->ix-view_x,iy=2*dy+o->iy-view_y,hit=0;
+   for(unsigned m=0;m<panel_count;m++){const Bounds *b=panels+m;if(ix<b->x+b->w&&b->x<ix+is->w&&iy<b->y+b->h&&b->y<iy+is->h)hit=1;}
+   if(!hit&&ix>=2&&iy>=2&&ix+is->w<=318&&iy+is->h<=238){sd_put(ix,iy,o->in_sprite);names++;continue;} // cut by the screen edge or under the legend: outside style below
+  }
   int n=o->n,px[3]={0},py[3]={0},x,y;
   for(int k=0;k<n;k++){px[k]=MX(o->pt[2*k]);py[k]=MY(o->pt[2*k+1]);}
   if(n){x=px[n-1]+o->x-o->pt[2*n-2];y=py[n-1]+o->y-o->pt[2*n-1];}

@@ -49,7 +49,7 @@ def header_rows(path):
     """(pl, floor, seen, room code, name) in the header's runtime order."""
     out = []
     for l in open(path, encoding='utf-8'):
-        m = re.match(r'\{(\d+),(\d+),(\d+),.*\}, /\* (\w+) (.*) \*/', l)
+        m = re.match(r'\{(\d+),(\d+),(\d+),.*\}, /\* ([\w,]+) (.*) \*/', l)
         if m:
             out.append((int(m[1]), int(m[2]), int(m[3]), m[4], m[5]))
     return out
@@ -109,6 +109,57 @@ def boundary(cells):
     return {c for c in cells if any((c[0] + a, c[1] + b) not in cells for a, b in ((1, 0), (-1, 0), (0, 1), (0, -1)))}
 
 
+def depth_map(mask):
+    """Chessboard distance of every room cell to the nearest outside cell (repeated erosion)."""
+    d = np.zeros(mask.shape, np.int32)
+    cur, k = mask.copy(), 0
+    while cur.any():
+        k += 1
+        d[cur] = k
+        e = cur.copy()
+        e[1:] &= cur[:-1]; e[:-1] &= cur[1:]; e[:, 1:] &= cur[:, :-1]; e[:, :-1] &= cur[:, 1:]
+        e[0] = e[-1] = False; e[:, 0] = e[:, -1] = False
+        cur = e
+    return d
+
+
+def inside_boxes(cells, todo, marks):
+    """Names that fit inside their room at 2x zoom (user 2026-11-13): the room's mask doubled, the 9x9 markers kept at 1:1 size
+    (centre doubled), a 1 px margin round the name and its shadow. Returns {index: (text, x, y)} with x, y in the doubled map's
+    coordinates (the view offset is subtracted at runtime). One line first, two lines when only they fit; the spot nearest the
+    room's deepest point; names of different rooms never overlap."""
+    mk = np.zeros((2 * H + 2, 2 * W + 2), bool)
+    for x, y in marks:
+        mk[max(0, 2 * y - 5) : 2 * y + 6, max(0, 2 * x - 5) : 2 * x + 6] = True
+    placed, out = [], {}
+    for i, seen, name in sorted(todo, key=lambda t: len(cells[t[1]])):
+        m = np.zeros(mk.shape, bool)
+        for x, y in cells[seen]:
+            m[2 * y : 2 * y + 2, 2 * x : 2 * x + 2] = True
+        depth = depth_map(m)
+        py, px = np.unravel_index(depth.argmax(), depth.shape)
+        bad = ~m | mk
+        ii = np.pad(bad.cumsum(0).cumsum(1), ((1, 0), (1, 0)))
+        for text in [name] + ([split(name)] if ' ' in name else []):
+            w, h = size_of(text)
+            w, h = w + 1, h + 1   # with the shadow
+            bw, bh = w + 2, h + 2   # and the margin
+            Hh, Ww = bad.shape
+            ys, xs = np.mgrid[0 : Hh - bh + 1, 0 : Ww - bw + 1]
+            free = (ii[ys + bh, xs + bw] - ii[ys, xs + bw] - ii[ys + bh, xs] + ii[ys, xs]) == 0
+            for bx, by, bw2, bh2 in placed:   # keep clear of this floor's other inside names
+                free[max(0, by - bh - 1) : max(0, by + bh2 + 2), max(0, bx - bw - 1) : max(0, bx + bw2 + 2)] = False
+            if not free.any():
+                continue
+            cy, cx = np.nonzero(free)
+            k = np.argmin((cx + 1 + w / 2 - px) ** 2 + (cy + 1 + h / 2 - py) ** 2)
+            bx, by = int(cx[k]) + 1, int(cy[k]) + 1
+            placed.append((bx, by, w, h))
+            out[i] = (text, bx, by)
+            break
+    return out
+
+
 def floor_layout(pl, floor, rects, rows, marks, lang):
     """rows: [(index, room code, name)] named rooms of this screen; returns {index: placement}."""
     cells = {r['seen']: rect_cells(r) for r in rects}
@@ -144,6 +195,8 @@ def floor_layout(pl, floor, rects, rows, marks, lang):
         out[i] = dict(text=o['text'], x=box[0] if box else round(o['x'] - size_of(o['text'])[0] / 2),
                       y=box[1] if box else round(o['y'] - size_of(o['text'])[1] / 2),
                       leader=[list(p) for p in (o.get('poly') or [])][:3], forced=bool(o.get('forced')))
+    for i, (text, bx, by) in inside_boxes(cells, todo, marks).items():
+        out[i]['inside'] = dict(text=text, x=bx, y=by)
     print(f'pl {pl} floor {floor} {lang}: {len(out)} names, forced {[o["text"] for o in out.values() if o["forced"]]}', flush=True)
     return out
 

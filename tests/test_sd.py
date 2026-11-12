@@ -22,7 +22,7 @@ for page,su,sv,sw,sh in SPR:
 layout=json.loads((R/'sd-layout.json').read_text())
 shapes=json.loads((R/'room_shapes.json').read_text())['floors']
 def hrows(name):
- return [(int(m[1]),int(m[2]),int(m[3]),m[4],m[5]) for l in (R/name).read_text().splitlines() if (m:=re.match(r'\{(\d+),(\d+),(\d+),.*\}, /\* (\w+) (.*) \*/',l))]
+ return [(int(m[1]),int(m[2]),int(m[3]),m[4],m[5]) for l in (R/name).read_text().splitlines() if (m:=re.match(r'\{(\d+),(\d+),(\d+),.*\}, /\* ([\w,]+) (.*) \*/',l))]
 def rect_cells(r):return {(r['x']+x,r['y']+j) for j,runs in enumerate(r['runs']) for a,n in runs for x in range(a,min(a+n,r['w']))}
 def struct_rows(path,name):
  t=(R/path).read_text();t=t[t.index(name+'[]'):];t=t[:t.index('};')]
@@ -42,21 +42,28 @@ sprites={}
 for lang in ('en','ko'):
  rows=hrows(f'room_names-{lang}.h')
  body=arr(assets,f'sd_rooms_{lang}[] = {{')
- table=re.findall(r'\{(\d+),(-?\d+),(-?\d+),(\d+),\{([-\d,]+)\}\}',body)
- assert len(table)==len(rows)==244
+ table=re.findall(r'\{(\d+),(-?\d+),(-?\d+),(\d+),\{([-\d,]+)\},(\d+),(-?\d+),(-?\d+)\}',body)
+ assert len(table)==len(rows)==248==len([l for l in (R/f'room_names-{lang}.h').read_text().splitlines() if l.startswith('{')])   # every runtime row
  if lang=='en':table_en=table
  by_floor={}
  for j,(pl,fl,seen,code,name) in enumerate(rows):
-  sp,x,y,n,pts=table[j];sp,x,y,n=int(sp),int(x),int(y),int(n);pts=[int(v) for v in pts.split(',')]
+  sp,x,y,n,pts,isp,ix,iy=table[j];sp,x,y,n,isp,ix,iy=int(sp),int(x),int(y),int(n),int(isp),int(ix),int(iy);pts=[int(v) for v in pts.split(',')]
   assert sp!=0xFFFF,(lang,code,name)
   _,_,_,w,h=SPR[sp];assert n>=2,(lang,name,'no leader')
   box=(x,y,w-1,h-1);assert 2<=x and x+w<=318 and 2<=y and y+h<=238,(lang,name,box)
-  by_floor.setdefault((pl,fl),[]).append((seen,name,box,[(pts[2*k],pts[2*k+1]) for k in range(n)]))
+  by_floor.setdefault((pl,fl),[]).append((seen,name,box,[(pts[2*k],pts[2*k+1]) for k in range(n)],(isp,ix,iy)))
  for (pl,fl),names in by_floor.items():
   rects=next(f['rooms'] for f in shapes if (f['pl'],f['floor'])==(pl,fl));cells={r['seen']:rect_cells(r) for r in rects};allc=set().union(*cells.values())
-  boxes=[b for _,_,b,_ in names]
-  for i,(seen,name,box,leader) in enumerate(names):
+  boxes=[b for _,_,b,_,_ in names]
+  inner=[]
+  for i,(seen,name,box,leader,(isp,ix,iy)) in enumerate(names):
    x,y,w,h=box
+   if isp!=0xFFFF:   # 2x zoom: the name inside its doubled room, clear of the 9x9 markers, clear of the other inside names
+    _,_,_,iw,ih=SPR[isp];c2={(2*a+i2,2*b+j2) for a,b in cells[seen] for i2 in (0,1) for j2 in (0,1)}
+    assert all((ix+i2,iy+j2) in c2 for i2 in range(iw) for j2 in range(ih)),(lang,pl,fl,name,'inside name leaves its room')
+    for mx,my in marks.get((pl,fl),()):assert not(ix<2*mx+5 and 2*mx-4<ix+iw and iy<2*my+5 and 2*my-4<iy+ih),(lang,pl,fl,name,'inside name on a marker')
+    for k0 in inner:assert not(ix<k0[0]+k0[2] and k0[0]<ix+iw and iy<k0[1]+k0[3] and k0[1]<iy+ih),(lang,pl,fl,name,'inside names overlap')
+    inner.append((ix,iy,iw,ih))
    assert not any((x+i2,y+j2) in allc for i2 in range(w) for j2 in range(h)),(lang,pl,fl,name,'name on a room')
    for hx,hy,hw,hh in HUD:assert not(x<hx+hw and hx<x+w and y<hy+hh and hy<y+h),(lang,pl,fl,name,'on screen furniture')
    for mx,my in marks.get((pl,fl),()):assert not(x<mx+5 and mx-4<x+w and y<my+5 and my-4<y+h),(lang,pl,fl,name,'on a marker',mx,my)
@@ -111,7 +118,7 @@ for floor in (2,3,4,9,13,16):
  pos={(p['x0'],p['y0'],p['x1']-p['x0']+1,p['y1']-p['y0']+1) for p in q}
  for j,(pl,fl,seen,code,name) in enumerate(hrows('room_names-en.h')):
   if (pl,fl)!=(0,floor):continue
-  sp,x,y,n,_=table_en[j];_,_,_,w,h=SPR[int(sp)]
+  sp,x,y,n,_,_,_,_=table_en[j];_,_,_,w,h=SPR[int(sp)]
   assert (int(x),int(y),w,h) in pos or int(y)+h>238-5*11-6,(floor,name)
  legend=[p for p in q if p['y0']>=238-5*11-4]
  assert len(legend)>=14,(floor,len(legend))                       # title, hide, 12 rows (+ names that sit above)
@@ -134,4 +141,15 @@ for vx,vy in ((160,120),(0,0),(320,240)):
   assert 1<=p['x0']<=p['x1']<=318 and 1<=p['y0']<=p['y1']<=238,p
   uw,uh=p['uv'][2]-p['uv'][0]+1,p['uv'][3]-p['uv'][1]+1
   assert (uw,uh)==(1,1) or (p['x1']-p['x0']+1,p['y1']-p['y0']+1)==(uw,uh) or p['x0']<=1 or p['x1']>=318 or p['y0']<=1 or p['y1']>=238,p   # 1:1 unless cropped at the edge
+# zoomed: a name that fits inside its room is drawn there (doubled position minus the view), the others keep their leaders
+call('KeyMapTestZoomView',160,120);q=draw(2);pos={(p['x0'],p['y0']) for p in q}
+inside_drawn=0
+for j,(pl,fl,seen,code,name) in enumerate(hrows('room_names-en.h')):
+ if (pl,fl)!=(0,2):continue
+ sp,x,y,n,_,isp,ix,iy=table_en[j]
+ if int(isp)==0xFFFF:continue
+ _,_,_,iw,ih=SPR[int(isp)];sx,sy=int(ix)-160,int(iy)-120
+ if 2<=sx and 2<=sy and sx+iw<=318 and sy+ih<=238 and not(sy+ih>238-5*11-4 and sx<2+280):
+  assert (sx,sy) in pos,(name,sx,sy);inside_drawn+=1
+assert inside_drawn>=3,inside_drawn
 print('SD tests passed')

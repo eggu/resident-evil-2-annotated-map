@@ -85,7 +85,9 @@ def main():
         for j, (pl, floor, seen, code, name) in enumerate(rows):
             o = layout.get(f'{pl},{floor}', {}).get(str(j), {}).get(lang)
             if not o: table.append(None); continue
-            table.append((add(('room', lang, o['text']), text_image(o['text'], CREAM), 1 + li), o))
+            ins = o.get('inside')   # 2x zoom: the name inside its room, in doubled-map coordinates
+            table.append((add(('room', lang, o['text']), text_image(o['text'], CREAM), 1 + li), o,
+                          add(('room', lang, ins['text']), text_image(ins['text'], CREAM), 1 + li) if ins else None))
         rooms[lang] = table
     # pack: shared group first, then each language; tallest first within a group
     rects = [None] * len(sprites)
@@ -110,14 +112,16 @@ def main():
     for it, k in sd_icons.COMMON.items(): com[it] = str(sid(('icon', k)))
     L.append('static const unsigned short sd_lock_sprite[100] = {' + ','.join(lock) + '}; /* key item id -> lock marker */')
     L.append('static const unsigned short sd_common_sprite[41] = {' + ','.join(com) + '}; /* common item id -> marker */')
-    L.append('typedef struct { unsigned short sprite; short x,y; unsigned char n; short pt[6]; } SdRoom; /* x,y name top-left; n leader points (start inside the room, last 1 px from the name); sprite 0xFFFF none */')
+    L.append('typedef struct { unsigned short sprite; short x,y; unsigned char n; short pt[6]; unsigned short in_sprite; short ix,iy; } SdRoom; /* x,y name top-left; n leader points (start inside the room, last 1 px from the name); sprite 0xFFFF none; in_sprite/ix/iy: the name inside its room at 2x zoom, top-left in doubled-map coordinates (0xFFFF none) */')
     for lang in ('en', 'ko'):
         out = []
         for t in rooms[lang]:
-            if not t: out.append('{0xFFFF,0,0,0,{0}}'); continue
-            sp, o = t
+            if not t: out.append('{0xFFFF,0,0,0,{0},0xFFFF,0,0}'); continue
+            sp, o, isp = t
             pts = [v for p in o['leader'][:3] for v in p] if not o['forced'] else []
-            out.append('{%d,%d,%d,%d,{%s}}' % (sp, o['x'], o['y'], len(pts) // 2, ','.join(map(str, pts + [0] * (6 - len(pts))))))
+            ins = o.get('inside')
+            out.append('{%d,%d,%d,%d,{%s},%d,%d,%d}' % (sp, o['x'], o['y'], len(pts) // 2, ','.join(map(str, pts + [0] * (6 - len(pts)))),
+                                                       0xFFFF if isp is None else isp, ins['x'] if ins else 0, ins['y'] if ins else 0))
         L.append(f'static const SdRoom sd_rooms_{lang}[] = {{' + ',\n'.join(out) + '};')
     L.append('static const unsigned short sd_legend[2][9][2] = {' + ','.join('{' + ','.join('{%d,%d}' % (sid(('legend', l, r, 0)), sid(('legend', l, r, 1))) for r in LEGEND) + '}' for l in (0, 1)) + '};')
     L.append('static const unsigned short sd_scope[2][3] = {' + ','.join('{%s}' % ','.join(str(sid(('scope', l, s))) for s in range(3)) for l in (0, 1)) + '};')
