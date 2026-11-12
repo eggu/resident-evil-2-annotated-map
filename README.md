@@ -37,8 +37,8 @@ A new configuration starts in **English, name size 100%, name opacity 70%, icon 
 
 The mod picks a display mode once, when the first map opens.
 
-- **HD** (the default when the HD texture pack `bio2hd.asi` is loaded): sharp names and icons at the game's high resolution.
-- **SD** (when the HD pack is not loaded, or `RetroMode` or `LowResEnable` in `config.ini` `[DLL]` is on): 1x pixel markers and a pixel font (Galmuri9). Room names sit next to their room on a short line, in one colour, and are shown at 1x and 2x zoom. Name and icon size, opacity, item names and the rank estimate are not available in SD, and the key-item markers are one cyan circle.
+- **HD**: Classic REbirth with the HD textures (`bio2hd.asi` loaded) and `RetroMode` and `LowResEnable` in `config.ini` `[DLL]` both off. Sharp names and icons at the game's high resolution.
+- **SD**: every other case, including a game without Classic REbirth. 1x pixel markers and a pixel font (Galmuri9). Room names sit next to their room on a short line, in one colour, and are shown at 1x and 2x zoom. Name and icon size, opacity, item names and the rank estimate are not available in SD, and the key-item markers are one cyan circle.
 
 `DisplayMode=SD` or `HD` in the INI forces a mode (see Settings).
 
@@ -117,7 +117,7 @@ All settings are in the `[MapOverlay]` section.
 
 ## Known limitations
 
-- Only the GOG `Resident Evil 2.exe` with Classic REbirth is supported. Other executables load nothing and only write a log.
+- Only the GOG `Resident Evil 2.exe` is supported (HD needs Classic REbirth; without it the map uses SD). Other executables load nothing and only write a log.
 - Enlarged names keep their positions, so they can overlap on crowded maps.
 - With `LockSide=1` (default) the marker sits at the game's own spot just past the door, only a few pixels away. Doors leading to another floor keep the marker on the door.
 - Enemy markers show spawn points, not live enemy positions.

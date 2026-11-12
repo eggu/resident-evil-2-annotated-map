@@ -33,7 +33,7 @@ RE2 리메이크(2019)용이 아닙니다.
 - 설정은 scripts/RE2.AnnotatedMap.ini에 저장됩니다.
 - [Z]는 A/B 시나리오 사이의 선택·행동과 관련된 재핑 표식이며 아이템 이름의 일부가 아닙니다.
 - 랭크 예상치는 INI의 Rank=1로 켭니다(기본 끔, 변경 후 게임 재실행).
-- HD/SD: HD 텍스처 팩(bio2hd.asi)이 로드되지 않았거나 config.ini [DLL]의 RetroMode/LowResEnable이 켜져 있으면 SD 방식(1배 픽셀 마커, 픽셀 글꼴 Galmuri9, 방 이름은 한 색으로 방 옆에 선으로 연결)으로 표시합니다. SD에서는 이름·아이콘 크기, 불투명도, 아이템 이름, 랭크를 쓸 수 없습니다. INI의 DisplayMode=Auto/HD/SD로 고정할 수 있습니다(변경 후 재실행).
+- HD/SD: Classic REbirth에 HD 텍스처 팩(bio2hd.asi)이 로드되어 있고 config.ini [DLL]의 RetroMode·LowResEnable이 모두 꺼져 있을 때만 HD이고, 그 밖의 모든 경우(Classic REbirth가 없는 게임 포함)는 SD 방식(1배 픽셀 마커, 픽셀 글꼴 Galmuri9, 방 이름은 한 색으로 방 옆에 선으로 연결)으로 표시합니다. SD에서는 이름·아이콘 크기, 불투명도, 아이템 이름, 랭크를 쓸 수 없습니다. INI의 DisplayMode=Auto/HD/SD로 고정할 수 있습니다(변경 후 재실행).
 
 제거
 scripts/RE2.AnnotatedMap.asi와 .ini(.log)를 지웁니다. 다른 ASI 모드가 없으면 dsound.dll도 지웁니다.
@@ -81,7 +81,7 @@ Controls (on the map screen only)
 - Settings are saved in scripts/RE2.AnnotatedMap.ini.
 - [Z] marks zapping-related items/interactions affected by choices or actions across scenarios A/B; it is not part of the item name.
 - The live rank estimate is enabled with Rank=1 in the INI (off by default; restart after changing).
-- HD/SD: when the HD texture pack (bio2hd.asi) is not loaded, or RetroMode/LowResEnable in config.ini [DLL] is on, the map uses SD mode (1x pixel markers, the Galmuri9 pixel font, room names in one colour beside their room on a leader line). Name/icon size, opacity, item names and rank are not available in SD. DisplayMode=Auto/HD/SD in the INI forces a mode (restart after changing).
+- HD/SD: HD only with Classic REbirth, the HD texture pack (bio2hd.asi) loaded and RetroMode and LowResEnable in config.ini [DLL] both off; every other case, including a game without Classic REbirth, uses SD mode (1x pixel markers, the Galmuri9 pixel font, room names in one colour beside their room on a leader line). Name/icon size, opacity, item names and rank are not available in SD. DisplayMode=Auto/HD/SD in the INI forces a mode (restart after changing).
 
 Uninstall
 Delete scripts/RE2.AnnotatedMap.asi and its .ini/.log. Also delete dsound.dll if no other ASI mod uses it.
