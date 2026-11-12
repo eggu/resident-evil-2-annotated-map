@@ -33,6 +33,15 @@ An ASI mod for the original Resident Evil 2 PC release (GOG `Resident Evil 2.exe
 
 A new configuration starts in **English, name size 100%, name opacity 70%, icon size 100%, icon opacity 80%, visited rooms only, with only Rooms on and marker names off**. Press `H` to show marker names. Press `\` for Korean and `2`–`7` to turn on other categories. The rank estimate is off. Press `9` to change scope. **All rooms** reveals unexplored rooms and items. Area/floor selection still lists visited floors only.
 
+## HD and SD
+
+The mod picks a display mode once, when the first map opens.
+
+- **HD** (the default when the HD texture pack `bio2hd.asi` is loaded): sharp names and icons at the game's high resolution.
+- **SD** (when the HD pack is not loaded, or `RetroMode` or `LowResEnable` in `config.ini` `[DLL]` is on): 1x pixel markers and a pixel font (Galmuri9). Room names sit next to their room on a short line, in one colour, and are shown at 1x and 2x zoom. Name and icon size, opacity, item names and the rank estimate are not available in SD, and the key-item markers are one cyan circle.
+
+`DisplayMode=SD` or `HD` in the INI forces a mode (see Settings).
+
 ## Installation
 
 1. Install **Classic REbirth** for Resident Evil 2 first (tested with 1.0.9). [Official download](https://classicrebirth.com/index.php/downloads/resident-evil-2-classic-rebirth/)
@@ -100,6 +109,7 @@ The release ZIP includes a default INI with comments. Close the game before edit
 | `IconOpacity` | `80` | Icon opacity (10–100) |
 | `Modifier` | `Shift` | Modifier for icon size/opacity: `Shift` or `Ctrl` |
 | `LockSide` | `0` | `0` lock markers on the door, `1` in the room not entered yet (RE1 HD style) |
+| `DisplayMode` | `Auto` | `Auto` follows HD and SD above, `HD` or `SD` forces one. Restart after changing |
 | `Version` | `4` | Settings format, written automatically; do not edit |
 | `Rank` | `0` | `1` shows the rank estimate. Restart after changing |
 

@@ -70,6 +70,15 @@ Marker names (`item_label_draw`):
 
 `tests/test_label_priority.py` and `tests/test_map_geometry.py` check these rules. Translucent names render below every opaque quad, so draw order alone cannot put a name over an icon.
 
+## SD mode
+
+SD mode (no HD pack: `bio2hd.asi` not loaded, or `RetroMode`/`LowResEnable` on, or `DisplayMode=SD`) draws 1:1 sprites from `src/sd_assets.h`, built by two tools:
+
+- `tools/mapgen/sd_layout.py [pl,floor ...]` places every room name outside its room on a leader (leader starts 3 px inside the room, names avoid every possible non-enemy marker, the native title, compass, arrows and the folded legend; fewest-spots-first, then a refinement pass for English) and writes `data/sd-layout.json`. About 8 minutes in parallel; rerun when room names, rooms or marker positions change.
+- `tools/mapgen/build_sd.py` renders markers (`tools/mapgen/sd_icons.py`: the approved lock table, 9x9 markers), Galmuri9 names and the legend into `src/sd_assets.h` (5 RGB555 pages: markers, English names, Korean names, legend). Run it after `sd_layout.py`.
+
+`tests/test_sd.py` checks the layout tables and an emulated draw with SD forced (`KeyMapTestSdMode`). Preview images: `local/sd-test/preview_sd.py` (untracked) draws shapes, markers and names for one screen.
+
 ## Document and puzzle names
 
 `data/marker_names.json` is the only source of these names. Documents (item ids 106-126): the game's own file titles. They are bitmaps, page 2 of `Common/file/fileNN.bin` (Korean, from the installed HD patch) and `fileNNu.bin` (English), NN = item id - 104; `tools/mapgen/extract_file_titles.py` unpacks them with the EXE's own decompressor, and `regen.py` stops when a bitmap hash differs from the table. The titles were read from the bitmaps by eye; entries with `ko_reading_uncertain` are flagged for confirmation. Puzzles: one name per mechanism, keyed by room stem plus evidence (`i<id>` the key item an item-use AOT asks for, `sw<bit>` a switch event, `nl<bit>` a number lock). Every named evidence cites public pages in `puzzle_sources` (Evil Resource item pages, Raccoon Insider room pages that carry the game's room IDs and examine texts, the BDennis FAQ); Korean puzzle names are project translations (`ko_basis`). Evidence without a name sits in `unresolved` with its reason and the marker stays unnamed; `extract_overlay.py` stops on evidence that is in neither list. `tests/test_marker_names.py` checks that every document has a Korean and English title and that the generated labels equal the table.

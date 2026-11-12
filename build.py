@@ -29,7 +29,7 @@ def main():
         for p in (ROOT/'data').iterdir(): shutil.copy2(p,build/p.name)
         shutil.copytree(ROOT/'tests/fixtures',build,dirs_exist_ok=True)
         env = dict(os.environ, RE2_GAME_EXE=str(args.game_exe))
-        for name in ('test_native-v6.4.py','test_upload-v6.4.py','test_settings.py','test_legend.py','test_label_priority.py','test_zoom.py','test_factory_arrows.py','test_puzzle_completion.py'):
+        for name in ('test_native-v6.4.py','test_upload-v6.4.py','test_settings.py','test_legend.py','test_label_priority.py','test_zoom.py','test_factory_arrows.py','test_puzzle_completion.py','test_sd.py'):
             subprocess.run([sys.executable,name],cwd=build,env=env,check=True,stdout=subprocess.DEVNULL)
     suffix = f'-candidate{args.candidate}' if args.candidate else ''
     package = dist/f'RE2-Annotated-Map-{version}{suffix}.zip'

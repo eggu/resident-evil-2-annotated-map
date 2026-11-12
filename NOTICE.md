@@ -32,6 +32,8 @@ data and documentation.
   Kil Hyung-jin, https://github.com/orioncactus/pretendard v1.3.9): SemiBold for Korean labels, Medium for English
   labels and the legend. The font files and license are in `fonts/` for regeneration; the release ZIP contains only
   rendered pixels, no font file.
+  In SD mode (no HD pack) the labels use Galmuri9 by quiple (SIL Open Font License 1.1, https://github.com/quiple/galmuri);
+  `fonts/Galmuri9.ttf` and `fonts/Galmuri-OFL.txt`; the ZIP again holds only rendered pixels.
 - **Ultimate ASI Loader** v9.7.4 (MIT, Copyright (c) 2023 ThirteenAG): the release ZIP includes its unmodified x86
   `dinput8.dll` renamed to `dsound.dll`, with its license in `scripts/UltimateASILoader-LICENSE.txt`.
   https://github.com/ThirteenAG/Ultimate-ASI-Loader

@@ -1,0 +1,137 @@
+"""SD mode (no HD pack; 2026-11-12). Table checks: every named room has an SD name inside the screen, outside every room, clear of
+the screen furniture and of every possible marker, no two names overlap, each leader starts 1..3 px inside its own room and ends
+at the name (the box starts on the next pixel; the sprite's ink bounds may trim a pixel); the atlas sprites stay inside 8-bit texture coordinates and carry pixels; every door key has an approved lock.
+Emulated draw on the real EXE with SD forced: every quad is a 1:1 sprite (or a 1 px leader) on screen, the legend is text, no opacity
+packets, no item names; detection follows DisplayMode. Run from build/ with RE2_GAME_EXE set (data/ and fixtures copied)."""
+import json,re,struct
+from pathlib import Path
+R=Path(__file__).resolve().parent
+exec((R/'test_native-v6.4.py').read_text().split('# ---- harness end')[0])
+import numpy as np
+def arr(text,name):
+ body=text.split(name,1)[1].split('};',1)[0]
+ return body
+assets=(R/'sd_assets.h').read_text()
+SPR=[tuple(map(int,m)) for m in re.findall(r'\{(\d+),(\d+),(\d+),(\d+),(\d+)\}',arr(assets,'sd_sprites[] = {'))]
+PX=np.array([int(v,16) for v in re.findall(r'0x[0-9a-f]+',assets.split('sd_pixels[SD_PAGES][65536] = {',1)[1])],np.uint16).reshape(-1,256,256)
+assert len(PX)==int(re.search(r'#define SD_PAGES (\d+)',assets)[1])
+for page,su,sv,sw,sh in SPR:
+ assert su+sw<256 and sv+sh<256,(page,su,sv,sw,sh)                # 8-bit texture coordinates: u+w, v+h stay below 256
+ assert PX[page,sv:sv+sh,su:su+sw].any(),(page,su,sv,sw,sh)
+# --- layout tables
+layout=json.loads((R/'sd-layout.json').read_text())
+shapes=json.loads((R/'room_shapes.json').read_text())['floors']
+def hrows(name):
+ return [(int(m[1]),int(m[2]),int(m[3]),m[4],m[5]) for l in (R/name).read_text().splitlines() if (m:=re.match(r'\{(\d+),(\d+),(\d+),.*\}, /\* (\w+) (.*) \*/',l))]
+def rect_cells(r):return {(r['x']+x,r['y']+j) for j,runs in enumerate(r['runs']) for a,n in runs for x in range(a,min(a+n,r['w']))}
+def struct_rows(path,name):
+ t=(R/path).read_text();t=t[t.index(name+'[]'):];t=t[:t.index('};')]
+ return [tuple(int(v) for v in re.findall(r'-?\d+',m)) for m in re.findall(r'\{([^{}]*)\}',t[t.index('{')+1:])]
+marks={}
+def add(pl,fl,x,y):marks.setdefault((pl&1,fl),set()).add((x,y))
+for r in struct_rows('items.h','map_items'):add(r[0],r[1],r[2]+6,r[3]+6)
+for r in struct_rows('overlay_data.h','map_markers'):add(r[0],r[1],r[4]+6,r[5]+6)
+for r in struct_rows('overlay_data.h','map_documents'):add(r[0],r[1],r[5]+6,r[6]+6)
+for r in struct_rows('overlay_data.h','map_interactions'):
+ if r[3] in (6,20):add(r[0],r[1],r[4]+6,r[5]+6)
+doors=struct_rows('doors-all.h','doors')
+for r in doors:add(r[0],r[1],r[2],r[3])
+HUD=[(8,14,100,36),(252,24,30,44),(154,18,12,9),(154,196,12,9),(5,114,9,12),(306,114,9,12)]
+def gap(a,b):return max(a[0]-(b[0]+b[2]),b[0]-(a[0]+a[2]),a[1]-(b[1]+b[3]),b[1]-(a[1]+a[3]))
+sprites={}
+for lang in ('en','ko'):
+ rows=hrows(f'room_names-{lang}.h')
+ body=arr(assets,f'sd_rooms_{lang}[] = {{')
+ table=re.findall(r'\{(\d+),(-?\d+),(-?\d+),(\d+),\{([-\d,]+)\}\}',body)
+ assert len(table)==len(rows)==244
+ if lang=='en':table_en=table
+ by_floor={}
+ for j,(pl,fl,seen,code,name) in enumerate(rows):
+  sp,x,y,n,pts=table[j];sp,x,y,n=int(sp),int(x),int(y),int(n);pts=[int(v) for v in pts.split(',')]
+  assert sp!=0xFFFF,(lang,code,name)
+  _,_,_,w,h=SPR[sp];assert n>=2,(lang,name,'no leader')
+  box=(x,y,w-1,h-1);assert 2<=x and x+w<=318 and 2<=y and y+h<=238,(lang,name,box)
+  by_floor.setdefault((pl,fl),[]).append((seen,name,box,[(pts[2*k],pts[2*k+1]) for k in range(n)]))
+ for (pl,fl),names in by_floor.items():
+  rects=next(f['rooms'] for f in shapes if (f['pl'],f['floor'])==(pl,fl));cells={r['seen']:rect_cells(r) for r in rects};allc=set().union(*cells.values())
+  boxes=[b for _,_,b,_ in names]
+  for i,(seen,name,box,leader) in enumerate(names):
+   x,y,w,h=box
+   assert not any((x+i2,y+j2) in allc for i2 in range(w) for j2 in range(h)),(lang,pl,fl,name,'name on a room')
+   for hx,hy,hw,hh in HUD:assert not(x<hx+hw and hx<x+w and y<hy+hh and hy<y+h),(lang,pl,fl,name,'on screen furniture')
+   for mx,my in marks.get((pl,fl),()):assert not(x<mx+5 and mx-4<x+w and y<my+5 and my-4<y+h),(lang,pl,fl,name,'on a marker',mx,my)
+   for k in range(i):assert gap(box,boxes[k])>=1,(lang,pl,fl,name,names[k][1],'names overlap')
+   sx,sy=leader[0];assert (sx,sy) in cells[seen],(lang,name,'leader start outside its room')
+   ex,ey=leader[-1];assert gap((ex,ey,1,1),box)==0,(lang,pl,fl,name,'leader end far from the name',leader,box)
+# every key that opens a door has an approved SD lock
+lock=[int(v,0) for v in re.findall(r'0x[0-9A-Fa-f]+|\d+',arr(assets,'sd_lock_sprite[100] = {').split('}')[0])]
+missing={k[6] for k in doors if k[6]<100 and lock[k[6]]==0xFFFF}
+assert not missing,missing
+# --- emulated draw
+for va in (0x4021c0,):u.mem_write(va,bytes.fromhex('c20800'))
+call('KeyMapTestInit',0x400000);call('KeyMapTestTexture',5000)
+def draw(floor,zoom=False):
+ u.mem_write(0x989ed0,bytes(32));u.mem_write(0x98eb2c,bytes(0xc0));u.mem_write(0x98ed2c,bytes(32));u.mem_write(0x98ec04,b'\xff'*32)
+ u.mem_write(0x691f7a,bytes([floor]));u.mem_write(0x691f62,b'\0');u.mem_write(0x691fb8,bytes(4))
+ u.mem_write(0x21000000,b'\xa5'*0x40000);u.mem_write(0x524e1c,struct.pack('<II',0x21000000,0x21040000));call('KeyMapTestDraw')
+ end=struct.unpack('<I',u.mem_read(0x524e1c,4))[0];out=[]
+ for p in range(0x21000000,end,32):
+  d=bytes(u.mem_read(p,32));x0,y0,x1,y1=struct.unpack_from('<4h',d,16)
+  out.append(dict(cmd=struct.unpack_from('<I',d,4)[0],t=struct.unpack_from('<I',d,8)[0],x0=x0,y0=y0,x1=x1,y1=y1,uv=tuple(d[24:28])))
+ return out
+def toggle(bit):call('KeyMapTestToggle',0,bit);call('KeyMapTestToggle',0,0)
+# imports with more than one argument need their own stub (the harness stub pops one argument)
+def stub_import(name,ret):
+ imp_p=struct.unpack_from('<I',b,o+96+8)[0];addr=0x25000200+len(name)*16
+ u.mem_write(addr,bytes.fromhex('31c0c2')+struct.pack('<H',ret))
+ while struct.unpack_from('<I',di,imp_p+12)[0]:
+  lookup,_,_,_,iat=struct.unpack_from('<5I',di,imp_p);lookup=lookup or iat;i=0
+  while (e:=struct.unpack_from('<I',di,lookup+i*4)[0]):
+   if not e&0x80000000 and di[e+2:di.index(0,e+2)]==name.encode():u.mem_write(0x10000000+iat+i*4,struct.pack('<I',addr))
+   i+=1
+  imp_p+=20
+stub_import('GetPrivateProfileIntA',16);stub_import('lstrcpyA',8)
+# detection: the stubbed imports read 0 (no config keys, no bio2hd module), so Auto = SD; HD and SD force their mode
+assert call('KeyMapTestSdDecide',0,0x20000000)==1 and call('KeyMapTestSdDecide',1,0x20000000)==0 and call('KeyMapTestSdDecide',2,0x20000000)==1
+call('KeyMapTestSdMode',1)
+for bit in (4,8,16,64,128,256,131072):toggle(bit)       # every category on
+toggle(4096);toggle(4096)                              # scope 3
+assert call('KeyMapTestScope')==3
+rect_of={(su,sv,sw,sh) for _,su,sv,sw,sh in SPR}
+for floor in (2,3,4,9,13,16):
+ q=draw(floor);assert len(q)>20,floor
+ for p in q:
+  assert p['t']==5000 and p['cmd']==0x24,p                        # one texture, opaque: no opacity packets in SD
+  assert 1<=p['x0']<=p['x1']<=318 and 1<=p['y0']<=p['y1']<=238,p
+  w,h=p['x1']-p['x0']+1,p['y1']-p['y0']+1;uw,uh=p['uv'][2]-p['uv'][0]+1,p['uv'][3]-p['uv'][1]+1
+  if (uw,uh)==(1,1):continue                                       # a 1 px leader run (or the unit-sized texel)
+  assert (uw,uh)==(w,h),p                                          # 1:1 texels
+  assert (p['uv'][0],p['uv'][1],w,h) in rect_of,p                  # an SD sprite, not an HD atlas cell
+ # every room name of the screen (English, all rooms shown) sits at its layout position, 1:1, unless the legend pushed it
+ pos={(p['x0'],p['y0'],p['x1']-p['x0']+1,p['y1']-p['y0']+1) for p in q}
+ for j,(pl,fl,seen,code,name) in enumerate(hrows('room_names-en.h')):
+  if (pl,fl)!=(0,floor):continue
+  sp,x,y,n,_=table_en[j];_,_,_,w,h=SPR[int(sp)]
+  assert (int(x),int(y),w,h) in pos or int(y)+h>238-5*11-6,(floor,name)
+ legend=[p for p in q if p['y0']>=238-5*11-4]
+ assert len(legend)>=14,(floor,len(legend))                       # title, hide, 12 rows (+ names that sit above)
+for lang_toggle in (32,):
+ toggle(lang_toggle);q=draw(2);assert call('KeyMapTestLanguage')==0 and len(q)>30
+ toggle(lang_toggle)
+
+
+stub_import('VirtualProtect',16)   # floor_keys: VirtualProtect fails cleanly
+u.mem_write(0x4ed950,bytes.fromhex('c3'));u.mem_map(0x22000000,0x10000);u.mem_write(0x6805b8,struct.pack('<I',0x22000000))
+for k in range(0x29):u.mem_write(0x67c7d8+k*12,struct.pack('<III',1000+k,256,0))
+# 2x zoom: markers and names keep their 1:1 size, names follow the map (leader start at 2x), nothing leaves the screen
+def press(bit=0x1000):u.mem_write(0x988608,struct.pack('<I',bit));call('KeyMapTestZoomInput');u.mem_write(0x988608,bytes(4));call('KeyMapTestZoomInput')
+press();assert call('KeyMapTestZoomState')==1
+for vx,vy in ((160,120),(0,0),(320,240)):
+ call('KeyMapTestZoomView',vx,vy);q=draw(2)
+ assert len(q)>20
+ for p in q:
+  if p['t']!=5000:continue
+  assert 1<=p['x0']<=p['x1']<=318 and 1<=p['y0']<=p['y1']<=238,p
+  uw,uh=p['uv'][2]-p['uv'][0]+1,p['uv'][3]-p['uv'][1]+1
+  assert (uw,uh)==(1,1) or (p['x1']-p['x0']+1,p['y1']-p['y0']+1)==(uw,uh) or p['x0']<=1 or p['x1']>=318 or p['y0']<=1 or p['y1']>=238,p   # 1:1 unless cropped at the edge
+print('SD tests passed')
