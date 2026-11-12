@@ -108,9 +108,9 @@ The release ZIP includes a default INI with comments. Close the game before edit
 | `IconSize` | `100` | Icon size (50–200) |
 | `IconOpacity` | `80` | Icon opacity (10–100) |
 | `Modifier` | `Shift` | Modifier for icon size/opacity: `Shift` or `Ctrl` |
-| `LockSide` | `0` | `0` lock markers on the door, `1` in the room not entered yet (RE1 HD style) |
+| `LockSide` | `1` | `1` lock markers beside the door, in the room not entered yet (RE1 HD style); `0` on the door. Settings files from before 1.4 are switched to `1` once |
 | `DisplayMode` | `Auto` | `Auto` follows HD and SD above, `HD` or `SD` forces one. Restart after changing |
-| `Version` | `4` | Settings format, written automatically; do not edit |
+| `Version` | `5` | Settings format, written automatically; do not edit |
 | `Rank` | `0` | `1` shows the rank estimate. Restart after changing |
 
 All settings are in the `[MapOverlay]` section.
@@ -119,7 +119,7 @@ All settings are in the `[MapOverlay]` section.
 
 - Only the GOG `Resident Evil 2.exe` with Classic REbirth is supported. Other executables load nothing and only write a log.
 - Enlarged names keep their positions, so they can overlap on crowded maps.
-- With `LockSide=1` the other side is the game's own spot just past the door, only a few pixels away. Doors leading to another floor keep the marker on the door.
+- With `LockSide=1` (default) the marker sits at the game's own spot just past the door, only a few pixels away. Doors leading to another floor keep the marker on the door.
 - Enemy markers show spawn points, not live enemy positions.
 
 ## Support

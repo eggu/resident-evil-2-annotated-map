@@ -81,15 +81,20 @@ def load():return call('KeyMapTestSettings',PATH,0)
 def save():calls.clear();return call('KeyMapTestSettings',PATH,1)
 def toggle(bits):call('KeyMapTestToggle',0,bits);call('KeyMapTestToggle',0,0)
 call('KeyMapTestInit',0x400000)
-# A missing INI gives the defaults: icons 100/80, item names off, Shift, lock at the door; it counts as old (migrate once).
-assert load()==1 and call('KeyMapTestIcons')==100|80<<8 and call('KeyMapTestSize')==100 and call('KeyMapTestOpacity')==70
+# A missing INI gives the defaults: icons 100/80, item names off, Shift, lock beside the door in the room not entered yet; it counts as old (migrate once).
+assert load()==1 and call('KeyMapTestIcons')>>18&1==1 and call('KeyMapTestIcons')&0xffff==100|80<<8 and call('KeyMapTestSize')==100 and call('KeyMapTestOpacity')==70
+# LockSide (2026-11-13): default 1; a file older than version 5 stored 0 as its default and is switched once; version 5 keeps a chosen 0.
+def lock_side():return call('KeyMapTestIcons')>>18&1
+files[INI]='[MapOverlay]\nVersion=4\nLockSide=0\n';assert load()==1 and lock_side()==1
+files[INI]='[MapOverlay]\nVersion=5\nLockSide=0\n';assert load()==0 and lock_side()==0
+files[INI]='[MapOverlay]\nVersion=5\n';assert load()==0 and lock_side()==1
 # A 1.1.0 INI (no Version): values and comments survive; one save writes Version=2 and the new keys through a copy.
 files[INI]='[MapOverlay]\n; Room and key-item name size\nNameSize=70\nNameOpacity=40\nLegend=0\nEnglish=0\nIconSize=500\nIconOpacity=3\n'
 assert load()==1 and call('KeyMapTestSize')==90 and call('KeyMapTestOpacity')==40 and call('KeyMapTestLegend')==0 and call('KeyMapTestLanguage')==0
 assert call('KeyMapTestIcons')&0xffff==200|10<<8 # clamped on read
 assert save()==1 and TMP not in files and calls.index('CopyFileA')<calls.index('WritePrivateProfileStringA')<calls.index('MoveFileExA')
-v=ini(INI);assert v[('MapOverlay','version')]=='4' and v[('MapOverlay','namesize')]=='90' and v[('MapOverlay','iconsize')]=='200' and v[('MapOverlay','modifier')]=='Shift'
-assert v[('MapOverlay','itemnames')]=='0' and v[('MapOverlay','lockside')]=='0' and '; Room and key-item name size' in files[INI]
+v=ini(INI);assert v[('MapOverlay','version')]=='5' and v[('MapOverlay','namesize')]=='90' and v[('MapOverlay','iconsize')]=='200' and v[('MapOverlay','modifier')]=='Shift'
+assert v[('MapOverlay','itemnames')]=='0' and v[('MapOverlay','lockside')]=='1' and '; Room and key-item name size' in files[INI]
 assert load()==0 # migrated: no second rewrite
 # A failed replace keeps the previous file and removes the copy.
 old=files[INI];fail['move']=True;toggle(16384);fail['move']=False
@@ -102,7 +107,7 @@ def names_mode():return call('KeyMapTestIcons')>>19&3
 for old,mode in (('1',1),('0',0),('2',2),('7',1)):
  files[INI]='[MapOverlay]\nVersion=2\nItemNames='+old+'\n'
  assert load()==1 and names_mode()==mode,(old,names_mode()) # Version 2 file: rewritten once
- assert save()==1 and ini(INI)[('MapOverlay','version')]=='4' and ini(INI)[('MapOverlay','itemnames')]==str(mode) and load()==0
+ assert save()==1 and ini(INI)[('MapOverlay','version')]=='5' and ini(INI)[('MapOverlay','itemnames')]==str(mode) and load()==0
 files[INI]='[MapOverlay]\nItemNames=1\n';assert load()==1 and names_mode()==1 # 1.1.0 file without Version: on stays all
 # Name size re-base (2026-11-08): the old 80% is the new 100%, so a saved NameSize of an older file is converted once
 # (old v -> v x 100 / 80, rounded to 10) and the visible size stays; no saved value gives the new default 100.
@@ -112,7 +117,7 @@ for old,new in (('100',130),('80',100),('60',80),('120',150),('150',190)):
  assert load()==1 and name_size()==new,(old,name_size())
  assert save()==1 and ini(INI)[('MapOverlay','namesize')]==str(new) and load()==0 and name_size()==new # no second conversion
 files[INI]='[MapOverlay]\nVersion=3\n';assert load()==1 and name_size()==100
-files[INI]='[MapOverlay]\nVersion=4\nNameSize=70\n';assert load()==0 and name_size()==70
+files[INI]='[MapOverlay]\nVersion=5\nNameSize=70\n';assert load()==0 and name_size()==70
 # Events toggle: new key, saved by name (numbers on the keyboard changed, stored toggles did not).
 files[INI]='[MapOverlay]\nVersion=3\nCommonItems=1\nEnemies=1\nPuzzles=1\n';assert load()==1 and call('KeyMapTestEvents')==0 and call('KeyMapTestCommon')==1 and call('KeyMapTestMonsters')==1
 toggle(131072);assert call('KeyMapTestEvents')==1 and ini(INI)[('MapOverlay','events')]=='1' and ini(INI)[('MapOverlay','commonitems')]=='1' and ini(INI)[('MapOverlay','enemies')]=='1'

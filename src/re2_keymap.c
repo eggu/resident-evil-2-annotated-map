@@ -66,7 +66,9 @@ static char settings_path[MAX_PATH];
 // Version 4 (2026-11-08): the number keys were renumbered ([6] events, common items [7], enemies [8], scope [9], language on the
 // backslash key); toggles are stored by name so they keep their values, Events is new, and NameSize is re-based (100% is the
 // former 80%): an older file's NameSize is converted once so the visible size stays.
-#define SETTINGS_VERSION 4
+// Version 5 (2026-11-13, user request): lock markers sit beside the door in the room not entered yet by default (LockSide=1). Version 4
+// and older files stored LockSide=0 as the default, so their value is replaced by 1 once; set it back to 0 afterwards to keep it on the door.
+#define SETTINGS_VERSION 5
 // Atomic save: the keys go into a copy of the INI (its comments kept), which then replaces it; on failure the old file stays.
 static int save_settings(void){
  if(!settings_path[0])return 0;
@@ -110,7 +112,7 @@ static int load_settings(void){
  {int v=(int)GetPrivateProfileIntA("MapOverlay","ItemNames",0,settings_path);item_names_enabled=v==2?NAMES_NO_COMMON:v!=0?NAMES_ALL:NAMES_OFF;}
  icon_size=icon_size_value((int)GetPrivateProfileIntA("MapOverlay","IconSize",100,settings_path));
  icon_opacity=opacity_value((int)GetPrivateProfileIntA("MapOverlay","IconOpacity",80,settings_path));
- lock_side=GetPrivateProfileIntA("MapOverlay","LockSide",0,settings_path)!=0;
+ lock_side=GetPrivateProfileIntA("MapOverlay","Version",0,settings_path)<5||GetPrivateProfileIntA("MapOverlay","LockSide",1,settings_path)!=0;
  {char m[8]={0};GetPrivateProfileStringA("MapOverlay","DisplayMode","Auto",m,sizeof(m),settings_path);display_mode=lstrcmpiA(m,"SD")==0?2:lstrcmpiA(m,"HD")==0?1:0;}
  char mod[8]={0};GetPrivateProfileStringA("MapOverlay","Modifier","Shift",mod,sizeof(mod),settings_path);
  modifier_ctrl=lstrcmpiA(mod,"Ctrl")==0;
@@ -662,8 +664,9 @@ static const Icon *door_icon(const Door *d,unsigned pl,unsigned mpl,unsigned flo
  for(unsigned k=0;k<sizeof(icons)/sizeof(icons[0]);k++)if(icons[k].item==d->key)return icons+k;
  return 0;
 }
-// LockSide=1 (RE1 HD map mod style): the lock sits in the room not entered yet: its own room when only the
-// destination was visited, else the destination. LockSide=0 (default) and doors without a drawn other side: on the door.
+// LockSide=1 (default since 1.4, RE1 HD map mod style): the lock sits beside the door in the room not entered yet: its own room when only the
+// destination was visited, else the destination (x2,y2, the door's arrival point a few px past it). LockSide=0 and doors without a drawn other
+// side (seen2=255, e.g. doors to another floor): on the door. HD and SD share this position.
 static void door_pos(const Door *d,int dx,int dy,int *x,int *y){
  int at=lock_side&&d->seen2!=255?(check_bit((void*)addr(0x98ec04),d->seen2)&&!check_bit((void*)addr(0x98ec04),d->seen)?1:2):0;
  *x=MX(at==1?d->x1:at==2?d->x2:d->x);*y=MY(at==1?d->y1:at==2?d->y2:d->y);
