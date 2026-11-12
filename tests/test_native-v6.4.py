@@ -948,17 +948,24 @@ def lock_at(seen,side):
   q=u.mem_read(p,32);x0,y0,x1,y1=struct.unpack_from('<4h',q,16)
   if created.get(struct.unpack_from('<I',q,8)[0])==('atlas',0) and (q[24],q[25])==lic[1:3]:got.append(((x0+x1+1)//2,(y0+y1+1)//2))
  call('KeyMapTestLockSide',0);return got
+def door_bar_of(x,y):
+ for va in range(0x53da70,0x53dae0,8):
+  e=bytes(u.mem_read(va,8))
+  if struct.unpack_from('<hh',e,4)==(x,y):return e[3]&1
 def room_centre(pl,floor,seen):
  ptr,count=struct.unpack('<IB',u.mem_read((0x53eb98 if pl&1 else 0x53eaf8)+floor*8,5))
  for k in range(count):
   q=bytes(u.mem_read(ptr+k*16,16))
   if q[12]==seen:return struct.unpack_from('<h',q,4)[0]+q[2]//2,struct.unpack_from('<h',q,6)[0]+q[3]//2
-def beside(seen,w,h):
- # 2026-11-13: beside the native 8x8 door bar (at the door's x,y), on the side of the room not entered yet: out from the bar centre along the axis
- # towards that room's centre, half the bar + half the marker + 1 px; pan (4,6)
- rx,ry=room_centre(lpl,lfl,seen);cx,cy=lx+4,ly+4;vx,vy=rx-cx,ry-cy
- if abs(vx)>=abs(vy):return (cx+4+(-1 if vx<0 else 1)*(4+w//2+1),cy+6)
- return (cx+4,cy+6+(-1 if vy<0 else 1)*(4+h//2+1))
+def lock_candidates(pl,floor,x,y,seen,w,h,pan=(0,0)):
+ """Lock marker centres k 0..3 (2026-11-13): touching the native door bar's art (4x6 vertical or 6x4 horizontal, top-left of its 8x8 sprite)."""
+ hb=door_bar_of(x,y);aw,ah=((6,4) if hb else (4,6)) if hb is not None else (2,2)
+ cx,cy=(x+aw//2,y+ah//2) if hb is not None else (x,y);rx,ry=room_centre(pl,floor,seen);sx=-1 if rx-cx<0 else 1;sy=-1 if ry-cy<0 else 1
+ along_x=(not hb) if hb is not None else abs(rx-cx)>=abs(ry-cy)
+ tx,ty=aw//2+w//2,ah//2+h//2;px,py=pan[0]+cx,pan[1]+cy
+ if along_x:return [(px+sx*tx,py),(px,py+sy*ty),(px,py-sy*ty),(px-sx*tx,py)]
+ return [(px,py+sy*ty),(px+sx*tx,py),(px-sx*tx,py),(px,py-sy*ty)]
+def beside(seen,w,h):return lock_candidates(lpl,lfl,lx,ly,seen,w,h,(4,6))[0] # pan (4,6)
 m_=max(lic[3],lic[4]);lw,lh=((lic[3]*LOCK_TENTHS*100*100//10000+m_*5)//(m_*10),(lic[4]*LOCK_TENTHS*100*100//10000+m_*5)//(m_*10))
 assert lock_at([lseen],0)==[(lx+4,ly+6)] # pan (4,6)
 assert lock_at([lseen],1)==[beside(lseen2,lw,lh)] and lock_at([lseen,lseen2],1)==[beside(lseen2,lw,lh)]

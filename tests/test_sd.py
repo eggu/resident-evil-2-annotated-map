@@ -105,6 +105,11 @@ def stub_import(name,ret):
 stub_import('GetPrivateProfileIntA',16);stub_import('lstrcpyA',8)
 # detection: the stubbed imports read 0 (no config keys, no bio2hd module), so Auto = SD; HD and SD force their mode
 assert call('KeyMapTestSdDecide',0,0x20000000)==1 and call('KeyMapTestSdDecide',1,0x20000000)==0 and call('KeyMapTestSdDecide',2,0x20000000)==1
+# Auto decision table (user 2026-11-13): HD only with Classic REbirth AND the HD pack AND RetroMode off AND LowResEnable off
+for rebirth in (0,1):
+ for hd in (0,1):
+  for retro in (0,1):
+   for low in (0,1):assert call('KeyMapTestSdAuto',rebirth,hd,retro,low)==(0 if (rebirth and hd and not retro and not low) else 1),(rebirth,hd,retro,low)
 call('KeyMapTestSdMode',1)
 for bit in (4,8,16,64,128,256,131072):toggle(bit)       # every category on
 toggle(4096);toggle(4096)                              # scope 3
@@ -136,7 +141,7 @@ for lang_toggle in (32,):
 # side: out from the bar centre towards that room's centre, clear of the bar (4 + 4 + 1 px); LockSide=0 keeps the marker on the door (x,y).
 def lock_quads(floor,rect):
  return [(p['x0']+4,p['y0']+4) for p in draw(floor) if p['t']==5000 and (p['uv'][0],p['uv'][1],p['x1']-p['x0']+1,p['y1']-p['y0']+1)==rect]
-checked=0
+checked=exact=0
 for floor in range(2,20):
  here=[d for d in doors if d[0]==0 and d[1]==floor and d[6]<100 and lock[d[6]]!=0xFFFF and d[7]==0 and d[8]==255 and d[13]!=255 and (d[2],d[3])!=(d[11],d[12])]
  for d in here:
@@ -145,19 +150,25 @@ for floor in range(2,20):
   if len(same)!=1 or not(6<=d[2]<=312 and 6<=d[3]<=232 and 6<=d[11]<=312 and 6<=d[12]<=232):continue
   call('KeyMapTestLockSide',0)
   if lock_quads(floor,rect)!=[(d[2],d[3])]:continue   # hidden under a key marker on this screen
+  def bar_h():
+   for va in range(0x53da70,0x53dae0,8):
+    e=bytes(u.mem_read(va,8))
+    if struct.unpack_from('<hh',e,4)==(d[2],d[3]):return e[3]&1
   ptr,count=struct.unpack('<IB',u.mem_read(0x53eaf8+floor*8,5));rc=None
   for k in range(count):
    qq=bytes(u.mem_read(ptr+k*16,16))
    if qq[12]==d[13]:rc=(struct.unpack_from('<h',qq,4)[0]+qq[2]//2,struct.unpack_from('<h',qq,6)[0]+qq[3]//2)
-  cx,cy=d[2]+4,d[3]+4;vx,vy=rc[0]-cx,rc[1]-cy
-  want=(cx+(-9 if vx<0 else 9),cy) if abs(vx)>=abs(vy) else (cx,cy+(-9 if vy<0 else 9))
+  hb=bar_h();aw,ah=((6,4) if hb else (4,6)) if hb is not None else (2,2);cx,cy=(d[2]+aw//2,d[3]+ah//2) if hb is not None else (d[2],d[3]);sx=-1 if rc[0]-cx<0 else 1;sy=-1 if rc[1]-cy<0 else 1
+  tx,ty=aw//2+4,ah//2+4     # 9x9 marker touching the bar's art
+  ax=(not hb) if hb is not None else abs(rc[0]-cx)>=abs(rc[1]-cy)
+  cands=[(cx+sx*tx,cy),(cx,cy+sy*ty),(cx,cy-sy*ty),(cx-sx*tx,cy)] if ax else [(cx,cy+sy*ty),(cx+sx*tx,cy),(cx-sx*tx,cy),(cx,cy-sy*ty)]
   call('KeyMapTestLockSide',1)
-  if want[0]<6 or want[0]>312 or want[1]<6 or want[1]>232:continue   # clamped to the screen
+  if any(c[0]<6 or c[0]>312 or c[1]<6 or c[1]>232 for c in cands):continue   # clamped to the screen
   got=lock_quads(floor,rect)
-  if not got:continue   # under a key marker beside the door: key items are never covered
-  assert got==[want],(floor,d,want,got)
+  assert len(got)==1 and got[0] in cands,(floor,d,cands,got)   # the first side no key marker covers
+  exact+=got[0]==cands[0]
   call('KeyMapTestLockSide',0);checked+=1
-assert checked>=3,checked
+assert checked>=3 and exact>=2,(checked,exact)
 stub_import('VirtualProtect',16)   # floor_keys: VirtualProtect fails cleanly
 u.mem_write(0x4ed950,bytes.fromhex('c3'));u.mem_map(0x22000000,0x10000);u.mem_write(0x6805b8,struct.pack('<I',0x22000000))
 for k in range(0x29):u.mem_write(0x67c7d8+k*12,struct.pack('<III',1000+k,256,0))
@@ -183,6 +194,27 @@ for j,(pl,fl,seen,code,name) in enumerate(hrows('room_names-en.h')):
  if 2<=sx and 2<=sy and sx+iw<=318 and sy+ih<=238 and not(sy+ih>238-5*11-4 and sx<2+280):
   assert (sx,sy) in pos,(name,sx,sy);inside_drawn+=1
 assert inside_drawn>=3,inside_drawn
+# 2x zoom: the lock marker keeps its size and touches the doubled bar art (4x6 / 6x4 texels doubled)
+call('KeyMapTestLockSide',1);call('KeyMapTestZoomView',60,150)
+tested=0
+for d in [e for e in doors if e[0]==0 and e[1]==2 and e[6] in (90,91,92)]:
+ hb=None
+ for va in range(0x53da70,0x53dae0,8):
+  e=bytes(u.mem_read(va,8))
+  if struct.unpack_from('<hh',e,4)==(d[2],d[3]):hb=e[3]&1
+ aw,ah=(6,4) if hb else (4,6);cx,cy=2*(d[2]+aw//2)-60,2*(d[3]+ah//2)-150
+ ptr,count=struct.unpack('<IB',u.mem_read(0x53eaf8+2*8,5))
+ for k in range(count):
+  qq=bytes(u.mem_read(ptr+k*16,16))
+  if qq[12]==d[13]:rc=(struct.unpack_from('<h',qq,4)[0]+qq[2]//2,struct.unpack_from('<h',qq,6)[0]+qq[3]//2)
+ sx=-1 if rc[0]-(d[2]+aw//2)<0 else 1;sy=-1 if rc[1]-(d[3]+ah//2)<0 else 1
+ tx,ty=aw+4,ah+4
+ cands=[(cx+sx*tx,cy),(cx,cy+sy*ty),(cx,cy-sy*ty),(cx-sx*tx,cy)] if not hb else [(cx,cy+sy*ty),(cx+sx*tx,cy),(cx-sx*tx,cy),(cx,cy-sy*ty)]
+ _,_,su,sv,sw,sh=(0,)+SPR[lock[d[6]]]
+ got=[(p['x0']+4,p['y0']+4) for p in draw(2) if p['t']==5000 and (p['uv'][0],p['uv'][1],p['x1']-p['x0']+1,p['y1']-p['y0']+1)==(su,sv,sw,sh)]
+ if 12<=cx<=300 and 12<=cy<=160 and not any(c[1]>170 for c in cands):assert len(got)==1 and got[0] in cands,(d,cands,got);tested+=1
+assert tested>=1,tested
+call('KeyMapTestLockSide',0)
 # names are part of the map: panning moves every drawn name by exactly the view change (no pulling to the screen edge, no leader re-ending)
 def sprite_quads(vx,vy):
  call('KeyMapTestZoomView',vx,vy);return [(p['x0'],p['y0'],p['x1']-p['x0']+1,p['y1']-p['y0']+1) for p in draw(2) if p['t']==5000]

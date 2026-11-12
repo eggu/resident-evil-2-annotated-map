@@ -120,17 +120,29 @@ static int load_settings(void){
 }
 
 // A toggle needs a rest period: the RE0 HD mod's live log showed one press arriving three times 200 ms apart.
-// Auto: SD when Classic REbirth runs without HD textures. RE2 has no HDTextures key (REbirth 1.0.9 knows RetroMode and LowResEnable);
-// the HD textures come from bio2hd.asi (hires\ hash replacement), so SD = RetroMode or LowResEnable on, or bio2hd.asi not loaded.
+// Classic REbirth is the ddraw.dll beside the game exe; a system ddraw.dll (or none) means no REbirth.
+static int rebirth_loaded(void){
+ HMODULE m=GetModuleHandleA("ddraw.dll");char dll[MAX_PATH],exe[MAX_PATH];
+ if(!m||!GetModuleFileNameA(m,dll,MAX_PATH)||!GetModuleFileNameA(NULL,exe,MAX_PATH))return 0;
+ char *da=dll,*db=exe;
+ for(char *q=dll;*q;q++)if(*q=='\\'||*q=='/')da=q;
+ for(char *q=exe;*q;q++)if(*q=='\\'||*q=='/')db=q;
+ *da=*db=0;
+ return !lstrcmpiA(dll,exe);
+}
+// Auto (user 2026-11-13, RE1-RE3): HD only when Classic REbirth runs with the HD pack (bio2hd.asi, hires\ hash replacement) loaded and
+// neither RetroMode nor LowResEnable is on; every other case, including no Classic REbirth at all, is SD. RE2 has no HDTextures key.
+static int sd_auto(int rebirth,int hd_pack,int retro,int low_res){return !(rebirth&&hd_pack&&!retro&&!low_res);}
 static int sd_decide(void){
  if(sd_mode<0){
+  int rebirth=rebirth_loaded(),hd=GetModuleHandleA("bio2hd.asi")!=0;
   int retro=GetPrivateProfileIntA("DLL","RetroMode",0,config_path)!=0,low=GetPrivateProfileIntA("DLL","LowResEnable",0,config_path)!=0;
-  int hd=GetModuleHandleA("bio2hd.asi")!=0;
-  sd_mode=display_mode==2||(display_mode==0&&(retro||low||!hd));
-  log_line(sd_mode?"SD mode: 1x markers and names (DisplayMode=%d retro=%d lowres=%d bio2hd=%d)\n":"HD mode (DisplayMode=%d retro=%d lowres=%d bio2hd=%d)\n",display_mode,retro,low,hd);
+  sd_mode=display_mode==2||(display_mode==0&&sd_auto(rebirth,hd,retro,low));
+  log_line(sd_mode?"SD mode: 1x markers and names (DisplayMode=%d rebirth=%d bio2hd=%d retro=%d lowres=%d)\n":"HD mode (DisplayMode=%d rebirth=%d bio2hd=%d retro=%d lowres=%d)\n",display_mode,rebirth,hd,retro,low);
  }
  return sd_mode;
 }
+__declspec(dllexport) int __cdecl KeyMapTestSdAuto(int rebirth,int hd_pack,int retro,int low_res){return sd_auto(rebirth,hd_pack,retro,low_res);}
 #define DEBOUNCE_MS 350
 static int debounced(unsigned bit){
  static LARGE_INTEGER last[17];LARGE_INTEGER now={0},rate={0};
@@ -674,19 +686,39 @@ static int room_centre(unsigned pl,unsigned floor,unsigned seen,int *cx,int *cy)
  for(unsigned k=0;k<f[4];k++,e+=16)if(e[0xc]==seen){*cx=*(const short*)(e+4)+e[2]/2;*cy=*(const short*)(e+6)+e[3]/2;return 1;}
  return 0;
 }
-// Lock marker centre. LockSide=0, doors without a drawn other side (seen2=255, no native bar): on the door spot. LockSide=1: beside the
-// native door bar (an 8x8 sprite at the door's x,y; the marker box would sit under it, user 2026-11-13: "not beside the door, so hidden"),
-// on the side of the room not entered yet: out from the bar's centre along the axis towards that room's centre, just clear of the bar
-// (half the bar + half the marker + 1 px; the bar doubles at 2x zoom, the marker stays 1:1 in SD).
-static void door_pos(const Door *d,const Icon *i,int dx,int dy,int *x,int *y){
+// The native door bar of a door row: the game's door table 0x53da70 (8-byte rows: b3 bit 0 = horizontal bar, x,y at +4/+6) draws an
+// 8x8 sprite at the door's x,y whose art is only 4x6 (vertical bar, a door in a vertical wall) or 6x4 (horizontal bar) in its top-left.
+static int door_bar(const Door *d,int *horizontal){
+ for(uintptr_t va=0x53da70;va<0x53dae0;va+=8){
+  const unsigned char *e=(const unsigned char*)addr(va);
+  if(*(const short*)(e+4)==d->x&&*(const short*)(e+6)==d->y){*horizontal=e[3]&1;return 1;}
+ }
+ return 0;
+}
+// Lock marker centre, candidate k. LockSide=0, doors without a drawn other side (seen2=255, no native bar): on the door spot (k 0 only).
+// LockSide=1: right beside the bar's art, touching it (user 2026-11-13: under it the marker was hidden, 5 px away it was "not at the
+// door"). k 0: on the side of the room not entered yet, along the axis the door is passed on (towards that room's centre); k 1/2: at
+// either end of the bar; k 3: the other side. The caller takes the first one a key marker does not cover. The bar doubles at 2x zoom,
+// the marker keeps its size. Returns 0 when there is no candidate k.
+static int door_pos(const Door *d,const Icon *i,int dx,int dy,unsigned k,int *x,int *y){
  int at=lock_side&&d->seen2!=255?(check_bit((void*)addr(0x98ec04),d->seen2)&&!check_bit((void*)addr(0x98ec04),d->seen)?1:2):0;
- if(!at){*x=MX(d->x);*y=MY(d->y);return;}
- int rx,ry,bx,by,bw,bh,z=zoom_on?2:1,cx=d->x+4,cy=d->y+4;
- if(!room_centre(d->pl&1,d->floor,at==1?d->seen:d->seen2,&rx,&ry)){rx=at==1?d->x1:d->x2;ry=at==1?d->y1:d->y2;} // fallback: the door AOT points
+ if(!at){*x=MX(d->x);*y=MY(d->y);return k==0;}
+ if(k>3)return 0;
+ int rx,ry,bx,by,bw,bh,z=zoom_on?2:1,horizontal_bar,bar=door_bar(d,&horizontal_bar);
+ int aw=bar?(horizontal_bar?6:4):2,ah=bar?(horizontal_bar?4:6):2,cx=bar?d->x+aw/2:d->x,cy=bar?d->y+ah/2:d->y; // art box and its centre (a lock
+ // without a native bar, e.g. a drawer or a projected door, is a point at the door spot: 2x2)
+ if(!room_centre(d->pl&1,d->floor,at==1?d->seen:d->seen2,&rx,&ry)){rx=at==1?d->x1:d->x2;ry=at==1?d->y1:d->y2;}
  icon_box(0,0,i,&bx,&by,&bw,&bh);
- int vx=rx-cx,vy=ry-cy,horizontal=(vx<0?-vx:vx)>=(vy<0?-vy:vy);
- int off=4*z+(horizontal?bw:bh)/2+1;
- *x=MX(cx)+(horizontal?(vx<0?-off:off):0);*y=MY(cy)+(horizontal?0:(vy<0?-off:off));
+ int vx=rx-cx,vy=ry-cy,sx=vx<0?-1:1,sy=vy<0?-1:1;
+ int along_x=bar?!horizontal_bar:((vx<0?-vx:vx)>=(vy<0?-vy:vy)); // the axis the door is passed on
+ int ox,oy; // offsets from the art centre
+ int tx=aw*z/2+bw/2,ty=ah*z/2+bh/2,ex=aw*z/2+bw/2,ey=ah*z/2+bh/2; // touching distances along x / y
+ if(along_x){ // vertical bar: the marker sits to its left/right (k 0, 3) or above/below (k 1, 2)
+  ox=k==0?sx*tx:k==3?-sx*tx:0;oy=k==1?sy*ey:k==2?-sy*ey:0;
+ }else{
+  oy=k==0?sy*ty:k==3?-sy*ty:0;ox=k==1?sx*ex:k==2?-sx*ex:0;
+ }
+ *x=MX(cx)+ox;*y=MY(cy)+oy;return 1;
 }
 // Name categories (ItemLabel.cat, tools/mapgen/category_colors.py): each is drawn in its legend row's colour.
 enum { LABEL_KEY,LABEL_LOCK,LABEL_PUZZLE,LABEL_DOCUMENT,LABEL_COMMON };
@@ -810,7 +842,7 @@ static unsigned draw_key_items(unsigned pl,unsigned mpl,unsigned floor,int dx,in
  for(unsigned j=0;locks_enabled&&j<sizeof(doors)/sizeof(doors[0]);j++){
   const Icon *i=door_icon(doors+j,pl,mpl,floor,flags);
   if(!i)continue;
-  int x,y,w,h,cx,cy;door_pos(doors+j,i,dx,dy,&cx,&cy);icon_box(cx,cy,i,&x,&y,&w,&h);reserve(x,y,w,h);
+  int x,y,w,h,cx,cy;door_pos(doors+j,i,dx,dy,0,&cx,&cy);icon_box(cx,cy,i,&x,&y,&w,&h);reserve(x,y,w,h);
   if(on_marker(rooms,cx,cy))reserve(x+MAP_BADGE,y+MAP_BADGE,w,h); // keep the name off its badge too (see draw_names)
  }
  for(unsigned j=0;documents_enabled&&j<sizeof(map_documents)/sizeof(map_documents[0]);j++){
@@ -948,11 +980,15 @@ static void draw_names(unsigned mode){
  }
  for(unsigned j=0;overlay_enabled&&locks_enabled&&j<sizeof(doors)/sizeof(doors[0]);j++){
   const Door*d=doors+j;const Icon *i=door_icon(d,pl,mpl,floor,flags);if(!i)continue;
-  int x,y,w,h,cx,cy;door_pos(d,i,dx,dy,&cx,&cy);icon_box(cx,cy,i,&x,&y,&w,&h);
-  // A locked box holding a key item shares its star's spot (611 Weapon Box): show the lock as a badge, like area maps.
-  int badge=on_marker(high_count,cx,cy);
-  if(badge){x+=MAP_BADGE;y+=MAP_BADGE;}
-  if((badge?!under_high_except(x,y,w,h,cx,cy):!under_high(x,y,w,h))&&!in_panel(x,y,w,h)){quad_draw(x,y,w,h,i->u,i->v,i->w,i->h,tex);name_marker(x,y,w,h,d->key,0);shown++;}
+  for(unsigned k=0;;k++){ // beside the door: the first of the bar's sides the key markers and the legend leave free
+   int x,y,w,h,cx,cy;
+   if(!door_pos(d,i,dx,dy,k,&cx,&cy))break;
+   icon_box(cx,cy,i,&x,&y,&w,&h);
+   // A locked box holding a key item shares its star's spot (611 Weapon Box): show the lock as a badge, like area maps.
+   int badge=on_marker(high_count,cx,cy);
+   if(badge){x+=MAP_BADGE;y+=MAP_BADGE;}
+   if((badge?!under_high_except(x,y,w,h,cx,cy):!under_high(x,y,w,h))&&!in_panel(x,y,w,h)){quad_draw(x,y,w,h,i->u,i->v,i->w,i->h,tex);name_marker(x,y,w,h,d->key,0);shown++;break;}
+  }
  }
  unsigned monsters=0;
  for(unsigned j=0;overlay_enabled&&monsters_enabled&&j<sizeof(map_monsters)/sizeof(map_monsters[0]);j++){
