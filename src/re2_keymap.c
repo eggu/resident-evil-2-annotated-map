@@ -667,9 +667,26 @@ static const Icon *door_icon(const Door *d,unsigned pl,unsigned mpl,unsigned flo
 // LockSide=1 (default since 1.4, RE1 HD map mod style): the lock sits beside the door in the room not entered yet: its own room when only the
 // destination was visited, else the destination (x2,y2, the door's arrival point a few px past it). LockSide=0 and doors without a drawn other
 // side (seen2=255, e.g. doors to another floor): on the door. HD and SD share this position.
-static void door_pos(const Door *d,int dx,int dy,int *x,int *y){
+// Centre of the room whose seen bit is `seen` on this floor (native room table: x,y at +4/+6, w,h at +2/+3, seen at +0xc).
+static int room_centre(unsigned pl,unsigned floor,unsigned seen,int *cx,int *cy){
+ if(floor>=20)return 0;
+ const unsigned char *f=(const unsigned char*)addr(pl?0x53eb98:0x53eaf8)+floor*8,*e=(const unsigned char*)addr(*(const uint32_t*)f);
+ for(unsigned k=0;k<f[4];k++,e+=16)if(e[0xc]==seen){*cx=*(const short*)(e+4)+e[2]/2;*cy=*(const short*)(e+6)+e[3]/2;return 1;}
+ return 0;
+}
+// Lock marker centre. LockSide=0, doors without a drawn other side (seen2=255, no native bar): on the door spot. LockSide=1: beside the
+// native door bar (an 8x8 sprite at the door's x,y; the marker box would sit under it, user 2026-11-13: "not beside the door, so hidden"),
+// on the side of the room not entered yet: out from the bar's centre along the axis towards that room's centre, just clear of the bar
+// (half the bar + half the marker + 1 px; the bar doubles at 2x zoom, the marker stays 1:1 in SD).
+static void door_pos(const Door *d,const Icon *i,int dx,int dy,int *x,int *y){
  int at=lock_side&&d->seen2!=255?(check_bit((void*)addr(0x98ec04),d->seen2)&&!check_bit((void*)addr(0x98ec04),d->seen)?1:2):0;
- *x=MX(at==1?d->x1:at==2?d->x2:d->x);*y=MY(at==1?d->y1:at==2?d->y2:d->y);
+ if(!at){*x=MX(d->x);*y=MY(d->y);return;}
+ int rx,ry,bx,by,bw,bh,z=zoom_on?2:1,cx=d->x+4,cy=d->y+4;
+ if(!room_centre(d->pl&1,d->floor,at==1?d->seen:d->seen2,&rx,&ry)){rx=at==1?d->x1:d->x2;ry=at==1?d->y1:d->y2;} // fallback: the door AOT points
+ icon_box(0,0,i,&bx,&by,&bw,&bh);
+ int vx=rx-cx,vy=ry-cy,horizontal=(vx<0?-vx:vx)>=(vy<0?-vy:vy);
+ int off=4*z+(horizontal?bw:bh)/2+1;
+ *x=MX(cx)+(horizontal?(vx<0?-off:off):0);*y=MY(cy)+(horizontal?0:(vy<0?-off:off));
 }
 // Name categories (ItemLabel.cat, tools/mapgen/category_colors.py): each is drawn in its legend row's colour.
 enum { LABEL_KEY,LABEL_LOCK,LABEL_PUZZLE,LABEL_DOCUMENT,LABEL_COMMON };
@@ -793,7 +810,7 @@ static unsigned draw_key_items(unsigned pl,unsigned mpl,unsigned floor,int dx,in
  for(unsigned j=0;locks_enabled&&j<sizeof(doors)/sizeof(doors[0]);j++){
   const Icon *i=door_icon(doors+j,pl,mpl,floor,flags);
   if(!i)continue;
-  int x,y,w,h,cx,cy;door_pos(doors+j,dx,dy,&cx,&cy);icon_box(cx,cy,i,&x,&y,&w,&h);reserve(x,y,w,h);
+  int x,y,w,h,cx,cy;door_pos(doors+j,i,dx,dy,&cx,&cy);icon_box(cx,cy,i,&x,&y,&w,&h);reserve(x,y,w,h);
   if(on_marker(rooms,cx,cy))reserve(x+MAP_BADGE,y+MAP_BADGE,w,h); // keep the name off its badge too (see draw_names)
  }
  for(unsigned j=0;documents_enabled&&j<sizeof(map_documents)/sizeof(map_documents[0]);j++){
@@ -931,7 +948,7 @@ static void draw_names(unsigned mode){
  }
  for(unsigned j=0;overlay_enabled&&locks_enabled&&j<sizeof(doors)/sizeof(doors[0]);j++){
   const Door*d=doors+j;const Icon *i=door_icon(d,pl,mpl,floor,flags);if(!i)continue;
-  int x,y,w,h,cx,cy;door_pos(d,dx,dy,&cx,&cy);icon_box(cx,cy,i,&x,&y,&w,&h);
+  int x,y,w,h,cx,cy;door_pos(d,i,dx,dy,&cx,&cy);icon_box(cx,cy,i,&x,&y,&w,&h);
   // A locked box holding a key item shares its star's spot (611 Weapon Box): show the lock as a badge, like area maps.
   int badge=on_marker(high_count,cx,cy);
   if(badge){x+=MAP_BADGE;y+=MAP_BADGE;}

@@ -948,10 +948,22 @@ def lock_at(seen,side):
   q=u.mem_read(p,32);x0,y0,x1,y1=struct.unpack_from('<4h',q,16)
   if created.get(struct.unpack_from('<I',q,8)[0])==('atlas',0) and (q[24],q[25])==lic[1:3]:got.append(((x0+x1+1)//2,(y0+y1+1)//2))
  call('KeyMapTestLockSide',0);return got
+def room_centre(pl,floor,seen):
+ ptr,count=struct.unpack('<IB',u.mem_read((0x53eb98 if pl&1 else 0x53eaf8)+floor*8,5))
+ for k in range(count):
+  q=bytes(u.mem_read(ptr+k*16,16))
+  if q[12]==seen:return struct.unpack_from('<h',q,4)[0]+q[2]//2,struct.unpack_from('<h',q,6)[0]+q[3]//2
+def beside(seen,w,h):
+ # 2026-11-13: beside the native 8x8 door bar (at the door's x,y), on the side of the room not entered yet: out from the bar centre along the axis
+ # towards that room's centre, half the bar + half the marker + 1 px; pan (4,6)
+ rx,ry=room_centre(lpl,lfl,seen);cx,cy=lx+4,ly+4;vx,vy=rx-cx,ry-cy
+ if abs(vx)>=abs(vy):return (cx+4+(-1 if vx<0 else 1)*(4+w//2+1),cy+6)
+ return (cx+4,cy+6+(-1 if vy<0 else 1)*(4+h//2+1))
+m_=max(lic[3],lic[4]);lw,lh=((lic[3]*LOCK_TENTHS*100*100//10000+m_*5)//(m_*10),(lic[4]*LOCK_TENTHS*100*100//10000+m_*5)//(m_*10))
 assert lock_at([lseen],0)==[(lx+4,ly+6)] # pan (4,6)
-assert lock_at([lseen],1)==[(lx2+4,ly2+6)] and lock_at([lseen,lseen2],1)==[(lx2+4,ly2+6)]
+assert lock_at([lseen],1)==[beside(lseen2,lw,lh)] and lock_at([lseen,lseen2],1)==[beside(lseen2,lw,lh)]
 toggle(4096);toggle(4096);assert call('KeyMapTestScope')==3 # all rooms: the door shows before its own room is visited
-assert lock_at([lseen2],1)==[(lx1+4,ly1+6)]
+assert lock_at([lseen2],1)==[beside(lseen,lw,lh)]
 toggle(4096);assert call('KeyMapTestScope')==1
 print('lock side ok')
 # [H] names every marker that has a name (2026-11-07, RE0): with key items off, lock-key, area-map and common-item names

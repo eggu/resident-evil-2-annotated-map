@@ -132,8 +132,8 @@ for lang_toggle in (32,):
  toggle(lang_toggle)
 
 
-# Lock markers (2026-11-13): beside the door, in the room not entered yet, in SD too. All rooms visited here, so the destination side
-# (door arrival point x2,y2) is used; LockSide=0 keeps the marker on the door (x,y). One door per screen, so its quad is unambiguous.
+# Lock markers (2026-11-13): beside the native 8x8 door bar, in the room not entered yet, in SD too. All rooms visited here, so the destination
+# side: out from the bar centre towards that room's centre, clear of the bar (4 + 4 + 1 px); LockSide=0 keeps the marker on the door (x,y).
 def lock_quads(floor,rect):
  return [(p['x0']+4,p['y0']+4) for p in draw(floor) if p['t']==5000 and (p['uv'][0],p['uv'][1],p['x1']-p['x0']+1,p['y1']-p['y0']+1)==rect]
 checked=0
@@ -145,7 +145,17 @@ for floor in range(2,20):
   if len(same)!=1 or not(6<=d[2]<=312 and 6<=d[3]<=232 and 6<=d[11]<=312 and 6<=d[12]<=232):continue
   call('KeyMapTestLockSide',0)
   if lock_quads(floor,rect)!=[(d[2],d[3])]:continue   # hidden under a key marker on this screen
-  call('KeyMapTestLockSide',1);assert lock_quads(floor,rect)==[(d[11],d[12])],(floor,d)
+  ptr,count=struct.unpack('<IB',u.mem_read(0x53eaf8+floor*8,5));rc=None
+  for k in range(count):
+   qq=bytes(u.mem_read(ptr+k*16,16))
+   if qq[12]==d[13]:rc=(struct.unpack_from('<h',qq,4)[0]+qq[2]//2,struct.unpack_from('<h',qq,6)[0]+qq[3]//2)
+  cx,cy=d[2]+4,d[3]+4;vx,vy=rc[0]-cx,rc[1]-cy
+  want=(cx+(-9 if vx<0 else 9),cy) if abs(vx)>=abs(vy) else (cx,cy+(-9 if vy<0 else 9))
+  call('KeyMapTestLockSide',1)
+  if want[0]<6 or want[0]>312 or want[1]<6 or want[1]>232:continue   # clamped to the screen
+  got=lock_quads(floor,rect)
+  if not got:continue   # under a key marker beside the door: key items are never covered
+  assert got==[want],(floor,d,want,got)
   call('KeyMapTestLockSide',0);checked+=1
 assert checked>=3,checked
 stub_import('VirtualProtect',16)   # floor_keys: VirtualProtect fails cleanly
