@@ -108,7 +108,7 @@ The release ZIP includes a default INI with comments. Close the game before edit
 | `IconSize` | `100` | Icon size (50–200) |
 | `IconOpacity` | `80` | Icon opacity (10–100) |
 | `Modifier` | `Shift` | Modifier for icon size/opacity: `Shift` or `Ctrl` |
-| `LockSide` | `1` | `1` lock markers beside the door, in the room not entered yet (RE1 HD style); `0` on the door. Settings files from before 1.4 are switched to `1` once |
+| `LockSide` | `1` | `1` lock markers beside the door, on the open side (the room you can enter from, not the locked room behind it; RE1 HD style); `0` on the door. Settings files from before 1.4 are switched to `1` once |
 | `DisplayMode` | `Auto` | `Auto` follows HD and SD above, `HD` or `SD` forces one. Restart after changing |
 | `Version` | `5` | Settings format, written automatically; do not edit |
 | `Rank` | `0` | `1` shows the rank estimate. Restart after changing |

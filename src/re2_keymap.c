@@ -66,7 +66,7 @@ static char settings_path[MAX_PATH];
 // Version 4 (2026-11-08): the number keys were renumbered ([6] events, common items [7], enemies [8], scope [9], language on the
 // backslash key); toggles are stored by name so they keep their values, Events is new, and NameSize is re-based (100% is the
 // former 80%): an older file's NameSize is converted once so the visible size stays.
-// Version 5 (2026-11-13, user request): lock markers sit beside the door in the room not entered yet by default (LockSide=1). Version 4
+// Version 5 (2026-11-13, user request): lock markers sit beside the door on the open side by default (LockSide=1). Version 4
 // and older files stored LockSide=0 as the default, so their value is replaced by 1 once; set it back to 0 afterwards to keep it on the door.
 #define SETTINGS_VERSION 5
 // Atomic save: the keys go into a copy of the INI (its comments kept), which then replaces it; on failure the old file stays.
@@ -676,9 +676,9 @@ static const Icon *door_icon(const Door *d,unsigned pl,unsigned mpl,unsigned flo
  for(unsigned k=0;k<sizeof(icons)/sizeof(icons[0]);k++)if(icons[k].item==d->key)return icons+k;
  return 0;
 }
-// LockSide=1 (default since 1.4, RE1 HD map mod style): the lock sits beside the door in the room not entered yet: its own room when only the
-// destination was visited, else the destination (x2,y2, the door's arrival point a few px past it). LockSide=0 and doors without a drawn other
-// side (seen2=255, e.g. doors to another floor): on the door. HD and SD share this position.
+// LockSide=1 (default since 1.4, RE1 HD map mod style): the lock sits beside the door on the open side: in the door's own room (the one
+// it is drawn for, visited), not in the locked room behind it whose background hid the marker (user 2026-11-13). LockSide=0 and doors without
+// a drawn other side (seen2=255, e.g. doors to another floor): on the door. HD and SD share this position.
 // Centre of the room whose seen bit is `seen` on this floor (native room table: x,y at +4/+6, w,h at +2/+3, seen at +0xc).
 static int room_centre(unsigned pl,unsigned floor,unsigned seen,int *cx,int *cy){
  if(floor>=20)return 0;
@@ -697,17 +697,16 @@ static int door_bar(const Door *d,int *horizontal){
 }
 // Lock marker centre, candidate k. LockSide=0, doors without a drawn other side (seen2=255, no native bar): on the door spot (k 0 only).
 // LockSide=1: right beside the bar's art, touching it (user 2026-11-13: under it the marker was hidden, 5 px away it was "not at the
-// door"). k 0: on the side of the room not entered yet, along the axis the door is passed on (towards that room's centre); k 1/2: at
+// door"). k 0: on the open side, along the axis the door is passed on (towards the door's own room centre); k 1/2: at
 // either end of the bar; k 3: the other side. The caller takes the first one a key marker does not cover. The bar doubles at 2x zoom,
 // the marker keeps its size. Returns 0 when there is no candidate k.
 static int door_pos(const Door *d,const Icon *i,int dx,int dy,unsigned k,int *x,int *y){
- int at=lock_side&&d->seen2!=255?(check_bit((void*)addr(0x98ec04),d->seen2)&&!check_bit((void*)addr(0x98ec04),d->seen)?1:2):0;
- if(!at){*x=MX(d->x);*y=MY(d->y);return k==0;}
+ if(!lock_side||d->seen2==255){*x=MX(d->x);*y=MY(d->y);return k==0;}
  if(k>3)return 0;
  int rx,ry,bx,by,bw,bh,z=zoom_on?2:1,horizontal_bar,bar=door_bar(d,&horizontal_bar);
  int aw=bar?(horizontal_bar?6:4):2,ah=bar?(horizontal_bar?4:6):2,cx=bar?d->x+aw/2:d->x,cy=bar?d->y+ah/2:d->y; // art box and its centre (a lock
  // without a native bar, e.g. a drawer or a projected door, is a point at the door spot: 2x2)
- if(!room_centre(d->pl&1,d->floor,at==1?d->seen:d->seen2,&rx,&ry)){rx=at==1?d->x1:d->x2;ry=at==1?d->y1:d->y2;}
+ if(!room_centre(d->pl&1,d->floor,d->seen,&rx,&ry)){rx=d->x1;ry=d->y1;}
  icon_box(0,0,i,&bx,&by,&bw,&bh);
  int vx=rx-cx,vy=ry-cy,sx=vx<0?-1:1,sy=vy<0?-1:1;
  int along_x=bar?!horizontal_bar:((vx<0?-vx:vx)>=(vy<0?-vy:vy)); // the axis the door is passed on

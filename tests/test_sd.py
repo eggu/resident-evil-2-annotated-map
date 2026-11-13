@@ -137,7 +137,7 @@ for lang_toggle in (32,):
  toggle(lang_toggle)
 
 
-# Lock markers (2026-11-13): beside the native 8x8 door bar, in the room not entered yet, in SD too. All rooms visited here, so the destination
+# Lock markers (2026-11-13): beside the native door bar, on the open side (the door's own room), in SD too. The door's
 # side: out from the bar centre towards that room's centre, clear of the bar (4 + 4 + 1 px); LockSide=0 keeps the marker on the door (x,y).
 def lock_quads(floor,rect):
  return [(p['x0']+4,p['y0']+4) for p in draw(floor) if p['t']==5000 and (p['uv'][0],p['uv'][1],p['x1']-p['x0']+1,p['y1']-p['y0']+1)==rect]
@@ -157,7 +157,7 @@ for floor in range(2,20):
   ptr,count=struct.unpack('<IB',u.mem_read(0x53eaf8+floor*8,5));rc=None
   for k in range(count):
    qq=bytes(u.mem_read(ptr+k*16,16))
-   if qq[12]==d[13]:rc=(struct.unpack_from('<h',qq,4)[0]+qq[2]//2,struct.unpack_from('<h',qq,6)[0]+qq[3]//2)
+   if qq[12]==d[4]:rc=(struct.unpack_from('<h',qq,4)[0]+qq[2]//2,struct.unpack_from('<h',qq,6)[0]+qq[3]//2)
   hb=bar_h();aw,ah=((6,4) if hb else (4,6)) if hb is not None else (2,2);cx,cy=(d[2]+aw//2,d[3]+ah//2) if hb is not None else (d[2],d[3]);sx=-1 if rc[0]-cx<0 else 1;sy=-1 if rc[1]-cy<0 else 1
   tx,ty=aw//2+4,ah//2+4     # 9x9 marker touching the bar's art
   ax=(not hb) if hb is not None else abs(rc[0]-cx)>=abs(rc[1]-cy)
@@ -206,7 +206,7 @@ for d in [e for e in doors if e[0]==0 and e[1]==2 and e[6] in (90,91,92)]:
  ptr,count=struct.unpack('<IB',u.mem_read(0x53eaf8+2*8,5))
  for k in range(count):
   qq=bytes(u.mem_read(ptr+k*16,16))
-  if qq[12]==d[13]:rc=(struct.unpack_from('<h',qq,4)[0]+qq[2]//2,struct.unpack_from('<h',qq,6)[0]+qq[3]//2)
+  if qq[12]==d[4]:rc=(struct.unpack_from('<h',qq,4)[0]+qq[2]//2,struct.unpack_from('<h',qq,6)[0]+qq[3]//2)
  sx=-1 if rc[0]-(d[2]+aw//2)<0 else 1;sy=-1 if rc[1]-(d[3]+ah//2)<0 else 1
  tx,ty=aw+4,ah+4
  cands=[(cx+sx*tx,cy),(cx,cy+sy*ty),(cx,cy-sy*ty),(cx-sx*tx,cy)] if not hb else [(cx,cy+sy*ty),(cx+sx*tx,cy),(cx-sx*tx,cy),(cx,cy-sy*ty)]

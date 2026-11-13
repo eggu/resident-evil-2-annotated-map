@@ -81,7 +81,7 @@ def load():return call('KeyMapTestSettings',PATH,0)
 def save():calls.clear();return call('KeyMapTestSettings',PATH,1)
 def toggle(bits):call('KeyMapTestToggle',0,bits);call('KeyMapTestToggle',0,0)
 call('KeyMapTestInit',0x400000)
-# A missing INI gives the defaults: icons 100/80, item names off, Shift, lock beside the door in the room not entered yet; it counts as old (migrate once).
+# A missing INI gives the defaults: icons 100/80, item names off, Shift, lock beside the door on the open side; it counts as old (migrate once).
 assert load()==1 and call('KeyMapTestIcons')>>18&1==1 and call('KeyMapTestIcons')&0xffff==100|80<<8 and call('KeyMapTestSize')==100 and call('KeyMapTestOpacity')==70
 # LockSide (2026-11-13): default 1; a file older than version 5 stored 0 as its default and is switched once; version 5 keeps a chosen 0.
 def lock_side():return call('KeyMapTestIcons')>>18&1

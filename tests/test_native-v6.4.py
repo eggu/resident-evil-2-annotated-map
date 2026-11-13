@@ -932,7 +932,7 @@ hf=next(m[1] for m in monsters if m[0]==0 and m[9]==0)
 assert mcount(mode_run(0,hf,(28,)))>0 and mcount(mode_run(0,hf,(28,)))==mcount(mode_run(0,hf))
 call('KeyMapTestToggle',0,256);call('KeyMapTestToggle',0,0)
 print('game-mode checks ok')
-# LockSide (2026-11-07): 0 keeps the lock on the door; 1 puts it in the room not entered yet: the destination (door AOT
+# LockSide: 0 keeps the lock on the door; 1 (2026-11-13) puts it beside the door on the open side, in the door's own room (was: the destination (door AOT
 # arrival point) unless only the destination was visited, then the door's own side (AOT centre).
 lock_door=next(d for d in doors if d[13]!=255 and d[4]!=d[13] and (d[9],d[10])!=(d[11],d[12]) and d[6] in {i[0] for i in icons} and d[7]==0 and d[8]==255)
 lpl,lfl,lx,ly,lseen,_,lkey,_,_,lx1,ly1,lx2,ly2,lseen2=lock_door
@@ -968,7 +968,7 @@ def lock_candidates(pl,floor,x,y,seen,w,h,pan=(0,0)):
 def beside(seen,w,h):return lock_candidates(lpl,lfl,lx,ly,seen,w,h,(4,6))[0] # pan (4,6)
 m_=max(lic[3],lic[4]);lw,lh=((lic[3]*LOCK_TENTHS*100*100//10000+m_*5)//(m_*10),(lic[4]*LOCK_TENTHS*100*100//10000+m_*5)//(m_*10))
 assert lock_at([lseen],0)==[(lx+4,ly+6)] # pan (4,6)
-assert lock_at([lseen],1)==[beside(lseen2,lw,lh)] and lock_at([lseen,lseen2],1)==[beside(lseen2,lw,lh)]
+assert lock_at([lseen],1)==[beside(lseen,lw,lh)] and lock_at([lseen,lseen2],1)==[beside(lseen,lw,lh)] # the open side: the door's own room
 toggle(4096);toggle(4096);assert call('KeyMapTestScope')==3 # all rooms: the door shows before its own room is visited
 assert lock_at([lseen2],1)==[beside(lseen,lw,lh)]
 toggle(4096);assert call('KeyMapTestScope')==1

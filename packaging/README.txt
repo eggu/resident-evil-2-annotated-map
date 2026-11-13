@@ -29,7 +29,7 @@ RE2 리메이크(2019)용이 아닙니다.
 - 지도 2배 확대: 결정 버튼으로 켜고 끕니다. 확대 중에는 방향 입력으로 지도를 옮기며, 지도를 다시 열면 1배로 돌아옵니다.
 - 기본값: 영어, 이름 크기 100%, 이름 불투명도 70%, 아이콘 크기 100%, 아이콘 불투명도 80%, 방문한 방만 표시,
   방 이름만 켬(2–7로 다른 항목 켬), 표식 이름 끔.
-- 잠금 표식은 문 바로 옆, 아직 들어가지 않은 쪽 방에 표시합니다(INI의 LockSide=0이면 문 위, 이전 버전 설정 파일은 한 번 1로 바뀜).
+- 잠금 표식은 문 바로 옆, 열려 있는 쪽 방(잠긴 방이 아님)에 표시합니다(INI의 LockSide=0이면 문 위, 이전 버전 설정 파일은 한 번 1로 바뀜).
 - 설정은 scripts/RE2.AnnotatedMap.ini에 저장됩니다.
 - [Z]는 A/B 시나리오 사이의 선택·행동과 관련된 재핑 표식이며 아이템 이름의 일부가 아닙니다.
 - 랭크 예상치는 INI의 Rank=1로 켭니다(기본 끔, 변경 후 게임 재실행).
@@ -77,7 +77,7 @@ Controls (on the map screen only)
 - 2x map zoom: the Action button toggles it. While zoomed, directions move the map; reopening the map returns to 1x.
 - Defaults: English, name size 100%, name opacity 70%, icon size 100%, icon opacity 80%, visited rooms only,
   only Rooms on (2-7 turn on other categories), marker names off.
-- Lock markers sit beside the door in the room not entered yet (LockSide=0 in the INI puts them on the door; settings files from older versions are switched to 1 once).
+- Lock markers sit beside the door on the open side, not in the locked room (LockSide=0 in the INI puts them on the door; settings files from older versions are switched to 1 once).
 - Settings are saved in scripts/RE2.AnnotatedMap.ini.
 - [Z] marks zapping-related items/interactions affected by choices or actions across scenarios A/B; it is not part of the item name.
 - The live rank estimate is enabled with Rank=1 in the INI (off by default; restart after changing).
