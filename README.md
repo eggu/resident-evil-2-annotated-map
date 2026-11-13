@@ -44,7 +44,7 @@ The mod picks a display mode once, when the first map opens.
 
 ## Installation
 
-1. Install **Classic REbirth** for Resident Evil 2 first (tested with 1.0.9). [Official download](https://classicrebirth.com/index.php/downloads/resident-evil-2-classic-rebirth/)
+1. For HD mode, install **Classic REbirth** for Resident Evil 2 first (tested with 1.0.9). Without it the map uses SD mode. [Official download](https://classicrebirth.com/index.php/downloads/resident-evil-2-classic-rebirth/)
 2. Close the game. Download `RE2-Annotated-Map-<version>.zip` from [Releases](https://github.com/eggu/resident-evil-2-annotated-map/releases/latest) and extract it. `Source code` is not the install package.
 3. Copy the ZIP contents (`dsound.dll`, `scripts/`) into the folder containing `Resident Evil 2.exe`, preserving the directory structure. [Ultimate ASI Loader](https://github.com/ThirteenAG/Ultimate-ASI-Loader) v9.7.4 (MIT) is included as `dsound.dll`.
    - If Ultimate ASI Loader is already installed as `dsound.dll` (e.g. by a translation patch), you can skip `dsound.dll`.
@@ -119,7 +119,7 @@ All settings are in the `[MapOverlay]` section.
 
 - Only the GOG `Resident Evil 2.exe` is supported (HD needs Classic REbirth; without it the map uses SD). Other executables load nothing and only write a log.
 - Enlarged names keep their positions, so they can overlap on crowded maps.
-- With `LockSide=1` (default) the marker sits at the game's own spot just past the door, only a few pixels away. Doors leading to another floor keep the marker on the door.
+- With `LockSide=1` (default) the marker sits right beside the door, on the side you can enter from. Doors leading to another floor keep the marker on the door. If key-item markers cover every spot beside a door, the lock marker can be hidden under them.
 - Enemy markers show spawn points, not live enemy positions.
 
 ## Support

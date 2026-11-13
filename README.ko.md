@@ -44,7 +44,7 @@ INI의 `DisplayMode=SD` 또는 `HD`로 방식을 고정할 수 있습니다(설�
 
 ## 설치
 
-1. Resident Evil 2용 **Classic REbirth**를 먼저 설치합니다(1.0.9에서 확인). [공식 다운로드](https://classicrebirth.com/index.php/downloads/resident-evil-2-classic-rebirth/)
+1. HD 모드를 쓰려면 Resident Evil 2용 **Classic REbirth**를 먼저 설치합니다(1.0.9에서 확인). 없으면 SD 모드로 표시합니다. [공식 다운로드](https://classicrebirth.com/index.php/downloads/resident-evil-2-classic-rebirth/)
 2. 게임을 종료합니다. [Releases](https://github.com/eggu/resident-evil-2-annotated-map/releases/latest)에서 `RE2-Annotated-Map-<버전>.zip`을 받아 압축을 풉니다. `Source code`는 설치 파일이 아닙니다.
 3. ZIP의 내용(`dsound.dll`, `scripts/`)을 `Resident Evil 2.exe`가 있는 게임 폴더에 폴더 구조 그대로 복사합니다. ASI 로더인 [Ultimate ASI Loader](https://github.com/ThirteenAG/Ultimate-ASI-Loader) v9.7.4(MIT)가 `dsound.dll`로 포함되어 있습니다.
    - 한글 패치 등으로 Ultimate ASI Loader가 이미 `dsound.dll`로 설치되어 있으면 `dsound.dll`은 건너뛰어도 됩니다.
@@ -119,7 +119,7 @@ INI의 `DisplayMode=SD` 또는 `HD`로 방식을 고정할 수 있습니다(설�
 
 - GOG판 `Resident Evil 2.exe`만 지원합니다(HD는 Classic REbirth가 필요하고, 없으면 SD로 표시). 다른 실행 파일에서는 아무것도 적용하지 않고 로그만 남깁니다.
 - 확대한 이름은 기존 위치를 유지하므로 좁은 지도에서 겹칠 수 있습니다.
-- `LockSide=1`(기본)의 문 반대편 위치는 게임이 정한 문 앞 지점이라 문에서 몇 픽셀만 떨어져 있습니다. 다른 층으로 이어지는 문은 문 위에 그대로 둡니다.
+- `LockSide=1`(기본)이면 마커를 문 바로 옆, 들어갈 수 있는 쪽에 둡니다. 다른 층으로 이어지는 문은 문 위에 그대로 둡니다. 문 옆 자리를 핵심 아이템 마커가 모두 차지하면 잠금 마커가 그 아래에 가려질 수 있습니다.
 - 적 표시는 출현 지점이며 실시간 위치가 아닙니다.
 
 ## 문제 신고

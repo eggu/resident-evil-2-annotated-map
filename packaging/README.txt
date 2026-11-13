@@ -1,8 +1,8 @@
 RE2 Annotated Map - Survivor's Notes - Resident Evil 2 (1998)
 상세 지도: 생존자의 메모
 
-지원: GOG판 Resident Evil 2(Resident Evil 2.exe) + Classic REbirth + Ultimate ASI Loader.
-Classic REbirth는 별도로 설치해야 합니다(1.0.9에서 확인): https://classicrebirth.com/index.php/downloads/resident-evil-2-classic-rebirth/ Ultimate ASI Loader v9.7.4(MIT)는 dsound.dll로 포함되어 있습니다.
+지원: GOG판 Resident Evil 2(Resident Evil 2.exe) + Ultimate ASI Loader(HD 모드는 Classic REbirth 필요).
+Classic REbirth는 별도로 설치하며 HD 모드에만 필요합니다(1.0.9에서 확인): https://classicrebirth.com/index.php/downloads/resident-evil-2-classic-rebirth/ Ultimate ASI Loader v9.7.4(MIT)는 dsound.dll로 포함되어 있습니다.
 RE2 리메이크(2019)용이 아닙니다.
 게임 지도에 방 이름, 잠긴 문과 열쇠, 핵심 아이템, 문서·지도, 퍼즐, 일반 아이템, 타자기·아이템 상자, 몬스터를 표시합니다.
 
@@ -47,8 +47,8 @@ https://github.com/eggu/resident-evil-2-annotated-map
 English
 ================================================================
 
-Supported: GOG Resident Evil 2 (Resident Evil 2.exe) + Classic REbirth + Ultimate ASI Loader.
-Classic REbirth must be installed separately (tested with 1.0.9): https://classicrebirth.com/index.php/downloads/resident-evil-2-classic-rebirth/ Ultimate ASI Loader v9.7.4 (MIT) is included as dsound.dll.
+Supported: GOG Resident Evil 2 (Resident Evil 2.exe) + Ultimate ASI Loader (HD mode needs Classic REbirth).
+Classic REbirth is installed separately and is needed only for HD mode (tested with 1.0.9): https://classicrebirth.com/index.php/downloads/resident-evil-2-classic-rebirth/ Ultimate ASI Loader v9.7.4 (MIT) is included as dsound.dll.
 This is not for the 2019 remake.
 Shows room names, locked doors and required keys, key items, documents and maps,
 puzzles, common items, typewriters and item boxes, and monsters on the game's map.
