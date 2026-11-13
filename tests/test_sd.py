@@ -12,6 +12,8 @@ def arr(text,name):
  body=text.split(name,1)[1].split('};',1)[0]
  return body
 assets=(R/'sd_assets.h').read_text()
+import re as _re
+_t=(R/'door_sides.h').read_text();DOOR_SIDES=[tuple(int(v) for v in m) for m in _re.findall(r'\{(-?\d+),(-?\d+)\}',_t.split('door_sides[][2]={',1)[1])]
 SPR=[tuple(map(int,m)) for m in re.findall(r'\{(\d+),(\d+),(\d+),(\d+),(\d+)\}',arr(assets,'sd_sprites[] = {'))]
 PX=np.array([int(v,16) for v in re.findall(r'0x[0-9a-f]+',assets.split('sd_pixels[SD_PAGES][65536] = {',1)[1])],np.uint16).reshape(-1,256,256)
 assert len(PX)==int(re.search(r'#define SD_PAGES (\d+)',assets)[1])
@@ -79,6 +81,15 @@ for lang in ('en','ko'):
 lock=[int(v,0) for v in re.findall(r'0x[0-9A-Fa-f]+|\d+',arr(assets,'sd_lock_sprite[100] = {').split('}')[0])]
 missing={k[6] for k in doors if k[6]<100 and lock[k[6]]==0xFFFF}
 assert not missing,missing
+# door open sides (door_sides.h): the marker side is inside the door's own room and outside the locked room behind it
+with_side=0
+for dr,side in zip(doors,DOOR_SIDES):
+ if dr[13]==255 or side==(0,0):continue
+ rooms={r['seen']:rect_cells(r) for r in next(f['rooms'] for f in shapes if (f['pl'],f['floor'])==(dr[0]&1,dr[1]))}
+ pts=[(dr[2]+3+side[0]*t,dr[3]+3+side[1]*t) for t in range(2,11)]
+ assert sum(p in rooms[dr[4]] for p in pts)>=3 and not any(p in rooms.get(dr[13],set()) for p in pts),(dr,side)
+ with_side+=1
+assert with_side>=20,with_side
 # --- emulated draw
 for va in (0x4021c0,):u.mem_write(va,bytes.fromhex('c20800'))
 call('KeyMapTestInit',0x400000);call('KeyMapTestTexture',5000)
@@ -161,7 +172,9 @@ for floor in range(2,20):
   hb=bar_h();aw,ah=((6,4) if hb else (4,6)) if hb is not None else (2,2);cx,cy=(d[2]+aw//2,d[3]+ah//2) if hb is not None else (d[2],d[3]);sx=-1 if rc[0]-cx<0 else 1;sy=-1 if rc[1]-cy<0 else 1
   tx,ty=aw//2+4,ah//2+4     # 9x9 marker touching the bar's art
   ax=(not hb) if hb is not None else abs(rc[0]-cx)>=abs(rc[1]-cy)
-  cands=[(cx+sx*tx,cy),(cx,cy+sy*ty),(cx,cy-sy*ty),(cx-sx*tx,cy)] if ax else [(cx,cy+sy*ty),(cx+sx*tx,cy),(cx-sx*tx,cy),(cx,cy-sy*ty)]
+  side=DOOR_SIDES[doors.index(d)]
+  if side!=(0,0):sx,sy=side;ax=sx!=0
+  cands=[(cx+sx*tx,cy),(cx,cy-ty),(cx,cy+ty)] if ax else [(cx,cy+sy*ty),(cx-tx,cy),(cx+tx,cy)]
   call('KeyMapTestLockSide',1)
   if any(c[0]<6 or c[0]>312 or c[1]<6 or c[1]>232 for c in cands):continue   # clamped to the screen
   got=lock_quads(floor,rect)
@@ -209,7 +222,10 @@ for d in [e for e in doors if e[0]==0 and e[1]==2 and e[6] in (90,91,92)]:
   if qq[12]==d[4]:rc=(struct.unpack_from('<h',qq,4)[0]+qq[2]//2,struct.unpack_from('<h',qq,6)[0]+qq[3]//2)
  sx=-1 if rc[0]-(d[2]+aw//2)<0 else 1;sy=-1 if rc[1]-(d[3]+ah//2)<0 else 1
  tx,ty=aw+4,ah+4
- cands=[(cx+sx*tx,cy),(cx,cy+sy*ty),(cx,cy-sy*ty),(cx-sx*tx,cy)] if not hb else [(cx,cy+sy*ty),(cx+sx*tx,cy),(cx-sx*tx,cy),(cx,cy-sy*ty)]
+ side=DOOR_SIDES[doors.index(d)]
+ if side!=(0,0):sx,sy=side;vert=sx!=0
+ else:vert=not hb
+ cands=[(cx+sx*tx,cy),(cx,cy-ty),(cx,cy+ty)] if vert else [(cx,cy+sy*ty),(cx-tx,cy),(cx+tx,cy)]
  _,_,su,sv,sw,sh=(0,)+SPR[lock[d[6]]]
  got=[(p['x0']+4,p['y0']+4) for p in draw(2) if p['t']==5000 and (p['uv'][0],p['uv'][1],p['x1']-p['x0']+1,p['y1']-p['y0']+1)==(su,sv,sw,sh)]
  if 12<=cx<=300 and 12<=cy<=160 and not any(c[1]>170 for c in cands):assert len(got)==1 and got[0] in cands,(d,cands,got);tested+=1

@@ -79,6 +79,10 @@ SD mode (no HD pack: `bio2hd.asi` not loaded, or `RetroMode`/`LowResEnable` on, 
 
 `tests/test_sd.py` checks the layout tables and an emulated draw with SD forced (`KeyMapTestSdMode`). Preview images: `local/sd-test/preview_sd.py` (untracked) draws shapes, markers and names for one screen.
 
+## Lock marker side
+
+`tools/mapgen/door_sides.py` writes `src/door_sides.h`, one unit step per `doors[]` row towards the open (own) room, found by probing the room masks (an L-shaped corridor's rect centre points into the wrong room). Rerun it when `doors-all.h` or `data/room_shapes.json` changes. The runtime puts the lock marker beside the native door bar's art on that side (tests/test_sd.py and test_native check it).
+
 ## Document and puzzle names
 
 `data/marker_names.json` is the only source of these names. Documents (item ids 106-126): the game's own file titles. They are bitmaps, page 2 of `Common/file/fileNN.bin` (Korean, from the installed HD patch) and `fileNNu.bin` (English), NN = item id - 104; `tools/mapgen/extract_file_titles.py` unpacks them with the EXE's own decompressor, and `regen.py` stops when a bitmap hash differs from the table. The titles were read from the bitmaps by eye; entries with `ko_reading_uncertain` are flagged for confirmation. Puzzles: one name per mechanism, keyed by room stem plus evidence (`i<id>` the key item an item-use AOT asks for, `sw<bit>` a switch event, `nl<bit>` a number lock). Every named evidence cites public pages in `puzzle_sources` (Evil Resource item pages, Raccoon Insider room pages that carry the game's room IDs and examine texts, the BDennis FAQ); Korean puzzle names are project translations (`ko_basis`). Evidence without a name sits in `unresolved` with its reason and the marker stays unnamed; `extract_overlay.py` stops on evidence that is in neither list. `tests/test_marker_names.py` checks that every document has a Korean and English title and that the generated labels equal the table.

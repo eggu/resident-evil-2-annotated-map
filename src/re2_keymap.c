@@ -695,28 +695,30 @@ static int door_bar(const Door *d,int *horizontal){
  }
  return 0;
 }
+#include "door_sides.h"
 // Lock marker centre, candidate k. LockSide=0, doors without a drawn other side (seen2=255, no native bar): on the door spot (k 0 only).
-// LockSide=1: right beside the bar's art, touching it (user 2026-11-13: under it the marker was hidden, 5 px away it was "not at the
-// door"). k 0: on the open side, along the axis the door is passed on (towards the door's own room centre); k 1/2: at
-// either end of the bar; k 3: the other side. The caller takes the first one a key marker does not cover. The bar doubles at 2x zoom,
-// the marker keeps its size. Returns 0 when there is no candidate k.
+// LockSide=1: right beside the bar's art, touching it, on the open side: the door's own room, never the locked room behind it (user
+// 2026-11-13: that room's background hid the marker). The side comes from tools/mapgen/door_sides.py (room masks; a rect centre is no guide
+// for an L-shaped corridor); without one, towards the own room's centre. k 0: across the bar on the open side, k 1/2: at either end of the
+// bar. The caller takes the first one a key marker does not cover. The bar doubles at 2x zoom, the marker keeps its size.
+// Returns 0 when there is no candidate k.
 static int door_pos(const Door *d,const Icon *i,int dx,int dy,unsigned k,int *x,int *y){
  if(!lock_side||d->seen2==255){*x=MX(d->x);*y=MY(d->y);return k==0;}
- if(k>3)return 0;
+ if(k>2)return 0;
  int rx,ry,bx,by,bw,bh,z=zoom_on?2:1,horizontal_bar,bar=door_bar(d,&horizontal_bar);
  int aw=bar?(horizontal_bar?6:4):2,ah=bar?(horizontal_bar?4:6):2,cx=bar?d->x+aw/2:d->x,cy=bar?d->y+ah/2:d->y; // art box and its centre (a lock
  // without a native bar, e.g. a drawer or a projected door, is a point at the door spot: 2x2)
- if(!room_centre(d->pl&1,d->floor,d->seen,&rx,&ry)){rx=d->x1;ry=d->y1;}
  icon_box(0,0,i,&bx,&by,&bw,&bh);
- int vx=rx-cx,vy=ry-cy,sx=vx<0?-1:1,sy=vy<0?-1:1;
- int along_x=bar?!horizontal_bar:((vx<0?-vx:vx)>=(vy<0?-vy:vy)); // the axis the door is passed on
- int ox,oy; // offsets from the art centre
- int tx=aw*z/2+bw/2,ty=ah*z/2+bh/2,ex=aw*z/2+bw/2,ey=ah*z/2+bh/2; // touching distances along x / y
- if(along_x){ // vertical bar: the marker sits to its left/right (k 0, 3) or above/below (k 1, 2)
-  ox=k==0?sx*tx:k==3?-sx*tx:0;oy=k==1?sy*ey:k==2?-sy*ey:0;
- }else{
-  oy=k==0?sy*ty:k==3?-sy*ty:0;ox=k==1?sx*ex:k==2?-sx*ex:0;
+ int sx=door_sides[d-doors][0],sy=door_sides[d-doors][1],along_x;
+ if(sx||sy)along_x=sx!=0;
+ else{ // no mask evidence: towards the own room's centre
+  if(!room_centre(d->pl&1,d->floor,d->seen,&rx,&ry)){rx=d->x1;ry=d->y1;}
+  int vx=rx-cx,vy=ry-cy;sx=vx<0?-1:1;sy=vy<0?-1:1;
+  along_x=bar?!horizontal_bar:((vx<0?-vx:vx)>=(vy<0?-vy:vy));
  }
+ int tx=aw*z/2+bw/2,ty=ah*z/2+bh/2,ox,oy; // touching distances along x / y
+ if(along_x){ox=k==0?sx*tx:0;oy=k==1?-ty:k==2?ty:0;}
+ else{oy=k==0?sy*ty:0;ox=k==1?-tx:k==2?tx:0;}
  *x=MX(cx)+ox;*y=MY(cy)+oy;return 1;
 }
 // Name categories (ItemLabel.cat, tools/mapgen/category_colors.py): each is drawn in its legend row's colour.
@@ -979,14 +981,19 @@ static void draw_names(unsigned mode){
  }
  for(unsigned j=0;overlay_enabled&&locks_enabled&&j<sizeof(doors)/sizeof(doors[0]);j++){
   const Door*d=doors+j;const Icon *i=door_icon(d,pl,mpl,floor,flags);if(!i)continue;
-  for(unsigned k=0;;k++){ // beside the door: the first of the bar's sides the key markers and the legend leave free
+  int placed=0;
+  for(unsigned k=0;!placed;k++){ // beside the door: the first of the bar's sides the key markers and the legend leave free
    int x,y,w,h,cx,cy;
    if(!door_pos(d,i,dx,dy,k,&cx,&cy))break;
    icon_box(cx,cy,i,&x,&y,&w,&h);
    // A locked box holding a key item shares its star's spot (611 Weapon Box): show the lock as a badge, like area maps.
    int badge=on_marker(high_count,cx,cy);
    if(badge){x+=MAP_BADGE;y+=MAP_BADGE;}
-   if((badge?!under_high_except(x,y,w,h,cx,cy):!under_high(x,y,w,h))&&!in_panel(x,y,w,h)){quad_draw(x,y,w,h,i->u,i->v,i->w,i->h,tex);name_marker(x,y,w,h,d->key,0);shown++;break;}
+   if((badge?!under_high_except(x,y,w,h,cx,cy):!under_high(x,y,w,h))&&!in_panel(x,y,w,h)){quad_draw(x,y,w,h,i->u,i->v,i->w,i->h,tex);name_marker(x,y,w,h,d->key,0);shown++;placed=1;}
+  }
+  if(!placed&&lock_side&&d->seen2!=255){ // every side is covered by key markers: draw it on the open side anyway, under them
+   int x,y,w,h,cx,cy;door_pos(d,i,dx,dy,0,&cx,&cy);icon_box(cx,cy,i,&x,&y,&w,&h);
+   if(!in_panel(x,y,w,h)){quad_draw(x,y,w,h,i->u,i->v,i->w,i->h,tex);name_marker(x,y,w,h,d->key,0);shown++;}
   }
  }
  unsigned monsters=0;

@@ -957,15 +957,18 @@ def room_centre(pl,floor,seen):
  for k in range(count):
   q=bytes(u.mem_read(ptr+k*16,16))
   if q[12]==seen:return struct.unpack_from('<h',q,4)[0]+q[2]//2,struct.unpack_from('<h',q,6)[0]+q[3]//2
-def lock_candidates(pl,floor,x,y,seen,w,h,pan=(0,0)):
+def lock_candidates(pl,floor,x,y,seen,w,h,pan=(0,0),side=(0,0)):
  """Lock marker centres k 0..3 (2026-11-13): touching the native door bar's art (4x6 vertical or 6x4 horizontal, top-left of its 8x8 sprite)."""
  hb=door_bar_of(x,y);aw,ah=((6,4) if hb else (4,6)) if hb is not None else (2,2)
  cx,cy=(x+aw//2,y+ah//2) if hb is not None else (x,y);rx,ry=room_centre(pl,floor,seen);sx=-1 if rx-cx<0 else 1;sy=-1 if ry-cy<0 else 1
  along_x=(not hb) if hb is not None else abs(rx-cx)>=abs(ry-cy)
+ if side!=(0,0):sx,sy=side;along_x=sx!=0
  tx,ty=aw//2+w//2,ah//2+h//2;px,py=pan[0]+cx,pan[1]+cy
- if along_x:return [(px+sx*tx,py),(px,py+sy*ty),(px,py-sy*ty),(px-sx*tx,py)]
- return [(px,py+sy*ty),(px+sx*tx,py),(px-sx*tx,py),(px,py-sy*ty)]
-def beside(seen,w,h):return lock_candidates(lpl,lfl,lx,ly,seen,w,h,(4,6))[0] # pan (4,6)
+ if along_x:return [(px+sx*tx,py),(px,py-ty),(px,py+ty)]
+ return [(px,py+sy*ty),(px-tx,py),(px+tx,py)]
+import re as _re
+_t=(R/'door_sides.h').read_text();DOOR_SIDES=[tuple(int(v) for v in m) for m in _re.findall(r'\{(-?\d+),(-?\d+)\}',_t.split('door_sides[][2]={',1)[1])]
+def beside(seen,w,h):return lock_candidates(lpl,lfl,lx,ly,seen,w,h,(4,6),DOOR_SIDES[doors.index(lock_door)])[0] # pan (4,6)
 m_=max(lic[3],lic[4]);lw,lh=((lic[3]*LOCK_TENTHS*100*100//10000+m_*5)//(m_*10),(lic[4]*LOCK_TENTHS*100*100//10000+m_*5)//(m_*10))
 assert lock_at([lseen],0)==[(lx+4,ly+6)] # pan (4,6)
 assert lock_at([lseen],1)==[beside(lseen,lw,lh)] and lock_at([lseen,lseen2],1)==[beside(lseen,lw,lh)] # the open side: the door's own room
