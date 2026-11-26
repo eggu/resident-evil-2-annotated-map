@@ -120,7 +120,7 @@ All settings are in the `[MapOverlay]` section.
 
 ## Known limitations
 
-- Supported executables: GOG `Resident Evil 2.exe` and the Steam release in all six languages. Other executables are left unpatched and only logged. HD mode requires Classic REbirth.
+- Supported executables: GOG `Resident Evil 2.exe` and the Steam release. Other executables are left unpatched and only logged. HD mode requires Classic REbirth.
 - Marker data comes from the GOG release. The Steam release, except Japanese, scripts a few rooms differently (for example, one extra sewer item), so a marker in those rooms can differ from the game.
 - Enlarged names keep their positions, so they can overlap on crowded maps.
 - With `LockSide=1` (default) the marker sits right beside the door, on the side you can enter from. Doors leading to another floor keep the marker on the door. If key-item markers cover every spot beside a door, the lock marker can be hidden under them.
