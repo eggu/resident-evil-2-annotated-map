@@ -3,7 +3,6 @@ from pathlib import Path
 import argparse, hashlib, importlib, json, os, shutil, subprocess, sys, zipfile
 
 ROOT = Path(__file__).resolve().parent
-EXE_SHA256 = '21b2a647cbeddac1ec389be847f22a434a0264a18020589de91cb2824dcb1bf5'
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
@@ -12,8 +11,6 @@ def main():
     args = parser.parse_args()
     if args.game_exe:
         args.game_exe = args.game_exe.resolve()
-        if hashlib.sha256(args.game_exe.read_bytes()).hexdigest() != EXE_SHA256:
-            parser.error('Unsupported executable SHA256; see docs/DEVELOPMENT.md')
     version = (ROOT/'VERSION').read_text().strip()
     build, dist = ROOT/'build', ROOT/'dist'
     build.mkdir(exist_ok=True); dist.mkdir(exist_ok=True)
@@ -29,7 +26,7 @@ def main():
         for p in (ROOT/'data').iterdir(): shutil.copy2(p,build/p.name)
         shutil.copytree(ROOT/'tests/fixtures',build,dirs_exist_ok=True)
         env = dict(os.environ, RE2_GAME_EXE=str(args.game_exe))
-        for name in ('test_native-v6.4.py','test_upload-v6.4.py','test_settings.py','test_legend.py','test_label_priority.py','test_zoom.py','test_factory_arrows.py','test_puzzle_completion.py','test_sd.py'):
+        for name in ('test_hook_signatures.py','test_native-v6.4.py','test_upload-v6.4.py','test_settings.py','test_legend.py','test_label_priority.py','test_zoom.py','test_factory_arrows.py','test_puzzle_completion.py','test_sd.py'):
             subprocess.run([sys.executable,name],cwd=build,env=env,check=True,stdout=subprocess.DEVNULL)
     suffix = f'-candidate{args.candidate}' if args.candidate else ''
     package = dist/f'RE2-Annotated-Map-{version}{suffix}.zip'

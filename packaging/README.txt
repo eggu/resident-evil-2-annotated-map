@@ -1,14 +1,15 @@
 RE2 Annotated Map - Survivor's Notes - Resident Evil 2 (1998)
 상세 지도: 생존자의 메모
 
-지원: GOG판 Resident Evil 2(Resident Evil 2.exe) + Ultimate ASI Loader(HD 모드는 Classic REbirth 필요).
+지원: GOG판 Resident Evil 2(Resident Evil 2.exe), Steam판(6개 언어) + Ultimate ASI Loader(HD 모드는 Classic REbirth 필요).
 Classic REbirth는 별도로 설치하며 HD 모드에만 필요합니다(1.0.9에서 확인): https://classicrebirth.com/index.php/downloads/resident-evil-2-classic-rebirth/ Ultimate ASI Loader v9.7.4(MIT)는 dsound.dll로 포함되어 있습니다.
 RE2 리메이크(2019)용이 아닙니다.
 게임 지도에 방 이름, 잠긴 문과 열쇠, 핵심 아이템, 문서·지도, 퍼즐, 일반 아이템, 타자기·아이템 상자, 몬스터를 표시합니다.
 
 설치
 1. 게임을 종료합니다.
-2. ZIP의 내용을 Resident Evil 2.exe가 있는 게임 폴더에 폴더 구조 그대로 복사합니다.
+2. ZIP의 내용을 게임 폴더에 폴더 구조 그대로 복사합니다. GOG판은 Resident Evil 2.exe가 있는 폴더,
+   Steam판은 로컬 파일 중 플레이하는 언어 폴더(english, japanese 등)입니다.
    (dsound.dll, scripts/RE2.AnnotatedMap.asi, scripts/RE2.AnnotatedMap.ini)
    한글 패치 등으로 Ultimate ASI Loader가 이미 dsound.dll로 설치되어 있으면 dsound.dll은 건너뛰어도 됩니다.
    ASI 로더가 아닌 다른 dsound.dll(예: DSOAL)이 있으면 덮어쓰지 말고, 포함된 dsound.dll을 winmm.dll 이름으로 복사하세요.
@@ -47,7 +48,8 @@ https://github.com/eggu/resident-evil-2-annotated-map
 English
 ================================================================
 
-Supported: GOG Resident Evil 2 (Resident Evil 2.exe) + Ultimate ASI Loader (HD mode needs Classic REbirth).
+Supported: GOG Resident Evil 2 (Resident Evil 2.exe), Steam release (all six languages)
++ Ultimate ASI Loader (HD mode needs Classic REbirth).
 Classic REbirth is installed separately and is needed only for HD mode (tested with 1.0.9): https://classicrebirth.com/index.php/downloads/resident-evil-2-classic-rebirth/ Ultimate ASI Loader v9.7.4 (MIT) is included as dsound.dll.
 This is not for the 2019 remake.
 Shows room names, locked doors and required keys, key items, documents and maps,
@@ -55,8 +57,9 @@ puzzles, common items, typewriters and item boxes, and monsters on the game's ma
 
 Installation
 1. Close the game.
-2. Copy the ZIP contents into the folder containing Resident Evil 2.exe, preserving
-   the directory structure (dsound.dll, scripts/RE2.AnnotatedMap.asi and scripts/RE2.AnnotatedMap.ini).
+2. Copy the ZIP contents into the game folder, preserving the directory structure
+   (dsound.dll, scripts/RE2.AnnotatedMap.asi and scripts/RE2.AnnotatedMap.ini).
+   GOG: the folder containing Resident Evil 2.exe. Steam: the folder of the language you play (english, japanese, ...).
    If Ultimate ASI Loader is already installed as dsound.dll (e.g. by a translation patch), you can skip dsound.dll.
    If you have a different dsound.dll (e.g. DSOAL), do not overwrite it: copy the included one as winmm.dll.
 3. Launch the game and open the map.

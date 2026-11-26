@@ -19,6 +19,41 @@ typedef RoomLabel_EN RoomLabel;
 typedef RoomName_EN RoomName;
 typedef ItemLabel_EN ItemLabel;
 static unsigned char *game;
+// Native layouts, keyed by the GOG addresses used throughout this file. GOG is the identity layout; the Steam
+// 1998 builds (one EXE per language and character) map every key to their own address (tools/steam_layouts.py).
+typedef struct { unsigned gog,va; } LayoutAddr;
+typedef struct { unsigned va,length; const char *bytes; } LayoutCheck;
+typedef struct { const char *name; int player; unsigned device; const LayoutAddr *addrs; unsigned addr_count; const LayoutCheck *checks; unsigned check_count; } Layout;
+#include "layouts.h"
+static const LayoutCheck gog_checks[]={
+ {0x4fa552,5,"\xe8\x39\x04\x00\x00"},
+ {0x4fb60b,5,"\xe8\x80\xf3\xff\xff"},
+ {0x4fb7e7,5,"\xe8\xa4\xf1\xff\xff"},
+ {0x4faf38,15,"\x6a\x00\x6a\x0a\x6a\x20\x56\xe8\x3c\x53\xf4\xff\x83\xc4\x10"},
+ {0x4fb4e6,6,"\x0f\x89\xbe\x00\x00\x00"},
+ {0x4fa465,6,"\x0f\x89\xbb\x00\x00\x00"},
+ // Absolute operands also identify the native data layout the overlay reads.
+ {0x4fa990,28,"\x83\xec\x14\x0f\xbf\x05\x16\xeb\x98\x00\x0f\xbf\x0d\x14\xeb\x98\x00\x53\x55\x56\x57\x50\x51\xbe\x80\x28\x8c\x00"},
+ {0x440280,14,"\x8b\x44\x24\x08\x8b\x0d\x1c\x4e\x52\x00\x56\x83\xf8\x29"},
+ {0x503170,9,"\x8b\x54\x24\x08\xb8\x00\x00\x00\x80"},
+};
+static const Layout layouts[]={
+ {"GOG",-1,0x8c8338,NULL,0,gog_checks,sizeof(gog_checks)/sizeof(gog_checks[0])},
+ STEAM_LAYOUTS
+};
+static const Layout *layout=layouts;
+static uintptr_t raw(unsigned va){return (uintptr_t)game+va-0x400000;} // a pointer the game itself stored
+static uintptr_t addr(unsigned va){
+ for(unsigned lo=0,hi=layout->addr_count;lo<hi;){ // ponytail: binary search per call, ~50 keys
+  unsigned mid=(lo+hi)/2,key=layout->addrs[mid].gog;
+  if(key==va)return raw(layout->addrs[mid].va);
+  if(key<va)lo=mid+1;else hi=mid;
+ }
+ return raw(va); // GOG; tests/test_layouts.py proves every key used here exists in each Steam table
+}
+#define FLOOR_SITE 0x4fa465
+static unsigned char floor_on[6];
+static unsigned player_of(unsigned flags){return layout->player>=0?(unsigned)layout->player:flags>>31;}
 static HANDLE logfile=INVALID_HANDLE_VALUE;
 static void log_line(const char *fmt,...){if(logfile==INVALID_HANDLE_VALUE)return;char out[512];va_list ap;va_start(ap,fmt);int n=wvsprintfA(out,fmt,ap);va_end(ap);DWORD wrote;if(n>0&&n<512)WriteFile(logfile,out,(DWORD)n,&wrote,NULL);}
 static int equal(const void *a,const void *b,unsigned n){const unsigned char*x=a,*y=b;for(unsigned i=0;i<n;i++)if(x[i]!=y[i])return 0;return 1;}
@@ -181,7 +216,6 @@ static void update_toggle(unsigned mode,int down){
 static void (__cdecl *map_draw)(void);
 static int (__cdecl *flat_rect)(void*,int,int);
 static int (__cdecl *check_bit)(void*,unsigned);
-static uintptr_t addr(unsigned va){return (uintptr_t)game+va-0x400000;}
 static unsigned sd_textures[SD_PAGES];
 static unsigned texture,room_textures_ko[ROOM_LABEL_PAGE_COUNT_KO],room_textures_en[ROOM_LABEL_PAGE_COUNT_EN];
 static unsigned item_textures_ko[ITEM_LABEL_PAGE_COUNT_KO],item_textures_en[ITEM_LABEL_PAGE_COUNT_EN],icon_texture,key_art_texture;
@@ -216,7 +250,7 @@ static unsigned cached_texture(unsigned *cache,const unsigned short *pixels){
  if(test_texture)return texture;
  unsigned char *marni=*(unsigned char**)addr(0x6805b8);
  if(!marni)return 0;
- uintptr_t device=*(uintptr_t*)(marni+0x8c8338);
+ uintptr_t device=*(uintptr_t*)(marni+layout->device);
  if(!device)return 0;
  if(texture_device!=device){
   texture=0;for(unsigned i=0;i<ROOM_LABEL_PAGE_COUNT_KO;i++)room_textures_ko[i]=0;
@@ -443,7 +477,7 @@ static int room_shown(unsigned pl,unsigned floor,unsigned seen){
  if(scope<2||floor>=20)return 0;
  const unsigned char *f=(const unsigned char*)addr(pl?0x53eb98:0x53eaf8)+floor*8;
  if(!check_bit((void*)addr(0x98ec1c),f[5]))return 0;
- const unsigned char *e=(const unsigned char*)addr(*(const uint32_t*)f);
+ const unsigned char *e=(const unsigned char*)raw(*(const uint32_t*)f);
  unsigned b=(*(uint32_t*)addr(0x989ed0)&0x40000000)!=0,alt=*(unsigned char*)addr(0x989ef8)&1;
  for(unsigned k=0;k<f[4];k++,e+=16){
   unsigned m=e[alt?0xf:0xe];
@@ -544,9 +578,9 @@ __declspec(dllexport) unsigned __cdecl KeyMapTestRank(unsigned secs,unsigned sav
  unsigned rank,score=rank_score(secs,saves,sprays,flags,&rank);return score|rank<<16;
 }
 static int bank_bit(unsigned bank,unsigned bit){
- if(bank==130||bank==131)return *(short*)addr(0x98eae4+(bank-100)*2)==(short)bit; // switch on SCD var 0x1e/0x1f
+ if(bank==130||bank==131)return *(short*)(addr(0x98eae4)+(bank-100)*2)==(short)bit; // switch on SCD var 0x1e/0x1f
  if(bank>34)return 0;
- uintptr_t p=*(uintptr_t*)addr(0x53b218+bank*4);
+ uintptr_t p=*(uintptr_t*)(addr(0x53b218)+bank*4);
  return p&&check_bit((void*)p,bit)!=0; // native checker returns the raw mask, not 0/1
 }
 // Extreme Battle loads ROOMA..G instead of ROOM1..7 (0x98e798=9): its rows are tagged pl|2. 4th Survivor/Tofu
@@ -640,7 +674,7 @@ int __cdecl fill_draw(unsigned char *s,unsigned slot,unsigned prio,unsigned mode
  if(!r||!e||slot!=0x20||prio!=10||s[7]!=2||(*(unsigned short*)(s+0xe)&1))return r;
  uintptr_t next=*(uintptr_t*)addr(0x524e1c),end=*(uintptr_t*)addr(0x524e20);
  if(next>end||end-next<32+8192)return r; // keep the overlay's label headroom
- if(!room_pending(marker_pl(*(uint32_t*)addr(0x989ed0)>>31),*(unsigned char*)addr(0x691f7a),e[0xc]))return r;
+ if(!room_pending(marker_pl(player_of(*(uint32_t*)addr(0x989ed0))),*(unsigned char*)addr(0x691f7a),e[0xc]))return r;
  unsigned floor=*(unsigned char*)addr(0x691f7a),tex=fill_texture(floor);
  if(!tex)return r;
  unsigned char c[0x28];
@@ -682,15 +716,15 @@ static const Icon *door_icon(const Door *d,unsigned pl,unsigned mpl,unsigned flo
 // Centre of the room whose seen bit is `seen` on this floor (native room table: x,y at +4/+6, w,h at +2/+3, seen at +0xc).
 static int room_centre(unsigned pl,unsigned floor,unsigned seen,int *cx,int *cy){
  if(floor>=20)return 0;
- const unsigned char *f=(const unsigned char*)addr(pl?0x53eb98:0x53eaf8)+floor*8,*e=(const unsigned char*)addr(*(const uint32_t*)f);
+ const unsigned char *f=(const unsigned char*)addr(pl?0x53eb98:0x53eaf8)+floor*8,*e=(const unsigned char*)raw(*(const uint32_t*)f);
  for(unsigned k=0;k<f[4];k++,e+=16)if(e[0xc]==seen){*cx=*(const short*)(e+4)+e[2]/2;*cy=*(const short*)(e+6)+e[3]/2;return 1;}
  return 0;
 }
 // The native door bar of a door row: the game's door table 0x53da70 (8-byte rows: b3 bit 0 = horizontal bar, x,y at +4/+6) draws an
 // 8x8 sprite at the door's x,y whose art is only 4x6 (vertical bar, a door in a vertical wall) or 6x4 (horizontal bar) in its top-left.
 static int door_bar(const Door *d,int *horizontal){
- for(uintptr_t va=0x53da70;va<0x53dae0;va+=8){
-  const unsigned char *e=(const unsigned char*)addr(va);
+ for(unsigned row=0;row<(0x53dae0-0x53da70)/8;row++){
+  const unsigned char *e=(const unsigned char*)addr(0x53da70)+row*8;
   if(*(const short*)(e+4)==d->x&&*(const short*)(e+6)==d->y){*horizontal=e[3]&1;return 1;}
  }
  return 0;
@@ -943,7 +977,7 @@ static unsigned draw_room_names(unsigned pl,unsigned floor,int dx,int dy,int mod
 }
 static void draw_names(unsigned mode){
  unsigned floor=*(unsigned char*)addr(0x691f7a);
- unsigned flags=*(uint32_t*)addr(0x989ed0),pl=flags>>31,mpl=marker_pl(pl),npl=monster_pl(pl);
+ unsigned flags=*(uint32_t*)addr(0x989ed0),pl=player_of(flags),mpl=marker_pl(pl),npl=monster_pl(pl);
  if(frames++%120==0)log_line("entry floor=%u mapmode=%u flags=%08lx\n",floor,mode,(unsigned long)flags);
  // Mode0 is interactive; mode2/3 are the map exit transition.
  if(mode!=0||floor>=20)return;
@@ -1051,7 +1085,7 @@ __declspec(dllexport) unsigned __cdecl KeyMapTestUploadPage(unsigned i){
 __declspec(dllexport) int __cdecl KeyMapTestSdMode(int m){if(m>=0)sd_mode=m;return sd_mode;}
 __declspec(dllexport) int __cdecl KeyMapTestSdDecide(int mode,const char *cfg){display_mode=mode;sd_mode=-1;lstrcpyA(config_path,cfg);return sd_decide();}
 __declspec(dllexport) void __cdecl KeyMapTestTexture(unsigned id){test_texture=1;texture=id;}
-__declspec(dllexport) void __cdecl KeyMapTestInit(unsigned char *g){sd_mode=0;game=g;map_draw=(void*)addr(0x4fa990);flat_rect=(void*)addr(0x441170);check_bit=(void*)addr(0x503170);sprite_draw=(void*)addr(0x440280);}
+__declspec(dllexport) void __cdecl KeyMapTestInit(unsigned char *g){sd_mode=0;game=g;map_draw=(void*)addr(0x4fa990);flat_rect=(void*)addr(0x441170);check_bit=(void*)addr(0x503170);sprite_draw=(void*)addr(0x440280);for(unsigned i=0;i<6;i++)floor_on[i]=((unsigned char*)addr(FLOOR_SITE))[i];}
 __declspec(dllexport) uintptr_t __cdecl KeyMapTestFillHook(void){return (uintptr_t)fill_stub;}
 __declspec(dllexport) void __cdecl KeyMapTestDraw(void){draw_names(*(unsigned char*)addr(0x691f62));}
 __declspec(dllexport) void __cdecl KeyMapTestToggle(unsigned mode,int down){update_toggle(mode,down);}
@@ -1088,16 +1122,16 @@ __declspec(dllexport) unsigned __cdecl KeyMapTestKeys(void){return map_keys_down
 static void ensure_native_ui(void){
  int valid=1;
  for(unsigned n=0;n<4;n++){
-  const unsigned char *p=(void*)addr(0x8c28f8+n*20),*d=(void*)addr(n<2?0x53dae4:0x53dae0);
+  const unsigned char *p=(void*)(addr(0x8c28f8)+n*20),*d=(void*)addr(n<2?0x53dae4:0x53dae0);
   if(p[3]!=4||p[0xc]!=d[0]||p[0xd]!=d[1]||*(unsigned short*)(p+0x10)!=d[2]||*(unsigned short*)(p+0x12)!=d[3])valid=0;
  }
  if(!valid){
   void (__cdecl *prepare)(void)=(void*)addr(0x4fa7d0);prepare();
-  log_line("rebuilt native map UI floor=%u mode=%u titleTex=%u compassTex=%u\n",*(unsigned char*)addr(0x691f7a),*(unsigned char*)addr(0x691f62),*(unsigned*)addr(0x67c7d8+30*12),*(unsigned*)addr(0x67c7d8+31*12));
+  log_line("rebuilt native map UI floor=%u mode=%u titleTex=%u compassTex=%u\n",*(unsigned char*)addr(0x691f7a),*(unsigned char*)addr(0x691f62),*(unsigned*)(addr(0x67c7d8)+30*12),*(unsigned*)(addr(0x67c7d8)+31*12));
  }
 }
 static int draw_all_room_outlines(void){
- unsigned floor=*(unsigned char*)addr(0x691f7a),pl=(*(uint32_t*)addr(0x989ed0)>>31)&1;
+ unsigned floor=*(unsigned char*)addr(0x691f7a),pl=player_of(*(uint32_t*)addr(0x989ed0))&1;
  const unsigned char *f=(const unsigned char*)addr(pl?0x53eb98:0x53eaf8)+floor*8;
  unsigned char *rooms=(unsigned char*)*(uint32_t*)f;unsigned count=f[4],bit=f[5];
  uint32_t *maps=(uint32_t*)addr(0x98ec1c)+(bit>>5),old_map=*maps;unsigned map_mask=0x80000000u>>(bit&31);unsigned char mask[255][2];
@@ -1124,7 +1158,7 @@ static void zoom_axis(unsigned char *p,unsigned axis,int view,int hi){
 }
 static void zoom_packets(uintptr_t start){
  if(!zoom_on)return;
- unsigned cursor=*(unsigned*)addr(0x67c7d8+20*12),ui=*(unsigned*)addr(0x67c7d8+30*12);
+ unsigned cursor=*(unsigned*)(addr(0x67c7d8)+20*12),ui=*(unsigned*)(addr(0x67c7d8)+30*12);
  uintptr_t end=*(uintptr_t*)addr(0x524e1c);
  if(zoom_center){
   zoom_center=0;view_x=view_y=0;
@@ -1160,12 +1194,13 @@ static void draw_map(unsigned mode){
  draw_names(mode);
 }
 // Status-screen map: native 0x4fa46b..0x4fa523 changes floor on Up/Down; while zoomed those keys pan instead.
-#define FLOOR_SITE 0x4fa465
+// The native branch (GOG jns, Steam je; both 0f 8x rel32) is saved at install; off = jmp to the same target.
 static void floor_keys(int enabled){
- static const unsigned char on[6]={0x0f,0x89,0xbb,0,0,0},off[6]={0xe9,0xbc,0,0,0,0x90};
- unsigned char *site=(unsigned char*)addr(FLOOR_SITE);DWORD old,unused;
+ unsigned char *site=(unsigned char*)addr(FLOOR_SITE),off[6]={0xe9,0,0,0,0,0x90};DWORD old,unused;
+ if(!floor_on[0])return; // hooks not installed
+ *(uint32_t*)(off+1)=*(uint32_t*)(floor_on+2)+1;
  if(!VirtualProtect(site,6,PAGE_EXECUTE_READWRITE,&old)){log_line("floor key permissions failed\n");return;}
- for(unsigned i=0;i<6;i++)site[i]=enabled?on[i]:off[i];
+ for(unsigned i=0;i<6;i++)site[i]=enabled?floor_on[i]:off[i];
  VirtualProtect(site,6,old,&unused);FlushInstructionCache(GetCurrentProcess(),site,6);
 }
 static void zoom_set(int on){
@@ -1296,50 +1331,77 @@ __declspec(dllexport) unsigned __cdecl KeyMapTestNav(unsigned pad){return map_na
 __declspec(dllexport) unsigned __cdecl KeyMapTestNavPress(unsigned pad){return nav_press(pad);}
 __declspec(dllexport) void __cdecl KeyMapTestNavArrows(void){nav_arrows_draw();}
 __declspec(dllexport) uintptr_t __cdecl KeyMapTestNavPixels(void){nav_build();return (uintptr_t)nav_pixels;}
+static int code_matches(unsigned va,const char *signature,unsigned length){
+ uintptr_t site=raw(va);
+ MEMORY_BASIC_INFORMATION page;
+ if(VirtualQuery((void*)site,&page,sizeof(page))!=sizeof(page) ||
+    page.AllocationBase!=game || page.State!=MEM_COMMIT ||
+    (page.Protect&(PAGE_GUARD|PAGE_NOACCESS)) ||
+    !(page.Protect&(PAGE_EXECUTE_READ|PAGE_EXECUTE_READWRITE|PAGE_EXECUTE_WRITECOPY)) ||
+    length>(uintptr_t)page.BaseAddress+page.RegionSize-site)return 0;
+ return equal((const void*)site,signature,length);
+}
+static int layout_matches(const Layout *l){
+ unsigned i=0;
+ while(i<l->check_count&&code_matches(l->checks[i].va,l->checks[i].bytes,l->checks[i].length))i++;
+ return i==l->check_count;
+}
+static const Layout *match_layout(void){
+ for(unsigned n=0;n<sizeof(layouts)/sizeof(layouts[0]);n++)if(layout_matches(layouts+n))return layouts+n;
+ return NULL;
+}
+
+static int install_map_hooks(const Layout *found){
+ layout=found;
+ const unsigned sites[]={0x4fa552,0x4fb60b,0x4fb7e7,0x4faf3f,0x4fb4e6};
+ const uintptr_t hooks[]={(uintptr_t)hook_status_selection,(uintptr_t)hook_status_entry,(uintptr_t)hook_status_map,(uintptr_t)fill_stub,addr(0x4fb5aa)};
+ DWORD old[5],unused;
+ unsigned acquired=0;
+ for(;acquired<5;acquired++)
+  if(!VirtualProtect((void*)addr(sites[acquired]),6,PAGE_EXECUTE_READWRITE,&old[acquired]))break;
+
+ int ready=acquired==5;
+ if(ready){
+  map_draw=(void*)addr(0x4fa990);flat_rect=(void*)addr(0x441170);check_bit=(void*)addr(0x503170);sprite_draw=(void*)addr(0x440280);
+  for(unsigned i=0;i<6;i++)floor_on[i]=((unsigned char*)addr(FLOOR_SITE))[i];
+  for(unsigned i=0;i<5;i++){
+   unsigned char *site=(unsigned char*)addr(sites[i]);
+   if(i==4){site[0]=0xe9;site[5]=0x90;}
+   *(uint32_t*)(site+1)=(uint32_t)(hooks[i]-(uintptr_t)(site+5));
+   FlushInstructionCache(GetCurrentProcess(),site,6);
+  }
+  log_line("%s map code found; hooks installed\n",layout->name);
+ }else log_line("map code permissions failed; no patch applied\n");
+
+ // Multiple sites share a page. Restore the original protection last.
+ while(acquired){
+  --acquired;
+  VirtualProtect((void*)addr(sites[acquired]),6,old[acquired],&unused);
+ }
+ return ready;
+}
+static int try_install(void){const Layout *found=match_layout();return found&&install_map_hooks(found);}
+__declspec(dllexport) int __cdecl KeyMapTestLayoutMatches(unsigned n){return layout_matches(layouts+n);}
+__declspec(dllexport) int __cdecl KeyMapTestInstall(void){return try_install()?(int)(layout-layouts):-1;}
+// Steam EXEs are packed: their code appears only after the unpacker runs, which is after this DLL attaches.
+static DWORD WINAPI install_later(LPVOID unused){
+ (void)unused;
+ for(unsigned tries=0;tries<3000;tries++){ // ponytail: 60 s poll; unpacking takes about a second
+  if(try_install())return 0;
+  Sleep(20);
+ }
+ log_line("no supported map code signature found; no patch applied\n");
+ return 0;
+}
 BOOL WINAPI DllMain(HINSTANCE module,DWORD reason,LPVOID reserved){
  (void)reserved;if(reason!=DLL_PROCESS_ATTACH)return TRUE;
  DisableThreadLibraryCalls(module);game=(unsigned char*)GetModuleHandleW(NULL);
  char own[MAX_PATH];GetModuleFileNameA(module,own,sizeof(own));char *slash=NULL;for(char *p=own;*p;p++)if(*p=='\\')slash=p;
  if(slash){lstrcpyA(slash+1,"RE2.AnnotatedMap.ini");lstrcpyA(settings_path,own);lstrcpyA(slash+1,"RE2.AnnotatedMap.log");}else{lstrcpyA(own,"RE2.AnnotatedMap.log");lstrcpyA(settings_path,"RE2.AnnotatedMap.ini");}
- int migrate=load_settings();
- {char cfg[MAX_PATH];if(GetModuleFileNameA(NULL,cfg,sizeof(cfg))){char *sl=NULL;for(char *p=cfg;*p;p++)if(*p=='\\')sl=p;if(sl){lstrcpyA(sl+1,"config.ini");lstrcpyA(config_path,cfg);}}} // Classic REbirth config.ini beside the game exe
  logfile=CreateFileA(own,GENERIC_WRITE,FILE_SHARE_READ,NULL,CREATE_ALWAYS,FILE_ATTRIBUTE_NORMAL,NULL);
- if(migrate&&GetFileAttributesA(settings_path)!=INVALID_FILE_ATTRIBUTES&&save_settings())log_line("settings rewritten as version %u\n",SETTINGS_VERSION);
- const unsigned sites[]={0x4fa552,0x4fb60b,0x4fb7e7,0x4faf3f},targets[]={0x4fa990,0x4fa990,0x4fa990,0x440280};
- const uintptr_t hooks[]={(uintptr_t)hook_status_selection,(uintptr_t)hook_status_entry,(uintptr_t)hook_status_map,(uintptr_t)fill_stub};
- for(unsigned i=0;i<4;i++){
-  unsigned char *site=(unsigned char*)addr(sites[i]);
-  if(site[0]!=0xe8 || (uintptr_t)(site+5)+(int32_t)*(int32_t*)(site+1)!=addr(targets[i])){
-   log_line("unsupported map call at %08x; no patch applied\n",sites[i]);return TRUE;
-  }
- }
- // Fill site: push 0; push 10; push 0x20; push esi; call 0x440280; add esp,16 (room loop 0x4fabf4..0x4faf4e).
- const unsigned char fill[]={0x6a,0x00,0x6a,0x0a,0x6a,0x20,0x56};
- if(!equal((void*)addr(0x4faf38),fill,sizeof(fill))||!equal((void*)addr(0x4faf44),"\x83\xc4\x10",3)){log_line("unsupported room fill call; no patch applied\n");return TRUE;}
- const unsigned char bit[]={0x8b,0x54,0x24,0x08,0xb8,0x00,0x00,0x00,0x80};
- if(!equal((void*)addr(0x503170),bit,sizeof(bit))){{log_line("unsupported bit checker; no patch applied\n");}return TRUE;}
- // Native status-map Up/Down (bank0 bit0 set in the police station/lab): jns 0x4fb5aa -> jmp, map_nav owns floors.
- const unsigned char native_nav[]={0x0f,0x89,0xbe,0x00,0x00,0x00};
- if(!equal((void*)addr(0x4fb4e6),native_nav,sizeof(native_nav))){log_line("unsupported native floor switch; no patch applied\n");return TRUE;}
- const unsigned char floor_jns[]={0x0f,0x89,0xbb,0x00,0x00,0x00};
- if(!equal((void*)addr(FLOOR_SITE),floor_jns,sizeof(floor_jns))){log_line("unsupported status floor switch; no patch applied\n");return TRUE;}
- map_draw=(void*)addr(0x4fa990);flat_rect=(void*)addr(0x441170);check_bit=(void*)addr(0x503170);sprite_draw=(void*)addr(0x440280);
- // Validate every call before mutation and acquire permissions for all four sites.
- DWORD olds[4];unsigned acquired=0;
- for(;acquired<4;acquired++){
-  if(!VirtualProtect((void*)addr(sites[acquired]),5,PAGE_EXECUTE_READWRITE,olds+acquired))break;
- }
- if(acquired!=4){DWORD unused;for(unsigned i=0;i<acquired;i++)VirtualProtect((void*)addr(sites[i]),5,olds[i],&unused);log_line("map code permissions failed; no patch applied\n");return TRUE;}
- {DWORD old,unused;unsigned char *site=(unsigned char*)addr(0x4fb4e6);
-  if(VirtualProtect(site,6,PAGE_EXECUTE_READWRITE,&old)){
-   site[0]=0xe9;*(int32_t*)(site+1)=0x4fb5aa-(0x4fb4e6+5);site[5]=0x90;
-   VirtualProtect(site,6,old,&unused);FlushInstructionCache(GetCurrentProcess(),site,6);
-  }else log_line("native floor switch permissions failed; mod and native Up/Down may both act\n");}
- for(unsigned i=0;i<4;i++){
-  unsigned char *site=(unsigned char*)addr(sites[i]);
-  *(int32_t*)(site+1)=(int32_t)(hooks[i]-(uintptr_t)(site+5));
-  DWORD unused;VirtualProtect(site,5,olds[i],&unused);FlushInstructionCache(GetCurrentProcess(),site,5);
- }
+ {char cfg[MAX_PATH];if(GetModuleFileNameA(NULL,cfg,sizeof(cfg))){char *sl=NULL;for(char *p=cfg;*p;p++)if(*p=='\\')sl=p;if(sl){lstrcpyA(sl+1,"config.ini");lstrcpyA(config_path,cfg);}}}
+ if(load_settings()&&GetFileAttributesA(settings_path)!=INVALID_FILE_ATTRIBUTES&&save_settings())log_line("settings rewritten as version %u\n",SETTINGS_VERSION);
  log_line("RE2.KeyMapNames bilingual build, 0-3 overlays, 9 language, settings loaded; labels=%u\n",(unsigned)(sizeof(doors)/sizeof(doors[0])));
+ if(!try_install()&&!CreateThread(NULL,0,install_later,NULL,0,NULL))log_line("install thread failed; no patch applied\n");
  return TRUE;
 }

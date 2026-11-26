@@ -10,20 +10,25 @@ This repository contains the RE2 annotated-map mod. The release ZIP installs `sc
 
 ## Native tests with a legally owned executable
 
-Supported executable SHA256:
+The runtime selects a native layout by machine-code signatures in the loaded image before writing a hook: GOG `Resident Evil 2.exe`, or one of the twelve Steam 1998 builds (`Leon`/`Claire` + `U` English, `J` Japanese, `F` French, `G` German, `I` Italian, `S` Spanish). The checks cover the hook sites, floor branches and function entries whose operands identify the data the overlay uses. Steam EXEs are packed, so when nothing matches at attach the install polls until the code is unpacked. Code addresses are written as GOG addresses and `addr()` translates them through `src/layouts.h`. Each Steam EXE holds one character, so the layout supplies the player instead of flag bit 31.
 
-```text
-21b2a647cbeddac1ec389be847f22a434a0264a18020589de91cb2824dcb1bf5
+`src/layouts.h` is generated from memory dumps taken after unpacking (flat image from 0x400000). The Steam DRM ends a process that was not started through Steam with exit code 53, so take the dumps while it unpacks. LeonU was mapped from GOG by instruction alignment and table contents; the other builds are derived from LeonU by unique matches, and the generator stops on any missing or ambiguous key. `tests/test_layouts.py` checks that every translated address exists in each table.
+
+```sh
+python -m pip install -r requirements-assets.txt
+python tools/steam_layouts.py /path/to/dumps   # LeonU.bin ClaireU.bin ... LeonS.bin ClaireS.bin
 ```
 
-The runtime has version-specific address and instruction guards. Do not remove guards to force a different executable to load. A different game build needs separate address/ABI analysis and runtime verification.
+A different executable requires its own address and ABI analysis.
 
 ```sh
 python -m pip install -r requirements-test.txt
 python build.py --game-exe '/path/to/Resident Evil 2.exe'
 ```
 
-The EXE is read only and its digest is checked first. Unicorn tests execute the actual x86 draw/texture code and verify state, flags, scenario/character gates, map-only keys, bilingual labels, texture uploads, and buffer limits. Tests are copied into `build/` and write reports there. The game EXE is never copied into the repository or package. Tests do not establish GPU behavior or visual acceptance in a running game. Existing label collision counts are diagnostic, not a guarantee of no overlap on every map.
+Set `RE2_STEAM_DUMPS` to the folder of those twelve dumps to also check that each image selects its own layout, rejects the others and installs every hook.
+
+The EXE is read only. The harness first exercises the runtime installer against the mapped executable, so these offline tests require an image with the map code available directly from disk. Unicorn tests execute the actual x86 draw/texture code and verify state, flags, scenario/character gates, map-only keys, bilingual labels, texture uploads, and buffer limits. Tests are copied into `build/` and write reports there. The game EXE is never copied into the repository or package. Tests do not establish GPU behavior or visual acceptance in a running game. Existing label collision counts are diagnostic, not a guarantee of no overlap on every map.
 
 ## Regenerating map data
 

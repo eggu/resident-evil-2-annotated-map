@@ -4,7 +4,7 @@
 
 <p align="center"><img src="docs/logo.png" alt="RE2 Annotated Map — Survivor’s Notes" width="320"></p>
 
-**상세 지도: 생존자의 메모** — 원작 Resident Evil 2 PC판(GOG판 `Resident Evil 2.exe` + [Classic REbirth](https://classicrebirth.com/))의 지도에 방 이름, 잠긴 문과 필요한 열쇠, 핵심 아이템, 문서·지도, 퍼즐, 일반 아이템, 타자기·아이템 상자, 몬스터를 표시하는 ASI 모드입니다. 한국어/영어를 지원합니다. RE2 리메이크(2019)용이 아닙니다.
+**상세 지도: 생존자의 메모** — 원작 Resident Evil 2 PC판(GOG판 `Resident Evil 2.exe` + [Classic REbirth](https://classicrebirth.com/), 또는 Steam판)의 지도에 방 이름, 잠긴 문과 필요한 열쇠, 핵심 아이템, 문서·지도, 퍼즐, 일반 아이템, 타자기·아이템 상자, 몬스터를 표시하는 ASI 모드입니다. 한국어/영어를 지원합니다. RE2 리메이크(2019)용이 아닙니다.
 
 - 게임 자체의 지도 화면에 표시합니다. 주운 아이템, 연 문, 푼 퍼즐, 쓰러뜨린 몬스터는 지도에서 사라집니다. 아이템이 남은 방은 주황색으로 칠합니다.
 - 레온/클레어, A/B 시나리오에 따른 아이템·잠긴 문 차이를 반영합니다. 재핑 아이템도 표시합니다.
@@ -46,7 +46,10 @@ INI의 `DisplayMode=SD` 또는 `HD`로 방식을 고정할 수 있습니다(설�
 
 1. HD 모드를 쓰려면 Resident Evil 2용 **Classic REbirth**를 먼저 설치합니다(1.0.9에서 확인). 없으면 SD 모드로 표시합니다. [공식 다운로드](https://classicrebirth.com/index.php/downloads/resident-evil-2-classic-rebirth/)
 2. 게임을 종료합니다. [Releases](https://github.com/eggu/resident-evil-2-annotated-map/releases/latest)에서 `RE2-Annotated-Map-<버전>.zip`을 받아 압축을 풉니다. `Source code`는 설치 파일이 아닙니다.
-3. ZIP의 내용(`dsound.dll`, `scripts/`)을 `Resident Evil 2.exe`가 있는 게임 폴더에 폴더 구조 그대로 복사합니다. ASI 로더인 [Ultimate ASI Loader](https://github.com/ThirteenAG/Ultimate-ASI-Loader) v9.7.4(MIT)가 `dsound.dll`로 포함되어 있습니다.
+3. ZIP의 내용(`dsound.dll`, `scripts/`)을 게임 폴더에 폴더 구조 그대로 복사합니다.
+   - GOG판: `Resident Evil 2.exe`가 있는 폴더.
+   - Steam판: Steam에서 게임을 우클릭 > 관리 > 로컬 파일 보기로 연 뒤, 플레이하는 언어 폴더(`english`, `japanese`, `french`, `german`, `italian`, `spanish`)에 복사합니다.
+   ASI 로더인 [Ultimate ASI Loader](https://github.com/ThirteenAG/Ultimate-ASI-Loader) v9.7.4(MIT)가 `dsound.dll`로 포함되어 있습니다.
    - 한글 패치 등으로 Ultimate ASI Loader가 이미 `dsound.dll`로 설치되어 있으면 `dsound.dll`은 건너뛰어도 됩니다.
    - ASI 로더가 아닌 다른 `dsound.dll`(예: DSOAL)이 있으면 덮어쓰지 말고, 포함된 `dsound.dll`을 `winmm.dll` 이름으로 복사하세요.
 
@@ -117,7 +120,8 @@ INI의 `DisplayMode=SD` 또는 `HD`로 방식을 고정할 수 있습니다(설�
 
 ## 알려진 한계
 
-- GOG판 `Resident Evil 2.exe`만 지원합니다(HD는 Classic REbirth가 필요하고, 없으면 SD로 표시). 다른 실행 파일에서는 아무것도 적용하지 않고 로그만 남깁니다.
+- 지원 실행 파일은 GOG판 `Resident Evil 2.exe`와 Steam판 6개 언어 전부입니다. 다른 실행 파일에서는 패치하지 않고 로그만 남깁니다. HD 모드에는 Classic REbirth가 필요합니다.
+- 마커 자료는 GOG판 기준입니다. 일본어를 제외한 Steam판은 몇몇 방의 스크립트가 달라(예: 하수도 아이템 하나 추가) 그 방의 마커가 게임과 다를 수 있습니다.
 - 확대한 이름은 기존 위치를 유지하므로 좁은 지도에서 겹칠 수 있습니다.
 - `LockSide=1`(기본)이면 마커를 문 바로 옆, 들어갈 수 있는 쪽에 둡니다. 다른 층으로 이어지는 문은 문 위에 그대로 둡니다. 문 옆 자리를 핵심 아이템 마커가 모두 차지하면 잠금 마커가 그 아래에 가려질 수 있습니다.
 - 적 표시는 출현 지점이며 실시간 위치가 아닙니다.

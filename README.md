@@ -4,7 +4,7 @@ English | [한국어](README.ko.md)
 
 <p align="center"><img src="docs/logo.png" alt="RE2 Annotated Map — Survivor’s Notes" width="320"></p>
 
-An ASI mod for the original Resident Evil 2 PC release (GOG `Resident Evil 2.exe` + [Classic REbirth](https://classicrebirth.com/)) that adds room names, locked doors and their keys, key items, documents and maps, puzzles, common items, typewriters and item boxes, and monsters to the map. Korean and English are supported. This is not for the 2019 remake.
+An ASI mod for the original Resident Evil 2 PC release (GOG `Resident Evil 2.exe` + [Classic REbirth](https://classicrebirth.com/), or the Steam release) that adds room names, locked doors and their keys, key items, documents and maps, puzzles, common items, typewriters and item boxes, and monsters to the map. Korean and English are supported. This is not for the 2019 remake.
 
 - Annotations are drawn on the game's own map screen. Picked-up items, opened doors, solved puzzles and killed monsters disappear from the map. Rooms with items left are tinted orange.
 - Item and lock differences between Leon/Claire and scenarios A/B are reflected. Zapping items are shown too.
@@ -46,7 +46,10 @@ The mod picks a display mode once, when the first map opens.
 
 1. For HD mode, install **Classic REbirth** for Resident Evil 2 first (tested with 1.0.9). Without it the map uses SD mode. [Official download](https://classicrebirth.com/index.php/downloads/resident-evil-2-classic-rebirth/)
 2. Close the game. Download `RE2-Annotated-Map-<version>.zip` from [Releases](https://github.com/eggu/resident-evil-2-annotated-map/releases/latest) and extract it. `Source code` is not the install package.
-3. Copy the ZIP contents (`dsound.dll`, `scripts/`) into the folder containing `Resident Evil 2.exe`, preserving the directory structure. [Ultimate ASI Loader](https://github.com/ThirteenAG/Ultimate-ASI-Loader) v9.7.4 (MIT) is included as `dsound.dll`.
+3. Copy the ZIP contents (`dsound.dll`, `scripts/`) into the game folder, preserving the directory structure.
+   - GOG: the folder containing `Resident Evil 2.exe`.
+   - Steam: in Steam, right-click the game > Manage > Browse local files, then open the folder of the language you play (`english`, `japanese`, `french`, `german`, `italian` or `spanish`).
+   [Ultimate ASI Loader](https://github.com/ThirteenAG/Ultimate-ASI-Loader) v9.7.4 (MIT) is included as `dsound.dll`.
    - If Ultimate ASI Loader is already installed as `dsound.dll` (e.g. by a translation patch), you can skip `dsound.dll`.
    - If you have a different `dsound.dll` (e.g. DSOAL), do not overwrite it: copy the included one as `winmm.dll`.
 
@@ -117,7 +120,8 @@ All settings are in the `[MapOverlay]` section.
 
 ## Known limitations
 
-- Only the GOG `Resident Evil 2.exe` is supported (HD needs Classic REbirth; without it the map uses SD). Other executables load nothing and only write a log.
+- Supported executables: GOG `Resident Evil 2.exe` and the Steam release in all six languages. Other executables are left unpatched and only logged. HD mode requires Classic REbirth.
+- Marker data comes from the GOG release. The Steam release, except Japanese, scripts a few rooms differently (for example, one extra sewer item), so a marker in those rooms can differ from the game.
 - Enlarged names keep their positions, so they can overlap on crowded maps.
 - With `LockSide=1` (default) the marker sits right beside the door, on the side you can enter from. Doors leading to another floor keep the marker on the door. If key-item markers cover every spot beside a door, the lock marker can be hidden under them.
 - Enemy markers show spawn points, not live enemy positions.
